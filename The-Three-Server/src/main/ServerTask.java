@@ -15,16 +15,15 @@ public class ServerTask implements Runnable {
 
 	private static int port=8081;
 	private ServerSocket serverSocket;
-	private static String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-	private static String DB_URL = "jdbc:mysql://localhost:3306/The-Three-DB";
-	private static String USER="mysql";
-	private static String PASS="1604102The-ThreeDB";
+	private static String JDBC_DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
+	//private static String DB_URL = "jdbc:sqlserver://localhost:1433;user=SA;password=SHAO0123ruo;";
+	private static String DB_URL = "jdbc:sqlserver://cal.srcserver.xyz:1433;user=SA;password=SHAO0123ruo;";
 	private static Statement stmt;
 	private void initDB() throws ClassNotFoundException, SQLException {
 		Connection conn=null;
 		stmt=null;
 		Class.forName(JDBC_DRIVER);//注册驱动
-		conn=DriverManager.getConnection(DB_URL,USER,PASS);//打开链接
+		conn=DriverManager.getConnection(DB_URL);//打开链接
 		stmt=conn.createStatement();//执行查询
 	}
 	private ResultSet query(String sql) throws SQLException {
