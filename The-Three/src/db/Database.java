@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import entity.Car;
 
 public class Database {
-	private static String addr="127.0.0.1";//"cal.srcserver.xyz";
+	private static String addr="192.168.43.21";//"cal.srcserver.xyz";
 	public Database() {
 		
 	}
@@ -18,7 +18,9 @@ public class Database {
 	public static Car[] getCarInfo() {
 		// TODO Auto-generated method stub
 		try {
+			System.out.println("1");
 			Socket socket= new Socket(addr,8081);
+			System.out.println("2");
 			DataInputStream input=new DataInputStream(socket.getInputStream());
 			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
 			output.writeChars("1");

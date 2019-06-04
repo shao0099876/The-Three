@@ -26,11 +26,13 @@ public class Level2NaviPanel extends JPanel {
 		button[0].setFont(new Font("宋体",Font.PLAIN,14));
 		button[0].setSize(4, 1);
 		button[0].setOpaque(false);
+		System.out.println("check_before");
 		button[0].addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				System.out.println("二级导航按钮监听");
 				BaseUI.contentPanel.setCarInfo();
 			}});
 		

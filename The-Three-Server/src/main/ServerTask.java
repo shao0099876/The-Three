@@ -34,28 +34,28 @@ public class ServerTask implements Runnable {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		try {
-			
-			serverSocket=new ServerSocket(port);
-			Socket socket=serverSocket.accept();
-			Server.newThread();
-			DataInputStream input=new DataInputStream(socket.getInputStream());
-			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
-			
-			int op=input.readInt();
-			switch(op) {
-			case 1:output.writeChars(getCarInfo());output.flush();break;
+		while(true) {
+			try {
+				serverSocket=new ServerSocket(port);
+				Socket socket=serverSocket.accept();
+				//Server.newThread();
+				DataInputStream input=new DataInputStream(socket.getInputStream());
+				DataOutputStream output=new DataOutputStream(socket.getOutputStream());
+				
+				int op=input.readInt();
+				switch(op) {
+				case 1:output.writeChars(getCarInfo());output.flush();break;
+				}
+				
+				stmt.close();//关闭数据库
+				socket.close();//关闭连接
+				serverSocket.close();//关闭连接
+				
+			} catch (IOException | SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			
-			stmt.close();//关闭数据库
-			socket.close();//关闭连接
-			serverSocket.close();//关闭连接
-			
-		} catch (IOException | SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
-		
 	}
 	
 	private String getCarInfo() {
