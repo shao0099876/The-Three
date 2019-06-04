@@ -18,7 +18,7 @@ public class Database {
 	public static Car[] getCarInfo() {
 		// TODO Auto-generated method stub
 		try {
-			Socket socket= new Socket(addr,8080);
+			Socket socket= new Socket(addr,8081);
 			DataInputStream input=new DataInputStream(socket.getInputStream());
 			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
 			output.writeChars("1");
