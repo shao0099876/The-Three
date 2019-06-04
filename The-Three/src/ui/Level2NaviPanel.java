@@ -21,11 +21,12 @@ public class Level2NaviPanel extends JPanel {
 	}
 	private void car() {
 		//car info
-		JButton button=new JButton("车辆信息");
-		button.setFont(new Font("宋体",Font.PLAIN,14));
-		button.setSize(4, 1);
-		button.setOpaque(false);
-		button.addActionListener(new ActionListener() {
+		JButton[] button=new JButton[10];
+		button[0]=new JButton("车辆信息");
+		button[0].setFont(new Font("宋体",Font.PLAIN,14));
+		button[0].setSize(4, 1);
+		button[0].setOpaque(false);
+		button[0].addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -33,7 +34,7 @@ public class Level2NaviPanel extends JPanel {
 				BaseUI.contentPanel.setCarInfo();
 			}});
 		
-		this.add(button);
+		this.add(button[0]);
 		this.revalidate();
 		this.repaint();
 	}
