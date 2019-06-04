@@ -8,7 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 public class Level1NaviPanel extends JPanel {
-	private JButton[] button=new JButton[4];//界面按钮
+	private JButton[] button=new JButton[5];//界面按钮
 	private NaviPanel father;
 	private void setButton(){//设置按钮
 		button[0]=new JButton("车队管理");
