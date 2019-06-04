@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import entity.Car;
 
 public class Database {
-	private static String addr="cal.srcserver.xyz";
+	private static String addr="127.0.0.1";//"cal.srcserver.xyz";
 	public Database() {
 		
 	}
