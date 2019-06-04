@@ -11,8 +11,8 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 public class BaseUI extends JFrame{
-	private NaviPanel naviPanel;//导航栏
-	private ContentMessagePanel contentPanel;//显示内容栏
+	public static NaviPanel naviPanel;//导航栏
+	public static ContentMessagePanel contentPanel;//显示内容栏
 	private JPanel mainPanel;
 	private JLayeredPane layer;
 	private ImageIcon image;

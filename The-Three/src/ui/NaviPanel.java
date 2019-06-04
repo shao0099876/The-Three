@@ -9,7 +9,7 @@ public class NaviPanel extends JPanel {
 		super();
 		this.setLayout(null);//设置空的布局管理器
 		this.setOpaque(false);
-		level1=new Level1NaviPanel();
+		level1=new Level1NaviPanel(this);
 		level2=new Level2NaviPanel();
 		
 		level1.setBounds(0, 0, x, (int)(y*0.5));
@@ -18,5 +18,8 @@ public class NaviPanel extends JPanel {
 		this.add(level1);
 		this.add(level2);
 		
+	}
+	public void changeLevel2(int num) {
+		level2.change(num);
 	}
 }
