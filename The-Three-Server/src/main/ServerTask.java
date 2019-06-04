@@ -13,7 +13,7 @@ import java.sql.Statement;
 
 public class ServerTask implements Runnable {
 
-	private static int port=8080;
+	private static int port=8081;
 	private ServerSocket serverSocket;
 	private static String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 	private static String DB_URL = "jdbc:mysql://localhost:3306/The-Three-DB";
@@ -27,11 +27,14 @@ public class ServerTask implements Runnable {
 		conn=DriverManager.getConnection(DB_URL,USER,PASS);//打开链接
 		stmt=conn.createStatement();//执行查询
 	}
+	private ResultSet query(String sql) throws SQLException {
+		ResultSet rs=stmt.executeQuery(sql);
+		return rs;
+	}
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
 		try {
-			initDB();
 			
 			serverSocket=new ServerSocket(port);
 			Socket socket=serverSocket.accept();
@@ -43,28 +46,50 @@ public class ServerTask implements Runnable {
 			switch(op) {
 			case 1:output.writeChars(getCarInfo());output.flush();break;
 			}
-		} catch (IOException | ClassNotFoundException | SQLException e) {
+			
+			stmt.close();//关闭数据库
+			socket.close();//关闭连接
+			serverSocket.close();//关闭连接
+			
+		} catch (IOException | SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 	}
 	
-	private ResultSet query(String sql) throws SQLException {
-		ResultSet rs=stmt.executeQuery(sql);
-		return rs;
-	}
 	private String getCarInfo() {
 		try {
 			initDB();
-		} catch (ClassNotFoundException | SQLException e) {
+		} catch (ClassNotFoundException | SQLException e1) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e1.printStackTrace();
 		}
-		
 		
 		StringBuilder sb=new StringBuilder();
 		
+		try {
+			ResultSet res=query("select * from Car");
+			boolean flag=true;
+			while(res.next()){
+				if(!flag){
+					sb.append("#");
+				}
+				flag=false;
+				sb.append(res.getString(1));
+				sb.append("#");
+				sb.append(res.getInt(2));
+				sb.append("#");
+				sb.append(res.getInt(3));
+				sb.append("#");
+				sb.append(res.getInt(4));
+			}
+			
+			res.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return sb.toString();
 	}
