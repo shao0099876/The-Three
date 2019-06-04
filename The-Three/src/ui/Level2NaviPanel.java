@@ -32,7 +32,7 @@ public class Level2NaviPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				System.out.println("二级导航按钮监听");
+				//System.out.println("二级导航按钮监听");
 				BaseUI.contentPanel.setCarInfo();
 			}});
 		

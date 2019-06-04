@@ -15,12 +15,12 @@ public class Database {
 		
 	}
 
-	public static Car[] getCarInfo() {
+	public static Car[] getCarInfo() {//查询车辆的概要信息
 		// TODO Auto-generated method stub
 		try {
-			System.out.println("1");
+			//System.out.println("1");
 			Socket socket= new Socket(addr,8081);
-			System.out.println("2");
+			//System.out.println("2");
 			DataInputStream input=new DataInputStream(socket.getInputStream());
 			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
 			output.writeChars("1");
