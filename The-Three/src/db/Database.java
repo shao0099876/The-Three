@@ -27,6 +27,9 @@ public class Database {
 			output.flush();
 			String raw_string=input.readLine();
 			String[] data=raw_string.split("#");
+			for(int i=0;i<data.length;i++) {
+				data[i]=data[i].substring(1, data[i].length()-1);
+			}
 			Route[] res=new Route[data.length/4];
 			for(int i=0;i<data.length;i+=4) {
 				res[i/4]=new Route(Integer.valueOf(data[i+0]),data[i+1],data[i+2],data[i+3]);
@@ -52,6 +55,9 @@ public class Database {
 			output.flush();
 			String raw_string=input.readLine();
 			String[] data=raw_string.split("#");
+			for(int i=0;i<data.length;i++) {
+				data[i]=data[i].substring(1, data[i].length()-1);
+			}
 			Driver[] res=new Driver[data.length/7];
 			for(int i=0;i<data.length;i+=7) {
 				res[i/7]=new Driver(Integer.valueOf(data[i+0]),data[i+1],data[i+2],
