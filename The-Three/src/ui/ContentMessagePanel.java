@@ -1,6 +1,7 @@
 package ui;
 
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -53,7 +54,7 @@ public class ContentMessagePanel extends JPanel {
 		
 		JTable table2=new JTable(data2,name2);
 		table2.setOpaque(false);
-		JScrollPane scroll2=new JScrollPane(table1);
+		JScrollPane scroll2=new JScrollPane(table2);
 		scroll2.setOpaque(false);
 		
 		//显示路线的详细信息
@@ -66,14 +67,17 @@ public class ContentMessagePanel extends JPanel {
 		
 		JTable table3=new JTable(data3,name3);
 		table3.setOpaque(false);
-		JScrollPane scroll3=new JScrollPane(table1);
+		JScrollPane scroll3=new JScrollPane(table3);
 		scroll3.setOpaque(false);
 		
+		JPanel panel=new JPanel(new GridLayout(1,3,0,0));//一行三列 显示列表
+		panel.setOpaque(false);
 		
-		self.add(scroll1);
-		self.add(scroll2);
-		self.add(scroll3);
+		panel.add(scroll1);
+		panel.add(scroll2);
+		panel.add(scroll3);
 		
+		self.add(panel);
 		self.revalidate();
 		self.repaint();
 		return;
