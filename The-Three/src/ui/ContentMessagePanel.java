@@ -2,7 +2,6 @@ package ui;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.sql.Driver;
 import java.util.ArrayList;
 
 import javax.swing.JLabel;
@@ -13,6 +12,8 @@ import javax.swing.JTable;
 
 import db.Database;
 import entity.Car;
+import entity.Driver;
+import entity.Route;
 
 public class ContentMessagePanel extends JPanel {
 	private static Car[] array;
@@ -25,6 +26,8 @@ public class ContentMessagePanel extends JPanel {
 	}
 	
 	public static void setCarDetailInfo(int n){//查看车辆详细信息
+		
+		
 		//显示基本信息
 		String[] name1= {"车牌号","驾驶员1","驾驶员2","路线"};
 		Car carDetail=new Car();
@@ -36,17 +39,40 @@ public class ContentMessagePanel extends JPanel {
 		JScrollPane scroll1=new JScrollPane(table1);
 		scroll1.setOpaque(false);
 		
-		//显示详细信息
+		//显示驾驶员的详细信息
 		String[] name2={"驾驶员编号","驾驶证","驾驶员姓名","驾驶员年龄","驾驶年长","驾驶员联系方式","驾驶员目前状态"};
-		//Driver driverInfo=new Driver();
+		Driver driInfo1=new Driver();
+		driInfo1=Database.getDriverInfo(carDetail.people1Number);//查询驾驶员1的信息
 		
+		Driver driInfo2=new Driver();
+		driInfo2=Database.getDriverInfo(carDetail.people2Number);//查询驾驶员2的信息
 		
+		String[][] data2=new String[2][7];
+		data2[0]=driInfo1.toStringArray();
+		data2[1]=driInfo2.toStringArray();
 		
+		JTable table2=new JTable(data2,name2);
+		table2.setOpaque(false);
+		JScrollPane scroll2=new JScrollPane(table1);
+		scroll2.setOpaque(false);
 		
+		//显示路线的详细信息
+		String[] name3={"路线编号","初始站点","终点站"};
+		Route routeInfo=new Route();
+		routeInfo=Database.getRouteInfo(carDetail.routeNumber);//查询路线的详细信息
+		
+		String[][] data3=new String[1][4];
+		data3[0]=routeInfo.toStringArray();
+		
+		JTable table3=new JTable(data3,name3);
+		table3.setOpaque(false);
+		JScrollPane scroll3=new JScrollPane(table1);
+		scroll3.setOpaque(false);
 		
 		
 		self.add(scroll1);
-		
+		self.add(scroll2);
+		self.add(scroll3);
 		
 		self.revalidate();
 		self.repaint();

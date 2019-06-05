@@ -7,6 +7,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -19,8 +20,8 @@ public class ServerTask implements Runnable {
 	//private static String DB_URL = "jdbc:sqlserver://localhost:1433;user=SA;password=SHAO0123ruo;";
 	private static String DB_URL = "jdbc:sqlserver://cal.srcserver.xyz:1433;databaseName=TheThreeDB;user=SA;password=SHAO0123ruo;";
 	private static Statement stmt;
+	private static Connection conn=null;
 	private void initDB() throws ClassNotFoundException, SQLException {
-		Connection conn=null;
 		stmt=null;
 		Class.forName(JDBC_DRIVER);//注册驱动
 		conn=DriverManager.getConnection(DB_URL);//打开链接
@@ -41,13 +42,26 @@ public class ServerTask implements Runnable {
 				DataInputStream input=new DataInputStream(socket.getInputStream());
 				DataOutputStream output=new DataOutputStream(socket.getOutputStream());
 				
-				int op=input.readInt();
+				int op=input.readInt();//读入操作数
 				switch(op) {
 				case 1:
 					output.writeChars(getCarInfo());
 					output.writeChar('\n');
 					output.flush();
 					break;
+				case 2:
+					int peonum=input.readInt();//读入驾驶员编号
+					output.writeChars(getDriverInfo(peonum));
+					output.writeChar('\n');
+					output.flush();
+					break;
+				case 3:
+					int routnum=input.readInt();//读入路线的编号
+					output.writeChars(getRouteInfo(routnum));
+					output.writeChar('\n');
+					output.flush();
+					break;
+				
 				}
 				
 				
@@ -62,6 +76,93 @@ public class ServerTask implements Runnable {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	private String getRouteInfo(int routnum) {
+		// TODO Auto-generated method stub
+		try {
+			initDB();
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		StringBuilder sb=new StringBuilder();
+		
+		try {
+			PreparedStatement pstmt=conn.prepareStatement("select * from Route where routeNumber=?");
+			pstmt.setInt(1,routnum);
+			ResultSet res=pstmt.executeQuery();
+			
+			boolean flag=true;
+			while(res.next()){
+				if(!flag){
+					sb.append("#");
+				}
+				flag=false;
+				sb.append(res.getInt(1));
+				sb.append("#");
+				sb.append(res.getString(2));
+				sb.append("#");
+				sb.append(res.getString(3));
+				sb.append("#");
+				sb.append(res.getString(4));
+			}
+			
+			res.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return sb.toString();
+	}
+	
+	
+	private String getDriverInfo(int peonum) {//查询驾驶员信息
+		// TODO Auto-generated method stub
+		try {
+			initDB();
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		StringBuilder sb=new StringBuilder();
+		
+		try {
+			PreparedStatement pstmt=conn.prepareStatement("select * from Driver where peopleNumber=?");
+			pstmt.setInt(1,peonum);
+			ResultSet res=pstmt.executeQuery();
+			
+			boolean flag=true;
+			while(res.next()){
+				if(!flag){
+					sb.append("#");
+				}
+				flag=false;
+				sb.append(res.getInt(1));
+				sb.append("#");
+				sb.append(res.getString(2));
+				sb.append("#");
+				sb.append(res.getString(3));
+				sb.append("#");
+				sb.append(res.getInt(4));
+				sb.append("#");
+				sb.append(res.getInt(5));
+				sb.append("#");
+				sb.append(res.getString(6));
+				sb.append("#");
+				sb.append(res.getInt(7));
+			}
+			
+			res.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return sb.toString();
 	}
 	
 	private String getCarInfo() {

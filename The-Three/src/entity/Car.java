@@ -2,9 +2,9 @@ package entity;
 
 public class Car {
 	private String carNumber;
-	private int people1Number;
-	private int people2Number;
-	private int routeNumber;
+	public int people1Number;
+	public int people2Number;
+	public int routeNumber;
 	public Car() {
 		
 	}
