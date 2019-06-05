@@ -53,6 +53,8 @@ public class Level1NaviPanel extends JPanel {
 			}
 			
 		});
+		
+		
 	}
 	
 	public Level1NaviPanel(NaviPanel f){

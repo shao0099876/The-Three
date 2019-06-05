@@ -57,9 +57,27 @@ public class ServerTask implements Runnable {
 					int routnum=IO.readInt(input);//读入路线的编号
 					IO.write(output, getRouteInfo(routnum));
 					break;
-				
+				case 4:
+					String s=IO.read(input);//读进来部分车牌号信息
+					System.out.println(s);
+					IO.write(output, getCarNum(s));
+					break;
+				case 5:
+					String carinfo=IO.read(input);//将要进行修改的车辆信息读进来
+					System.out.println(carinfo);//测试
+					IO.write(output, AddCarInfo(carinfo));
+					break;
+				case 6:
+					String delcarinfo=IO.read(input);//将要进行删除的车辆信息读进来
+					System.out.println(delcarinfo);//测试
+					IO.write(output, DelCarInfo(delcarinfo));
+					break;
+				case 7:
+					String modcarinfo=IO.read(input);//将要进行删除的车辆信息读进来
+					System.out.println(modcarinfo);//测试
+					IO.write(output, ModCarInfo(modcarinfo));
+					break;
 				}
-				
 				
 				stmt.close();//关闭数据库
 				input.close();
@@ -106,6 +124,7 @@ public class ServerTask implements Runnable {
 			}
 			
 			res.close();
+			pstmt.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -153,6 +172,7 @@ public class ServerTask implements Runnable {
 			}
 			
 			res.close();
+			pstmt.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -196,61 +216,224 @@ public class ServerTask implements Runnable {
 		
 		return sb.toString();
 	}
-/*// JDBC 驱动名及数据库 URL
- 
-    public static void main(String[] args) {
-        Connection conn = null;
-        Statement stmt = null;
-        try{
-            // 注册 JDBC 驱动
-            Class.forName("com.mysql.jdbc.Driver");
-        
-            // 打开链接
-            System.out.println("连接数据库...");
-            conn = DriverManager.getConnection(DB_URL,USER,PASS);
-        
-            // 执行查询
-            System.out.println(" 实例化Statement对象...");
-            stmt = conn.createStatement();
-            String sql;
-            sql = "SELECT id, name, url FROM websites";
-            ResultSet rs = stmt.executeQuery(sql);
-        
-            // 展开结果集数据库
-            while(rs.next()){
-                // 通过字段检索
-                int id  = rs.getInt("id");
-                String name = rs.getString("name");
-                String url = rs.getString("url");
-    
-                // 输出数据
-                System.out.print("ID: " + id);
-                System.out.print(", 站点名称: " + name);
-                System.out.print(", 站点 URL: " + url);
-                System.out.print("\n");
-            }
-            // 完成后关闭
-            rs.close();
-            stmt.close();
-            conn.close();
-        }catch(SQLException se){
-            // 处理 JDBC 错误
-            se.printStackTrace();
-        }catch(Exception e){
-            // 处理 Class.forName 错误
-            e.printStackTrace();
-        }finally{
-            // 关闭资源
-            try{
-                if(stmt!=null) stmt.close();
-            }catch(SQLException se2){
-            }// 什么都不做
-            try{
-                if(conn!=null) conn.close();
-            }catch(SQLException se){
-                se.printStackTrace();
-            }
-        }
-        System.out.println("Goodbye!");
-    }*/
+
+	private String getCarNum(String s){//查询车辆的车牌号（模糊查询）
+		System.out.print("查数据库");
+		s=s+"%";//实现模糊查询
+		try {
+			initDB();
+		} catch (ClassNotFoundException | SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		StringBuilder sb=new StringBuilder();
+		
+		try {
+			PreparedStatement pstmt=conn.prepareStatement("select carNumber from Car where carNumber like ?");
+			pstmt.setString(1,s);
+			ResultSet res=pstmt.executeQuery();
+			
+			boolean flag=true;
+			while(res.next()){
+				if(!flag){
+					sb.append("#");
+				}
+				flag=false;
+				sb.append(res.getString(1));
+			}
+			
+			res.close();
+			pstmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println(sb.toString());
+		return sb.toString();
+	}
+
+
+	private String AddCarInfo(String s){//用于增加车辆信息
+		System.out.println("开始修改车辆信息");//测试
+		String message="";//操作结果
+		
+		String[] data=s.split("#");//获取信息
+		
+		try {
+			initDB();
+		} catch (ClassNotFoundException | SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		//数据类型转换
+		String newcarNumber=data[0];
+		int newpeople1Number=Integer.valueOf(data[1]);
+		int newpeople2Number=Integer.valueOf(data[2]);
+		int newrouteNumber=Integer.valueOf(data[3]);
+		System.out.println(newcarNumber);
+		System.out.println(newpeople1Number);
+		System.out.println(newpeople2Number);
+		System.out.println(newrouteNumber);
+		
+			
+		try {
+			PreparedStatement pstmt=conn.prepareStatement("select carNumber from Car where carNumber = ?");
+			pstmt.setString(1,newcarNumber);
+			ResultSet res=pstmt.executeQuery();
+			
+			if(res==null){//为空，说明无结果，为添加
+				System.out.println("开始添加数据库");
+				PreparedStatement pstmt1=conn.prepareStatement("insert into Car values(?,?,?,?)");
+				pstmt1.setString(1,newcarNumber);
+				pstmt1.setInt(2,newpeople1Number);
+				pstmt1.setInt(3,newpeople2Number);
+				pstmt1.setInt(4,newrouteNumber);	
+				pstmt1.executeUpdate();  
+				pstmt1.close();
+				message="添加信息成功";
+			}
+			else{//非空，不能添加
+				message="存在车辆信息，不能添加";
+				/*System.out.println("开始更新数据库");
+				//待修改
+				PreparedStatement pstmt2=conn.prepareStatement("update Car set people1Number = ? people2Number = ? routeNumber = ? where carNumber = ?");
+				
+				pstmt2.setString(4,newcarNumber);
+				pstmt2.setInt(1,newpeople1Number);
+				pstmt2.setInt(2,newpeople2Number);
+				pstmt2.setInt(3,newrouteNumber);	
+				pstmt2.executeUpdate();
+				pstmt2.close();
+				
+				//Statement stmt=conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+				//stmt.executeUpdate("update Car set people1Number='newpeople1Number' people2Number='newpeople2Number' routeNumber='newrouteNumber' where carNumber='newcarNumber'"); 
+			
+				/*stmt.setInt(1,newpeople1Number);
+				stmt.setInt(2,newpeople2Number);
+				stmt.setInt(3,newrouteNumber);
+				stmt.setString(4,newcarNumber);*/
+				//stmt.close();
+
+				 
+				
+				//PreparedStatement pstmt1=conn.prepareStatement("update Car set people1Number=? people2Number=? routeNumber=? where carNumber=?");
+				
+				//pstmt1.executeUpdate();*/
+			}
+			res.close();
+			pstmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return message;
+	}
+
+	private String DelCarInfo(String s){//用于删除车辆信息
+		System.out.println("开始删除车辆信息");//测试
+		String[] data=s.split("#");//获取信息
+		
+		try {
+			initDB();
+		} catch (ClassNotFoundException | SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		//删除数据
+		try {
+			PreparedStatement pstmt = conn.prepareStatement("delete from Car where carNumber=?");
+			pstmt.setString(1,data[0]);
+			pstmt.executeUpdate();  
+			pstmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		String message="操作成功";
+		return message;
+	}
+	
+	private String ModCarInfo(String s){//用于修改车辆信息
+		System.out.println("开始修改车辆信息");//测试
+		String message="";//操作结果
+		
+		String[] data=s.split("#");//获取信息
+		
+		try {
+			initDB();
+		} catch (ClassNotFoundException | SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		//数据类型转换
+		String newcarNumber=data[0];
+		int newpeople1Number=Integer.valueOf(data[1]);
+		int newpeople2Number=Integer.valueOf(data[2]);
+		int newrouteNumber=Integer.valueOf(data[3]);
+		System.out.println(newcarNumber);
+		System.out.println(newpeople1Number);
+		System.out.println(newpeople2Number);
+		System.out.println(newrouteNumber);
+		
+			
+		try {
+			PreparedStatement pstmt=conn.prepareStatement("select carNumber from Car where carNumber = ?");
+			pstmt.setString(1,newcarNumber);
+			ResultSet res=pstmt.executeQuery();
+			
+			if(res==null){//为空，说明无结果，无法修改
+				message="存在车辆信息，不能修改";
+				/*System.out.println("开始添加数据库");
+				PreparedStatement pstmt1=conn.prepareStatement("insert into Car values(?,?,?,?)");
+				pstmt1.setString(1,newcarNumber);
+				pstmt1.setInt(2,newpeople1Number);
+				pstmt1.setInt(3,newpeople2Number);
+				pstmt1.setInt(4,newrouteNumber);	
+				pstmt1.executeUpdate();  
+				pstmt1.close();
+				message="添加信息成功";*/
+			}
+			else{//非空，不能添加
+				System.out.println("开始更新数据库");
+				//待修改
+				PreparedStatement pstmt2=conn.prepareStatement("update Car set people1Number = ? people2Number = ? routeNumber = ? where carNumber = ?");
+				
+				pstmt2.setString(4,newcarNumber);
+				pstmt2.setInt(1,newpeople1Number);
+				pstmt2.setInt(2,newpeople2Number);
+				pstmt2.setInt(3,newrouteNumber);	
+				pstmt2.executeUpdate();
+				pstmt2.close();
+				message="修改成功";
+				
+				//Statement stmt=conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+				//stmt.executeUpdate("update Car set people1Number='newpeople1Number' people2Number='newpeople2Number' routeNumber='newrouteNumber' where carNumber='newcarNumber'"); 
+			
+				/*stmt.setInt(1,newpeople1Number);
+				stmt.setInt(2,newpeople2Number);
+				stmt.setInt(3,newrouteNumber);
+				stmt.setString(4,newcarNumber);*/
+				//stmt.close();
+
+				 
+				
+				//PreparedStatement pstmt1=conn.prepareStatement("update Car set people1Number=? people2Number=? routeNumber=? where carNumber=?");
+				
+				//pstmt1.executeUpdate();*/
+			}
+			res.close();
+			pstmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return message;
+	}
 }

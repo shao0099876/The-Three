@@ -1,7 +1,7 @@
 package entity;
 
 public class Car {
-	private String carNumber;
+	public String carNumber;
 	public int people1Number;
 	public int people2Number;
 	public int routeNumber;
