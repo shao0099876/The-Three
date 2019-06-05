@@ -2,6 +2,7 @@ package ui;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.Driver;
 import java.util.ArrayList;
 
 import javax.swing.JLabel;
@@ -24,6 +25,7 @@ public class ContentMessagePanel extends JPanel {
 	}
 	
 	public static void setCarDetailInfo(int n){//查看车辆详细信息
+		//显示基本信息
 		String[] name1= {"车牌号","驾驶员1","驾驶员2","路线"};
 		Car carDetail=new Car();
 		carDetail=array[n];
@@ -34,9 +36,18 @@ public class ContentMessagePanel extends JPanel {
 		JScrollPane scroll1=new JScrollPane(table1);
 		scroll1.setOpaque(false);
 		
+		//显示详细信息
+		String[] name2={"驾驶员编号","驾驶证","驾驶员姓名","驾驶员年龄","驾驶年长","驾驶员联系方式","驾驶员目前状态"};
+		//Driver driverInfo=new Driver();
+		
+		
+		
+		
 		
 		
 		self.add(scroll1);
+		
+		
 		self.revalidate();
 		self.repaint();
 		return;

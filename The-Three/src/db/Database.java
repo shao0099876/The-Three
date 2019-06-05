@@ -5,6 +5,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.sql.Driver;
 import java.util.ArrayList;
 
 import entity.Car;
@@ -14,7 +15,7 @@ public class Database {
 	public Database() {
 		
 	}
-
+	
 	public static Car[] getCarInfo() {//查询车辆的概要信息
 		// TODO Auto-generated method stub
 		try {
@@ -46,4 +47,10 @@ public class Database {
 		}
 		return null;
 	}
+	
+	public static Driver[] getDriverInfo(){
+		return null;
+		
+	}
+	
 }

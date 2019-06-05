@@ -43,10 +43,17 @@ public class ServerTask implements Runnable {
 				
 				int op=input.readInt();
 				switch(op) {
-				case 1:output.writeChars(getCarInfo());output.flush();break;
+				case 1:
+					output.writeChars(getCarInfo());
+					output.writeChar('\n');
+					output.flush();
+					break;
 				}
 				
+				
 				stmt.close();//关闭数据库
+				input.close();
+				output.close();
 				socket.close();//关闭连接
 				serverSocket.close();//关闭连接
 				
