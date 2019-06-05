@@ -1,0 +1,1 @@
+https://docs.microsoft.com/zh-cn/sql/linux/quickstart-install-connect-ubuntu?view=sql-server-2017
