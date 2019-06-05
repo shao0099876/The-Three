@@ -1,8 +1,9 @@
 package ui;
 
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.sql.Driver;
 import java.util.ArrayList;
 
 import javax.swing.JLabel;
@@ -13,6 +14,8 @@ import javax.swing.JTable;
 
 import db.Database;
 import entity.Car;
+import entity.Driver;
+import entity.Route;
 
 public class ContentMessagePanel extends JPanel {
 	private static Car[] array;
@@ -21,10 +24,11 @@ public class ContentMessagePanel extends JPanel {
 		super();
 		self=this;
 		this.setOpaque(false);
-		
 	}
 	
 	public static void setCarDetailInfo(int n){//查看车辆详细信息
+		self.removeAll();
+		
 		//显示基本信息
 		String[] name1= {"车牌号","驾驶员1","驾驶员2","路线"};
 		Car carDetail=new Car();
@@ -36,24 +40,52 @@ public class ContentMessagePanel extends JPanel {
 		JScrollPane scroll1=new JScrollPane(table1);
 		scroll1.setOpaque(false);
 		
-		//显示详细信息
+		//显示驾驶员的详细信息
 		String[] name2={"驾驶员编号","驾驶证","驾驶员姓名","驾驶员年龄","驾驶年长","驾驶员联系方式","驾驶员目前状态"};
-		//Driver driverInfo=new Driver();
+		Driver driInfo1=new Driver();
+		driInfo1=Database.getDriverInfo(carDetail.people1Number);//查询驾驶员1的信息
 		
+		Driver driInfo2=new Driver();
+		driInfo2=Database.getDriverInfo(carDetail.people2Number);//查询驾驶员2的信息
 		
+		String[][] data2=new String[2][7];
+		data2[0]=driInfo1.toStringArray();
+		data2[1]=driInfo2.toStringArray();
 		
+		JTable table2=new JTable(data2,name2);
+		table2.setOpaque(false);
+		JScrollPane scroll2=new JScrollPane(table2);
+		scroll2.setOpaque(false);
 		
+		//显示路线的详细信息
+		String[] name3={"路线编号","初始站点","终点站"};
+		Route routeInfo=new Route();
+		routeInfo=Database.getRouteInfo(carDetail.routeNumber);//查询路线的详细信息
 		
+		String[][] data3=new String[1][4];
+		data3[0]=routeInfo.toStringArray();
 		
-		self.add(scroll1);
+		JTable table3=new JTable(data3,name3);
+		table3.setOpaque(false);
+		JScrollPane scroll3=new JScrollPane(table3);
+		scroll3.setOpaque(false);
 		
+		JPanel panel=new JPanel(new GridLayout(1,3,0,0));//一行三列 显示列表
+		panel.setOpaque(false);
 		
+		panel.add(scroll1);
+		panel.add(scroll2);
+		panel.add(scroll3);
+		
+		self.add(panel);
 		self.revalidate();
 		self.repaint();
 		return;
 	}
 	
 	public void setCarInfo() {//车队管理概要信息
+		this.removeAll();//将面板上面的组件全部清空
+		
 		String[] name= {"车牌号","驾驶员1","驾驶员2","路线"};
 		array=Database.getCarInfo();
 		if(array==null||array.length==0) {
@@ -112,8 +144,6 @@ public class ContentMessagePanel extends JPanel {
 			}
 			
 		});
-		
-		
 		
 		this.add(scroll);
 		this.revalidate();
