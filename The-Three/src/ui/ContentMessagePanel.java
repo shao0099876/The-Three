@@ -1,5 +1,6 @@
 package ui;
 
+import java.awt.FlowLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ public class ContentMessagePanel extends JPanel {
 	}
 	
 	public static void setCarDetailInfo(int n){//查看车辆详细信息
-		self.removeAll();//先清除面板上面的所有组件
+		self.removeAll();
 		
 		//显示基本信息
 		String[] name1= {"车牌号","驾驶员1","驾驶员2","路线"};
