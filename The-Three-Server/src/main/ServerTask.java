@@ -44,7 +44,7 @@ public class ServerTask implements Runnable {
 				DataInputStream input=new DataInputStream(socket.getInputStream());
 				DataOutputStream output=new DataOutputStream(socket.getOutputStream());
 				int op=IO.readInt(input);//¶ÁÈë²Ù×÷Êý
-				
+				System.out.print(op+"\n");
 				switch(op) {
 				case 1:
 					IO.write(output, getCarInfo());

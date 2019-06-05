@@ -22,11 +22,10 @@ public class ContentMessagePanel extends JPanel {
 		super();
 		self=this;
 		this.setOpaque(false);
-		
 	}
 	
 	public static void setCarDetailInfo(int n){//查看车辆详细信息
-		
+		self.removeAll();//先清除面板上面的所有组件
 		
 		//显示基本信息
 		String[] name1= {"车牌号","驾驶员1","驾驶员2","路线"};
@@ -80,6 +79,8 @@ public class ContentMessagePanel extends JPanel {
 	}
 	
 	public void setCarInfo() {//车队管理概要信息
+		this.removeAll();//将面板上面的组件全部清空
+		
 		String[] name= {"车牌号","驾驶员1","驾驶员2","路线"};
 		array=Database.getCarInfo();
 		if(array==null||array.length==0) {
@@ -138,8 +139,6 @@ public class ContentMessagePanel extends JPanel {
 			}
 			
 		});
-		
-		
 		
 		this.add(scroll);
 		this.revalidate();
