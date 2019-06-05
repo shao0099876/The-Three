@@ -25,6 +25,7 @@ public class IO {
 		BufferedWriter writer=new BufferedWriter(new OutputStreamWriter(output));
 		try {
 			writer.write(s+"\n");
+			writer.flush();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
