@@ -12,6 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import iotools.IO;
+
 public class ServerTask implements Runnable {
 
 	private static int port=8081;
@@ -41,25 +43,19 @@ public class ServerTask implements Runnable {
 				//Server.newThread();
 				DataInputStream input=new DataInputStream(socket.getInputStream());
 				DataOutputStream output=new DataOutputStream(socket.getOutputStream());
+				int op=IO.readInt(input);//读入操作数
 				
-				int op=input.readInt();//读入操作数
 				switch(op) {
 				case 1:
-					output.writeChars(getCarInfo());
-					output.writeChar('\n');
-					output.flush();
+					IO.write(output, getCarInfo());
 					break;
 				case 2:
-					int peonum=input.readInt();//读入驾驶员编号
-					output.writeChars(getDriverInfo(peonum));
-					output.writeChar('\n');
-					output.flush();
+					int peonum=IO.readInt(input);//读入驾驶员编号
+					IO.write(output, getDriverInfo(peonum));
 					break;
 				case 3:
-					int routnum=input.readInt();//读入路线的编号
-					output.writeChars(getRouteInfo(routnum));
-					output.writeChar('\n');
-					output.flush();
+					int routnum=IO.readInt(input);//读入路线的编号
+					IO.write(output, getRouteInfo(routnum));
 					break;
 				
 				}
