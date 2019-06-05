@@ -50,6 +50,7 @@ public class ServerTask implements Runnable {
 					break;
 				}
 				
+				
 				stmt.close();//¹Ø±ÕÊı¾İ¿â
 				input.close();
 				output.close();
