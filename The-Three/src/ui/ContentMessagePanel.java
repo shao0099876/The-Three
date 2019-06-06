@@ -43,6 +43,7 @@ public class ContentMessagePanel extends JPanel{
 	private ArrayList<String> car_num=new ArrayList<String>();//用于保存车辆车牌号模糊查询的结果
 	private JPanel car_mpanel,car_panel2;
 	private DefaultComboBoxModel car_model;
+	private String car_lastmessage="";
 	public ContentMessagePanel() {
 		super();
 		self=this;
@@ -381,7 +382,16 @@ public class ContentMessagePanel extends JPanel{
 			public void itemStateChanged(ItemEvent e) {
 				// TODO Auto-generated method stub
 				if(e.getStateChange() == ItemEvent.SELECTED){
-					car_text1.setText(String.valueOf(car_model.getSelectedItem()));
+					Thread t=new Thread(new Runnable(){
+
+						@Override
+						public void run() {
+							// TODO Auto-generated method stub
+							car_text1.setText(String.valueOf(car_model.getSelectedItem()));
+						}
+						
+					});
+					t.start();
 				}
 			}
 		});
@@ -399,15 +409,17 @@ public class ContentMessagePanel extends JPanel{
 	public void test_change(){
 		String s=car_text1.getText();//获取当前文本框中的内容
 		System.out.println(s);
-		String[] temp_car=Database.getCarNumber(s);//用来保存模糊查询得到的车牌号信息
-		System.out.println("模糊查询结束");
-		
-		car_num.clear();
-		for(int i=0;i<temp_car.length;i++){
-			car_num.add(temp_car[i]);
+		if(!(s.equals(car_lastmessage))){//判断文本框是否改变
+			String[] temp_car=Database.getCarNumber(s);//用来保存模糊查询得到的车牌号信息
+			System.out.println("模糊查询结束");
+			
+			car_num.clear();
+			for(int i=0;i<temp_car.length;i++){
+				car_num.add(temp_car[i]);
+			}	
+			setCarSecondPanel(car_num);//当模糊查询结果改变了，car面板上面的信息也就需要改变
 		}
-		
-		setCarSecondPanel(car_num);//当模糊查询结果改变了，car面板上面的信息也就需要改变
+		car_lastmessage=s;//新值变旧值
 	}
 	
 	public String carInfo_addCarInfo(String newcarinfo){//增加或者修改车辆信息
