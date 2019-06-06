@@ -271,6 +271,7 @@ public class ContentMessagePanel extends JPanel{
 				carinfo.append(car_text4.getText());
 				
 				String newcarinfo=carinfo.toString();
+				System.out.println(newcarinfo);
 				
 				String s=carInfo_addCarInfo(newcarinfo);//将该信息输出在界面上面
 				JOptionPane.showMessageDialog(self,s,"information",JOptionPane.INFORMATION_MESSAGE);
@@ -300,7 +301,7 @@ public class ContentMessagePanel extends JPanel{
 				carinfo.append(car_text4.getText());
 				
 				String newcarinfo=carinfo.toString();
-				
+				System.out.println(newcarinfo);
 				String s=carInfo_ModifyCarInfo(newcarinfo);//将该信息输出在界面上面
 				JOptionPane.showMessageDialog(self,s,"information",JOptionPane.INFORMATION_MESSAGE);
 				
@@ -328,7 +329,7 @@ public class ContentMessagePanel extends JPanel{
 				carinfo.append(car_text4.getText());
 				
 				String newcarinfo=carinfo.toString();
-				
+				System.out.println(newcarinfo);
 				String s=carInfo_deletCarInfo(newcarinfo);//将该信息输出在界面上面
 				JOptionPane.showMessageDialog(self,s,"information",JOptionPane.INFORMATION_MESSAGE);
 			}
@@ -346,13 +347,10 @@ public class ContentMessagePanel extends JPanel{
 		String s=car_text1.getText();//获取当前文本框中的内容
 		System.out.println(s);
 		String[] carNum=Database.getCarNumber(s);//用来保存模糊查询得到的车牌号信息
-		
-		for(int i = 0;i<carNum.length;i++){
-			System.out.println(carNum[i]);
-			System.out.println(i);
-		}
 		System.out.println("测试");
-		
+		for(int i = 0;i<carNum.length;i++){
+			System.out.println(i+carNum[i]);
+		}
 	}
 	
 	public String carInfo_addCarInfo(String newcarinfo){//增加或者修改车辆信息

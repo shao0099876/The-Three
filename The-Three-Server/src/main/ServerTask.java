@@ -296,31 +296,6 @@ public class ServerTask implements Runnable {
 			}
 			else{//非空，不能添加
 				message="存在车辆信息，不能添加";
-				/*System.out.println("开始更新数据库");
-				//待修改
-				PreparedStatement pstmt2=conn.prepareStatement("update Car set people1Number = ? people2Number = ? routeNumber = ? where carNumber = ?");
-				
-				pstmt2.setString(4,newcarNumber);
-				pstmt2.setInt(1,newpeople1Number);
-				pstmt2.setInt(2,newpeople2Number);
-				pstmt2.setInt(3,newrouteNumber);	
-				pstmt2.executeUpdate();
-				pstmt2.close();
-				
-				//Statement stmt=conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
-				//stmt.executeUpdate("update Car set people1Number='newpeople1Number' people2Number='newpeople2Number' routeNumber='newrouteNumber' where carNumber='newcarNumber'"); 
-			
-				/*stmt.setInt(1,newpeople1Number);
-				stmt.setInt(2,newpeople2Number);
-				stmt.setInt(3,newrouteNumber);
-				stmt.setString(4,newcarNumber);*/
-				//stmt.close();
-
-				 
-				
-				//PreparedStatement pstmt1=conn.prepareStatement("update Car set people1Number=? people2Number=? routeNumber=? where carNumber=?");
-				
-				//pstmt1.executeUpdate();*/
 			}
 			res.close();
 			pstmt.close();
@@ -328,13 +303,13 @@ public class ServerTask implements Runnable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		return message;
 	}
 
 	private String DelCarInfo(String s){//用于删除车辆信息
 		System.out.println("开始删除车辆信息");//测试
 		String[] data=s.split("#");//获取信息
+		String message="";
 		
 		try {
 			initDB();
@@ -342,19 +317,32 @@ public class ServerTask implements Runnable {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
-		//删除数据
 		try {
-			PreparedStatement pstmt = conn.prepareStatement("delete from Car where carNumber=?");
+			PreparedStatement pstmt=conn.prepareStatement("select carNumber from Car where carNumber = ?");
 			pstmt.setString(1,data[0]);
-			pstmt.executeUpdate();  
+			ResultSet res=pstmt.executeQuery();
+			
+			if(res==null){//为空，说明无结果，没有办法进行删除操作
+				message="没有该车辆信息，没有办法进行删除";
+			}
+			else{//非空，进行删除
+				try {
+					PreparedStatement pstmt0 = conn.prepareStatement("delete from Car where carNumber=?");
+					pstmt0.setString(1,data[0]);
+					pstmt0.executeUpdate();  
+					pstmt0.close();
+					message="删除成功";
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			res.close();
 			pstmt.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		String message="操作成功";
 		return message;
 	}
 	
@@ -388,44 +376,19 @@ public class ServerTask implements Runnable {
 			ResultSet res=pstmt.executeQuery();
 			
 			if(res==null){//为空，说明无结果，无法修改
-				message="存在车辆信息，不能修改";
-				/*System.out.println("开始添加数据库");
-				PreparedStatement pstmt1=conn.prepareStatement("insert into Car values(?,?,?,?)");
-				pstmt1.setString(1,newcarNumber);
-				pstmt1.setInt(2,newpeople1Number);
-				pstmt1.setInt(3,newpeople2Number);
-				pstmt1.setInt(4,newrouteNumber);	
-				pstmt1.executeUpdate();  
-				pstmt1.close();
-				message="添加信息成功";*/
+				message="不存在该车辆信息，不能修改";
 			}
-			else{//非空，不能添加
+			else{//非空，有结果，可以进行修改
 				System.out.println("开始更新数据库");
 				//待修改
-				PreparedStatement pstmt2=conn.prepareStatement("update Car set people1Number = ? people2Number = ? routeNumber = ? where carNumber = ?");
-				
-				pstmt2.setString(4,newcarNumber);
+				PreparedStatement pstmt2=conn.prepareStatement("update Car set people1Number = ? people2Number = ? routeNumber = ? where carNumber = ?");			
 				pstmt2.setInt(1,newpeople1Number);
 				pstmt2.setInt(2,newpeople2Number);
 				pstmt2.setInt(3,newrouteNumber);	
+				pstmt2.setString(4,newcarNumber);
 				pstmt2.executeUpdate();
 				pstmt2.close();
 				message="修改成功";
-				
-				//Statement stmt=conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
-				//stmt.executeUpdate("update Car set people1Number='newpeople1Number' people2Number='newpeople2Number' routeNumber='newrouteNumber' where carNumber='newcarNumber'"); 
-			
-				/*stmt.setInt(1,newpeople1Number);
-				stmt.setInt(2,newpeople2Number);
-				stmt.setInt(3,newrouteNumber);
-				stmt.setString(4,newcarNumber);*/
-				//stmt.close();
-
-				 
-				
-				//PreparedStatement pstmt1=conn.prepareStatement("update Car set people1Number=? people2Number=? routeNumber=? where carNumber=?");
-				
-				//pstmt1.executeUpdate();*/
 			}
 			res.close();
 			pstmt.close();
@@ -433,7 +396,6 @@ public class ServerTask implements Runnable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		return message;
 	}
 }
