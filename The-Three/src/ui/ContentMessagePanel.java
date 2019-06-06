@@ -3,13 +3,19 @@ package ui;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.AbstractButton;
+import javax.swing.BorderFactory;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -33,6 +39,10 @@ public class ContentMessagePanel extends JPanel{
 	private static Car[] array;
 	private static ContentMessagePanel self;
 	private JTextField car_text1,car_text2,car_text3,car_text4;
+	private JComboBox car_bobox;
+	private ArrayList<String> car_num=new ArrayList<String>();//用于保存车辆车牌号模糊查询的结果
+	private JPanel car_mpanel,car_panel2;
+	private DefaultComboBoxModel car_model;
 	public ContentMessagePanel() {
 		super();
 		self=this;
@@ -167,7 +177,10 @@ public class ContentMessagePanel extends JPanel{
 	public void carInfo_Add_Del(){//车辆信息的增加修改删除操作
 		self.removeAll();//清除面板上面的所有组件
 
-		JPanel panel=new JPanel(new GridLayout(6,3,10,10));//六行两列
+		car_mpanel=new JPanel(new GridLayout(1,2,0,0));//一行两列
+		
+		//第一列
+		JPanel panel=new JPanel(new GridLayout(6,3,5,5));//六行三列
 		panel.setOpaque(false);
 		
 		//第一行 车辆编号
@@ -349,7 +362,34 @@ public class ContentMessagePanel extends JPanel{
 			
 		});
 		
-		self.add(panel);
+		car_mpanel.add(panel);
+		
+		//第二列
+		car_panel2=new JPanel();
+		
+		car_model=new DefaultComboBoxModel();
+		
+		setCarSecondPanel(car_num);
+		
+		car_bobox=new JComboBox(car_model);
+		car_bobox.setBorder(BorderFactory.createTitledBorder("车牌号模糊查询结果"));
+		
+		//添加监听函数
+		car_bobox.addItemListener(new ItemListener(){
+
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				// TODO Auto-generated method stub
+				if(e.getStateChange() == ItemEvent.SELECTED){
+					car_text1.setText(String.valueOf(car_model.getSelectedItem()));
+				}
+			}
+		});
+		
+		car_panel2.add(car_bobox);
+		car_mpanel.add(car_panel2);
+		
+		self.add(car_mpanel);
 		self.revalidate();
 		self.repaint();
 		return;
@@ -359,11 +399,15 @@ public class ContentMessagePanel extends JPanel{
 	public void test_change(){
 		String s=car_text1.getText();//获取当前文本框中的内容
 		System.out.println(s);
-		String[] carNum=Database.getCarNumber(s);//用来保存模糊查询得到的车牌号信息
-		System.out.println("测试");
-		for(int i = 0;i<carNum.length;i++){
-			System.out.println(i+carNum[i]);
+		String[] temp_car=Database.getCarNumber(s);//用来保存模糊查询得到的车牌号信息
+		System.out.println("模糊查询结束");
+		
+		car_num.clear();
+		for(int i=0;i<temp_car.length;i++){
+			car_num.add(temp_car[i]);
 		}
+		
+		setCarSecondPanel(car_num);//当模糊查询结果改变了，car面板上面的信息也就需要改变
 	}
 	
 	public String carInfo_addCarInfo(String newcarinfo){//增加或者修改车辆信息
@@ -381,5 +425,16 @@ public class ContentMessagePanel extends JPanel{
 		return s;
 	}
 
-
+	public void setCarSecondPanel(ArrayList<String> num){//动态显示carpanel界面的第二列
+		System.out.println("我在动态显示结果");
+		car_model.removeAllElements();//先清空
+		car_num=num;
+		int len=car_num.size();
+		System.out.println(len);
+		
+		for(int i=0;i<len;i++){
+			System.out.println(car_num.get(i));
+			car_model.addElement(car_num.get(i));
+		}
+	}
 }

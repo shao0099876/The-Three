@@ -14,7 +14,7 @@ import entity.Driver;
 import entity.Route;
 
 public class Database {
-	private static String addr="192.168.43.21";//"cal.srcserver.xyz";
+	private static String addr="127.0.0.1";//"cal.srcserver.xyz";
 	public Database() {
 		
 	}
