@@ -17,6 +17,7 @@ public class BaseUI extends JFrame{
 	private JLayeredPane layer;
 	private ImageIcon image;
 	private static String backgroundImagePath="/background.jpg";
+	
 	private void setBackgroundImage() {
 		image=new ImageIcon(getClass().getResource(backgroundImagePath));
 		JPanel background=new JPanel();
@@ -26,6 +27,7 @@ public class BaseUI extends JFrame{
 		layer.add(background,JLayeredPane.DEFAULT_LAYER);//底层图片
 		return;
 	}
+	
 	private void setLocation() {
 		Toolkit kit = Toolkit.getDefaultToolkit();              //定义工具包
 	    Dimension screenSize = kit.getScreenSize();             //获取屏幕的尺寸
@@ -33,6 +35,7 @@ public class BaseUI extends JFrame{
 	    int screenHeight = screenSize.height;                   //获取屏幕的高
 	    this.setLocation(screenWidth/2-image.getIconWidth()/2, screenHeight/2-image.getIconHeight()/2);//设置窗口居中显示
 	}
+	
 	public BaseUI() {
 		super("物流综合信息平台");
 		layer=new JLayeredPane();
@@ -42,6 +45,7 @@ public class BaseUI extends JFrame{
 		contentPanel=new ContentMessagePanel();
 		naviPanel.setBounds(0,0,image.getIconWidth(),(int)(image.getIconHeight()*0.3));
 		contentPanel.setBounds(0, (int)(image.getIconHeight()*0.3), image.getIconWidth(), (int)(image.getIconHeight()*0.7));
+		
 		layer.add(naviPanel,JLayeredPane.MODAL_LAYER);
 		layer.add(contentPanel,JLayeredPane.MODAL_LAYER);
 		

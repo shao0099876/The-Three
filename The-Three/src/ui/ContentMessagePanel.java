@@ -1,25 +1,38 @@
 package ui;
 
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
+import javax.swing.AbstractButton;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
 
 import db.Database;
 import entity.Car;
 import entity.Driver;
 import entity.Route;
 
-public class ContentMessagePanel extends JPanel {
+public class ContentMessagePanel extends JPanel{
 	private static Car[] array;
 	private static ContentMessagePanel self;
+	private JTextField car_text1,car_text2,car_text3,car_text4;
 	public ContentMessagePanel() {
 		super();
 		self=this;
@@ -150,4 +163,210 @@ public class ContentMessagePanel extends JPanel {
 		this.repaint();
 		return;
 	}
+
+	public void carInfo_Add_Del(){//车辆信息的增加修改删除操作
+		self.removeAll();//清除面板上面的所有组件
+
+		JPanel panel=new JPanel(new GridLayout(6,3,10,10));//六行两列
+		panel.setOpaque(false);
+		
+		//第一行 车辆编号
+		JLabel label1=new JLabel("车辆编号");
+		label1.setFont(new Font("宋体",Font.PLAIN,20));
+		label1.setOpaque(false);
+		panel.add(label1);
+		
+		car_text1=new JTextField(20);
+		car_text1.setEditable(true);//设置为可编辑
+		car_text1.setOpaque(false);
+		panel.add(car_text1);
+		panel.add(new JLabel("    "));
+		
+		//对文本框增加相应函数
+		Document document = car_text1.getDocument();
+		document.addDocumentListener(new DocumentListener(){
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				test_change();
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				test_change();
+			}
+			
+		});
+		
+		//第二行 驾驶员1号
+		JLabel label2=new JLabel("驾驶员一号编号");
+		label2.setFont(new Font("宋体",Font.PLAIN,20));
+		label2.setOpaque(false);
+		panel.add(label2);
+		
+		car_text2=new JTextField();
+		car_text2.setEditable(true);//设置为可编辑
+		car_text2.setOpaque(false);
+		panel.add(car_text2);
+		panel.add(new JLabel("    "));
+		
+		//第三行 驾驶员2号
+		JLabel label3=new JLabel("驾驶员二号编号");
+		label3.setFont(new Font("宋体",Font.PLAIN,20));
+		label3.setOpaque(false);
+		panel.add(label3);
+		
+		car_text3=new JTextField();
+		car_text3.setEditable(true);//设置为可编辑
+		car_text3.setOpaque(false);
+		panel.add(car_text3);
+		panel.add(new JLabel("    "));
+		
+		//第四行 路线编号
+		JLabel label4=new JLabel("路线编号");
+		label4.setFont(new Font("宋体",Font.PLAIN,20));
+		label4.setOpaque(false);
+		panel.add(label4);
+		
+		car_text4=new JTextField();
+		car_text4.setEditable(true);//设置为可编辑
+		car_text4.setOpaque(false);
+		panel.add(car_text4);
+		panel.add(new JLabel("    "));
+		
+		//第五行 增加空行
+		panel.add(new JLabel("    "));
+		panel.add(new JLabel("    "));
+		panel.add(new JLabel("    "));
+		
+		//第六行 添加按钮
+		JButton[] button=new JButton[3];
+		
+		button[0]=new JButton("添加");
+		button[0].setFont(new Font("宋体",Font.PLAIN,14));
+		button[0].setSize(4, 1);
+		button[0].setOpaque(false);
+		panel.add(button[0]);
+		
+		button[0].addActionListener(new ActionListener(){//增加按钮添加响应函数
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				
+				StringBuilder carinfo=new StringBuilder();//保存文本框中对应的信息
+				carinfo.append(car_text1.getText());
+				carinfo.append("#");
+				carinfo.append(car_text2.getText());
+				carinfo.append("#");
+				carinfo.append(car_text3.getText());
+				carinfo.append("#");
+				carinfo.append(car_text4.getText());
+				
+				String newcarinfo=carinfo.toString();
+				System.out.println(newcarinfo);
+				
+				String s=carInfo_addCarInfo(newcarinfo);//将该信息输出在界面上面
+				JOptionPane.showMessageDialog(self,s,"information",JOptionPane.INFORMATION_MESSAGE);
+				
+			}
+			
+		});
+		
+		button[1]=new JButton("修改");
+		button[1].setFont(new Font("宋体",Font.PLAIN,14));
+		button[1].setSize(4, 1);
+		button[1].setOpaque(false);
+		panel.add(button[1]);
+		
+		button[1].addActionListener(new ActionListener(){//修改按钮添加响应函数
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				StringBuilder carinfo=new StringBuilder();//保存文本框中对应的信息
+				carinfo.append(car_text1.getText());
+				carinfo.append("#");
+				carinfo.append(car_text2.getText());
+				carinfo.append("#");
+				carinfo.append(car_text3.getText());
+				carinfo.append("#");
+				carinfo.append(car_text4.getText());
+				
+				String newcarinfo=carinfo.toString();
+				System.out.println(newcarinfo);
+				String s=carInfo_ModifyCarInfo(newcarinfo);//将该信息输出在界面上面
+				JOptionPane.showMessageDialog(self,s,"information",JOptionPane.INFORMATION_MESSAGE);
+				
+			}
+			
+		});
+		
+		button[2]=new JButton("删除");
+		button[2].setFont(new Font("宋体",Font.PLAIN,14));
+		button[2].setSize(4, 1);
+		button[2].setOpaque(false);
+		panel.add(button[2]);
+		
+		button[2].addActionListener(new ActionListener(){//删除按钮添加响应函数
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				StringBuilder carinfo=new StringBuilder();//保存文本框中对应的信息
+				carinfo.append(car_text1.getText());
+				carinfo.append("#");
+				carinfo.append(car_text2.getText());
+				carinfo.append("#");
+				carinfo.append(car_text3.getText());
+				carinfo.append("#");
+				carinfo.append(car_text4.getText());
+				
+				String newcarinfo=carinfo.toString();
+				System.out.println(newcarinfo);
+				String s=carInfo_deletCarInfo(newcarinfo);//将该信息输出在界面上面
+				JOptionPane.showMessageDialog(self,s,"information",JOptionPane.INFORMATION_MESSAGE);
+			}
+			
+		});
+		
+		self.add(panel);
+		self.revalidate();
+		self.repaint();
+		return;
+		
+	}
+	
+	public void test_change(){
+		String s=car_text1.getText();//获取当前文本框中的内容
+		System.out.println(s);
+		String[] carNum=Database.getCarNumber(s);//用来保存模糊查询得到的车牌号信息
+		System.out.println("测试");
+		for(int i = 0;i<carNum.length;i++){
+			System.out.println(i+carNum[i]);
+		}
+	}
+	
+	public String carInfo_addCarInfo(String newcarinfo){//增加或者修改车辆信息
+		String s=Database.AddCarInfo(newcarinfo);
+		return s;
+	}
+
+	public String carInfo_deletCarInfo(String newcarinfo){//删除车辆信息
+		String s=Database.DeleteCarInfo(newcarinfo);
+		return s;
+	}
+	
+	public String carInfo_ModifyCarInfo(String newcarinfo){//修改车辆信息
+		String s=Database.ModifyCarInfo(newcarinfo);
+		return s;
+	}
+
+
 }
