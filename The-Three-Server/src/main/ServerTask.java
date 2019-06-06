@@ -24,7 +24,6 @@ public class ServerTask implements Runnable {
 	private static Statement stmt;
 	private static Connection conn=null;
 	private void initDB() throws ClassNotFoundException, SQLException {
-		stmt=null;
 		Class.forName(JDBC_DRIVER);//注册驱动
 		conn=DriverManager.getConnection(DB_URL);//打开链接
 		stmt=conn.createStatement();//执行查询
@@ -40,7 +39,6 @@ public class ServerTask implements Runnable {
 			try {
 				serverSocket=new ServerSocket(port);
 				Socket socket=serverSocket.accept();
-				//Server.newThread();
 				DataInputStream input=new DataInputStream(socket.getInputStream());
 				DataOutputStream output=new DataOutputStream(socket.getOutputStream());
 				int op=IO.readInt(input);//读入操作数
@@ -77,6 +75,13 @@ public class ServerTask implements Runnable {
 					System.out.println(modcarinfo);//测试
 					IO.write(output, ModCarInfo(modcarinfo));
 					break;
+				case 8:
+					IO.write(output, getCarNumList());
+					break;
+				case 9:
+					String carNum=IO.read(input);
+					IO.write(output,getCarLatestGPS(carNum));
+					break;
 				}
 				
 				stmt.close();//关闭数据库
@@ -92,6 +97,40 @@ public class ServerTask implements Runnable {
 		}
 	}
 	
+	private String getCarLatestGPS(String carNum) {
+		// TODO Auto-generated method stub
+		try {
+			initDB();
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		StringBuilder sb=new StringBuilder();
+		
+		try {
+			PreparedStatement pstmt=conn.prepareStatement("select GPS from Devicerecord where Carnumber=? ORDER BY Time DESC");
+			pstmt.setString(1,carNum);
+			ResultSet res=pstmt.executeQuery();
+			
+			boolean flag=true;
+			while(res.next()){
+				if(!flag){
+					sb.append("#");
+				}
+				flag=false;
+				sb.append(res.getString(1));
+			}
+			System.out.println(sb.toString());
+			res.close();
+			pstmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return sb.toString();
+	}
 	private String getRouteInfo(int routnum) {
 		// TODO Auto-generated method stub
 		try {
@@ -107,7 +146,6 @@ public class ServerTask implements Runnable {
 			PreparedStatement pstmt=conn.prepareStatement("select * from Route where routeNumber=?");
 			pstmt.setInt(1,routnum);
 			ResultSet res=pstmt.executeQuery();
-			
 			boolean flag=true;
 			while(res.next()){
 				if(!flag){
@@ -122,7 +160,6 @@ public class ServerTask implements Runnable {
 				sb.append("#");
 				sb.append(res.getString(4));
 			}
-			
 			res.close();
 			pstmt.close();
 		} catch (SQLException e) {
@@ -277,7 +314,6 @@ public class ServerTask implements Runnable {
 		System.out.println(newpeople2Number);
 		System.out.println(newrouteNumber);
 		
-			
 		try {
 			PreparedStatement pstmt=conn.prepareStatement("select carNumber from Car where carNumber = ?");
 			pstmt.setString(1,newcarNumber);
@@ -397,5 +433,32 @@ public class ServerTask implements Runnable {
 			e.printStackTrace();
 		}
 		return message;
+	}
+	private String getCarNumList() {
+		try {
+			initDB();
+		} catch(ClassNotFoundException | SQLException e1) {
+			e1.printStackTrace();
+		}
+		StringBuilder sb=new StringBuilder();
+		try {
+			ResultSet res=stmt.executeQuery("select carNumber from Car");
+			
+			boolean flag=true;
+			while(res.next()){
+				if(!flag){
+					sb.append("#");
+				}
+				flag=false;
+				sb.append(res.getString(1));
+			}
+			
+			res.close();
+			return sb.toString();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

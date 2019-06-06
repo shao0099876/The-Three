@@ -11,10 +11,12 @@ import code.Code;
 import code.IO;
 import entity.Car;
 import entity.Driver;
+import entity.GPS;
 import entity.Route;
 
 public class Database {
-	private static String addr="192.168.43.21";//"cal.srcserver.xyz";
+	//private static String addr="192.168.43.21";//"cal.srcserver.xyz";
+	private static String addr="127.0.0.1";
 	public Database() {
 		
 	}
@@ -178,6 +180,47 @@ public class Database {
 			String raw_string=IO.read(input);
 			
 			return raw_string;
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	public static String[] getCarNumList() {
+		try {
+			Socket socket= new Socket(addr,8081);
+			DataInputStream input=new DataInputStream(socket.getInputStream());
+			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
+			
+			IO.write(output, "8");
+			String raw_string=IO.read(input);
+			System.out.println(raw_string);
+			
+			String[] data=raw_string.split("#");
+			return data;
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	public static GPS getCarLatestGPS(String carNumber) {
+		try {
+			Socket socket= new Socket(addr,8081);
+			DataInputStream input=new DataInputStream(socket.getInputStream());
+			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
+			IO.write(output, "9");//查询车辆信息具体信息中的路线的信息
+			IO.write(output, carNumber);//写入路线的编号
+			String raw_string=IO.read(input);
+			System.out.println(raw_string);
+			String[] data=raw_string.split(",");
+			return new GPS(Double.valueOf(data[0]),Double.valueOf(data[1]));
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
