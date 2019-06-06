@@ -10,7 +10,7 @@ import code.IO;
 import entity.Route;
 
 public class Route_Database {
-	private static String addr="127.0.0.1";//"cal.srcserver.xyz";
+	private static String addr="192.168.43.21";//"cal.srcserver.xyz";
 	public static Route getRouteInfo(int n){//查询路线信息
 		try {
 			Socket socket= new Socket(addr,8081);

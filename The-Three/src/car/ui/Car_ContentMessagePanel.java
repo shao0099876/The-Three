@@ -130,19 +130,50 @@ public class Car_ContentMessagePanel {
 			@Override
 			public void changedUpdate(DocumentEvent e) {
 				// TODO Auto-generated method stub
-				
+				System.out.println("TextUpdate!");
 			}
 
 			@Override
 			public void insertUpdate(DocumentEvent e) {
-				// TODO Auto-generated method stub
-				test_change(self);
+				Thread t=new Thread(new Runnable() {
+
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						System.out.println("TextChanged!");
+						String s=self.car_text1.getText();
+						if(s.equals(self.car_lastmessage)){
+							return;
+						}
+						System.out.println("Text is diff");
+						test_change(self,s);
+						self.car_lastmessage=self.car_text1.getText();
+					}
+					
+				});
+				t.start();
 			}
 
 			@Override
 			public void removeUpdate(DocumentEvent e) {
 				// TODO Auto-generated method stub
-				test_change(self);
+				Thread t=new Thread(new Runnable() {
+
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						System.out.println("TextChanged!");
+						String s=self.car_text1.getText();
+						if(s.equals(self.car_lastmessage)){
+							return;
+						}
+						System.out.println("Text is diff"+s);
+						test_change(self,s);
+						self.car_lastmessage=self.car_text1.getText();
+					}
+					
+				});
+				t.start();
 			}
 			
 		});
@@ -297,7 +328,7 @@ public class Car_ContentMessagePanel {
 		
 		self.car_model=new DefaultComboBoxModel();
 		
-		setCarSecondPanel(self,self.car_num);
+		//setCarSecondPanel(self,self.car_num);
 		
 		self.car_bobox=new JComboBox(self.car_model);
 		self.car_bobox.setBorder(BorderFactory.createTitledBorder("车牌号模糊查询结果"));
@@ -316,6 +347,9 @@ public class Car_ContentMessagePanel {
 						public void run() {
 							// TODO Auto-generated method stub
 							self.car_text1.setText(String.valueOf(self.car_model.getSelectedItem()));
+							System.out.println("ComboSelected...");
+							self.car_bobox.setSelectedIndex(-1);
+							self.car_lastmessage=self.car_text1.getText();
 						}
 						
 					});
@@ -389,22 +423,16 @@ public class Car_ContentMessagePanel {
 		self.repaint();
 		return;
 	}
-	public static void test_change(ContentMessagePanel self){
-		String s=self.car_text1.getText();//获取当前文本框中的内容
-		System.out.println(s);
-		if(!(s.equals(self.car_lastmessage))){//判断文本框是否改变
-			String[] temp_car=Car_Database.getCarNumber(s);//用来保存模糊查询得到的车牌号信息
-			System.out.println("模糊查询结束");
-			
-			self.car_num.clear();
-			for(int i=0;i<temp_car.length;i++){
-				self.car_num.add(temp_car[i]);
-			}	
-			setCarSecondPanel(self,self.car_num);//当模糊查询结果改变了，car面板上面的信息也就需要改变
-		}
-		self.car_lastmessage=s;//新值变旧值
-		self.car_text1.revalidate();
-		self.car_text1.repaint();
+	public static void test_change(ContentMessagePanel self,String s){
+		System.out.println("即将查询："+s);
+		String[] temp_car=Car_Database.getCarNumber(s);//用来保存模糊查询得到的车牌号信息
+		System.out.println("模糊查询结束");
+		
+		self.car_num.clear();
+		for(int i=0;i<temp_car.length;i++){
+			self.car_num.add(temp_car[i]);
+		}	
+		setCarSecondPanel(self,self.car_num);//当模糊查询结果改变了，car面板上面的信息也就需要改变
 	}
 	public static String carInfo_addCarInfo(String newcarinfo){//增加或者修改车辆信息
 		String s=Car_Database.AddCarInfo(newcarinfo);
@@ -420,7 +448,7 @@ public class Car_ContentMessagePanel {
 	}
 	public static void setCarSecondPanel(ContentMessagePanel self,ArrayList<String> num){//动态显示carpanel界面的第二列
 		System.out.println("我在动态显示结果");
-		self.car_model.removeAllElements();//先清空
+		self.car_model=new DefaultComboBoxModel();//先清空
 		self.car_num=num;
 		int len=self.car_num.size();
 		System.out.println(len);
@@ -429,5 +457,7 @@ public class Car_ContentMessagePanel {
 			System.out.println(self.car_num.get(i));
 			self.car_model.addElement(self.car_num.get(i));
 		}
+		self.car_bobox.setModel(self.car_model);
+		self.car_bobox.setSelectedIndex(-1);
 	}
 }
