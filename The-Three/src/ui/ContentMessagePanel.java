@@ -276,6 +276,10 @@ public class ContentMessagePanel extends JPanel{
 				String s=carInfo_addCarInfo(newcarinfo);//将该信息输出在界面上面
 				JOptionPane.showMessageDialog(self,s,"information",JOptionPane.INFORMATION_MESSAGE);
 				
+				car_text1.setText("");
+				car_text2.setText("");
+				car_text3.setText("");
+				car_text4.setText("");
 			}
 			
 		});
@@ -305,6 +309,10 @@ public class ContentMessagePanel extends JPanel{
 				String s=carInfo_ModifyCarInfo(newcarinfo);//将该信息输出在界面上面
 				JOptionPane.showMessageDialog(self,s,"information",JOptionPane.INFORMATION_MESSAGE);
 				
+				car_text1.setText("");
+				car_text2.setText("");
+				car_text3.setText("");
+				car_text4.setText("");
 			}
 			
 		});
@@ -332,6 +340,11 @@ public class ContentMessagePanel extends JPanel{
 				System.out.println(newcarinfo);
 				String s=carInfo_deletCarInfo(newcarinfo);//将该信息输出在界面上面
 				JOptionPane.showMessageDialog(self,s,"information",JOptionPane.INFORMATION_MESSAGE);
+			
+				car_text1.setText("");
+				car_text2.setText("");
+				car_text3.setText("");
+				car_text4.setText("");
 			}
 			
 		});

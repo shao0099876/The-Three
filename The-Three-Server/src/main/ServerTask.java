@@ -381,7 +381,7 @@ public class ServerTask implements Runnable {
 			else{//非空，有结果，可以进行修改
 				System.out.println("开始更新数据库");
 				//待修改
-				PreparedStatement pstmt2=conn.prepareStatement("update Car set people1Number = ? people2Number = ? routeNumber = ? where carNumber = ?");			
+				PreparedStatement pstmt2=conn.prepareStatement("update Car set people1Number = ? , people2Number = ? , routeNumber = ? where carNumber = ?");			
 				pstmt2.setInt(1,newpeople1Number);
 				pstmt2.setInt(2,newpeople2Number);
 				pstmt2.setInt(3,newrouteNumber);	
