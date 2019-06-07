@@ -239,4 +239,60 @@ public class Route_ServerTask extends ServerTask{
 		return message;
 	}
 
+	public static String modOneRouteInfo(String s){//修改具体的路线信息
+		System.out.println("开始修改路线信息");//测试
+		String message="";//操作结果
+		
+		String[] data=s.split("#");//获取信息
+		
+		try {
+			initDB();
+		} catch (ClassNotFoundException | SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		//数据类型转换
+		int newrouteNumber=Integer.valueOf(data[0]);
+		System.out.println(newrouteNumber);
+		
+		String newstartAddr=data[1];
+		System.out.println(newstartAddr);
+		
+		String newdestAddr=data[2];
+		System.out.println(newdestAddr);
+		
+		String newmAddr=data[3];		
+		System.out.println(newmAddr);
+		
+			
+		try {
+			PreparedStatement pstmt=conn.prepareStatement("select routeNumber from Route where routeNumber = ?");
+			pstmt.setInt(1,newrouteNumber);
+			ResultSet res=pstmt.executeQuery();
+			
+			if(res==null){//为空，说明无结果，不能添加
+				message="不存在路线信息，不能修改";
+			}
+			else{//非空，可以修改
+				System.out.println("开始修改数据库");
+				PreparedStatement pstmt1=conn.prepareStatement("update Route set startAddr = ? , destAddr = ? , mAddr = ? where routeNumber = ?)");
+				
+				pstmt1.setString(1,newstartAddr);
+				pstmt1.setString(2,newdestAddr);
+				pstmt1.setString(3,newmAddr);
+				pstmt1.setInt(4,newrouteNumber);
+				pstmt1.executeUpdate();  
+				pstmt1.close();
+				message="修改信息成功";
+			}
+			res.close();
+			pstmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return message;
+	}
 }

@@ -62,7 +62,7 @@ public class Route_Level2NaviPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				
+				Route_ContentMessagePanel.modifyRouteInfo(BaseUI.contentPanel);
 			}});
 		
 		//É¾³ýÂ·Ïß
