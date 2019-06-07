@@ -5,13 +5,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JPanel;
 
+import client.DebugInfo;
 import ui.BaseUI;
 import ui.Level2NaviPanel;
 
 public class Car_Level2NaviPanel {
 	public static void car(Level2NaviPanel self) {
+		DebugInfo.DebugInfo("二级导航：正在设置为车辆管理Panel");
 		JButton[] button=new JButton[10];
 		
 		//查询车辆信息
@@ -19,14 +20,22 @@ public class Car_Level2NaviPanel {
 		button[0].setFont(new Font("宋体",Font.PLAIN,14));
 		button[0].setSize(4, 1);
 		button[0].setOpaque(false);
-		System.out.println("check_before");
 		button[0].addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				//System.out.println("二级导航按钮监听");
-				Car_ContentMessagePanel.setCarInfo(BaseUI.contentPanel);
+				DebugInfo.DebugInfo("二级导航：车辆信息按钮被按下");
+				Thread t=new Thread(new Runnable() {
+
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						Car_ContentMessagePanel.setCarInfo(BaseUI.contentPanel);
+					}
+					
+				});
+				t.start();
 			}});
 		
 		//增加，修改，删除车辆信息
@@ -34,19 +43,28 @@ public class Car_Level2NaviPanel {
 		button[1].setFont(new Font("宋体",Font.PLAIN,14));
 		button[1].setSize(4, 1);
 		button[1].setOpaque(false);
-		System.out.println("车辆维护按钮已被按下");//测试使用
 		button[1].addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				//System.out.println("二级导航按钮监听");
-				Car_ContentMessagePanel.carInfo_Add_Del(BaseUI.contentPanel);
+				DebugInfo.DebugInfo("二级导航：车辆维护按钮被按下");
+				Thread t=new Thread(new Runnable() {
+
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						Car_ContentMessagePanel.carInfo_Add_Del(BaseUI.contentPanel);
+					}
+					
+				});
+				t.start();
 			}});
 		
 		self.add(button[0]);
 		self.add(button[1]);
 		self.revalidate();
 		self.repaint();
+		DebugInfo.DebugInfo("二级导航：车辆管理Panel重绘完毕");
 	}
 }

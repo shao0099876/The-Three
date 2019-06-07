@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import client.DebugInfo;
+
 public class Level1NaviPanel extends JPanel {
 	private JButton[] button=new JButton[5];//界面按钮
 	private NaviPanel father;
@@ -20,8 +22,17 @@ public class Level1NaviPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				
-				father.changeLevel2(0);
+				Thread t=new Thread(new Runnable() {
+
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						DebugInfo.DebugInfo("一级导航：车队管理按钮被按下");
+						father.changeLevel2(0);
+					}
+					
+				});
+				t.start();
 			}
 			
 		});
@@ -35,7 +46,17 @@ public class Level1NaviPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				father.changeLevel2(1);
+				Thread t=new Thread(new Runnable() {
+
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						DebugInfo.DebugInfo("一级导航：驾驶员按钮被按下");
+						father.changeLevel2(1);
+					}
+					
+				});
+				t.start();
 			}
 			
 		});
@@ -49,7 +70,17 @@ public class Level1NaviPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				father.changeLevel2(2);
+				Thread t=new Thread(new Runnable() {
+
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						DebugInfo.DebugInfo("一级导航：货物按钮被按下");
+						father.changeLevel2(2);
+					}
+					
+				});
+				t.start();
 			}
 			
 		});
