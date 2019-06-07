@@ -41,7 +41,7 @@ public class Route_Level2NaviPanel {
 				t.start();
 			}});
 		
-		//查看路线
+		//增加路线
 		button[1]=new JButton("增加路线");
 		button[1].setFont(new Font("宋体",Font.PLAIN,14));
 		button[1].setSize(4, 1);
@@ -74,7 +74,7 @@ public class Route_Level2NaviPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				
+				Route_ContentMessagePanel.delRouteInfo(BaseUI.contentPanel);
 			}});
 		
 		self.add(button[0]);

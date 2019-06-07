@@ -39,10 +39,10 @@ public class ContentMessagePanel extends JPanel{
 	private static ContentMessagePanel self;
 	public JTextField car_text1,car_text2,car_text3,car_text4;
 	public JComboBox car_bobox;
-	//public ArrayList<String> car_num=new ArrayList<String>();//用于保存车辆车牌号模糊查询的结果
 	public JPanel car_mpanel,car_panel2;
-	//public DefaultComboBoxModel car_model;
-	//public String car_lastmessage="";
+	
+	public JTextField route_deltext;
+
 	public ContentMessagePanel() {
 		super();
 		self=this;

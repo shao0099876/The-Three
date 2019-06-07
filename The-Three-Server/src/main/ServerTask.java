@@ -71,7 +71,16 @@ public class ServerTask implements Runnable {
 				break;
 			case 8:
 				IO.write(output, Route_ServerTask.getAllRouteInfo());//查询所有路线信息
-			
+			case 9:
+				String delrouteinfo=IO.read(input);//将要进行模糊查询的路线信息读进来
+				System.out.println(delrouteinfo);//测试
+				IO.write(output, Route_ServerTask.getMoHuRouteInfo(delrouteinfo));
+				break;
+			case 10:
+				String del_routeinfo=IO.read(input);//将要进行删除的路线信息读进来
+				System.out.println(del_routeinfo);//测试
+				IO.write(output, Route_ServerTask.delRouteInfo(del_routeinfo));
+				break;
 			}
 			input.close();
 			output.close();
