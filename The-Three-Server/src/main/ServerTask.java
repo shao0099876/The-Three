@@ -14,81 +14,69 @@ import routeServer.Route_ServerTask;
 import iotools.IO;
 
 public class ServerTask implements Runnable {
-
-	private static int port=8081;
-	private ServerSocket serverSocket;
+	private Socket socket;
+	public ServerTask(Socket p) {
+		socket=p;
+	}
 	private static String JDBC_DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 	//private static String DB_URL = "jdbc:sqlserver://localhost:1433;user=SA;password=SHAO0123ruo;";
-	private static String DB_URL = "jdbc:sqlserver://cal.srcserver.xyz:1433;databaseName=TheThreeDB;user=SA;password=SHAO0123ruo;";
+	private static String DB_URL = "jdbc:sqlserver://localhost:1433;databaseName=TheThreeDB;user=SA;password=SHAO0123ruo;";
 	protected static Connection conn=null;
 	public static void initDB() throws ClassNotFoundException, SQLException {
 		Class.forName(JDBC_DRIVER);//注册驱动
 		conn=DriverManager.getConnection(DB_URL);//打开链接
 		//执行查询
 	}
-//	private ResultSet query(String sql) throws SQLException {
-//		ResultSet rs=stmt.executeQuery(sql);
-//		return rs;
-//	}
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
 		try {
-			serverSocket=new ServerSocket(port);
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		while(true) {
-			try {
-				Socket socket=serverSocket.accept();
-				DataInputStream input=new DataInputStream(socket.getInputStream());
-				DataOutputStream output=new DataOutputStream(socket.getOutputStream());
-				int op=IO.readInt(input);//读入操作数
-				System.out.print(op+"\n");
-				switch(op) {
-				case 1:
-					IO.write(output, Car_ServerTask.getCarInfo());
-					break;
-				case 2:
-					System.out.println("readDriverNum_before");
-					int peonum=IO.readInt(input);//读入驾驶员编号
-					System.out.println(peonum);
-					IO.write(output, Driver_ServerTask.getDriverInfo(peonum));
-					break;
-				case 3:
-					int routnum=IO.readInt(input);//读入路线的编号
-					IO.write(output, Route_ServerTask.getRouteInfo(routnum));
-					break;
-				case 4:
-					String s=IO.read(input);//读进来部分车牌号信息
-					System.out.println(s);
-					IO.write(output, Car_ServerTask.getCarNum(s));
-					break;
-				case 5:
-					String carinfo=IO.read(input);//将要进行修改的车辆信息读进来
-					System.out.println(carinfo);//测试
-					IO.write(output, Car_ServerTask.AddCarInfo(carinfo));
-					break;
-				case 6:
-					String delcarinfo=IO.read(input);//将要进行删除的车辆信息读进来
-					System.out.println(delcarinfo);//测试
-					IO.write(output, Car_ServerTask.DelCarInfo(delcarinfo));
-					break;
-				case 7:
-					String modcarinfo=IO.read(input);//将要进行删除的车辆信息读进来
-					System.out.println(modcarinfo);//测试
-					IO.write(output, Car_ServerTask.ModCarInfo(modcarinfo));
-					break;
-				}
-				input.close();
-				output.close();
-				socket.close();//关闭连接
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			DataInputStream input=new DataInputStream(socket.getInputStream());
+			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
+			int op=IO.readInt(input);//读入操作数
+			System.out.print(op+"\n");
+			switch(op) {
+			case 1:
+				IO.write(output, Car_ServerTask.getCarInfo());
+				break;
+			case 2:
+				System.out.println("readDriverNum_before");
+				int peonum=IO.readInt(input);//读入驾驶员编号
+				System.out.println(peonum);
+				IO.write(output, Driver_ServerTask.getDriverInfo(peonum));
+				break;
+			case 3:
+				int routnum=IO.readInt(input);//读入路线的编号
+				IO.write(output, Route_ServerTask.getRouteInfo(routnum));
+				break;
+			case 4:
+				String s=IO.read(input);//读进来部分车牌号信息
+				System.out.println(s);
+				IO.write(output, Car_ServerTask.getCarNum(s));
+				break;
+			case 5:
+				String carinfo=IO.read(input);//将要进行修改的车辆信息读进来
+				System.out.println(carinfo);//测试
+				IO.write(output, Car_ServerTask.AddCarInfo(carinfo));
+				break;
+			case 6:
+				String delcarinfo=IO.read(input);//将要进行删除的车辆信息读进来
+				System.out.println(delcarinfo);//测试
+				IO.write(output, Car_ServerTask.DelCarInfo(delcarinfo));
+				break;
+			case 7:
+				String modcarinfo=IO.read(input);//将要进行删除的车辆信息读进来
+				System.out.println(modcarinfo);//测试
+				IO.write(output, Car_ServerTask.ModCarInfo(modcarinfo));
+				break;
 			}
-		}
+			input.close();
+			output.close();
+			socket.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}//关闭连接
 	}
 	
 	
