@@ -453,7 +453,7 @@ public class Car_ContentMessagePanel {
 			car_model.addElement(temp_car[i]);
 		}
 		self.car_bobox.setModel(car_model);
-		self.car_bobox.setSelectedIndex(-1);//当模糊查询结果改变了，car面板上面的信息也就需要改变
+		//self.car_bobox.setSelectedIndex(-1);//当模糊查询结果改变了，car面板上面的信息也就需要改变
 		self.car_bobox.addItemListener(itemListener);
 	}
 	public static void textChange() {

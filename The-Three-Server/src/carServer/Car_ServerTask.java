@@ -1,5 +1,6 @@
 package carServer;
 
+import java.net.Socket;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,6 +9,10 @@ import java.sql.Statement;
 import main.ServerTask;
 
 public class Car_ServerTask extends ServerTask{
+	public Car_ServerTask(Socket p) {
+		super(p);
+		// TODO Auto-generated constructor stub
+	}
 	public static String getCarInfo() {
 		try {
 			initDB();
