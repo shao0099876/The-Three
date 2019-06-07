@@ -81,6 +81,12 @@ public class ServerTask implements Runnable {
 				System.out.println(del_routeinfo);//测试
 				IO.write(output, Route_ServerTask.delRouteInfo(del_routeinfo));
 				break;
+			case 11:
+				String add_routeinfo=IO.read(input);//将要添加的路线信息读进来
+				System.out.println(add_routeinfo);//测试
+				IO.write(output, Route_ServerTask.addOneRouteInfo(add_routeinfo));
+				break;
+			
 			}
 			input.close();
 			output.close();

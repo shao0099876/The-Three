@@ -37,7 +37,7 @@ public class Route_ContentMessagePanel {
 	//true表明删除的路线编号来自于点击的模糊搜索结果
 	private static String del_routenum;//标记被删除的路线编号
 	
-	public static void setRouteInfo(ContentMessagePanel p_self) {//路线信息 不包含GPS信息
+	public static void setRouteInfo(ContentMessagePanel p_self) {//查看路线信息 不包含GPS信息
 		self=p_self;
 		DebugInfo.DebugInfo("开始绘制路线概要信息Panel");
 		self.removeAll();//将面板上面的组件全部清空
@@ -280,5 +280,105 @@ public class Route_ContentMessagePanel {
 		return;
 	}
 
+	public static void addRouteInfo(ContentMessagePanel p_self){//增加路线信息
+		self=p_self;
+		DebugInfo.DebugInfo("开始绘制增加路线信息Panel");
+		self.removeAll();//将面板上面的组件全部清空
+		
+		JPanel panel=new JPanel(new GridLayout(5,2,5,0));
+		panel.setOpaque(false);
+		
+		//第一行 路线编号
+		JLabel lab1=new JLabel("路线编号");
+		lab1.setFont(new Font("宋体",Font.PLAIN,20));
+		lab1.setOpaque(false);
+		panel.add(lab1);
+		
+		self.route_addtext1=new JTextField(20);
+		self.route_addtext1.setEditable(true);//设置为可编辑
+		self.route_addtext1.setOpaque(false);
+		panel.add(self.route_addtext1);
+		
+		//第二行 起始站台
+		JLabel lab2=new JLabel("起始站台");
+		lab2.setFont(new Font("宋体",Font.PLAIN,20));
+		lab2.setOpaque(false);
+		panel.add(lab2);
+		
+		self.route_addtext2=new JTextField(20);
+		self.route_addtext2.setEditable(true);//设置为可编辑
+		self.route_addtext2.setOpaque(false);
+		panel.add(self.route_addtext2);
+		
+		//第三行 终点站
+		JLabel lab3=new JLabel("终点站");
+		lab3.setFont(new Font("宋体",Font.PLAIN,20));
+		lab3.setOpaque(false);
+		panel.add(lab3);
+		
+		self.route_addtext3=new JTextField(20);
+		self.route_addtext3.setEditable(true);//设置为可编辑
+		self.route_addtext3.setOpaque(false);
+		panel.add(self.route_addtext3);
+		
+		//第四行 中转站
+		JLabel lab4=new JLabel("终点站");
+		lab4.setFont(new Font("宋体",Font.PLAIN,20));
+		lab4.setOpaque(false);
+		panel.add(lab4);
+		
+		self.route_addtext4=new JTextField(100);
+		self.route_addtext4.setEditable(true);//设置为可编辑
+		self.route_addtext4.setOpaque(false);
+		panel.add(self.route_addtext4);
+		
+		//第五行 增加按钮
+		panel.add(new JLabel("添加中转站信息格式：青岛-成都-济南"));
+		//中转站格式待修改完善
+		
+		JButton b=new JButton("确认");
+		b=new JButton("添加");
+		b.setFont(new Font("宋体",Font.PLAIN,14));
+		b.setSize(4, 1);
+		b.setOpaque(false);
+		panel.add(b);
+		
+		b.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				DebugInfo.DebugInfo("添加路线信息的按钮被按下");
+				Thread t=new Thread(new Runnable(){
+
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						String[] s=new String[4]; 
+						s[0]=self.route_addtext1.getText();
+						s[1]=self.route_addtext2.getText();
+						s[2]=self.route_addtext3.getText();
+						s[3]=self.route_addtext4.getText();
+						
+						String message=Route_Database.addRouteInfo(s);//将该信息输出在界面上面
+						JOptionPane.showMessageDialog(self,message,"information",JOptionPane.INFORMATION_MESSAGE);
+					
+						self.route_addtext1.setText("");
+						self.route_addtext2.setText("");
+						self.route_addtext3.setText("");
+						self.route_addtext4.setText("");
+						
+					}
+					});
+				}
+			
+		});
+		
+		self.add(panel);
+		self.revalidate();
+		self.repaint();
+		DebugInfo.DebugInfo("完成绘制增加路线信息Panel");
+		return;
+	}
 
 }
