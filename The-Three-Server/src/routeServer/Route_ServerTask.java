@@ -1,5 +1,6 @@
 package routeServer;
 
+import java.net.Socket;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,6 +8,11 @@ import java.sql.SQLException;
 import main.ServerTask;
 
 public class Route_ServerTask extends ServerTask{
+	public Route_ServerTask(Socket p) {
+		super(p);
+		// TODO Auto-generated constructor stub
+	}
+
 	public static String getRouteInfo(int routnum) {
 		// TODO Auto-generated method stub
 		try {

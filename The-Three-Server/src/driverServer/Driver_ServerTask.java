@@ -1,5 +1,6 @@
 package driverServer;
 
+import java.net.Socket;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,6 +8,11 @@ import java.sql.SQLException;
 import main.ServerTask;
 
 public class Driver_ServerTask extends ServerTask {
+	public Driver_ServerTask(Socket p) {
+		super(p);
+		// TODO Auto-generated constructor stub
+	}
+
 	public static String getDriverInfo(int peonum) {//查询驾驶员信息
 		// TODO Auto-generated method stub
 		try {
