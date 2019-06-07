@@ -51,7 +51,7 @@ public class Level1NaviPanel extends JPanel {
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
-						DebugInfo.DebugInfo("一级导航：驾驶员按钮被按下");
+						DebugInfo.DebugInfo("一级导航：路线按钮被按下");
 						father.changeLevel2(1);
 					}
 					

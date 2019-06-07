@@ -92,6 +92,7 @@ public class Car_ContentMessagePanel {
 			});
 			t.start();
 		}};
+		
 	public static void setCarInfo(ContentMessagePanel p_self) {//车队管理概要信息
 		self=p_self;
 		DebugInfo.DebugInfo("开始绘制车队管理概要信息Panel");
@@ -419,7 +420,7 @@ public class Car_ContentMessagePanel {
 		scroll2.setOpaque(false);
 		
 		//显示路线的详细信息
-		String[] name3={"路线编号","初始站点","终点站"};
+		String[] name3={"路线编号","起始站点","终点站","中转站点"};
 		Route routeInfo=new Route();
 		routeInfo=Route_Database.getRouteInfo(carDetail.routeNumber);//查询路线的详细信息
 		

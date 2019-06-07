@@ -13,6 +13,7 @@ import ui.Level2NaviPanel;
 public class Car_Level2NaviPanel {
 	public static void car(Level2NaviPanel self) {
 		DebugInfo.DebugInfo("二级导航：正在设置为车辆管理Panel");
+		self.removeAll();
 		JButton[] button=new JButton[10];
 		
 		//查询车辆信息
@@ -61,8 +62,22 @@ public class Car_Level2NaviPanel {
 				t.start();
 			}});
 		
+		button[2]=new JButton("绘制GPS");
+		button[2].setFont(new Font("宋体",Font.PLAIN,14));
+		button[2].setSize(4, 1);
+		button[2].setOpaque(false);
+		button[2].addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				//待添加绘制GPS函数 这里是绘制所有车辆的GPS位置信息
+			}});
+		
 		self.add(button[0]);
 		self.add(button[1]);
+		self.add(button[2]);
+		
 		self.revalidate();
 		self.repaint();
 		DebugInfo.DebugInfo("二级导航：车辆管理Panel重绘完毕");

@@ -69,6 +69,9 @@ public class ServerTask implements Runnable {
 				System.out.println(modcarinfo);//测试
 				IO.write(output, Car_ServerTask.ModCarInfo(modcarinfo));
 				break;
+			case 8:
+				IO.write(output, Route_ServerTask.getAllRouteInfo());//查询所有路线信息
+			
 			}
 			input.close();
 			output.close();
