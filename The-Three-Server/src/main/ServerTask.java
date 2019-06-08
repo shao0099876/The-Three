@@ -20,8 +20,8 @@ public class ServerTask implements Runnable {
 	}
 	private static String JDBC_DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 	//private static String DB_URL = "jdbc:sqlserver://localhost:1433;user=SA;password=SHAO0123ruo;";
-	//private static String DB_URL = "jdbc:sqlserver://localhost:1433;databaseName=TheThreeDB;user=SA;password=SHAO0123ruo;";
-	private static String DB_URL = "jdbc:sqlserver://cal.srcserver.xyz:1433;databaseName=TheThreeDB;user=SA;password=SHAO0123ruo;";
+	private static String DB_URL = "jdbc:sqlserver://localhost:1433;databaseName=TheThreeDB;user=SA;password=SHAO0123ruo;";
+	//private static String DB_URL = "jdbc:sqlserver://cal.srcserver.xyz:1433;databaseName=TheThreeDB;user=SA;password=SHAO0123ruo;";
 	protected static Connection conn=null;
 	public static void initDB() throws ClassNotFoundException, SQLException {
 		Class.forName(JDBC_DRIVER);//注册驱动
@@ -90,7 +90,7 @@ public class ServerTask implements Runnable {
 				IO.write(output, Route_ServerTask.addOneRouteInfo(add_routeinfo));
 				break;
 			case 12:
-				String mod_routeinfo=IO.read(input);//将要添加的路线信息读进来
+				String mod_routeinfo=IO.read(input);//将要修改的路线信息读进来
 				System.out.println(mod_routeinfo);//测试
 				IO.write(output, Route_ServerTask.modOneRouteInfo(mod_routeinfo));
 				break;

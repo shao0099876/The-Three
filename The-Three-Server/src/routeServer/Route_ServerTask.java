@@ -186,7 +186,8 @@ public class Route_ServerTask extends ServerTask{
 		System.out.println("开始增加路线信息");//测试
 		String message="";//操作结果
 		
-		String[] data=s.split("#");//获取信息
+		String[] data=new String[4];
+		data=s.split("#");//获取信息
 		
 		for(int i=0;i<data.length;i++){
 			System.out.println(data[i]);
@@ -229,9 +230,11 @@ public class Route_ServerTask extends ServerTask{
 				pstmt1.executeUpdate();  
 				pstmt1.close();
 				message="添加信息成功";
+				System.out.println("1");
 			}
 			else{//非空，不能添加
 				message="存在路线信息，不能添加";
+				System.out.println("0");
 			}
 			res.close();
 			pstmt.close();
@@ -247,7 +250,8 @@ public class Route_ServerTask extends ServerTask{
 		System.out.println("开始修改路线信息");//测试
 		String message="";//操作结果
 		
-		String[] data=s.split("#");//获取信息
+		String[] data=new String[4];
+		data=s.split("#");//获取信息
 		
 		try {
 			initDB();

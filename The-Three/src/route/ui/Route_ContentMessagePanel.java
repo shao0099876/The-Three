@@ -183,7 +183,7 @@ public class Route_ContentMessagePanel {
 		DebugInfo.DebugInfo("开始绘制删除路线信息Panel");
 		self.removeAll();//将面板上面的组件全部清空
 		
-		flag=false;//初始化为删除路线编号来自于文本框
+		flag=true;//初始化为删除路线编号来自于文本框
 		del_routenum=" ";//初始化
 		
 		//设置panel
@@ -215,15 +215,11 @@ public class Route_ContentMessagePanel {
 		b.addActionListener(new ActionListener(){//增加按钮添加响应函数
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO Auto-generated method stub
 				Thread t=new Thread(new Runnable() {
-
 					@Override
 					public void run() {
-						// TODO Auto-generated method stub
 						DebugInfo.DebugInfo("搜索按钮被按下");
 						String s=self.route_deltext.getText();
-						
 						Route[] array=Route_Database.getMohuRouteInfo(s);
 						
 						if(array==null||array.length==0){
@@ -246,32 +242,21 @@ public class Route_ContentMessagePanel {
 							scroll.setOpaque(false);
 							
 							table.addMouseListener(new MouseListener(){
-
 								@Override
-								public void mouseClicked(MouseEvent arg0) {
-									// TODO Auto-generated method stub
-									DebugInfo.DebugInfo("路线信息表格项被点击！");
-									int row = table.getSelectedRow();
-							        int col = table.getSelectedColumn();
-							        if(col==0){
-							        	del_routenum=table.getValueAt(row, 0).toString();//获取当前点击的路线的编号
-							        	flag=true;//点击搜索结果后，删除信息就来自于模糊搜索结果
-							        }
-									
-//									Thread t=new Thread(new Runnable() {
-//
-//										@Override
-//										public void run() {
-//											// TODO Auto-generated method stub
-//											int row = table.getSelectedRow();
-//									        int col = table.getSelectedColumn();
-//									        if(col==0){
-//									        	del_routenum=table.getValueAt(row, 0).toString();//获取当前点击的路线的编号
-//									        	flag=true;//点击搜索结果后，删除信息就来自于模糊搜索结果
-//									        }
-//										}
-//									});
-//									t.start();
+								public void mouseClicked(MouseEvent arg0) {		
+									Thread t=new Thread(new Runnable() {
+										@Override
+										public void run() {
+											// TODO Auto-generated method stub
+											int row = table.getSelectedRow();
+									        int col = table.getSelectedColumn();
+									        if(col==0){
+									        	del_routenum=table.getValueAt(row, 0).toString();//获取当前点击的路线的编号
+									        	flag=false;//点击搜索结果后，删除信息就来自于模糊搜索结果
+									        }
+										}
+									});
+									t.start();
 								}
 
 								@Override
@@ -309,43 +294,33 @@ public class Route_ContentMessagePanel {
 							cpanel.add(bb,BorderLayout.SOUTH);
 							
 							bb.addActionListener(new ActionListener(){
-
 								@Override
-								public void actionPerformed(ActionEvent arg0) {
-									// TODO Auto-generated method stub
-									System.out.println("删除路线按钮按下");
-									if(!flag){//删除信息来自文本框
-										del_routenum=self.route_deltext.getText();//获取当前文本框中的路线编号
-									}
-									String message=Route_Database.delRouteInfo(del_routenum);
-									JOptionPane.showMessageDialog(self,message,"information",JOptionPane.INFORMATION_MESSAGE);
-									self.route_deltext.setText("");//清空文本框中内容
-									
-//									Thread t=new Thread(new Runnable(){
-//
-//										@Override
-//										public void run() {
-//											// TODO Auto-generated method stub
-//											if(!flag){//删除信息来自文本框
-//												del_routenum=self.route_deltext.getText();//获取当前文本框中的路线编号
-//											}
-//											String message=Route_Database.delRouteInfo(del_routenum);
-//											JOptionPane.showMessageDialog(self,message,"information",JOptionPane.INFORMATION_MESSAGE);
-//											self.route_deltext.setText("");//清空文本框中内容
-//										}
-//									});
-//									t.start();
-								}
-								
+								public void actionPerformed(ActionEvent arg0) {	
+									Thread t=new Thread(new Runnable(){
+										@Override
+										public void run() {
+											if(flag){//删除信息来自文本框
+												del_routenum=self.route_deltext.getText();//获取当前文本框中的路线编号
+											}
+											String message=Route_Database.delRouteInfo(del_routenum);
+											JOptionPane.showMessageDialog(self,message,"information",JOptionPane.INFORMATION_MESSAGE);
+											self.route_deltext.setText("");//清空文本框中内容
+											cpanel.removeAll();
+											cpanel.revalidate();
+											cpanel.repaint();						
+										}
+									});
+									t.start();
+								}	
 							});
+							cpanel.revalidate();
+							cpanel.repaint();	
 						}
 					}
 				});
 				t.start();
 			}
-			
 		});
-		
 		
 		self.add(panel);
 		self.revalidate();
@@ -421,22 +396,20 @@ public class Route_ContentMessagePanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				DebugInfo.DebugInfo("添加路线信息的按钮被按下");
 				Thread t=new Thread(new Runnable(){
-
 					@Override
 					public void run() {
-						// TODO Auto-generated method stub
+						DebugInfo.DebugInfo("添加路线信息的按钮被按下");
 						String[] s=new String[4]; 
 						s[0]=self.route_addtext1.getText();
 						s[1]=self.route_addtext2.getText();
 						s[2]=self.route_addtext3.getText();
 						s[3]=self.route_addtext4.getText();
 						
-						for(int i=0;i<s.length;i++){
-							System.out.println(s[i]);
-						}
-						String message=Route_Database.addRouteInfo(s);//将该信息输出在界面上面
+						String S=s[0]+"#"+s[1]+"#"+s[2]+"#"+s[3];//保存增加的路径信息
+						System.out.println("增加路径信息:"+S);
+						
+						String message=Route_Database.addRouteInfo(S);//将该信息输出在界面上面
 						JOptionPane.showMessageDialog(self,message,"information",JOptionPane.INFORMATION_MESSAGE);
 					
 						self.route_addtext1.setText("");
@@ -445,9 +418,9 @@ public class Route_ContentMessagePanel {
 						self.route_addtext4.setText("");
 						
 					}
-					});
+				});
 				t.start();
-				}
+			}
 		});
 		
 		self.add(p);
@@ -534,7 +507,6 @@ public class Route_ContentMessagePanel {
 				// TODO Auto-generated method stub
 				DebugInfo.DebugInfo("修改路线信息的按钮被按下");
 				Thread t=new Thread(new Runnable(){
-
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
@@ -552,10 +524,9 @@ public class Route_ContentMessagePanel {
 						self.route_modifytext3.setText("");
 						self.route_modifytext4.setText("");
 					}
-					});
+				});
 				t.start();
-				}
-			
+			}	
 		});
 		self.route_mpanel.add(panel);
 		

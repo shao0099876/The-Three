@@ -10,7 +10,7 @@ import code.IO;
 import entity.Route;
 
 public class Route_Database {
-	private static String addr="127.0.0.1";//"cal.srcserver.xyz";//"cal.srcserver.xyz";
+	private static String addr="cal.srcserver.xyz";//"cal.srcserver.xyz";
 	public static Route getRouteInfo(int n){//查询单条路线信息
 		try {
 			Socket socket= new Socket(addr,8081);
@@ -153,28 +153,17 @@ public class Route_Database {
 		return null;
 	}
 
-	public static String addRouteInfo(String[] s){//增加路线信息
+	public static String addRouteInfo(String s){//增加路线信息
 		try {
-			StringBuilder sb=new StringBuilder();
-			for(int i=0;i<s.length;i++){
-				if(i==(s.length-1)){
-					sb.append(s[i]);
-				}
-				else{
-					sb.append(s[i]);
-					sb.append("#");
-				}
-			}
-			
-			String S=sb.toString();//将路线信息转化为字符创
+			String S=s;
 			System.out.println("增加路线信息为"+S);
 			
 			Socket socket= new Socket(addr,8081);
 			DataInputStream input=new DataInputStream(socket.getInputStream());
 			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
-			IO.write(output, "11");//增加路线信息
+			IO.write(output,"11");//增加路线信息
 			System.out.println("开始发送添加路线信息");
-			IO.write(output, S);//路线的信息
+			IO.write(output,S);//路线的信息
 			System.out.println("发送添加路线信息结束");
 			
 			String raw_string=IO.read(input);
@@ -208,8 +197,8 @@ public class Route_Database {
 			Socket socket= new Socket(addr,8081);
 			DataInputStream input=new DataInputStream(socket.getInputStream());
 			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
-			IO.write(output, "12");//增加或者修改车辆信息
-			IO.write(output, S);//车辆的信息
+			IO.write(output, "12");//修改路线
+			IO.write(output, S);//路线信息
 			
 			String raw_string=IO.read(input);
 			output.close();
