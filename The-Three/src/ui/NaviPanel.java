@@ -5,10 +5,12 @@ import javax.swing.JPanel;
 public class NaviPanel extends JPanel {
 	private Level1NaviPanel level1;
 	private Level2NaviPanel level2;
+	
 	public NaviPanel(int x,int y) {
 		super();
 		this.setLayout(null);//设置空的布局管理器
 		this.setOpaque(false);
+		
 		level1=new Level1NaviPanel(this);
 		level2=new Level2NaviPanel();
 		

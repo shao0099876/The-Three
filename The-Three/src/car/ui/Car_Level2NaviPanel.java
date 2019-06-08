@@ -8,6 +8,7 @@ import javax.swing.JButton;
 
 import client.DebugInfo;
 import ui.BaseUI;
+import ui.ContentMessagePanel;
 import ui.Level2NaviPanel;
 
 public class Car_Level2NaviPanel {

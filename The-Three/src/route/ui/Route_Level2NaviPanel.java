@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import car.ui.Car_ContentMessagePanel;
 import client.DebugInfo;
 import ui.BaseUI;
+import ui.ContentMessagePanel;
 import ui.Level2NaviPanel;
 
 public class Route_Level2NaviPanel {

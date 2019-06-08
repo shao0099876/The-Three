@@ -37,7 +37,7 @@ public class Route_ContentMessagePanel {
 	//true表明删除的路线编号来自于点击的模糊搜索结果
 	private static String del_routenum;//标记被删除的路线编号
 	
-	private static DocumentListener documentListener=new DocumentListener() {
+	private static DocumentListener documentListener1=new DocumentListener() {
 
 		@Override
 		public void changedUpdate(DocumentEvent e) {
@@ -76,7 +76,7 @@ public class Route_ContentMessagePanel {
 		}
 		
 	};
-	private static ItemListener itemListener=new ItemListener() {
+	private static ItemListener itemListener1=new ItemListener() {
 
 		@Override
 		public void itemStateChanged(ItemEvent arg0) {
@@ -379,12 +379,12 @@ public class Route_ContentMessagePanel {
 		p.add(self.route_addtext3);
 		
 		//第四行 中转站
-		JLabel lab4=new JLabel("终点站");
+		JLabel lab4=new JLabel("中转站");
 		lab4.setFont(new Font("宋体",Font.PLAIN,20));
 		lab4.setOpaque(false);
 		p.add(lab4);
 		
-		self.route_addtext4=new JTextField(100);
+		self.route_addtext4=new JTextField(20);
 		self.route_addtext4.setEditable(true);//设置为可编辑
 		self.route_addtext4.setOpaque(false);
 		p.add(self.route_addtext4);
@@ -462,7 +462,7 @@ public class Route_ContentMessagePanel {
 		
 		//对文本框增加响应函数
 		Document document = self.route_modifytext1.getDocument();
-		document.addDocumentListener(documentListener);
+		document.addDocumentListener(documentListener1);
 		
 		//第二行 起始站台
 		JLabel label2=new JLabel("起始站台");
@@ -487,12 +487,12 @@ public class Route_ContentMessagePanel {
 		panel.add(self.route_modifytext3);
 		
 		//第四行 中转站
-		JLabel label4=new JLabel("终点站");
+		JLabel label4=new JLabel("中转站");
 		label4.setFont(new Font("宋体",Font.PLAIN,20));
 		label4.setOpaque(false);
 		panel.add(label4);
 		
-		self.route_modifytext4=new JTextField(100);
+		self.route_modifytext4=new JTextField(20);
 		self.route_modifytext4.setEditable(true);//设置为可编辑
 		self.route_modifytext4.setOpaque(false);
 		panel.add(self.route_modifytext4);
@@ -548,7 +548,7 @@ public class Route_ContentMessagePanel {
 		self.route_bobox.setSelectedIndex(-1);//设置不选中
 		
 		//添加监听函数
-		self.route_bobox.addItemListener(itemListener);
+		self.route_bobox.addItemListener(itemListener1);
 		
 		self.route_panel2.add(self.route_bobox);
 		
@@ -564,14 +564,14 @@ public class Route_ContentMessagePanel {
 	
 	public static void modroute_textChange() {
 		Document document=self.route_modifytext1.getDocument();
-		document.removeDocumentListener(documentListener);
+		document.removeDocumentListener(documentListener1);
 		String s=(String) self.route_bobox.getSelectedItem();
 		self.route_modifytext1.setText(s);
-		document.addDocumentListener(documentListener);
+		document.addDocumentListener(documentListener1);
 	}
 	
 	public static void modroute_comboboxChange(){
-		self.route_bobox.removeItemListener(itemListener);
+		self.route_bobox.removeItemListener(itemListener1);
 		String s=self.route_modifytext1.getText();
 		String[] temp_route=Route_Database.getMohuRouteNumInfo(s);//用来保存模糊查询得到的路线编号
 		
@@ -581,6 +581,6 @@ public class Route_ContentMessagePanel {
 		}
 		self.route_bobox.setModel(route_model);
 		//self.car_bobox.setSelectedIndex(-1);//当模糊查询结果改变了，car面板上面的信息也就需要改变
-		self.route_bobox.addItemListener(itemListener);
+		self.route_bobox.addItemListener(itemListener1);
 	}
 }
