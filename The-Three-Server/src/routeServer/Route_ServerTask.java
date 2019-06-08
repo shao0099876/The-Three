@@ -300,7 +300,7 @@ public class Route_ServerTask extends ServerTask{
 			}
 			if(n>0){//非空，可以修改
 				System.out.println("开始修改数据库");
-				PreparedStatement pstmt1=conn.prepareStatement("update Route set startAddr = ? , destAddr = ? , mAddr = ? where routeNumber = ?)");
+				PreparedStatement pstmt1=conn.prepareStatement("update Route set startAddr = ? , destAddr = ? , mAddr = ? where routeNumber = ?");
 				
 				pstmt1.setString(1,newstartAddr);
 				pstmt1.setString(2,newdestAddr);

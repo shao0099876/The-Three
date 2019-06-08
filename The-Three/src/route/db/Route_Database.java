@@ -181,18 +181,10 @@ public class Route_Database {
 		return null;
 	}
 
-	public static String modRouteInfo(String[] s){//修改具体的路线信息
+	public static String modRouteInfo(String s){//修改具体的路线信息
 		try {
-			StringBuilder sb=new StringBuilder();
-			for(int i=0;i<s.length;i++){
-				if(i==(s.length-1)){
-					sb.append(s[i]);
-				}
-				sb.append(s[i]);
-				sb.append("#");
-			}
 			
-			String S=sb.toString();//将路线信息转化为字符创
+			String S=s;//将路线信息转化为字符创
 			
 			Socket socket= new Socket(addr,8081);
 			DataInputStream input=new DataInputStream(socket.getInputStream());

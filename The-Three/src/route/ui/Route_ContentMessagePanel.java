@@ -136,7 +136,14 @@ public class Route_ContentMessagePanel {
 						int row = table.getSelectedRow();
 				        int col = table.getSelectedColumn();
 				        if(col==0){
-				        	//待添加 绘制具体路线上面的车辆的GPS信息
+				        	
+				        	//以路线为主体
+				        	
+				        	
+				        	//待添加 绘制具体路线上面的所有车辆的GPS信息
+				        	
+				        	
+				        	
 				        	
 				        }
 					}
@@ -454,8 +461,8 @@ public class Route_ContentMessagePanel {
 		panel.add(self.route_modifytext1);
 		
 		//对文本框增加响应函数
-		Document document = self.route_modifytext1.getDocument();
-		document.addDocumentListener(documentListener1);
+		Document document1 = self.route_modifytext1.getDocument();
+		document1.addDocumentListener(documentListener1);
 		
 		//第二行 起始站台
 		JLabel label2=new JLabel("起始站台");
@@ -516,7 +523,10 @@ public class Route_ContentMessagePanel {
 						s[2]=self.route_modifytext3.getText();
 						s[3]=self.route_modifytext4.getText();
 						
-						String message=Route_Database.modRouteInfo(s);//将该信息输出在界面上面
+						String S=s[0]+"#"+s[1]+"#"+s[2]+"#"+s[3];
+						System.out.println("修改信息为："+S);
+						
+						String message=Route_Database.modRouteInfo(S);//将该信息输出在界面上面
 						JOptionPane.showMessageDialog(self,message,"information",JOptionPane.INFORMATION_MESSAGE);
 					
 						self.route_modifytext1.setText("");
@@ -555,11 +565,11 @@ public class Route_ContentMessagePanel {
 	}
 	
 	public static void modroute_textChange() {
-		Document document=self.route_modifytext1.getDocument();
-		document.removeDocumentListener(documentListener1);
+		Document document1=self.route_modifytext1.getDocument();
+		document1.removeDocumentListener(documentListener1);
 		String s=(String) self.route_bobox.getSelectedItem();
 		self.route_modifytext1.setText(s);
-		document.addDocumentListener(documentListener1);
+		document1.addDocumentListener(documentListener1);
 	}
 	
 	public static void modroute_comboboxChange(){

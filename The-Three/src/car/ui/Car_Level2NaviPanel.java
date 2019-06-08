@@ -77,7 +77,14 @@ public class Car_Level2NaviPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				
+				//以车辆为主体
+				
 				//待添加绘制GPS函数 这里是绘制所有车辆的GPS位置信息
+				
+				
+				
+				
 			}});
 		
 		self.add(button[0]);
