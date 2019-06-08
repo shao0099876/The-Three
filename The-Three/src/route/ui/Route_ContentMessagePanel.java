@@ -183,7 +183,7 @@ public class Route_ContentMessagePanel {
 		self.removeAll();//将面板上面的组件全部清空
 		
 		flag=false;//初始化为删除路线编号来自于文本框
-		del_routenum="";//初始化
+		del_routenum=" ";//初始化
 		
 		//设置panel
 		JPanel panel=new JPanel();
@@ -416,6 +416,9 @@ public class Route_ContentMessagePanel {
 						s[2]=self.route_addtext3.getText();
 						s[3]=self.route_addtext4.getText();
 						
+						for(int i=0;i<s.length;i++){
+							System.out.println(s[i]);
+						}
 						String message=Route_Database.addRouteInfo(s);//将该信息输出在界面上面
 						JOptionPane.showMessageDialog(self,message,"information",JOptionPane.INFORMATION_MESSAGE);
 					
@@ -426,8 +429,8 @@ public class Route_ContentMessagePanel {
 						
 					}
 					});
+				t.start();
 				}
-			
 		});
 		
 		self.add(p);

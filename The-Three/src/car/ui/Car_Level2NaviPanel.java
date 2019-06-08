@@ -13,6 +13,7 @@ import ui.Level2NaviPanel;
 
 public class Car_Level2NaviPanel {
 	public static void car(Level2NaviPanel self) {
+		
 		DebugInfo.DebugInfo("二级导航：正在设置为车辆管理Panel");
 		self.removeAll();
 		JButton[] button=new JButton[10];

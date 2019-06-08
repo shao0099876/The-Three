@@ -188,6 +188,10 @@ public class Route_ServerTask extends ServerTask{
 		
 		String[] data=s.split("#");//获取信息
 		
+		for(int i=0;i<data.length;i++){
+			System.out.println(data[i]);
+		}
+		
 		try {
 			initDB();
 		} catch (ClassNotFoundException | SQLException e1) {

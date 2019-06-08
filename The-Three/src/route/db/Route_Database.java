@@ -156,17 +156,22 @@ public class Route_Database {
 				if(i==(s.length-1)){
 					sb.append(s[i]);
 				}
-				sb.append(s[i]);
-				sb.append("#");
+				else{
+					sb.append(s[i]);
+					sb.append("#");
+				}
 			}
 			
 			String S=sb.toString();//将路线信息转化为字符创
+			System.out.println("增加路线信息为"+S);
 			
 			Socket socket= new Socket(addr,8081);
 			DataInputStream input=new DataInputStream(socket.getInputStream());
 			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
-			IO.write(output, "11");//增加或者修改车辆信息
-			IO.write(output, S);//车辆的信息
+			IO.write(output, "11");//增加路线信息
+			System.out.println("开始发送添加路线信息");
+			IO.write(output, S);//路线的信息
+			System.out.println("发送添加路线信息结束");
 			
 			String raw_string=IO.read(input);
 			output.close();
