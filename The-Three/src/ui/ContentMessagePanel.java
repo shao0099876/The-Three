@@ -41,6 +41,12 @@ public class ContentMessagePanel extends JPanel{
 	public JComboBox car_bobox;
 	public JPanel car_mpanel,car_panel2;
 	
+	public JTextField route_deltext;//用于路线删除
+	public JTextField route_addtext1,route_addtext2,route_addtext3,route_addtext4;//用于增加路线时
+	public JTextField route_modifytext1,route_modifytext2,route_modifytext3,route_modifytext4;//用于修改路线时
+	public JComboBox route_bobox;
+	public JPanel route_mpanel,route_panel2;
+	
 	
 	public ContentMessagePanel() {
 		super();

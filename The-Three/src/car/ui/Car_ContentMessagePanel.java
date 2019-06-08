@@ -176,6 +176,7 @@ public class Car_ContentMessagePanel {
 		self.removeAll();//清除面板上面的所有组件
 
 		self.car_mpanel=new JPanel(new GridLayout(1,2,0,0));//一行两列
+		self.car_mpanel.setOpaque(false);
 		
 		//第一列
 		JPanel panel=new JPanel(new GridLayout(6,3,5,5));//六行三列
@@ -370,8 +371,10 @@ public class Car_ContentMessagePanel {
 		
 		//第二列
 		self.car_panel2=new JPanel();
+		self.car_panel2.setOpaque(false);
 		
 		self.car_bobox=new JComboBox();
+		self.car_bobox.setOpaque(false);
 		self.car_bobox.setBorder(BorderFactory.createTitledBorder("车牌号模糊查询结果"));
 		self.car_bobox.setSelectedIndex(-1);//设置不选中
 		
