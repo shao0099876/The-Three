@@ -13,6 +13,10 @@ import ui.Level2NaviPanel;
 
 public class Car_Level2NaviPanel {
 	public static void car(Level2NaviPanel self) {
+		//将内容模板清空
+		BaseUI.contentPanel.removeAll();
+		BaseUI.contentPanel.revalidate();
+		BaseUI.contentPanel.repaint();
 		
 		DebugInfo.DebugInfo("二级导航：正在设置为车辆管理Panel");
 		self.removeAll();

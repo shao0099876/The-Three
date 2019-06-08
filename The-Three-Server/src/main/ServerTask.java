@@ -20,7 +20,8 @@ public class ServerTask implements Runnable {
 	}
 	private static String JDBC_DRIVER = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 	//private static String DB_URL = "jdbc:sqlserver://localhost:1433;user=SA;password=SHAO0123ruo;";
-	private static String DB_URL = "jdbc:sqlserver://cal.srcserver.xyz:1433;databaseName=TheThreeDB;user=SA;password=SHAO0123ruo;";
+	private static String DB_URL = "jdbc:sqlserver://localhost:1433;databaseName=TheThreeDB;user=SA;password=SHAO0123ruo;";
+	//private static String DB_URL = "jdbc:sqlserver://cal.srcserver.xyz:1433;databaseName=TheThreeDB;user=SA;password=SHAO0123ruo;";
 	protected static Connection conn=null;
 	public static void initDB() throws ClassNotFoundException, SQLException {
 		Class.forName(JDBC_DRIVER);//×¢²áÇý¶¯
