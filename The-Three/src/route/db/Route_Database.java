@@ -73,7 +73,9 @@ public class Route_Database {
 			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
 			
 			IO.write(output, "9");//模糊查询路线信息
+			System.out.println("开始发送删除需要用的模糊查询路线编号");
 			IO.write(output, s);//模糊查询路线的路线信息片段
+			System.out.println("发送删除需要用的模糊查询路线编号结束");
 			
 			String raw_string=IO.read(input);
 			String[] data=raw_string.split("#");
@@ -102,7 +104,9 @@ public class Route_Database {
 			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
 			
 			IO.write(output, "9");//模糊查询路线信息
+			System.out.println("开始发送模糊查询文本框里面的路线编号");
 			IO.write(output, s);//模糊查询路线的路线信息片段
+			System.out.println("发送模糊查询文本框里面的路线编号结束");
 			
 			String raw_string=IO.read(input);
 			String[] data=raw_string.split("#");

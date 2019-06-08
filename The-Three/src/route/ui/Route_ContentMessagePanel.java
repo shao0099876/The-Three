@@ -127,6 +127,7 @@ public class Route_ContentMessagePanel {
 			public void mouseClicked(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				DebugInfo.DebugInfo("路线信息表格项被点击！");
+				
 				Thread t=new Thread(new Runnable() {
 
 					@Override
@@ -250,20 +251,27 @@ public class Route_ContentMessagePanel {
 								public void mouseClicked(MouseEvent arg0) {
 									// TODO Auto-generated method stub
 									DebugInfo.DebugInfo("路线信息表格项被点击！");
-									Thread t=new Thread(new Runnable() {
-
-										@Override
-										public void run() {
-											// TODO Auto-generated method stub
-											int row = table.getSelectedRow();
-									        int col = table.getSelectedColumn();
-									        if(col==0){
-									        	del_routenum=table.getValueAt(row, 0).toString();//获取当前点击的路线的编号
-									        	flag=true;//点击搜索结果后，删除信息就来自于模糊搜索结果
-									        }
-										}
-									});
-									t.start();
+									int row = table.getSelectedRow();
+							        int col = table.getSelectedColumn();
+							        if(col==0){
+							        	del_routenum=table.getValueAt(row, 0).toString();//获取当前点击的路线的编号
+							        	flag=true;//点击搜索结果后，删除信息就来自于模糊搜索结果
+							        }
+									
+//									Thread t=new Thread(new Runnable() {
+//
+//										@Override
+//										public void run() {
+//											// TODO Auto-generated method stub
+//											int row = table.getSelectedRow();
+//									        int col = table.getSelectedColumn();
+//									        if(col==0){
+//									        	del_routenum=table.getValueAt(row, 0).toString();//获取当前点击的路线的编号
+//									        	flag=true;//点击搜索结果后，删除信息就来自于模糊搜索结果
+//									        }
+//										}
+//									});
+//									t.start();
 								}
 
 								@Override
@@ -305,19 +313,28 @@ public class Route_ContentMessagePanel {
 								@Override
 								public void actionPerformed(ActionEvent arg0) {
 									// TODO Auto-generated method stub
-									Thread t=new Thread(new Runnable(){
-
-										@Override
-										public void run() {
-											// TODO Auto-generated method stub
-											if(!flag){//删除信息来自文本框
-												del_routenum=self.route_deltext.getText();//获取当前文本框中的路线编号
-											}
-											String message=Route_Database.delRouteInfo(del_routenum);
-											JOptionPane.showMessageDialog(self,message,"information",JOptionPane.INFORMATION_MESSAGE);
-											self.route_deltext.setText("");//清空文本框中内容
-										}
-									});
+									System.out.println("删除路线按钮按下");
+									if(!flag){//删除信息来自文本框
+										del_routenum=self.route_deltext.getText();//获取当前文本框中的路线编号
+									}
+									String message=Route_Database.delRouteInfo(del_routenum);
+									JOptionPane.showMessageDialog(self,message,"information",JOptionPane.INFORMATION_MESSAGE);
+									self.route_deltext.setText("");//清空文本框中内容
+									
+//									Thread t=new Thread(new Runnable(){
+//
+//										@Override
+//										public void run() {
+//											// TODO Auto-generated method stub
+//											if(!flag){//删除信息来自文本框
+//												del_routenum=self.route_deltext.getText();//获取当前文本框中的路线编号
+//											}
+//											String message=Route_Database.delRouteInfo(del_routenum);
+//											JOptionPane.showMessageDialog(self,message,"information",JOptionPane.INFORMATION_MESSAGE);
+//											self.route_deltext.setText("");//清空文本框中内容
+//										}
+//									});
+//									t.start();
 								}
 								
 							});
@@ -536,6 +553,7 @@ public class Route_ContentMessagePanel {
 						self.route_modifytext4.setText("");
 					}
 					});
+				t.start();
 				}
 			
 		});
