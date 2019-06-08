@@ -157,10 +157,15 @@ public class Route_ServerTask extends ServerTask{
 			pstmt.setInt(1,deln);
 			ResultSet res=pstmt.executeQuery();
 			
-			if(res==null){//为空，说明无结果，没有办法进行删除操作
+			int n=0;
+			while(res.next()){
+				n=n+1;
+			}
+			
+			if(n==0){//为空，说明无结果，没有办法进行删除操作
 				message="没有该路线信息，没有办法进行删除";
 			}
-			else{//非空，进行删除
+			if(n>0){//非空，进行删除
 				try {
 					PreparedStatement pstmt0 = conn.prepareStatement("delete from Route where routeNumber=?");
 					pstmt0.setInt(1,deln);
@@ -219,7 +224,13 @@ public class Route_ServerTask extends ServerTask{
 			pstmt.setInt(1,newrouteNumber);
 			ResultSet res=pstmt.executeQuery();
 			
-			if(res==null){//为空，说明无结果，为添加
+			int n=0;//记录查询的个数
+			
+			while(res.next()){
+				n=n+1;//有记录 就加一
+			}
+			
+			if(n==0){//为空，说明无结果，为添加
 				System.out.println("开始添加数据库");
 				PreparedStatement pstmt1=conn.prepareStatement("insert into Route values(?,?,?,?)");
 				
@@ -232,7 +243,7 @@ public class Route_ServerTask extends ServerTask{
 				message="添加信息成功";
 				System.out.println("1");
 			}
-			else{//非空，不能添加
+			if(n>0){//非空，不能添加
 				message="存在路线信息，不能添加";
 				System.out.println("0");
 			}
@@ -279,10 +290,15 @@ public class Route_ServerTask extends ServerTask{
 			pstmt.setInt(1,newrouteNumber);
 			ResultSet res=pstmt.executeQuery();
 			
-			if(res==null){//为空，说明无结果，不能添加
+			int n=0;
+			while(res.next()){
+				n=n+1;
+			}
+			
+			if(n==0){//为空，说明无结果，不能修改
 				message="不存在路线信息，不能修改";
 			}
-			else{//非空，可以修改
+			if(n>0){//非空，可以修改
 				System.out.println("开始修改数据库");
 				PreparedStatement pstmt1=conn.prepareStatement("update Route set startAddr = ? , destAddr = ? , mAddr = ? where routeNumber = ?)");
 				
