@@ -3,7 +3,6 @@ package ui;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -40,18 +39,19 @@ public class BaseUI extends JFrame{
 		super("物流综合信息平台");
 		layer=new JLayeredPane();
 		setBackgroundImage();
-		
-		naviPanel=new NaviPanel(image.getIconWidth(),(int)(image.getIconHeight()*0.3));
+		int width=image.getIconWidth();
+		int height=image.getIconHeight();
+		naviPanel=new NaviPanel(width,(int)(height*0.3));
 		contentPanel=new ContentMessagePanel();
-		naviPanel.setBounds(0,0,image.getIconWidth(),(int)(image.getIconHeight()*0.3));
-		contentPanel.setBounds(0, (int)(image.getIconHeight()*0.3), image.getIconWidth(), (int)(image.getIconHeight()*0.7));
+		naviPanel.setBounds(0,0,width,(int)(height*0.3));
+		contentPanel.setBounds(0, (int)(height*0.3), width, (int)(height*0.7));
 		
 		layer.add(naviPanel,JLayeredPane.MODAL_LAYER);
 		layer.add(contentPanel,JLayeredPane.MODAL_LAYER);
 		
 		setLayeredPane(layer);
 		setVisible(true);
-		setSize(image.getIconWidth(),image.getIconHeight());
+		setSize(width,height);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocation();
 	}
