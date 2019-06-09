@@ -2,9 +2,12 @@ package browser;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JList;
@@ -13,7 +16,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import db.Database;
+import car.db.Car_Database;
+import client.DebugInfo;
 import entity.GPS;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
@@ -21,52 +25,53 @@ import javafx.scene.Scene;
 
 public class BrowserDialog extends JDialog {
 	private Scene scene;
-	private void initAndShowGUI() {
-		final JFXPanel fxPanel=new JFXPanel();
+	private static Browser browser;
+	private static JFXPanel fxPanel;
+	private static boolean init_complete=false;
+	public void ShowGUI() {
 		this.add(fxPanel,BorderLayout.CENTER);
-		
 		JPanel listPanel=new JPanel();
-		DefaultListModel<String> model=new DefaultListModel<String>();
-		String[] data=Database.getCarNumList();
-		for(int i=0;i<data.length;i++) {
-			model.add(i, data[i]);
-		}
-		JList<String> list=new JList<String>(model);
-		list.setFont(new Font("Î¢ÈíÑÅºÚ",Font.PLAIN,30));
-		list.addListSelectionListener(new ListSelectionListener() {
+		JButton button=new JButton("test");
+		button.addActionListener(new ActionListener() {
 
 			@Override
-			public void valueChanged(ListSelectionEvent arg0) {
+			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				String carNum=(String) list.getSelectedValue();
-				GPS gps=Database.getCarLatestGPS(carNum);
-				System.out.println(gps.toString());
+				drawCarPoint(116.404,39.915);
 			}
 			
 		});
-		ArrayList<String> test=new ArrayList<String>();
-		listPanel.add(list);
+		
+		listPanel.add(button);
 		this.add(listPanel,BorderLayout.WEST);
 		this.setSize(2000,1300);
 		this.setVisible(true);
+	}
+	public static void init() {
+		fxPanel=new JFXPanel();
 		Platform.runLater(new Runnable() {
 
 			@Override
 			public void run() {
-				// TODO Auto-generated method stub
-				initFX(fxPanel);
+				browser =new Browser();
+				Scene scene=new Scene(browser);
+		        fxPanel.setScene(scene);
+		        init_complete=true;
 			}
 			
 		});
 	}
-	private static void initFX(JFXPanel fxPanel) {
-        // This method is invoked on JavaFX thread
-		Scene scene=new Scene(new Browser());
-        fxPanel.setScene(scene);
-    }
 	public BrowserDialog(JFrame father) {
 		super(father,"ä¯ÀÀÆ÷",false);
 		this.setLayout(new BorderLayout());
-		initAndShowGUI();
+	}
+	public void drawCarPoint(double x,double y) {
+		StringBuilder sb=new StringBuilder();//DrawPoint
+		sb.append("DrawPoint(");
+		sb.append(x);
+		sb.append(",");
+		sb.append(y);
+		sb.append(")");
+		browser.execute(sb.toString());
 	}
 }

@@ -1,5 +1,6 @@
 package browser;
 
+import javafx.application.Platform;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
@@ -10,11 +11,10 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
 public class Browser extends Region {
-	final WebView browser=new WebView();
-	final WebEngine engine=browser.getEngine();
+	static WebView browser=new WebView();
 	public Browser() {
 		getStyleClass().add("browser");
-		engine.load(Browser.class.getResource("map.html").toExternalForm());
+		browser.getEngine().load(Browser.class.getResource("map.html").toExternalForm());
 		getChildren().add(browser);
 	}
 	private Node createSpacer() {
@@ -35,5 +35,17 @@ public class Browser extends Region {
  
     @Override protected double computePrefHeight(double width) {
         return 600;
+    }
+    public void execute(String s) {
+    	Platform.runLater(new Runnable() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				browser.getEngine().executeScript(s);
+			}
+			
+		});
+    	
     }
 }

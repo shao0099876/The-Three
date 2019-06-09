@@ -9,12 +9,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import carServer.Car_ServerTask;
+import deviceServer.Device_ServerTask;
 import driverServer.Driver_ServerTask;
 import routeServer.Route_ServerTask;
 import iotools.IO;
 
 public class ServerTask implements Runnable {
-	private Socket socket;
+	protected Socket socket;
 	public ServerTask(Socket p) {
 		socket=p;
 	}
@@ -69,6 +70,9 @@ public class ServerTask implements Runnable {
 				System.out.println(modcarinfo);//≤‚ ‘
 				IO.write(output, Car_ServerTask.ModCarInfo(modcarinfo));
 				break;
+			case 8:
+				String carnum=IO.read(input);
+				IO.write(output, Device_ServerTask.getCarLatestGPS(carnum));
 			}
 			input.close();
 			output.close();
