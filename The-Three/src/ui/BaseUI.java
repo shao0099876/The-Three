@@ -41,8 +41,10 @@ public class BaseUI extends JFrame{
 		setBackgroundImage();
 		int width=image.getIconWidth();
 		int height=image.getIconHeight();
-		naviPanel=new NaviPanel(width,(int)(height*0.3));
+		
 		contentPanel=new ContentMessagePanel();
+		naviPanel=new NaviPanel(width,(int)(height*0.3));		
+		
 		naviPanel.setBounds(0,0,width,(int)(height*0.3));
 		contentPanel.setBounds(0, (int)(height*0.3), width, (int)(height*0.7));
 		

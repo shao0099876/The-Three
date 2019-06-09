@@ -1,4 +1,4 @@
-package car.ui;
+package route.ui;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -6,93 +6,89 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
+import car.ui.Car_ContentMessagePanel;
 import client.DebugInfo;
 import ui.BaseUI;
 import ui.ContentMessagePanel;
 import ui.Level2NaviPanel;
 
-public class Car_Level2NaviPanel {
-	public static void car(Level2NaviPanel self) {
+public class Route_Level2NaviPanel {
+	public static void route(Level2NaviPanel self) {
 		//将内容模板清空
 		BaseUI.contentPanel.removeAll();
 		BaseUI.contentPanel.revalidate();
 		BaseUI.contentPanel.repaint();
 		
-		DebugInfo.DebugInfo("二级导航：正在设置为车辆管理Panel");
 		self.removeAll();
-		JButton[] button=new JButton[10];
 		
-		//查询车辆信息
-		button[0]=new JButton("车辆信息");
+		JButton[] button=new JButton[10];//设置按钮
+		
+		//查看路线
+		button[0]=new JButton("查看路线");
 		button[0].setFont(new Font("宋体",Font.PLAIN,14));
 		button[0].setSize(4, 1);
 		button[0].setOpaque(false);
 		button[0].addActionListener(new ActionListener() {
-
+			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				DebugInfo.DebugInfo("二级导航：车辆信息按钮被按下");
+				DebugInfo.DebugInfo("二级导航：查看路线按钮被按下");
 				Thread t=new Thread(new Runnable() {
-
+					
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
-						Car_ContentMessagePanel.setCarInfo(BaseUI.contentPanel);
+						Route_ContentMessagePanel.setRouteInfo(BaseUI.contentPanel);
 					}
 					
 				});
 				t.start();
 			}});
 		
-		//增加，修改，删除车辆信息
-		button[1]=new JButton("车辆维护");
+		//增加路线
+		button[1]=new JButton("增加路线");
 		button[1].setFont(new Font("宋体",Font.PLAIN,14));
 		button[1].setSize(4, 1);
 		button[1].setOpaque(false);
 		button[1].addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				DebugInfo.DebugInfo("二级导航：车辆维护按钮被按下");
-				Thread t=new Thread(new Runnable() {
-
-					@Override
-					public void run() {
-						// TODO Auto-generated method stub
-						Car_ContentMessagePanel.carInfo_Add_Del(BaseUI.contentPanel);
-					}
-					
-				});
-				t.start();
+				Route_ContentMessagePanel.addRouteInfo(BaseUI.contentPanel);
 			}});
 		
-		button[2]=new JButton("绘制GPS");
+		//修改路线
+		button[2]=new JButton("修改路线");
 		button[2].setFont(new Font("宋体",Font.PLAIN,14));
 		button[2].setSize(4, 1);
 		button[2].setOpaque(false);
 		button[2].addActionListener(new ActionListener() {
-
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				
-				//以车辆为主体
-				
-				//待添加绘制GPS函数 这里是绘制所有车辆的GPS位置信息
-				
-				
-				
-				
+				Route_ContentMessagePanel.modifyRouteInfo(BaseUI.contentPanel);
+			}});
+		
+		//删除路线
+		button[3]=new JButton("删除路线");
+		button[3].setFont(new Font("宋体",Font.PLAIN,14));
+		button[3].setSize(4, 1);
+		button[3].setOpaque(false);
+		button[3].addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				Route_ContentMessagePanel.delRouteInfo(BaseUI.contentPanel);
 			}});
 		
 		self.add(button[0]);
 		self.add(button[1]);
 		self.add(button[2]);
+		self.add(button[3]);
 		
 		self.revalidate();
 		self.repaint();
-		DebugInfo.DebugInfo("二级导航：车辆管理Panel重绘完毕");
 	}
+
 }

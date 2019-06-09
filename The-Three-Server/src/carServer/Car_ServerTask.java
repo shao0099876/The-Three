@@ -113,7 +113,12 @@ public class Car_ServerTask extends ServerTask{
 			pstmt.setString(1,newcarNumber);
 			ResultSet res=pstmt.executeQuery();
 			
-			if(res==null){//为空，说明无结果，为添加
+			int n=0;
+			while(res.next()){
+				n=n+1;
+			}
+			
+			if(n==0){//为空，说明无结果，为添加
 				System.out.println("开始添加数据库");
 				PreparedStatement pstmt1=conn.prepareStatement("insert into Car values(?,?,?,?)");
 				pstmt1.setString(1,newcarNumber);
@@ -124,7 +129,7 @@ public class Car_ServerTask extends ServerTask{
 				pstmt1.close();
 				message="添加信息成功";
 			}
-			else{//非空，不能添加
+			if(n>0){//非空，不能添加
 				message="存在车辆信息，不能添加";
 			}
 			res.close();
@@ -152,10 +157,15 @@ public class Car_ServerTask extends ServerTask{
 			pstmt.setString(1,data[0]);
 			ResultSet res=pstmt.executeQuery();
 			
-			if(res==null){//为空，说明无结果，没有办法进行删除操作
+			int n=0;
+			while(res.next()){
+				n=n+1;
+			}
+			
+			if(n==0){//为空，说明无结果，没有办法进行删除操作
 				message="没有该车辆信息，没有办法进行删除";
 			}
-			else{//非空，进行删除
+			if(n>0){//非空，进行删除
 				try {
 					PreparedStatement pstmt0 = conn.prepareStatement("delete from Car where carNumber=?");
 					pstmt0.setString(1,data[0]);
@@ -205,10 +215,15 @@ public class Car_ServerTask extends ServerTask{
 			pstmt.setString(1,newcarNumber);
 			ResultSet res=pstmt.executeQuery();
 			
-			if(res==null){//为空，说明无结果，无法修改
+			int n=0;
+			while(res.next()){
+				n=n+1;
+			}
+			
+			if(n==0){//为空，说明无结果，无法修改
 				message="不存在该车辆信息，不能修改";
 			}
-			else{//非空，有结果，可以进行修改
+			if(n>0){//非空，有结果，可以进行修改
 				System.out.println("开始更新数据库");
 				//待修改
 				PreparedStatement pstmt2=conn.prepareStatement("update Car set people1Number = ? , people2Number = ? , routeNumber = ? where carNumber = ?");			

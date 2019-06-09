@@ -92,6 +92,7 @@ public class Car_ContentMessagePanel {
 			});
 			t.start();
 		}};
+		
 	public static void setCarInfo(ContentMessagePanel p_self) {//车队管理概要信息
 		self=p_self;
 		DebugInfo.DebugInfo("开始绘制车队管理概要信息Panel");
@@ -175,6 +176,7 @@ public class Car_ContentMessagePanel {
 		self.removeAll();//清除面板上面的所有组件
 
 		self.car_mpanel=new JPanel(new GridLayout(1,2,0,0));//一行两列
+		self.car_mpanel.setOpaque(false);
 		
 		//第一列
 		JPanel panel=new JPanel(new GridLayout(6,3,5,5));//六行三列
@@ -369,8 +371,10 @@ public class Car_ContentMessagePanel {
 		
 		//第二列
 		self.car_panel2=new JPanel();
+		self.car_panel2.setOpaque(false);
 		
 		self.car_bobox=new JComboBox();
+		self.car_bobox.setOpaque(false);
 		self.car_bobox.setBorder(BorderFactory.createTitledBorder("车牌号模糊查询结果"));
 		self.car_bobox.setSelectedIndex(-1);//设置不选中
 		
@@ -419,7 +423,7 @@ public class Car_ContentMessagePanel {
 		scroll2.setOpaque(false);
 		
 		//显示路线的详细信息
-		String[] name3={"路线编号","初始站点","终点站"};
+		String[] name3={"路线编号","起始站点","终点站","中转站点"};
 		Route routeInfo=new Route();
 		routeInfo=Route_Database.getRouteInfo(carDetail.routeNumber);//查询路线的详细信息
 		

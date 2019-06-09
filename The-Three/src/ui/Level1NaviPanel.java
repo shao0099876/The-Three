@@ -37,7 +37,7 @@ public class Level1NaviPanel extends JPanel {
 			
 		});
 		
-		button[1]=new JButton("驾驶员");
+		button[1]=new JButton("路线管理");
 		button[1].setFont(new Font("宋体",Font.PLAIN,14));button[1].setOpaque(false);
 		button[1].setSize(4, 1);
 		button[1].setOpaque(false);
@@ -51,7 +51,7 @@ public class Level1NaviPanel extends JPanel {
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
-						DebugInfo.DebugInfo("一级导航：驾驶员按钮被按下");
+						DebugInfo.DebugInfo("一级导航：路线按钮被按下");
 						father.changeLevel2(1);
 					}
 					
