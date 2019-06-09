@@ -24,6 +24,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.Document;
 
+import browser.BrowserDialog;
 import route.db.Route_Database;
 import client.DebugInfo;
 import ui.ContentMessagePanel;
@@ -141,7 +142,12 @@ public class Route_ContentMessagePanel {
 				        	
 				        	
 				        	//待添加 绘制具体路线上面的所有车辆的GPS信息
-				        	
+				        	String routeNumber=data[row][col];
+				        	String[] res=Route_Database.getCarGPSonRoute(routeNumber);
+				        	BrowserDialog map=new BrowserDialog();
+				        	map.clean();
+				        	map.Draw_Cars_on_Route(data[row], res);
+				        	map.setVisible(true);
 				        	
 				        	
 				        	

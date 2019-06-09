@@ -130,27 +130,5 @@ public class Car_Database {
 		}
 		return null;
 	}
-	public static String getCarLatestGPS(String carNum) {
-		// TODO Auto-generated method stub
-		try {
-			Socket socket= new Socket(addr,8081);
-			DataInputStream input=new DataInputStream(socket.getInputStream());
-			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
-			IO.write(output, "8");//获取车辆最后GPS位置
-			IO.write(output, carNum);//车辆的信息
-			
-			String raw_string=IO.read(input);
-			output.close();
-			input.close();
-			socket.close();
-			return raw_string;
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
+
 }

@@ -207,4 +207,24 @@ public class Route_Database {
 		return null;
 		
 	}
+	public static String[] getCarGPSonRoute(String s) {//查询该路线上所有车辆的GPS位置信息
+		try {
+			Socket socket=new Socket(addr,8081);
+			DataInputStream input=new DataInputStream(socket.getInputStream());
+			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
+			IO.write(output, "13");
+			IO.write(output,s);
+		
+			String raw_string=IO.read(input);
+			output.close();
+			input.close();
+			socket.close();
+			return raw_string.split("#");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
 }

@@ -48,19 +48,17 @@
         map.enableScrollWheelZoom(true);
     }
 
-    function Drawroute(x1, y1, x2, y2) {
+    function Drawroute(start, end) {
         driving[cnt] = new BMap.DrivingRoute(map, {
             renderOptions: {
                 map: map,
                 autoViewport: true
             }
         });
-        var start = new BMap.Point(x1, y1);
-        var end = new BMap.Point(x2, y2);
         driving[cnt].search(start, end);
         cnt += 1;
     }
-
+    //Drawroute("威海","济南")
     function ErasePoints() {
         map.clearOverlays();
     }
@@ -69,6 +67,7 @@
         for (i in driving) {
             i.clearResults();
         }
+        cnt = 0;
     }
 </script>
 

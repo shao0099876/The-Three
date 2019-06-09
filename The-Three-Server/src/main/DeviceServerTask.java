@@ -44,7 +44,7 @@ public class DeviceServerTask extends ServerTask implements Runnable {
 		try {
 			pstmt = conn.prepareStatement("insert into Devicerecord values(?,?,?,?,?,?)");
 			pstmt.setString(1,array[0]);
-			pstmt.setString(2,array[1]+","+array[2]);
+			pstmt.setString(2,array[1]);
 			Date now=new Date();
 			SimpleDateFormat ft=new SimpleDateFormat("yyyyMMddhhmmss");//20190522101121
 			pstmt.setString(3, ft.format(now));

@@ -11,9 +11,8 @@ import main.ServerTask;
 public class Car_ServerTask extends ServerTask{
 	public Car_ServerTask(Socket p) {
 		super(p);
-		// TODO Auto-generated constructor stub
 	}
-	public static String getCarInfo() {
+	public static String getCarInfo() {		//通信协议1：查车队概要列表
 		try {
 			initDB();
 		} catch (ClassNotFoundException | SQLException e1) {
@@ -49,7 +48,7 @@ public class Car_ServerTask extends ServerTask{
 		}
 		return sb.toString();
 	}
-	public static String getCarNum(String s){//查询车辆的车牌号（模糊查询）
+	public static String getCarNum(String s){//通讯协议4：查询车辆的车牌号（模糊查询）
 		System.out.print("查数据库");
 		s=s+"%";//实现模糊查询
 		try {
@@ -84,7 +83,7 @@ public class Car_ServerTask extends ServerTask{
 		System.out.println(sb.toString());
 		return sb.toString();
 	}
-	public static String AddCarInfo(String s){//用于增加车辆信息
+	public static String AddCarInfo(String s){//通讯协议5：增加车辆信息
 		System.out.println("开始修改车辆信息");//测试
 		String message="";//操作结果
 		
@@ -141,7 +140,7 @@ public class Car_ServerTask extends ServerTask{
 		}
 		return message;
 	}
-	public static String DelCarInfo(String s){//用于删除车辆信息
+	public static String DelCarInfo(String s){//通讯协议6：用于删除车辆信息
 		System.out.println("开始删除车辆信息");//测试
 		String[] data=s.split("#");//获取信息
 		String message="";
