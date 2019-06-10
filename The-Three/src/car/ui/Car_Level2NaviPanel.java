@@ -87,9 +87,7 @@ public class Car_Level2NaviPanel {
 				BrowserDialog map=new BrowserDialog();
 				map.clean();
 				map.Draw_Cars_Point(res);
-				map.ShowGUI();
-				
-				
+				map.ShowGUI(Car_Database.getAllCarNumber().split("#"));
 				
 			}});
 		

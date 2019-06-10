@@ -25,6 +25,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.text.Document;
 
 import browser.BrowserDialog;
+import car.db.Car_Database;
 import route.db.Route_Database;
 import client.DebugInfo;
 import ui.ContentMessagePanel;
@@ -147,10 +148,7 @@ public class Route_ContentMessagePanel {
 				        	BrowserDialog map=new BrowserDialog();
 				        	map.clean();
 				        	map.Draw_Cars_on_Route(data[row], res);
-				        	map.ShowGUI();
-				        	
-				        	
-				        	
+				        	map.ShowGUI(Car_Database.getCarNumberonRoute(routeNumber).split("#"));
 				        }
 					}
 				});

@@ -28,20 +28,24 @@ public class BrowserDialog extends JDialog {
 	private static Browser browser;
 	private static JFXPanel fxPanel;
 	public static JFrame frame;
-	public void ShowGUI() {
+	public void ShowGUI(String[] array) {
 		this.add(fxPanel,BorderLayout.CENTER);
 		JPanel listPanel=new JPanel();
-		JButton button=new JButton("test");
-		button.addActionListener(new ActionListener() {
+		DefaultListModel<String> model=new DefaultListModel<String>();
+		for(String i:array) {
+			model.addElement(i);
+		}
+		JList<String> list=new JList<String>(model);
+		list.addListSelectionListener(new ListSelectionListener() {
 
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
+			public void valueChanged(ListSelectionEvent arg0) {
 				// TODO Auto-generated method stub
+				
 			}
 			
 		});
-		
-		listPanel.add(button);
+		listPanel.add(list);
 		this.add(listPanel,BorderLayout.WEST);
 		this.setSize(2000,1300);
 		this.setVisible(true);

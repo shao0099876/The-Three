@@ -152,5 +152,50 @@ public class Car_Database {
 		}
 		return null;
 	}
+	public static String getCarNumberonRoute(String routeNumber) {
+		// TODO Auto-generated method stub
+		try {
+			Socket socket= new Socket(addr,8081);
+			DataInputStream input=new DataInputStream(socket.getInputStream());
+			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
+			IO.write(output, "15");//查询所有车辆GPS位置信息
+			IO.write(output, routeNumber);
+			String raw_string=IO.read(input);
+			output.close();
+			input.close();
+			socket.close();
+			return raw_string;
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	public static String getAllCarNumber() {
+		// TODO Auto-generated method stub
+		try {
+			Socket socket= new Socket(addr,8081);
+			DataInputStream input=new DataInputStream(socket.getInputStream());
+			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
+			IO.write(output, "16");//查询所有车辆车牌号
+			String raw_string=IO.read(input);
+			output.close();
+			input.close();
+			socket.close();
+			return raw_string;
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return null;
+	}
 
 }

@@ -243,4 +243,68 @@ public class Car_ServerTask extends ServerTask{
 		}
 		return message;
 	}
+	public static String getCarNumberonRoute(int routeNumber) {
+		// TODO Auto-generated method stub
+		try {
+			initDB();
+		} catch (ClassNotFoundException | SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		StringBuilder sb=new StringBuilder();
+		
+		try {
+			PreparedStatement pstmt=conn.prepareStatement("select carNumber from Car where routeNumber=?");
+			pstmt.setInt(1,routeNumber);
+			ResultSet res=pstmt.executeQuery();
+			
+			boolean flag=true;
+			while(res.next()){
+				if(!flag){
+					sb.append("#");
+				}
+				flag=false;
+				sb.append(res.getString(1));
+			}
+			res.close();
+			pstmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return sb.toString();
+	}
+	public static String getAllCarNumber() {
+		// TODO Auto-generated method stub
+		try {
+			initDB();
+		} catch (ClassNotFoundException | SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		StringBuilder sb=new StringBuilder();
+		
+		try {
+			Statement stmt=conn.createStatement();
+			ResultSet res=stmt.executeQuery("select carNumber from Car");
+			boolean flag=true;
+			while(res.next()){
+				if(!flag){
+					sb.append("#");
+				}
+				flag=false;
+				sb.append(res.getString(1));
+			}
+			res.close();
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return sb.toString();
+	}
 }
