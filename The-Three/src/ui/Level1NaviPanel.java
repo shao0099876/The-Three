@@ -85,6 +85,34 @@ public class Level1NaviPanel extends JPanel {
 			
 		});
 		
+		button[3]=new JButton("退出登陆");
+		button[3].setFont(new Font("宋体",Font.PLAIN,14));button[2].setOpaque(false);
+		button[3].setSize(4, 1);
+		button[3].setOpaque(false);
+		
+		button[3].addActionListener(new ActionListener(){//添加响应函数
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				Thread t=new Thread(new Runnable() {
+
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						//退出登陆，退回登陆前
+						
+						
+						
+						
+						
+						
+					}
+					
+				});
+				t.start();
+			}
+			
+		});
 		
 	}
 	
@@ -99,7 +127,7 @@ public class Level1NaviPanel extends JPanel {
 		this.add(button[0]);
 		this.add(button[1]);
 		this.add(button[2]);
-		
+		this.add(button[3]);
 	}
 
 }
