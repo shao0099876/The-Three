@@ -41,17 +41,17 @@ public class ContentMessagePanel extends JPanel{
 	public JComboBox car_bobox;
 	public JPanel car_mpanel,car_panel2;
 	
-	public JTextField route_deltext;//ç”¨äºè·¯çº¿åˆ é™¤
-	public JTextField route_addtext1,route_addtext2,route_addtext3,route_addtext4;//ç”¨äºå¢åŠ è·¯çº¿æ—¶
-	public JTextField route_modifytext1,route_modifytext2,route_modifytext3,route_modifytext4;//ç”¨äºä¿®æ”¹è·¯çº¿æ—¶
+	public JTextField route_deltext;//ÓÃÓÚÂ·ÏßÉ¾³ı
+	public JTextField route_addtext1,route_addtext2,route_addtext3,route_addtext4;//ÓÃÓÚÔö¼ÓÂ·ÏßÊ±
+	public JTextField route_modifytext1,route_modifytext2,route_modifytext3,route_modifytext4;//ÓÃÓÚĞŞ¸ÄÂ·ÏßÊ±
 	public JComboBox route_bobox;
 	public JPanel route_mpanel,route_panel2;
 	
-	public JTextField driver_deltext;//ç”¨äºé©¾é©¶å‘˜åˆ é™¤
+	public JTextField driver_deltext;//ÓÃÓÚ¼İÊ»Ô±É¾³ı
 	public JTextField driver_addtext1,driver_addtext2,driver_addtext3,driver_addtext4,
-						driver_addtext5,driver_addtext6,driver_addtext7;//ç”¨äºå¢åŠ é©¾é©¶å‘˜
+						driver_addtext5,driver_addtext6,driver_addtext7;//ÓÃÓÚÔö¼Ó¼İÊ»Ô±
 	public JTextField driver_modifytext1,driver_modifytext2,driver_modifytext3,driver_modifytext4,
-						driver_modifytext5,driver_modifytext6,driver_modifytext7;//ç”¨äºä¿®æ”¹é©¾é©¶å‘˜
+						driver_modifytext5,driver_modifytext6,driver_modifytext7;//ÓÃÓÚĞŞ¸Ä¼İÊ»Ô±
 	
 	public JComboBox driver_bobox;
 	public JPanel driver_mpanel,driver_panel2;

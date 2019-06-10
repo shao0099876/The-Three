@@ -13,7 +13,7 @@ public class Route_ServerTask extends ServerTask{
 		// TODO Auto-generated constructor stub
 	}
 
-	public static String getRouteInfo(int routnum) {//è·å–æŸæ¡è·¯çº¿ä¿¡æ¯
+	public static String getRouteInfo(int routnum) {//»ñÈ¡Ä³ÌõÂ·ÏßĞÅÏ¢
 		// TODO Auto-generated method stub
 		try {
 			initDB();
@@ -55,7 +55,7 @@ public class Route_ServerTask extends ServerTask{
 		return sb.toString();
 	}
 
-	public static String getAllRouteInfo() {//è·å–æ‰€æœ‰è·¯çº¿ä¿¡æ¯
+	public static String getAllRouteInfo() {//»ñÈ¡ËùÓĞÂ·ÏßĞÅÏ¢
 		// TODO Auto-generated method stub
 		try {
 			initDB();
@@ -67,7 +67,7 @@ public class Route_ServerTask extends ServerTask{
 		StringBuilder sb=new StringBuilder();
 		
 		try {
-			PreparedStatement pstmt=conn.prepareStatement("select * from Route");//æŸ¥è¯¢æ‰€æœ‰è·¯çº¿ä¿¡æ¯
+			PreparedStatement pstmt=conn.prepareStatement("select * from Route");//²éÑ¯ËùÓĞÂ·ÏßĞÅÏ¢
 			ResultSet res=pstmt.executeQuery();
 			
 			boolean flag=true;
@@ -96,7 +96,7 @@ public class Route_ServerTask extends ServerTask{
 		return sb.toString();
 	}
 
-	public static String getMoHuRouteInfo(String delrouteinfo) {//è·å–æŸæ¡è·¯çº¿ä¿¡æ¯
+	public static String getMoHuRouteInfo(String delrouteinfo) {//»ñÈ¡Ä³ÌõÂ·ÏßĞÅÏ¢
 		// TODO Auto-generated method stub
 		int routnum=Integer.valueOf(delrouteinfo);
 		
@@ -140,9 +140,9 @@ public class Route_ServerTask extends ServerTask{
 		return sb.toString();
 	}
 
-	public static String delRouteInfo(String del_routeinfo){//åˆ é™¤å…·ä½“çš„æŸæ¡è·¯çº¿ä¿¡æ¯
-		System.out.println("å¼€å§‹åˆ é™¤è·¯çº¿ä¿¡æ¯");//æµ‹è¯•
-		int deln=Integer.valueOf(del_routeinfo);//å°†è·¯çº¿ç¼–å·è½¬åŒ–ä¸ºINTå‹
+	public static String delRouteInfo(String del_routeinfo){//É¾³ı¾ßÌåµÄÄ³ÌõÂ·ÏßĞÅÏ¢
+		System.out.println("¿ªÊ¼É¾³ıÂ·ÏßĞÅÏ¢");//²âÊÔ
+		int deln=Integer.valueOf(del_routeinfo);//½«Â·Ïß±àºÅ×ª»¯ÎªINTĞÍ
 		
 		String message="";
 		
@@ -162,16 +162,16 @@ public class Route_ServerTask extends ServerTask{
 				n=n+1;
 			}
 			
-			if(n==0){//ä¸ºç©ºï¼Œè¯´æ˜æ— ç»“æœï¼Œæ²¡æœ‰åŠæ³•è¿›è¡Œåˆ é™¤æ“ä½œ
-				message="æ²¡æœ‰è¯¥è·¯çº¿ä¿¡æ¯ï¼Œæ²¡æœ‰åŠæ³•è¿›è¡Œåˆ é™¤";
+			if(n==0){//Îª¿Õ£¬ËµÃ÷ÎŞ½á¹û£¬Ã»ÓĞ°ì·¨½øĞĞÉ¾³ı²Ù×÷
+				message="Ã»ÓĞ¸ÃÂ·ÏßĞÅÏ¢£¬Ã»ÓĞ°ì·¨½øĞĞÉ¾³ı";
 			}
-			if(n>0){//éç©ºï¼Œè¿›è¡Œåˆ é™¤
+			if(n>0){//·Ç¿Õ£¬½øĞĞÉ¾³ı
 				try {
 					PreparedStatement pstmt0 = conn.prepareStatement("delete from Route where routeNumber=?");
 					pstmt0.setInt(1,deln);
 					pstmt0.executeUpdate();  
 					pstmt0.close();
-					message="åˆ é™¤æˆåŠŸ";
+					message="É¾³ı³É¹¦";
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -187,12 +187,12 @@ public class Route_ServerTask extends ServerTask{
 		return message;
 	}
 
-	public static String addOneRouteInfo(String s){//å¢åŠ ä¸€æ¡è·¯çº¿ä¿¡æ¯
-		System.out.println("å¼€å§‹å¢åŠ è·¯çº¿ä¿¡æ¯");//æµ‹è¯•
-		String message="";//æ“ä½œç»“æœ
+	public static String addOneRouteInfo(String s){//Ôö¼ÓÒ»ÌõÂ·ÏßĞÅÏ¢
+		System.out.println("¿ªÊ¼Ôö¼ÓÂ·ÏßĞÅÏ¢");//²âÊÔ
+		String message="";//²Ù×÷½á¹û
 		
 		String[] data=new String[4];
-		data=s.split("#");//è·å–ä¿¡æ¯
+		data=s.split("#");//»ñÈ¡ĞÅÏ¢
 		
 		for(int i=0;i<data.length;i++){
 			System.out.println(data[i]);
@@ -205,7 +205,7 @@ public class Route_ServerTask extends ServerTask{
 			e1.printStackTrace();
 		}
 		
-		//æ•°æ®ç±»å‹è½¬æ¢
+		//Êı¾İÀàĞÍ×ª»»
 		int newrouteNumber=Integer.valueOf(data[0]);
 		System.out.println(newrouteNumber);
 		
@@ -224,14 +224,14 @@ public class Route_ServerTask extends ServerTask{
 			pstmt.setInt(1,newrouteNumber);
 			ResultSet res=pstmt.executeQuery();
 			
-			int n=0;//è®°å½•æŸ¥è¯¢çš„ä¸ªæ•°
+			int n=0;//¼ÇÂ¼²éÑ¯µÄ¸öÊı
 			
 			while(res.next()){
-				n=n+1;//æœ‰è®°å½• å°±åŠ ä¸€
+				n=n+1;//ÓĞ¼ÇÂ¼ ¾Í¼ÓÒ»
 			}
 			
-			if(n==0){//ä¸ºç©ºï¼Œè¯´æ˜æ— ç»“æœï¼Œä¸ºæ·»åŠ 
-				System.out.println("å¼€å§‹æ·»åŠ æ•°æ®åº“");
+			if(n==0){//Îª¿Õ£¬ËµÃ÷ÎŞ½á¹û£¬ÎªÌí¼Ó
+				System.out.println("¿ªÊ¼Ìí¼ÓÊı¾İ¿â");
 				PreparedStatement pstmt1=conn.prepareStatement("insert into Route values(?,?,?,?)");
 				
 				pstmt1.setInt(1,newrouteNumber);
@@ -240,11 +240,11 @@ public class Route_ServerTask extends ServerTask{
 				pstmt1.setString(4,newmAddr);
 				pstmt1.executeUpdate();  
 				pstmt1.close();
-				message="æ·»åŠ ä¿¡æ¯æˆåŠŸ";
+				message="Ìí¼ÓĞÅÏ¢³É¹¦";
 				System.out.println("1");
 			}
-			if(n>0){//éç©ºï¼Œä¸èƒ½æ·»åŠ 
-				message="å­˜åœ¨è·¯çº¿ä¿¡æ¯ï¼Œä¸èƒ½æ·»åŠ ";
+			if(n>0){//·Ç¿Õ£¬²»ÄÜÌí¼Ó
+				message="´æÔÚÂ·ÏßĞÅÏ¢£¬²»ÄÜÌí¼Ó";
 				System.out.println("0");
 			}
 			res.close();
@@ -257,12 +257,12 @@ public class Route_ServerTask extends ServerTask{
 		return message;
 	}
 
-	public static String modOneRouteInfo(String s){//ä¿®æ”¹å…·ä½“çš„è·¯çº¿ä¿¡æ¯
-		System.out.println("å¼€å§‹ä¿®æ”¹è·¯çº¿ä¿¡æ¯");//æµ‹è¯•
-		String message="";//æ“ä½œç»“æœ
+	public static String modOneRouteInfo(String s){//ĞŞ¸Ä¾ßÌåµÄÂ·ÏßĞÅÏ¢
+		System.out.println("¿ªÊ¼ĞŞ¸ÄÂ·ÏßĞÅÏ¢");//²âÊÔ
+		String message="";//²Ù×÷½á¹û
 		
 		String[] data=new String[4];
-		data=s.split("#");//è·å–ä¿¡æ¯
+		data=s.split("#");//»ñÈ¡ĞÅÏ¢
 		
 		try {
 			initDB();
@@ -271,7 +271,7 @@ public class Route_ServerTask extends ServerTask{
 			e1.printStackTrace();
 		}
 		
-		//æ•°æ®ç±»å‹è½¬æ¢
+		//Êı¾İÀàĞÍ×ª»»
 		int newrouteNumber=Integer.valueOf(data[0]);
 		System.out.println(newrouteNumber);
 		
@@ -295,11 +295,11 @@ public class Route_ServerTask extends ServerTask{
 				n=n+1;
 			}
 			
-			if(n==0){//ä¸ºç©ºï¼Œè¯´æ˜æ— ç»“æœï¼Œä¸èƒ½ä¿®æ”¹
-				message="ä¸å­˜åœ¨è·¯çº¿ä¿¡æ¯ï¼Œä¸èƒ½ä¿®æ”¹";
+			if(n==0){//Îª¿Õ£¬ËµÃ÷ÎŞ½á¹û£¬²»ÄÜĞŞ¸Ä
+				message="²»´æÔÚÂ·ÏßĞÅÏ¢£¬²»ÄÜĞŞ¸Ä";
 			}
-			if(n>0){//éç©ºï¼Œå¯ä»¥ä¿®æ”¹
-				System.out.println("å¼€å§‹ä¿®æ”¹æ•°æ®åº“");
+			if(n>0){//·Ç¿Õ£¬¿ÉÒÔĞŞ¸Ä
+				System.out.println("¿ªÊ¼ĞŞ¸ÄÊı¾İ¿â");
 				PreparedStatement pstmt1=conn.prepareStatement("update Route set startAddr = ? , destAddr = ? , mAddr = ? where routeNumber = ?");
 				
 				pstmt1.setString(1,newstartAddr);
@@ -308,7 +308,7 @@ public class Route_ServerTask extends ServerTask{
 				pstmt1.setInt(4,newrouteNumber);
 				pstmt1.executeUpdate();  
 				pstmt1.close();
-				message="ä¿®æ”¹ä¿¡æ¯æˆåŠŸ";
+				message="ĞŞ¸ÄĞÅÏ¢³É¹¦";
 			}
 			res.close();
 			pstmt.close();

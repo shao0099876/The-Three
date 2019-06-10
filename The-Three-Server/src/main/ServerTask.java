@@ -25,9 +25,9 @@ public class ServerTask implements Runnable {
 	//private static String DB_URL = "jdbc:sqlserver://cal.srcserver.xyz:1433;databaseName=TheThreeDB;user=SA;password=SHAO0123ruo;";
 	protected static Connection conn=null;
 	public static void initDB() throws ClassNotFoundException, SQLException {
-		Class.forName(JDBC_DRIVER);//æ³¨å†Œé©±åŠ¨
-		conn=DriverManager.getConnection(DB_URL);//æ‰“å¼€é“¾æ¥
-		//æ‰§è¡ŒæŸ¥è¯¢
+		Class.forName(JDBC_DRIVER);//×¢²áÇı¶¯
+		conn=DriverManager.getConnection(DB_URL);//´ò¿ªÁ´½Ó
+		//Ö´ĞĞ²éÑ¯
 	}
 	@Override
 	public void run() {
@@ -35,7 +35,7 @@ public class ServerTask implements Runnable {
 		try {
 			DataInputStream input=new DataInputStream(socket.getInputStream());
 			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
-			int op=IO.readInt(input);//è¯»å…¥æ“ä½œæ•°
+			int op=IO.readInt(input);//¶ÁÈë²Ù×÷Êı
 			System.out.print(op+"\n");
 			switch(op) {
 			case 1:
@@ -43,56 +43,56 @@ public class ServerTask implements Runnable {
 				break;
 			case 2:
 				System.out.println("readDriverNum_before");
-				int peonum=IO.readInt(input);//è¯»å…¥é©¾é©¶å‘˜ç¼–å·
+				int peonum=IO.readInt(input);//¶ÁÈë¼İÊ»Ô±±àºÅ
 				System.out.println(peonum);
 				IO.write(output, Driver_ServerTask.getDriverInfo(peonum));
 				break;
 			case 3:
-				int routnum=IO.readInt(input);//è¯»å…¥è·¯çº¿çš„ç¼–å·
+				int routnum=IO.readInt(input);//¶ÁÈëÂ·ÏßµÄ±àºÅ
 				IO.write(output, Route_ServerTask.getRouteInfo(routnum));
 				break;
 			case 4:
-				String s=IO.read(input);//è¯»è¿›æ¥éƒ¨åˆ†è½¦ç‰Œå·ä¿¡æ¯
+				String s=IO.read(input);//¶Á½øÀ´²¿·Ö³µÅÆºÅĞÅÏ¢
 				System.out.println(s);
 				IO.write(output, Car_ServerTask.getCarNum(s));
 				break;
 			case 5:
-				String carinfo=IO.read(input);//å°†è¦è¿›è¡Œä¿®æ”¹çš„è½¦è¾†ä¿¡æ¯è¯»è¿›æ¥
-				System.out.println(carinfo);//æµ‹è¯•
+				String carinfo=IO.read(input);//½«Òª½øĞĞĞŞ¸ÄµÄ³µÁ¾ĞÅÏ¢¶Á½øÀ´
+				System.out.println(carinfo);//²âÊÔ
 				IO.write(output, Car_ServerTask.AddCarInfo(carinfo));
 				break;
 			case 6:
-				String delcarinfo=IO.read(input);//å°†è¦è¿›è¡Œåˆ é™¤çš„è½¦è¾†ä¿¡æ¯è¯»è¿›æ¥
-				System.out.println(delcarinfo);//æµ‹è¯•
+				String delcarinfo=IO.read(input);//½«Òª½øĞĞÉ¾³ıµÄ³µÁ¾ĞÅÏ¢¶Á½øÀ´
+				System.out.println(delcarinfo);//²âÊÔ
 				IO.write(output, Car_ServerTask.DelCarInfo(delcarinfo));
 				break;
 			case 7:
-				String modcarinfo=IO.read(input);//å°†è¦è¿›è¡Œåˆ é™¤çš„è½¦è¾†ä¿¡æ¯è¯»è¿›æ¥
-				System.out.println(modcarinfo);//æµ‹è¯•
+				String modcarinfo=IO.read(input);//½«Òª½øĞĞÉ¾³ıµÄ³µÁ¾ĞÅÏ¢¶Á½øÀ´
+				System.out.println(modcarinfo);//²âÊÔ
 				IO.write(output, Car_ServerTask.ModCarInfo(modcarinfo));
 				break;
 			case 8:
-				IO.write(output, Route_ServerTask.getAllRouteInfo());//æŸ¥è¯¢æ‰€æœ‰è·¯çº¿ä¿¡æ¯
+				IO.write(output, Route_ServerTask.getAllRouteInfo());//²éÑ¯ËùÓĞÂ·ÏßĞÅÏ¢
 				break;
 			case 9:
-				String delrouteinfo=IO.read(input);//å°†è¦è¿›è¡Œæ¨¡ç³ŠæŸ¥è¯¢çš„è·¯çº¿ä¿¡æ¯è¯»è¿›æ¥
-				System.out.println(delrouteinfo);//æµ‹è¯•
+				String delrouteinfo=IO.read(input);//½«Òª½øĞĞÄ£ºı²éÑ¯µÄÂ·ÏßĞÅÏ¢¶Á½øÀ´
+				System.out.println(delrouteinfo);//²âÊÔ
 				IO.write(output, Route_ServerTask.getMoHuRouteInfo(delrouteinfo));
 				break;
 			case 10:
-				String del_routeinfo=IO.read(input);//å°†è¦è¿›è¡Œåˆ é™¤çš„è·¯çº¿ä¿¡æ¯è¯»è¿›æ¥
-				System.out.println(del_routeinfo);//æµ‹è¯•
+				String del_routeinfo=IO.read(input);//½«Òª½øĞĞÉ¾³ıµÄÂ·ÏßĞÅÏ¢¶Á½øÀ´
+				System.out.println(del_routeinfo);//²âÊÔ
 				IO.write(output, Route_ServerTask.delRouteInfo(del_routeinfo));
 				break;
 			case 11:
-				System.out.println("å¼€å§‹æ¥å—æ·»åŠ è·¯çº¿ä¿¡æ¯");
-				String add_routeinfo=IO.read(input);//å°†è¦æ·»åŠ çš„è·¯çº¿ä¿¡æ¯è¯»è¿›æ¥
-				System.out.println(add_routeinfo);//æµ‹è¯•
+				System.out.println("¿ªÊ¼½ÓÊÜÌí¼ÓÂ·ÏßĞÅÏ¢");
+				String add_routeinfo=IO.read(input);//½«ÒªÌí¼ÓµÄÂ·ÏßĞÅÏ¢¶Á½øÀ´
+				System.out.println(add_routeinfo);//²âÊÔ
 				IO.write(output, Route_ServerTask.addOneRouteInfo(add_routeinfo));
 				break;
 			case 12:
-				String mod_routeinfo=IO.read(input);//å°†è¦ä¿®æ”¹çš„è·¯çº¿ä¿¡æ¯è¯»è¿›æ¥
-				System.out.println(mod_routeinfo);//æµ‹è¯•
+				String mod_routeinfo=IO.read(input);//½«ÒªĞŞ¸ÄµÄÂ·ÏßĞÅÏ¢¶Á½øÀ´
+				System.out.println(mod_routeinfo);//²âÊÔ
 				IO.write(output, Route_ServerTask.modOneRouteInfo(mod_routeinfo));
 				break;
 			case 13:
@@ -111,28 +111,28 @@ public class ServerTask implements Runnable {
 				IO.write(output, Device_ServerTask.getSpecifiedCarGPS(IO.read(input)));
 				break;
 			case 20:
-				System.out.println("å¼€å§‹æŸ¥è¯¢æ‰€æœ‰é©¾é©¶å‘˜ä¿¡æ¯");
-				IO.write(output, Driver_ServerTask.getAllDriverInfo());//æŸ¥è¯¢æ‰€æœ‰é©¾é©¶å‘˜ä¿¡æ¯
+				System.out.println("¿ªÊ¼²éÑ¯ËùÓĞ¼İÊ»Ô±ĞÅÏ¢");
+				IO.write(output, Driver_ServerTask.getAllDriverInfo());//²éÑ¯ËùÓĞ¼İÊ»Ô±ĞÅÏ¢
 				break;
 			case 21:
-				String adddriverinfo=IO.read(input);//å°†æ·»åŠ çš„é©¾é©¶å‘˜ä¿¡æ¯è¯»è¿›æ¥
-				System.out.println(adddriverinfo);//æµ‹è¯•
-				IO.write(output, Driver_ServerTask.addDriverInfo(adddriverinfo));//æŸ¥è¯¢æ‰€æœ‰é©¾é©¶å‘˜ä¿¡æ¯
+				String adddriverinfo=IO.read(input);//½«Ìí¼ÓµÄ¼İÊ»Ô±ĞÅÏ¢¶Á½øÀ´
+				System.out.println(adddriverinfo);//²âÊÔ
+				IO.write(output, Driver_ServerTask.addDriverInfo(adddriverinfo));//²éÑ¯ËùÓĞ¼İÊ»Ô±ĞÅÏ¢
 				break;
 			case 22:
-				String moddriverinfo=IO.read(input);//å°†ä¿®æ”¹çš„é©¾é©¶å‘˜ä¿¡æ¯è¯»è¿›æ¥
-				System.out.println(moddriverinfo);//æµ‹è¯•
-				IO.write(output, Driver_ServerTask.modDriverInfo(moddriverinfo));//æŸ¥è¯¢æ‰€æœ‰é©¾é©¶å‘˜ä¿¡æ¯
+				String moddriverinfo=IO.read(input);//½«ĞŞ¸ÄµÄ¼İÊ»Ô±ĞÅÏ¢¶Á½øÀ´
+				System.out.println(moddriverinfo);//²âÊÔ
+				IO.write(output, Driver_ServerTask.modDriverInfo(moddriverinfo));//²éÑ¯ËùÓĞ¼İÊ»Ô±ĞÅÏ¢
 				break;
 			case 23:
-				String mohuinfo=IO.read(input);//å°†æ¨¡ç³ŠæŸ¥è¯¢é©¾é©¶å‘˜çš„ä¿¡æ¯è¯»è¿›æ¥
-				System.out.println(mohuinfo);//æµ‹è¯•
-				IO.write(output, Driver_ServerTask.mohuDriverInfo(mohuinfo));//æ¨¡ç³ŠæŸ¥è¯¢é©¾é©¶å‘˜ä¿¡æ¯
+				String mohuinfo=IO.read(input);//½«Ä£ºı²éÑ¯¼İÊ»Ô±µÄĞÅÏ¢¶Á½øÀ´
+				System.out.println(mohuinfo);//²âÊÔ
+				IO.write(output, Driver_ServerTask.mohuDriverInfo(mohuinfo));//Ä£ºı²éÑ¯¼İÊ»Ô±ĞÅÏ¢
 				break;
 			case 24:
-				String delnum=IO.read(input);//å°†åˆ é™¤çš„é©¾é©¶å‘˜ç¼–å·è¯»è¿›æ¥
-				System.out.println(delnum);//æµ‹è¯•
-				IO.write(output, Driver_ServerTask.delDriverInfo(delnum));//åˆ é™¤é©¾é©¶å‘˜
+				String delnum=IO.read(input);//½«É¾³ıµÄ¼İÊ»Ô±±àºÅ¶Á½øÀ´
+				System.out.println(delnum);//²âÊÔ
+				IO.write(output, Driver_ServerTask.delDriverInfo(delnum));//É¾³ı¼İÊ»Ô±
 				break;
 			}
 			input.close();
@@ -141,7 +141,7 @@ public class ServerTask implements Runnable {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}//å…³é—­è¿æ¥
+		}//¹Ø±ÕÁ¬½Ó
 	}
 	
 	

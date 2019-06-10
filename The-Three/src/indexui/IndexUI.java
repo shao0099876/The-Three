@@ -22,14 +22,14 @@ public class IndexUI extends JFrame{
 	private ImageIcon image;
 	private static String backgroundImagePath="/background.jpg";
 	
-	//è®¾ç½®ç•Œé¢æ˜¾ç¤º
+	//ÉèÖÃ½çÃæÏÔÊ¾
 	private JPanel bpanel;
 	private JPanel cpanel1;
 	private JPanel cpanel2;
 	private JButton[] button=new JButton[2];
-	private JTextField text;//è®¢å•ç¼–å·æ¨¡ç³Šæœç´¢æ–‡æœ¬æ¡†
-	private JButton b1;//æœç´¢æŒ‰é’®
-	private JButton b2;//ç»˜åˆ¶è¯¥è®¢å•çš„åœ°å›¾
+	private JTextField text;//¶©µ¥±àºÅÄ£ºıËÑË÷ÎÄ±¾¿ò
+	private JButton b1;//ËÑË÷°´Å¥
+	private JButton b2;//»æÖÆ¸Ã¶©µ¥µÄµØÍ¼
 	
 	
 	private void setBackgroundImage() {
@@ -38,38 +38,38 @@ public class IndexUI extends JFrame{
 		background.setBounds(0,0,image.getIconWidth(),image.getIconHeight());
 		JLabel jl=new JLabel(image);
 		background.add(jl);
-		layer.add(background,JLayeredPane.DEFAULT_LAYER);//åº•å±‚å›¾ç‰‡
+		layer.add(background,JLayeredPane.DEFAULT_LAYER);//µ×²ãÍ¼Æ¬
 		return;
 	}
 	
 	private void setLocation() {
-		Toolkit kit = Toolkit.getDefaultToolkit();              //å®šä¹‰å·¥å…·åŒ…
-	    Dimension screenSize = kit.getScreenSize();             //è·å–å±å¹•çš„å°ºå¯¸
-	    int screenWidth = screenSize.width;                     //è·å–å±å¹•çš„å®½
-	    int screenHeight = screenSize.height;                   //è·å–å±å¹•çš„é«˜
-	    this.setLocation(screenWidth/2-image.getIconWidth()/2, screenHeight/2-image.getIconHeight()/2);//è®¾ç½®çª—å£å±…ä¸­æ˜¾ç¤º
+		Toolkit kit = Toolkit.getDefaultToolkit();              //¶¨Òå¹¤¾ß°ü
+	    Dimension screenSize = kit.getScreenSize();             //»ñÈ¡ÆÁÄ»µÄ³ß´ç
+	    int screenWidth = screenSize.width;                     //»ñÈ¡ÆÁÄ»µÄ¿í
+	    int screenHeight = screenSize.height;                   //»ñÈ¡ÆÁÄ»µÄ¸ß
+	    this.setLocation(screenWidth/2-image.getIconWidth()/2, screenHeight/2-image.getIconHeight()/2);//ÉèÖÃ´°¿Ú¾ÓÖĞÏÔÊ¾
 	}
 	
-	private void setButton(int x,int y,int w,int h){//æ·»åŠ æŒ‰é’®
-		bpanel=new JPanel();//æ˜¾ç¤ºæŒ‰é’®çš„é¢æ¿
+	private void setButton(int x,int y,int w,int h){//Ìí¼Ó°´Å¥
+		bpanel=new JPanel();//ÏÔÊ¾°´Å¥µÄÃæ°å
 		bpanel.setOpaque(false);
 		bpanel.setBounds(0, 0, x, y);
 		
-		//æŒ‰é’®1
-		button[0]=new JButton("æŸ¥è¯¢ç‰©æµä¿¡æ¯");
-		button[0].setFont(new Font("å®‹ä½“",Font.PLAIN,14));
+		//°´Å¥1
+		button[0]=new JButton("²éÑ¯ÎïÁ÷ĞÅÏ¢");
+		button[0].setFont(new Font("ËÎÌå",Font.PLAIN,14));
 		button[0].setSize(4, 1);
 		button[0].setOpaque(false);
 		
-		button[0].addActionListener(new ActionListener(){//æ·»åŠ å“åº”å‡½æ•°
+		button[0].addActionListener(new ActionListener(){//Ìí¼ÓÏìÓ¦º¯Êı
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				DebugInfo.DebugInfo("æŸ¥çœ‹ç‰©æµä¿¡æ¯æŒ‰é’®æŒ‰ä¸‹");
+				DebugInfo.DebugInfo("²é¿´ÎïÁ÷ĞÅÏ¢°´Å¥°´ÏÂ");
 				Thread t=new Thread(new Runnable() {
 					@Override
 					public void run() {
-						//åˆ›å»ºæ¨¡ç³Šæœç´¢è®¢å•ç¼–å·çš„æœç´¢æ¡†
+						//´´½¨Ä£ºıËÑË÷¶©µ¥±àºÅµÄËÑË÷¿ò
 						setText(w,h);
 					}
 				});
@@ -79,17 +79,17 @@ public class IndexUI extends JFrame{
 		});		
 		bpanel.add(button[0]);
 		
-		//æŒ‰é’®2
-		button[1]=new JButton("ç™»é™†");
-		button[1].setFont(new Font("å®‹ä½“",Font.PLAIN,14));
+		//°´Å¥2
+		button[1]=new JButton("µÇÂ½");
+		button[1].setFont(new Font("ËÎÌå",Font.PLAIN,14));
 		button[1].setSize(4, 1);
 		button[1].setOpaque(false);
 		
-		button[1].addActionListener(new ActionListener(){//æ·»åŠ å“åº”å‡½æ•°
+		button[1].addActionListener(new ActionListener(){//Ìí¼ÓÏìÓ¦º¯Êı
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				DebugInfo.DebugInfo("ç™»é™†æŒ‰é’®æŒ‰ä¸‹");
+				DebugInfo.DebugInfo("µÇÂ½°´Å¥°´ÏÂ");
 				
 				Thread t=new Thread(new Runnable() {
 
@@ -97,19 +97,19 @@ public class IndexUI extends JFrame{
 					public void run() {
 						// TODO Auto-generated method stub						
 						
-						//å¾…æ·»åŠ 
+						//´ıÌí¼Ó
 						
 						
-						//æ·»åŠ ç™»é™†çš„å“åº”å‡½æ•°
+						//Ìí¼ÓµÇÂ½µÄÏìÓ¦º¯Êı
 						/*
-						 è¦æ±‚1ï¼š
-						 	å°†æ•´ä¸ªçš„panelä¸Šé¢çš„å†…å®¹æ¸…ç©º,æ˜¾ç¤ºå‡ºç™»é™†ç•Œé¢
-						 è¦æ±‚2ï¼š
-						 	ç™»é™†ä¸æˆåŠŸï¼Œå¼¹å‡ºå¯¹è¯æ¡†ç»™å‡ºæç¤ºï¼Œå›åˆ°æœªç™»å½•ç•Œé¢
-						 è¦æ±‚3ï¼š
-						 	å¦‚æœæ˜¯å‘˜å·¥ç™»é™†æˆåŠŸï¼Œå›åˆ°BaseUIåˆ›å»ºçš„ç•Œé¢
-						 è¦æ±‚4ï¼š
-						 	å¦‚æœæ˜¯ä¸­è½¬ç«™çš„ç™»é™†æˆåŠŸï¼Œé‡æ–°åˆ›å»ºä¸€ä¸ªç•Œé¢
+						 ÒªÇó1£º
+						 	½«Õû¸öµÄpanelÉÏÃæµÄÄÚÈİÇå¿Õ,ÏÔÊ¾³öµÇÂ½½çÃæ
+						 ÒªÇó2£º
+						 	µÇÂ½²»³É¹¦£¬µ¯³ö¶Ô»°¿ò¸ø³öÌáÊ¾£¬»Øµ½Î´µÇÂ¼½çÃæ
+						 ÒªÇó3£º
+						 	Èç¹ûÊÇÔ±¹¤µÇÂ½³É¹¦£¬»Øµ½BaseUI´´½¨µÄ½çÃæ
+						 ÒªÇó4£º
+						 	Èç¹ûÊÇÖĞ×ªÕ¾µÄµÇÂ½³É¹¦£¬ÖØĞÂ´´½¨Ò»¸ö½çÃæ
 						 */
 						
 					}
@@ -121,11 +121,11 @@ public class IndexUI extends JFrame{
 		bpanel.add(button[1]);
 
 		layer.add(bpanel,JLayeredPane.MODAL_LAYER);
-		System.out.println("æ·»åŠ å®‰å¦®ç»“æŸ");
+		System.out.println("Ìí¼Ó°²Äİ½áÊø");
 	}
 	
-	public void setText(int x,int y){//è®¾ç½®ç‰©æµä¿¡æ¯çš„æœç´¢æ¡†æ¨¡ç³ŠæŸ¥è¯¢æ–‡æœ¬ä¸æŒ‰é’®
-		cpanel1=new JPanel();//æ˜¾ç¤ºæŒ‰é’®çš„é¢æ¿
+	public void setText(int x,int y){//ÉèÖÃÎïÁ÷ĞÅÏ¢µÄËÑË÷¿òÄ£ºı²éÑ¯ÎÄ±¾Óë°´Å¥
+		cpanel1=new JPanel();//ÏÔÊ¾°´Å¥µÄÃæ°å
 		cpanel1.setOpaque(false);
 		cpanel1.setBounds(0, (int)(y*0.1), x, (int)(y*0.1));
 		
@@ -133,41 +133,41 @@ public class IndexUI extends JFrame{
 		text.setOpaque(false);
 		cpanel1.add(text);
 		
-		b1=new JButton("æœç´ ");
-		b1.setFont(new Font("å®‹ä½“",Font.PLAIN,14));
+		b1=new JButton("ËÑËØ");
+		b1.setFont(new Font("ËÎÌå",Font.PLAIN,14));
 		b1.setSize(4, 1);
 		b1.setOpaque(false);
 		
-		b1.addActionListener(new ActionListener(){//æ·»åŠ å“åº”å‡½æ•°
+		b1.addActionListener(new ActionListener(){//Ìí¼ÓÏìÓ¦º¯Êı
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				DebugInfo.DebugInfo("æœç´¢æŒ‰é’®æŒ‰ä¸‹");
+				DebugInfo.DebugInfo("ËÑË÷°´Å¥°´ÏÂ");
 				Thread t=new Thread(new Runnable() {
 
 					@Override
 					public void run() {
 						
-						//å¾…æ·»åŠ 
+						//´ıÌí¼Ó
 						
-						//å°†æ–‡æœ¬æ¡†ä¸­çš„å†…å®¹è¯»å‡ºæ¥ï¼Œè¿›è¡Œç‰©æµè®¢å•ç¼–å·çš„æ¨¡ç³Šæœç´¢
+						//½«ÎÄ±¾¿òÖĞµÄÄÚÈİ¶Á³öÀ´£¬½øĞĞÎïÁ÷¶©µ¥±àºÅµÄÄ£ºıËÑË÷
 						
 						/*
-						 cpanel2åœ¨è¿™é‡Œåˆ›å»ºï¼Œç”¨æ¥æ˜¾ç¤ºæ¨¡ç³Šæœç´¢çš„ç»“æœï¼Œcpanelä½ç½®å¦‚ä¸‹
+						 cpanel2ÔÚÕâÀï´´½¨£¬ÓÃÀ´ÏÔÊ¾Ä£ºıËÑË÷µÄ½á¹û£¬cpanelÎ»ÖÃÈçÏÂ
 						 cpanel.setbounds(0,(int)(y*0.2),x,(int)(y*0.8))
 						 
-						  1ã€cpanel2ä¸­åŒ…å«ä¸€ä¸ªjcomboboxï¼Œç”¨æ¥æ˜¾ç¤ºæœç´¢ç»“æœ
-							ç»“æœä¸­ï¼Œå°†ä¸€ä¸ªè®¢å•ç¼–å·çš„ä¿¡æ¯ä½œä¸ºä¸€æ¡æ˜¾ç¤º,ä¸€æ¡ä¸­åº”è¯¥åŒ…æ‹¬ï¼š
-						 	è®¢å•ç¼–å·ï¼Œèµ·å§‹åœ°ç‚¹ï¼Œç»ˆç‚¹ï¼Œé€”å¾„åœ°ï¼Œè®¢å•çš„çŠ¶æ€
+						  1¡¢cpanel2ÖĞ°üº¬Ò»¸öjcombobox£¬ÓÃÀ´ÏÔÊ¾ËÑË÷½á¹û
+							½á¹ûÖĞ£¬½«Ò»¸ö¶©µ¥±àºÅµÄĞÅÏ¢×÷ÎªÒ»ÌõÏÔÊ¾,Ò»ÌõÖĞÓ¦¸Ã°üÀ¨£º
+						 	¶©µ¥±àºÅ£¬ÆğÊ¼µØµã£¬ÖÕµã£¬Í¾¾¶µØ£¬¶©µ¥µÄ×´Ì¬
 						 	
-						 2ã€cpanelä¸­åŒ…å«ä¸€ä¸ªæŒ‰é’®ï¼Œå°±æ˜¯b2
-						 æŒ‰ä¸‹æŒ‰é’®b2åï¼Œç»˜åˆ¶è¯¥è®¢å•åœ¨åœ°å›¾ä¸­çš„è·¯çº¿ï¼Œè¿˜éœ€è¦å°†ä¸­è½¬ç«™çš„ä¿¡æ¯è¡¨æ˜å‡ºæ¥
+						 2¡¢cpanelÖĞ°üº¬Ò»¸ö°´Å¥£¬¾ÍÊÇb2
+						 °´ÏÂ°´Å¥b2ºó£¬»æÖÆ¸Ã¶©µ¥ÔÚµØÍ¼ÖĞµÄÂ·Ïß£¬»¹ĞèÒª½«ÖĞ×ªÕ¾µÄĞÅÏ¢±íÃ÷³öÀ´
 						 
-						 æ³¨æ„ï¼š
-						 	æ­¤æ—¶è¦åˆ¤æ–­jcomboboxé‡Œé¢æ˜¯å¦æœ‰é¡¹è¢«é€‰ä¸­ï¼Œå¦‚æœæœ‰é€‰ä¸­å°±åœ¨åœ°å›¾ä¸­ç»˜åˆ¶è¢«é€‰ä¸­çš„é¡¹
-						 	å¦‚æœæ²¡æœ‰è¢«é€‰ä¸­çš„ï¼Œå°±ç»˜åˆ¶æ–‡æœ¬æ¡†ä¸­çš„
+						 ×¢Òâ£º
+						 	´ËÊ±ÒªÅĞ¶ÏjcomboboxÀïÃæÊÇ·ñÓĞÏî±»Ñ¡ÖĞ£¬Èç¹ûÓĞÑ¡ÖĞ¾ÍÔÚµØÍ¼ÖĞ»æÖÆ±»Ñ¡ÖĞµÄÏî
+						 	Èç¹ûÃ»ÓĞ±»Ñ¡ÖĞµÄ£¬¾Í»æÖÆÎÄ±¾¿òÖĞµÄ
 						 	
-						 	å¯ä»¥å‚è€ƒè·¯å¾„åˆ é™¤é‚£ä¸€å—çš„å†™æ³•
+						 	¿ÉÒÔ²Î¿¼Â·¾¶É¾³ıÄÇÒ»¿éµÄĞ´·¨
 						 
 						 **/
 						
@@ -184,14 +184,14 @@ public class IndexUI extends JFrame{
 	}
 	
 	public IndexUI() {
-		super("ç‰©æµç»¼åˆä¿¡æ¯å¹³å°");
+		super("ÎïÁ÷×ÛºÏĞÅÏ¢Æ½Ì¨");
 		layer=new JLayeredPane();
 		setBackgroundImage();
 		
 		int width=image.getIconWidth();
 		int height=image.getIconHeight();
 		
-		setButton(width,(int)(height*0.1),width,height);//æ·»åŠ æŒ‰é’®
+		setButton(width,(int)(height*0.1),width,height);//Ìí¼Ó°´Å¥
 		
 		
 		setLayeredPane(layer);

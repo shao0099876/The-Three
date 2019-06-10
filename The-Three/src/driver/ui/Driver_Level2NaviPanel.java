@@ -14,19 +14,19 @@ import java.awt.event.ActionListener;
 
 public class Driver_Level2NaviPanel {
 	public static void driver(Level2NaviPanel self) {
-		//å°†å†…å®¹æ¨¡æ¿æ¸…ç©º
+		//½«ÄÚÈİÄ£°åÇå¿Õ
 		BaseUI.contentPanel.removeAll();
 		BaseUI.contentPanel.revalidate();
 		BaseUI.contentPanel.repaint();
 		
 		self.removeAll();
 		
-		//æ·»åŠ æŒ‰é’®
-		JButton[] button=new JButton[10];//è®¾ç½®æŒ‰é’®
+		//Ìí¼Ó°´Å¥
+		JButton[] button=new JButton[10];//ÉèÖÃ°´Å¥
 		
-		//æŸ¥çœ‹é©¾é©¶å‘˜ä¿¡æ¯
-		button[0]=new JButton("æŸ¥çœ‹é©¾é©¶å‘˜ä¿¡æ¯");
-		button[0].setFont(new Font("å®‹ä½“",Font.PLAIN,14));
+		//²é¿´¼İÊ»Ô±ĞÅÏ¢
+		button[0]=new JButton("²é¿´¼İÊ»Ô±ĞÅÏ¢");
+		button[0].setFont(new Font("ËÎÌå",Font.PLAIN,14));
 		button[0].setSize(4, 1);
 		button[0].setOpaque(false);
 		button[0].addActionListener(new ActionListener() {
@@ -34,7 +34,7 @@ public class Driver_Level2NaviPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				DebugInfo.DebugInfo("äºŒçº§å¯¼èˆªï¼šæŸ¥çœ‹é©¾é©¶å‘˜ä¿¡æ¯æŒ‰é’®è¢«æŒ‰ä¸‹");
+				DebugInfo.DebugInfo("¶ş¼¶µ¼º½£º²é¿´¼İÊ»Ô±ĞÅÏ¢°´Å¥±»°´ÏÂ");
 				Thread t=new Thread(new Runnable() {		
 					@Override
 					public void run() {
@@ -44,9 +44,9 @@ public class Driver_Level2NaviPanel {
 				t.start();
 			}});
 		
-		//å¢åŠ é©¾é©¶å‘˜ä¿¡æ¯
-		button[1]=new JButton("å¢åŠ é©¾é©¶å‘˜ä¿¡æ¯");
-		button[1].setFont(new Font("å®‹ä½“",Font.PLAIN,14));
+		//Ôö¼Ó¼İÊ»Ô±ĞÅÏ¢
+		button[1]=new JButton("Ôö¼Ó¼İÊ»Ô±ĞÅÏ¢");
+		button[1].setFont(new Font("ËÎÌå",Font.PLAIN,14));
 		button[1].setSize(4, 1);
 		button[1].setOpaque(false);
 		button[1].addActionListener(new ActionListener() {
@@ -55,9 +55,9 @@ public class Driver_Level2NaviPanel {
 				Driver_ContentMessagePanel.addDriverInfo(BaseUI.contentPanel);
 			}});
 		
-		//ä¿®æ”¹é©¾é©¶å‘˜ä¿¡æ¯
-		button[2]=new JButton("ä¿®æ”¹é©¾é©¶å‘˜ä¿¡æ¯");
-		button[2].setFont(new Font("å®‹ä½“",Font.PLAIN,14));
+		//ĞŞ¸Ä¼İÊ»Ô±ĞÅÏ¢
+		button[2]=new JButton("ĞŞ¸Ä¼İÊ»Ô±ĞÅÏ¢");
+		button[2].setFont(new Font("ËÎÌå",Font.PLAIN,14));
 		button[2].setSize(4, 1);
 		button[2].setOpaque(false);
 		button[2].addActionListener(new ActionListener() {
@@ -66,9 +66,9 @@ public class Driver_Level2NaviPanel {
 				Driver_ContentMessagePanel.modifyDriverInfo(BaseUI.contentPanel);
 			}});
 		
-		//åˆ é™¤é©¾é©¶å‘˜ä¿¡æ¯
-		button[3]=new JButton("åˆ é™¤é©¾é©¶å‘˜ä¿¡æ¯");
-		button[3].setFont(new Font("å®‹ä½“",Font.PLAIN,14));
+		//É¾³ı¼İÊ»Ô±ĞÅÏ¢
+		button[3]=new JButton("É¾³ı¼İÊ»Ô±ĞÅÏ¢");
+		button[3].setFont(new Font("ËÎÌå",Font.PLAIN,14));
 		button[3].setSize(4, 1);
 		button[3].setOpaque(false);
 		button[3].addActionListener(new ActionListener() {

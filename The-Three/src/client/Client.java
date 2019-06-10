@@ -10,7 +10,7 @@ public class Client {
 		// TODO Auto-generated method stub
 		BrowserDialog.init();
 		
-		//鏀逛负鏈櫥褰曠殑鐣岄潰
+		//改为未登录的界面
 		//BrowserDialog.frame=new IndexUI();
 		BrowserDialog.frame=new BaseUI();
 	}

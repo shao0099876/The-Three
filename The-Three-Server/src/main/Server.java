@@ -28,7 +28,7 @@ public class Server {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					DebugInfo.DebugInfo("æŽ¥æ”¶åˆ°è¿žæŽ¥");
+					DebugInfo.DebugInfo("½ÓÊÕµ½Á¬½Ó");
 					Thread t=new Thread(new ServerTask(socket));
 					t.start();
 				}

@@ -11,14 +11,14 @@ import entity.Driver;
 
 public class Driver_Database {
 	private static String addr="cal.srcserver.xyz";//"cal.srcserver.xyz";
-	public static Driver getDriverInfo(int n){//æŸ¥è¯¢æŸä¸€å…·ä½“é©¾é©¶å‘˜ä¿¡æ¯
+	public static Driver getDriverInfo(int n){//²éÑ¯Ä³Ò»¾ßÌå¼İÊ»Ô±ĞÅÏ¢
 		try {
 			Socket socket= new Socket(addr,8081);
 			DataInputStream input=new DataInputStream(socket.getInputStream());
 			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
 			
-			IO.write(output, "2");//æŸ¥è¯¢è½¦è¾†ä¿¡æ¯å…·ä½“ä¿¡æ¯ä¸­çš„é©¾é©¶å‘˜çš„ä¿¡æ¯
-			IO.write(output, Integer.toString(n));//å†™å…¥é©¾é©¶å‘˜ç¼–å·
+			IO.write(output, "2");//²éÑ¯³µÁ¾ĞÅÏ¢¾ßÌåĞÅÏ¢ÖĞµÄ¼İÊ»Ô±µÄĞÅÏ¢
+			IO.write(output, Integer.toString(n));//Ğ´Èë¼İÊ»Ô±±àºÅ
 			String raw_string=IO.read(input);
 			System.out.println(raw_string);
 			String[] data=raw_string.split("#");
@@ -45,13 +45,13 @@ public class Driver_Database {
 		
 	}
 	
-	public static Driver[] getAllDriverInfo(){//æŸ¥è¯¢æ‰€æœ‰é©¾é©¶å‘˜ä¿¡æ¯
+	public static Driver[] getAllDriverInfo(){//²éÑ¯ËùÓĞ¼İÊ»Ô±ĞÅÏ¢
 		try {
 			Socket socket= new Socket(addr,8081);
 			DataInputStream input=new DataInputStream(socket.getInputStream());
 			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
 			
-			IO.write(output, "20");//æŸ¥è¯¢æ‰€æœ‰é©¾é©¶å‘˜ä¿¡æ¯		
+			IO.write(output, "20");//²éÑ¯ËùÓĞ¼İÊ»Ô±ĞÅÏ¢		
 			
 			String raw_string=IO.read(input);
 			System.out.println(raw_string);
@@ -80,19 +80,19 @@ public class Driver_Database {
 		
 	}
 	
-	public static String addDriverInfo(String s){//å¢åŠ é©¾é©¶å‘˜ä¿¡æ¯
+	public static String addDriverInfo(String s){//Ôö¼Ó¼İÊ»Ô±ĞÅÏ¢
 		try {
 			String S=s;
-			System.out.println("å¢åŠ é©¾é©¶å‘˜ä¿¡æ¯ä¸º"+S);
+			System.out.println("Ôö¼Ó¼İÊ»Ô±ĞÅÏ¢Îª"+S);
 			
 			Socket socket= new Socket(addr,8081);
 			DataInputStream input=new DataInputStream(socket.getInputStream());
 			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
 			
-			IO.write(output,"21");//å¢åŠ é©¾é©¶å‘˜ä¿¡æ¯
-			System.out.println("å¼€å§‹å‘é€æ·»åŠ é©¾é©¶å‘˜ä¿¡æ¯");
-			IO.write(output,S);//é©¾é©¶å‘˜ä¿¡æ¯
-			System.out.println("å‘é€æ·»åŠ é©¾é©¶å‘˜ä¿¡æ¯ç»“æŸ");
+			IO.write(output,"21");//Ôö¼Ó¼İÊ»Ô±ĞÅÏ¢
+			System.out.println("¿ªÊ¼·¢ËÍÌí¼Ó¼İÊ»Ô±ĞÅÏ¢");
+			IO.write(output,S);//¼İÊ»Ô±ĞÅÏ¢
+			System.out.println("·¢ËÍÌí¼Ó¼İÊ»Ô±ĞÅÏ¢½áÊø");
 			
 			String raw_string=IO.read(input);
 			output.close();
@@ -109,19 +109,19 @@ public class Driver_Database {
 		return null;
 	}
 
-	public static String modifyDriverInfo(String s){//ä¿®æ”¹é©¾é©¶å‘˜ä¿¡æ¯
+	public static String modifyDriverInfo(String s){//ĞŞ¸Ä¼İÊ»Ô±ĞÅÏ¢
 		try {
 			String S=s;
-			System.out.println("ä¿®æ”¹é©¾é©¶å‘˜ä¿¡æ¯ä¸º"+S);
+			System.out.println("ĞŞ¸Ä¼İÊ»Ô±ĞÅÏ¢Îª"+S);
 			
 			Socket socket= new Socket(addr,8081);
 			DataInputStream input=new DataInputStream(socket.getInputStream());
 			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
 			
-			IO.write(output,"22");//ä¿®æ”¹é©¾é©¶å‘˜ä¿¡æ¯
-			System.out.println("å¼€å§‹å‘é€ä¿®æ”¹é©¾é©¶å‘˜ä¿¡æ¯");
-			IO.write(output,S);//é©¾é©¶å‘˜ä¿¡æ¯
-			System.out.println("å‘é€ä¿®æ”¹é©¾é©¶å‘˜ä¿¡æ¯ç»“æŸ");
+			IO.write(output,"22");//ĞŞ¸Ä¼İÊ»Ô±ĞÅÏ¢
+			System.out.println("¿ªÊ¼·¢ËÍĞŞ¸Ä¼İÊ»Ô±ĞÅÏ¢");
+			IO.write(output,S);//¼İÊ»Ô±ĞÅÏ¢
+			System.out.println("·¢ËÍĞŞ¸Ä¼İÊ»Ô±ĞÅÏ¢½áÊø");
 			
 			String raw_string=IO.read(input);
 			output.close();
@@ -138,21 +138,21 @@ public class Driver_Database {
 		return null;
 	}
 
-	public static String[] getMohuDriverNumInfo(String s){//æ¨¡ç³ŠæŸ¥è¯¢é©¾é©¶å‘˜çš„ç¼–å·
+	public static String[] getMohuDriverNumInfo(String s){//Ä£ºı²éÑ¯¼İÊ»Ô±µÄ±àºÅ
 		try {
 			Socket socket= new Socket(addr,8081);
 			DataInputStream input=new DataInputStream(socket.getInputStream());
 			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
 			
-			IO.write(output, "23");//æ¨¡ç³ŠæŸ¥è¯¢é©¾é©¶å‘˜ç¼–å·
-			System.out.println("å¼€å§‹å‘é€åˆ é™¤éœ€è¦ç”¨çš„æ¨¡ç³ŠæŸ¥è¯¢é©¾é©¶å‘˜ç¼–å·");
-			IO.write(output, s);//æ¨¡ç³ŠæŸ¥è¯¢è·¯çº¿çš„è·¯çº¿ä¿¡æ¯ç‰‡æ®µ
-			System.out.println("å‘é€åˆ é™¤éœ€è¦ç”¨çš„æ¨¡ç³ŠæŸ¥è¯¢é©¾é©¶å‘˜ç¼–å·ç»“æŸ");
+			IO.write(output, "23");//Ä£ºı²éÑ¯¼İÊ»Ô±±àºÅ
+			System.out.println("¿ªÊ¼·¢ËÍÉ¾³ıĞèÒªÓÃµÄÄ£ºı²éÑ¯¼İÊ»Ô±±àºÅ");
+			IO.write(output, s);//Ä£ºı²éÑ¯Â·ÏßµÄÂ·ÏßĞÅÏ¢Æ¬¶Î
+			System.out.println("·¢ËÍÉ¾³ıĞèÒªÓÃµÄÄ£ºı²éÑ¯¼İÊ»Ô±±àºÅ½áÊø");
 			
 			String raw_string=IO.read(input);
 			String[] data=raw_string.split("#");
 			
-			String[] res=new String[data.length];//ç”¨æ¥ä¿å­˜ç¼–å·
+			String[] res=new String[data.length];//ÓÃÀ´±£´æ±àºÅ
 			
 			for(int i=0;i<data.length;i+=7) {
 				res[i]=data[i];
@@ -171,16 +171,16 @@ public class Driver_Database {
 		return null;
 	}
 
-	public static Driver[] getMohuDriverInfo(String s){//æ¨¡ç³ŠæŸ¥è¯¢é©¾é©¶å‘˜ä¿¡æ¯
+	public static Driver[] getMohuDriverInfo(String s){//Ä£ºı²éÑ¯¼İÊ»Ô±ĞÅÏ¢
 		try {
 			Socket socket= new Socket(addr,8081);
 			DataInputStream input=new DataInputStream(socket.getInputStream());
 			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
 			
-			IO.write(output, "23");//æ¨¡ç³ŠæŸ¥è¯¢é©¾é©¶å‘˜ç¼–å·
-			System.out.println("å¼€å§‹å‘é€åˆ é™¤éœ€è¦ç”¨çš„æ¨¡ç³ŠæŸ¥è¯¢é©¾é©¶å‘˜ç¼–å·");
-			IO.write(output, s);//æ¨¡ç³ŠæŸ¥è¯¢è·¯çº¿çš„è·¯çº¿ä¿¡æ¯ç‰‡æ®µ
-			System.out.println("å‘é€åˆ é™¤éœ€è¦ç”¨çš„æ¨¡ç³ŠæŸ¥è¯¢é©¾é©¶å‘˜ç¼–å·ç»“æŸ");
+			IO.write(output, "23");//Ä£ºı²éÑ¯¼İÊ»Ô±±àºÅ
+			System.out.println("¿ªÊ¼·¢ËÍÉ¾³ıĞèÒªÓÃµÄÄ£ºı²éÑ¯¼İÊ»Ô±±àºÅ");
+			IO.write(output, s);//Ä£ºı²éÑ¯Â·ÏßµÄÂ·ÏßĞÅÏ¢Æ¬¶Î
+			System.out.println("·¢ËÍÉ¾³ıĞèÒªÓÃµÄÄ£ºı²éÑ¯¼İÊ»Ô±±àºÅ½áÊø");
 			
 			String raw_string=IO.read(input);
 			String[] data=raw_string.split("#");
@@ -205,14 +205,14 @@ public class Driver_Database {
 		return null;
 	}
 
-	public static String delDriverInfo(String s){//åˆ é™¤é©¾é©¶å‘˜ä¿¡æ¯
+	public static String delDriverInfo(String s){//É¾³ı¼İÊ»Ô±ĞÅÏ¢
 		try {
 			Socket socket= new Socket(addr,8081);
 			DataInputStream input=new DataInputStream(socket.getInputStream());
 			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
 			
-			IO.write(output, "24");//åˆ é™¤å…·ä½“çš„é©¾é©¶å‘˜
-			IO.write(output, s);//é©¾é©¶å‘˜ç¼–å·
+			IO.write(output, "24");//É¾³ı¾ßÌåµÄ¼İÊ»Ô±
+			IO.write(output, s);//¼İÊ»Ô±±àºÅ
 			
 			String raw_string=IO.read(input);
 			output.close();

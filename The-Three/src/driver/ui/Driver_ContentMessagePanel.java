@@ -33,11 +33,11 @@ public class Driver_ContentMessagePanel {
 	private static ContentMessagePanel self;
 	private static Driver[] array=null;
 	
-	private static boolean flag;//ç”¨æ¥æ ‡è®°åˆ é™¤é©¾é©¶å‘˜ä¿¡æ¯æ—¶çš„é©¾é©¶å‘˜ç¼–å·æ¥è‡ªå“ªé‡Œ
-	//falseè¡¨æ˜åˆ é™¤çš„è·¯çº¿ç¼–å·æ¥è‡ªäºæ–‡æœ¬æ¡†
-	//trueè¡¨æ˜åˆ é™¤çš„è·¯çº¿ç¼–å·æ¥è‡ªäºç‚¹å‡»çš„æ¨¡ç³Šæœç´¢ç»“æœ
+	private static boolean flag;//ÓÃÀ´±ê¼ÇÉ¾³ı¼İÊ»Ô±ĞÅÏ¢Ê±µÄ¼İÊ»Ô±±àºÅÀ´×ÔÄÄÀï
+	//false±íÃ÷É¾³ıµÄÂ·Ïß±àºÅÀ´×ÔÓÚÎÄ±¾¿ò
+	//true±íÃ÷É¾³ıµÄÂ·Ïß±àºÅÀ´×ÔÓÚµã»÷µÄÄ£ºıËÑË÷½á¹û
 	
-	private static String del_drivernum;//æ ‡è®°è¢«åˆ é™¤çš„é©¾é©¶å‘˜ç¼–å·
+	private static String del_drivernum;//±ê¼Ç±»É¾³ıµÄ¼İÊ»Ô±±àºÅ
 	
 	private static DocumentListener documentListener2=new DocumentListener() {
 
@@ -50,7 +50,7 @@ public class Driver_ContentMessagePanel {
 		@Override
 		public void insertUpdate(DocumentEvent e) {
 			// TODO Auto-generated method stub
-			DebugInfo.DebugInfo("æ–‡æœ¬æ¡†å†…å®¹å¢åŠ ï¼");
+			DebugInfo.DebugInfo("ÎÄ±¾¿òÄÚÈİÔö¼Ó£¡");
 			Thread t=new Thread(new Runnable() {
 				
 				@Override
@@ -65,7 +65,7 @@ public class Driver_ContentMessagePanel {
 		@Override
 		public void removeUpdate(DocumentEvent e) {
 			// TODO Auto-generated method stub
-			DebugInfo.DebugInfo("æ–‡æœ¬æ¡†å†…å®¹å‡å°‘ï¼");
+			DebugInfo.DebugInfo("ÎÄ±¾¿òÄÚÈİ¼õÉÙ£¡");
 			Thread t=new Thread(new Runnable() {
 				
 				@Override
@@ -84,7 +84,7 @@ public class Driver_ContentMessagePanel {
 		@Override
 		public void itemStateChanged(ItemEvent arg0) {
 			// TODO Auto-generated method stub
-			DebugInfo.DebugInfo("Comboboxé¡¹è¢«é€‰ä¸­ï¼");
+			DebugInfo.DebugInfo("ComboboxÏî±»Ñ¡ÖĞ£¡");
 			Thread t=new Thread(new Runnable(){
 
 				@Override
@@ -97,20 +97,20 @@ public class Driver_ContentMessagePanel {
 			t.start();
 		}};
 	
-	public static void setDriverInfo(ContentMessagePanel p_self) {//é©¾é©¶å‘˜ä¿¡æ¯æ¦‚è§ˆ
+	public static void setDriverInfo(ContentMessagePanel p_self) {//¼İÊ»Ô±ĞÅÏ¢¸ÅÀÀ
 		self=p_self;
-		DebugInfo.DebugInfo("å¼€å§‹ç»˜åˆ¶è½¦é˜Ÿç®¡ç†æ¦‚è¦ä¿¡æ¯Panel");
-		self.removeAll();//å°†é¢æ¿ä¸Šé¢çš„ç»„ä»¶å…¨éƒ¨æ¸…ç©º
+		DebugInfo.DebugInfo("¿ªÊ¼»æÖÆ³µ¶Ó¹ÜÀí¸ÅÒªĞÅÏ¢Panel");
+		self.removeAll();//½«Ãæ°åÉÏÃæµÄ×é¼şÈ«²¿Çå¿Õ
 		
-		String[] name= {"é©¾é©¶å‘˜ç¼–å·","é©¾é©¶å‘˜å§“å","å·¥ä½œçŠ¶æ€"};
-		array=Driver_Database.getAllDriverInfo();//è·å–æ‰€æœ‰é©¾é©¶å‘˜çš„æ‰€æœ‰ä¿¡æ¯
+		String[] name= {"¼İÊ»Ô±±àºÅ","¼İÊ»Ô±ĞÕÃû","¹¤×÷×´Ì¬"};
+		array=Driver_Database.getAllDriverInfo();//»ñÈ¡ËùÓĞ¼İÊ»Ô±µÄËùÓĞĞÅÏ¢
 		
 		if(array==null||array.length==0){
-			JOptionPane.showMessageDialog(self,"å½“å‰ç³»ç»Ÿæ— é©¾é©¶å‘˜ä¿¡æ¯","information",JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(self,"µ±Ç°ÏµÍ³ÎŞ¼İÊ»Ô±ĞÅÏ¢","information",JOptionPane.INFORMATION_MESSAGE);
 			return;
 		}
 		
-		String[][] data=new String[array.length][3];//åªä¿å­˜éƒ¨åˆ†ä¿¡æ¯
+		String[][] data=new String[array.length][3];//Ö»±£´æ²¿·ÖĞÅÏ¢
 		
 		for(int i=0;i<array.length;i++){
 			data[i][0]=String.valueOf(array[i].peopleNumber);
@@ -128,7 +128,7 @@ public class Driver_ContentMessagePanel {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				DebugInfo.DebugInfo("é©¾é©¶å‘˜æ¦‚è¦ä¿¡æ¯è¡¨æ ¼é¡¹è¢«ç‚¹å‡»ï¼");
+				DebugInfo.DebugInfo("¼İÊ»Ô±¸ÅÒªĞÅÏ¢±í¸ñÏî±»µã»÷£¡");
 				Thread t=new Thread(new Runnable() {
 					@Override
 					public void run() {
@@ -172,16 +172,16 @@ public class Driver_ContentMessagePanel {
 		self.add(scroll);
 		self.revalidate();
 		self.repaint();
-		DebugInfo.DebugInfo("å®Œæˆç»˜åˆ¶é©¾é©¶å‘˜æ¦‚è¦ä¿¡æ¯Panel");
+		DebugInfo.DebugInfo("Íê³É»æÖÆ¼İÊ»Ô±¸ÅÒªĞÅÏ¢Panel");
 		return;
 	}
 
-	public static void setDriverDetailInfo(ContentMessagePanel p_self,Driver dri){//å…·ä½“é©¾é©¶å‘˜çš„è¯¦ç»†ä¿¡æ¯
+	public static void setDriverDetailInfo(ContentMessagePanel p_self,Driver dri){//¾ßÌå¼İÊ»Ô±µÄÏêÏ¸ĞÅÏ¢
 		self=p_self;
 		self.removeAll();
 		
-		//æ˜¾ç¤ºå…·ä½“é©¾é©¶å‘˜çš„è¯¦ç»†ä¿¡æ¯
-		String[] name1={"é©¾é©¶å‘˜ç¼–å·","é©¾é©¶è¯ç¼–å·","é©¾é©¶å‘˜å§“å","é©¾é©¶å‘˜å¹´çºª","é©¾é©¶å‘˜é©¾é¾„","è”ç³»æ–¹å¼","å·¥ä½œçŠ¶æ€"};
+		//ÏÔÊ¾¾ßÌå¼İÊ»Ô±µÄÏêÏ¸ĞÅÏ¢
+		String[] name1={"¼İÊ»Ô±±àºÅ","¼İÊ»Ö¤±àºÅ","¼İÊ»Ô±ĞÕÃû","¼İÊ»Ô±Äê¼Í","¼İÊ»Ô±¼İÁä","ÁªÏµ·½Ê½","¹¤×÷×´Ì¬"};
 		String[][] data1=new String[1][7];
 		data1[0]=dri.toStringArray();
 		
@@ -193,101 +193,101 @@ public class Driver_ContentMessagePanel {
 		self.add(scroll1);
 		self.revalidate();
 		self.repaint();
-		DebugInfo.DebugInfo("å®Œæˆç»˜åˆ¶é©¾é©¶å‘˜è¯¦ç»†ä¿¡æ¯Panel");
+		DebugInfo.DebugInfo("Íê³É»æÖÆ¼İÊ»Ô±ÏêÏ¸ĞÅÏ¢Panel");
 		return;
 	}
 
-	public static void addDriverInfo(ContentMessagePanel p_self){//å¢åŠ é©¾é©¶å‘˜ä¿¡æ¯
+	public static void addDriverInfo(ContentMessagePanel p_self){//Ôö¼Ó¼İÊ»Ô±ĞÅÏ¢
 		self=p_self;
-		DebugInfo.DebugInfo("å¼€å§‹ç»˜åˆ¶å¢åŠ é©¾é©¶å‘˜ä¿¡æ¯Panel");
-		self.removeAll();//å°†é¢æ¿ä¸Šé¢çš„ç»„ä»¶å…¨éƒ¨æ¸…ç©º
+		DebugInfo.DebugInfo("¿ªÊ¼»æÖÆÔö¼Ó¼İÊ»Ô±ĞÅÏ¢Panel");
+		self.removeAll();//½«Ãæ°åÉÏÃæµÄ×é¼şÈ«²¿Çå¿Õ
 		
 		JPanel p = new JPanel(new GridLayout(8,2,5,5));
 		p.setOpaque(false);
 		
-		//ç¬¬ä¸€è¡Œ é©¾é©¶å‘˜ç¼–å·
-		JLabel lab1=new JLabel("é©¾é©¶å‘˜ç¼–å·");
-		lab1.setFont(new Font("å®‹ä½“",Font.PLAIN,20));
+		//µÚÒ»ĞĞ ¼İÊ»Ô±±àºÅ
+		JLabel lab1=new JLabel("¼İÊ»Ô±±àºÅ");
+		lab1.setFont(new Font("ËÎÌå",Font.PLAIN,20));
 		lab1.setOpaque(false);
 		p.add(lab1);
 		
 		self.driver_addtext1=new JTextField(20);
-		self.driver_addtext1.setEditable(true);//è®¾ç½®ä¸ºå¯ç¼–è¾‘
+		self.driver_addtext1.setEditable(true);//ÉèÖÃÎª¿É±à¼­
 		self.driver_addtext1.setOpaque(false);
 		p.add(self.driver_addtext1);
 		
-		//ç¬¬äºŒè¡Œ é©¾é©¶è¯ç¼–å·
-		JLabel lab2=new JLabel("é©¾é©¶è¯ç¼–å·");
-		lab2.setFont(new Font("å®‹ä½“",Font.PLAIN,20));
+		//µÚ¶şĞĞ ¼İÊ»Ö¤±àºÅ
+		JLabel lab2=new JLabel("¼İÊ»Ö¤±àºÅ");
+		lab2.setFont(new Font("ËÎÌå",Font.PLAIN,20));
 		lab2.setOpaque(false);
 		p.add(lab2);
 		
 		self.driver_addtext2=new JTextField(20);
-		self.driver_addtext2.setEditable(true);//è®¾ç½®ä¸ºå¯ç¼–è¾‘
+		self.driver_addtext2.setEditable(true);//ÉèÖÃÎª¿É±à¼­
 		self.driver_addtext2.setOpaque(false);
 		p.add(self.driver_addtext2);
 		
-		//ç¬¬ä¸‰è¡Œ é©¾é©¶å‘˜å§“å
-		JLabel lab3=new JLabel("é©¾é©¶å‘˜å§“å");
-		lab3.setFont(new Font("å®‹ä½“",Font.PLAIN,20));
+		//µÚÈıĞĞ ¼İÊ»Ô±ĞÕÃû
+		JLabel lab3=new JLabel("¼İÊ»Ô±ĞÕÃû");
+		lab3.setFont(new Font("ËÎÌå",Font.PLAIN,20));
 		lab3.setOpaque(false);
 		p.add(lab3);
 		
 		self.driver_addtext3=new JTextField(20);
-		self.driver_addtext3.setEditable(true);//è®¾ç½®ä¸ºå¯ç¼–è¾‘
+		self.driver_addtext3.setEditable(true);//ÉèÖÃÎª¿É±à¼­
 		self.driver_addtext3.setOpaque(false);
 		p.add(self.driver_addtext3);
 		
-		//ç¬¬å››è¡Œ é©¾é©¶å‘˜å¹´çºª
-		JLabel lab4=new JLabel("é©¾é©¶å‘˜å¹´çºª");
-		lab4.setFont(new Font("å®‹ä½“",Font.PLAIN,20));
+		//µÚËÄĞĞ ¼İÊ»Ô±Äê¼Í
+		JLabel lab4=new JLabel("¼İÊ»Ô±Äê¼Í");
+		lab4.setFont(new Font("ËÎÌå",Font.PLAIN,20));
 		lab4.setOpaque(false);
 		p.add(lab4);
 		
 		self.driver_addtext4=new JTextField(20);
-		self.driver_addtext4.setEditable(true);//è®¾ç½®ä¸ºå¯ç¼–è¾‘
+		self.driver_addtext4.setEditable(true);//ÉèÖÃÎª¿É±à¼­
 		self.driver_addtext4.setOpaque(false);
 		p.add(self.driver_addtext4);
 		
-		//ç¬¬äº”è¡Œ   é©¾é¾„
-		JLabel lab5=new JLabel("é©¾é¾„");
-		lab5.setFont(new Font("å®‹ä½“",Font.PLAIN,20));
+		//µÚÎåĞĞ   ¼İÁä
+		JLabel lab5=new JLabel("¼İÁä");
+		lab5.setFont(new Font("ËÎÌå",Font.PLAIN,20));
 		lab5.setOpaque(false);
 		p.add(lab5);
 		
 		self.driver_addtext5=new JTextField(20);
-		self.driver_addtext5.setEditable(true);//è®¾ç½®ä¸ºå¯ç¼–è¾‘
+		self.driver_addtext5.setEditable(true);//ÉèÖÃÎª¿É±à¼­
 		self.driver_addtext5.setOpaque(false);
 		p.add(self.driver_addtext5);
 		
-		//ç¬¬å…­è¡Œ  é©¾é©¶å‘˜è”ç³»æ–¹å¼
-		JLabel lab6=new JLabel("è”ç³»æ–¹å¼");
-		lab6.setFont(new Font("å®‹ä½“",Font.PLAIN,20));
+		//µÚÁùĞĞ  ¼İÊ»Ô±ÁªÏµ·½Ê½
+		JLabel lab6=new JLabel("ÁªÏµ·½Ê½");
+		lab6.setFont(new Font("ËÎÌå",Font.PLAIN,20));
 		lab6.setOpaque(false);
 		p.add(lab6);
 		
 		self.driver_addtext6=new JTextField(20);
-		self.driver_addtext6.setEditable(true);//è®¾ç½®ä¸ºå¯ç¼–è¾‘
+		self.driver_addtext6.setEditable(true);//ÉèÖÃÎª¿É±à¼­
 		self.driver_addtext6.setOpaque(false);
 		p.add(self.driver_addtext6);
 		
-		//ç¬¬ä¸ƒè¡Œ  é©¾é©¶å‘˜å½“å‰çŠ¶æ€
-		JLabel lab7=new JLabel("å½“å‰å·¥ä½œçŠ¶æ€");
-		lab7.setFont(new Font("å®‹ä½“",Font.PLAIN,20));
+		//µÚÆßĞĞ  ¼İÊ»Ô±µ±Ç°×´Ì¬
+		JLabel lab7=new JLabel("µ±Ç°¹¤×÷×´Ì¬");
+		lab7.setFont(new Font("ËÎÌå",Font.PLAIN,20));
 		lab7.setOpaque(false);
 		p.add(lab7);
 		
 		self.driver_addtext7=new JTextField(20);
-		self.driver_addtext7.setEditable(true);//è®¾ç½®ä¸ºå¯ç¼–è¾‘
+		self.driver_addtext7.setEditable(true);//ÉèÖÃÎª¿É±à¼­
 		self.driver_addtext7.setOpaque(false);
 		p.add(self.driver_addtext7);
 		
-		//ç¬¬å…«è¡Œ å¢åŠ æŒ‰é’®
+		//µÚ°ËĞĞ Ôö¼Ó°´Å¥
 		p.add(new JLabel(" 		"));
-		//ä¸­è½¬ç«™æ ¼å¼å¾…ä¿®æ”¹å®Œå–„
+		//ÖĞ×ªÕ¾¸ñÊ½´ıĞŞ¸ÄÍêÉÆ
 		
-		JButton b=new JButton("ç¡®è®¤");
-		b.setFont(new Font("å®‹ä½“",Font.PLAIN,14));
+		JButton b=new JButton("È·ÈÏ");
+		b.setFont(new Font("ËÎÌå",Font.PLAIN,14));
 		b.setSize(4, 1);
 		b.setOpaque(false);
 		p.add(b);
@@ -300,7 +300,7 @@ public class Driver_ContentMessagePanel {
 				Thread t=new Thread(new Runnable(){
 					@Override
 					public void run() {
-						DebugInfo.DebugInfo("æ·»åŠ é©¾é©¶å‘˜ä¿¡æ¯çš„æŒ‰é’®è¢«æŒ‰ä¸‹");
+						DebugInfo.DebugInfo("Ìí¼Ó¼İÊ»Ô±ĞÅÏ¢µÄ°´Å¥±»°´ÏÂ");
 						String[] s=new String[7]; 
 						
 						s[0]=self.driver_addtext1.getText();
@@ -311,10 +311,10 @@ public class Driver_ContentMessagePanel {
 						s[5]=self.driver_addtext6.getText();
 						s[6]=self.driver_addtext7.getText();
 						
-						String S=s[0]+"#"+s[1]+"#"+s[2]+"#"+s[3]+"#"+s[4]+"#"+s[5]+"#"+s[6];//ä¿å­˜å¢åŠ çš„é©¾é©¶å‘˜ä¿¡æ¯
-						System.out.println("å¢åŠ é©¾é©¶å‘˜ä¿¡æ¯:"+S);
+						String S=s[0]+"#"+s[1]+"#"+s[2]+"#"+s[3]+"#"+s[4]+"#"+s[5]+"#"+s[6];//±£´æÔö¼ÓµÄ¼İÊ»Ô±ĞÅÏ¢
+						System.out.println("Ôö¼Ó¼İÊ»Ô±ĞÅÏ¢:"+S);
 						
-						String message=Driver_Database.addDriverInfo(S);//å°†è¯¥ä¿¡æ¯è¾“å‡ºåœ¨ç•Œé¢ä¸Šé¢
+						String message=Driver_Database.addDriverInfo(S);//½«¸ÃĞÅÏ¢Êä³öÔÚ½çÃæÉÏÃæ
 						JOptionPane.showMessageDialog(self,message,"information",JOptionPane.INFORMATION_MESSAGE);
 					
 						self.driver_addtext1.setText("");
@@ -334,110 +334,110 @@ public class Driver_ContentMessagePanel {
 		self.add(p);
 		self.revalidate();
 		self.repaint();
-		DebugInfo.DebugInfo("å®Œæˆç»˜åˆ¶å¢åŠ é©¾é©¶å‘˜ä¿¡æ¯Panel");
+		DebugInfo.DebugInfo("Íê³É»æÖÆÔö¼Ó¼İÊ»Ô±ĞÅÏ¢Panel");
 		return;
 		
 	}
 
-	public static void modifyDriverInfo(ContentMessagePanel p_self){//ä¿®æ”¹é©¾é©¶å‘˜ä¿¡æ¯
+	public static void modifyDriverInfo(ContentMessagePanel p_self){//ĞŞ¸Ä¼İÊ»Ô±ĞÅÏ¢
 		self=p_self;
-		DebugInfo.DebugInfo("å¼€å§‹ç»˜åˆ¶ä¿®æ”¹é©¾é©¶å‘˜ä¿¡æ¯Panel");
-		self.removeAll();//å°†é¢æ¿ä¸Šé¢çš„ç»„ä»¶å…¨éƒ¨æ¸…ç©º
+		DebugInfo.DebugInfo("¿ªÊ¼»æÖÆĞŞ¸Ä¼İÊ»Ô±ĞÅÏ¢Panel");
+		self.removeAll();//½«Ãæ°åÉÏÃæµÄ×é¼şÈ«²¿Çå¿Õ
 		
 		self.driver_mpanel=new JPanel(new GridLayout(1,2,0,0));
 		self.driver_mpanel.setOpaque(false);
 		
-		//ç¬¬ä¸€åˆ—
+		//µÚÒ»ÁĞ
 		JPanel p = new JPanel(new GridLayout(8,2,5,5));
 		p.setOpaque(false);
 		
-		//ç¬¬ä¸€è¡Œ é©¾é©¶å‘˜ç¼–å·
-		JLabel lab1=new JLabel("é©¾é©¶å‘˜ç¼–å·");
-		lab1.setFont(new Font("å®‹ä½“",Font.PLAIN,20));
+		//µÚÒ»ĞĞ ¼İÊ»Ô±±àºÅ
+		JLabel lab1=new JLabel("¼İÊ»Ô±±àºÅ");
+		lab1.setFont(new Font("ËÎÌå",Font.PLAIN,20));
 		lab1.setOpaque(false);
 		p.add(lab1);
 		
 		self.driver_modifytext1=new JTextField(20);
-		self.driver_modifytext1.setEditable(true);//è®¾ç½®ä¸ºå¯ç¼–è¾‘
+		self.driver_modifytext1.setEditable(true);//ÉèÖÃÎª¿É±à¼­
 		self.driver_modifytext1.setOpaque(false);
 		p.add(self.driver_modifytext1);
 		
-		//å¯¹æ–‡æœ¬æ¡†å¢åŠ å“åº”å‡½æ•°
+		//¶ÔÎÄ±¾¿òÔö¼ÓÏìÓ¦º¯Êı
 		Document document2 = self.driver_modifytext1.getDocument();
 		document2.addDocumentListener(documentListener2);
 		
-		//ç¬¬äºŒè¡Œ é©¾é©¶è¯ç¼–å·
-		JLabel lab2=new JLabel("é©¾é©¶è¯ç¼–å·");
-		lab2.setFont(new Font("å®‹ä½“",Font.PLAIN,20));
+		//µÚ¶şĞĞ ¼İÊ»Ö¤±àºÅ
+		JLabel lab2=new JLabel("¼İÊ»Ö¤±àºÅ");
+		lab2.setFont(new Font("ËÎÌå",Font.PLAIN,20));
 		lab2.setOpaque(false);
 		p.add(lab2);
 		
 		self.driver_modifytext2=new JTextField(20);
-		self.driver_modifytext2.setEditable(true);//è®¾ç½®ä¸ºå¯ç¼–è¾‘
+		self.driver_modifytext2.setEditable(true);//ÉèÖÃÎª¿É±à¼­
 		self.driver_modifytext2.setOpaque(false);
 		p.add(self.driver_modifytext2);
 		
-		//ç¬¬ä¸‰è¡Œ é©¾é©¶å‘˜å§“å
-		JLabel lab3=new JLabel("é©¾é©¶å‘˜å§“å");
-		lab3.setFont(new Font("å®‹ä½“",Font.PLAIN,20));
+		//µÚÈıĞĞ ¼İÊ»Ô±ĞÕÃû
+		JLabel lab3=new JLabel("¼İÊ»Ô±ĞÕÃû");
+		lab3.setFont(new Font("ËÎÌå",Font.PLAIN,20));
 		lab3.setOpaque(false);
 		p.add(lab3);
 		
 		self.driver_modifytext3=new JTextField(20);
-		self.driver_modifytext3.setEditable(true);//è®¾ç½®ä¸ºå¯ç¼–è¾‘
+		self.driver_modifytext3.setEditable(true);//ÉèÖÃÎª¿É±à¼­
 		self.driver_modifytext3.setOpaque(false);
 		p.add(self.driver_modifytext3);
 		
-		//ç¬¬å››è¡Œ é©¾é©¶å‘˜å¹´çºª
-		JLabel lab4=new JLabel("é©¾é©¶å‘˜å¹´çºª");
-		lab4.setFont(new Font("å®‹ä½“",Font.PLAIN,20));
+		//µÚËÄĞĞ ¼İÊ»Ô±Äê¼Í
+		JLabel lab4=new JLabel("¼İÊ»Ô±Äê¼Í");
+		lab4.setFont(new Font("ËÎÌå",Font.PLAIN,20));
 		lab4.setOpaque(false);
 		p.add(lab4);
 		
 		self.driver_modifytext4=new JTextField(20);
-		self.driver_modifytext4.setEditable(true);//è®¾ç½®ä¸ºå¯ç¼–è¾‘
+		self.driver_modifytext4.setEditable(true);//ÉèÖÃÎª¿É±à¼­
 		self.driver_modifytext4.setOpaque(false);
 		p.add(self.driver_modifytext4);
 		
-		//ç¬¬äº”è¡Œ   é©¾é¾„
-		JLabel lab5=new JLabel("é©¾é¾„");
-		lab5.setFont(new Font("å®‹ä½“",Font.PLAIN,20));
+		//µÚÎåĞĞ   ¼İÁä
+		JLabel lab5=new JLabel("¼İÁä");
+		lab5.setFont(new Font("ËÎÌå",Font.PLAIN,20));
 		lab5.setOpaque(false);
 		p.add(lab5);
 		
 		self.driver_modifytext5=new JTextField(20);
-		self.driver_modifytext5.setEditable(true);//è®¾ç½®ä¸ºå¯ç¼–è¾‘
+		self.driver_modifytext5.setEditable(true);//ÉèÖÃÎª¿É±à¼­
 		self.driver_modifytext5.setOpaque(false);
 		p.add(self.driver_modifytext5);
 		
-		//ç¬¬å…­è¡Œ  é©¾é©¶å‘˜è”ç³»æ–¹å¼
-		JLabel lab6=new JLabel("è”ç³»æ–¹å¼");
-		lab6.setFont(new Font("å®‹ä½“",Font.PLAIN,20));
+		//µÚÁùĞĞ  ¼İÊ»Ô±ÁªÏµ·½Ê½
+		JLabel lab6=new JLabel("ÁªÏµ·½Ê½");
+		lab6.setFont(new Font("ËÎÌå",Font.PLAIN,20));
 		lab6.setOpaque(false);
 		p.add(lab6);
 		
 		self.driver_modifytext6=new JTextField(20);
-		self.driver_modifytext6.setEditable(true);//è®¾ç½®ä¸ºå¯ç¼–è¾‘
+		self.driver_modifytext6.setEditable(true);//ÉèÖÃÎª¿É±à¼­
 		self.driver_modifytext6.setOpaque(false);
 		p.add(self.driver_modifytext6);
 		
-		//ç¬¬ä¸ƒè¡Œ  é©¾é©¶å‘˜å½“å‰çŠ¶æ€
-		JLabel lab7=new JLabel("å½“å‰å·¥ä½œçŠ¶æ€");
-		lab7.setFont(new Font("å®‹ä½“",Font.PLAIN,20));
+		//µÚÆßĞĞ  ¼İÊ»Ô±µ±Ç°×´Ì¬
+		JLabel lab7=new JLabel("µ±Ç°¹¤×÷×´Ì¬");
+		lab7.setFont(new Font("ËÎÌå",Font.PLAIN,20));
 		lab7.setOpaque(false);
 		p.add(lab7);
 		
 		self.driver_modifytext7=new JTextField(20);
-		self.driver_modifytext7.setEditable(true);//è®¾ç½®ä¸ºå¯ç¼–è¾‘
+		self.driver_modifytext7.setEditable(true);//ÉèÖÃÎª¿É±à¼­
 		self.driver_modifytext7.setOpaque(false);
 		p.add(self.driver_modifytext7);
 		
-		//ç¬¬å…«è¡Œ å¢åŠ æŒ‰é’®
+		//µÚ°ËĞĞ Ôö¼Ó°´Å¥
 		p.add(new JLabel(" 		"));
-		//ä¸­è½¬ç«™æ ¼å¼å¾…ä¿®æ”¹å®Œå–„
+		//ÖĞ×ªÕ¾¸ñÊ½´ıĞŞ¸ÄÍêÉÆ
 		
-		JButton b=new JButton("ç¡®è®¤");
-		b.setFont(new Font("å®‹ä½“",Font.PLAIN,14));
+		JButton b=new JButton("È·ÈÏ");
+		b.setFont(new Font("ËÎÌå",Font.PLAIN,14));
 		b.setSize(4, 1);
 		b.setOpaque(false);
 		p.add(b);
@@ -450,7 +450,7 @@ public class Driver_ContentMessagePanel {
 				Thread t=new Thread(new Runnable(){
 					@Override
 					public void run() {
-						DebugInfo.DebugInfo("ä¿®æ”¹é©¾é©¶å‘˜ä¿¡æ¯çš„æŒ‰é’®è¢«æŒ‰ä¸‹");
+						DebugInfo.DebugInfo("ĞŞ¸Ä¼İÊ»Ô±ĞÅÏ¢µÄ°´Å¥±»°´ÏÂ");
 						String[] s=new String[7]; 
 						
 						s[0]=self.driver_modifytext1.getText();
@@ -461,10 +461,10 @@ public class Driver_ContentMessagePanel {
 						s[5]=self.driver_modifytext6.getText();
 						s[6]=self.driver_modifytext7.getText();
 						
-						String S=s[0]+"#"+s[1]+"#"+s[2]+"#"+s[3]+"#"+s[4]+"#"+s[5]+"#"+s[6];//ä¿å­˜å¢åŠ çš„é©¾é©¶å‘˜ä¿¡æ¯
-						System.out.println("ä¿®æ”¹é©¾é©¶å‘˜ä¿¡æ¯:"+S);
+						String S=s[0]+"#"+s[1]+"#"+s[2]+"#"+s[3]+"#"+s[4]+"#"+s[5]+"#"+s[6];//±£´æÔö¼ÓµÄ¼İÊ»Ô±ĞÅÏ¢
+						System.out.println("ĞŞ¸Ä¼İÊ»Ô±ĞÅÏ¢:"+S);
 						
-						String message=Driver_Database.modifyDriverInfo(S);//å°†è¯¥ä¿¡æ¯è¾“å‡ºåœ¨ç•Œé¢ä¸Šé¢
+						String message=Driver_Database.modifyDriverInfo(S);//½«¸ÃĞÅÏ¢Êä³öÔÚ½çÃæÉÏÃæ
 						JOptionPane.showMessageDialog(self,message,"information",JOptionPane.INFORMATION_MESSAGE);
 					
 						self.driver_modifytext1.setText("");
@@ -482,16 +482,16 @@ public class Driver_ContentMessagePanel {
 		});
 		self.driver_mpanel.add(p);
 		
-		//ç¬¬äºŒåˆ—
+		//µÚ¶şÁĞ
 		self.driver_panel2=new JPanel();
 		self.driver_panel2.setOpaque(false);
 		
 		self.driver_bobox=new JComboBox();
 		self.driver_bobox.setOpaque(false);
-		self.driver_bobox.setBorder(BorderFactory.createTitledBorder("é©¾é©¶å‘˜ç¼–å·æ¨¡ç³ŠæŸ¥è¯¢ç»“æœ"));
-		self.driver_bobox.setSelectedIndex(-1);//è®¾ç½®ä¸é€‰ä¸­
+		self.driver_bobox.setBorder(BorderFactory.createTitledBorder("¼İÊ»Ô±±àºÅÄ£ºı²éÑ¯½á¹û"));
+		self.driver_bobox.setSelectedIndex(-1);//ÉèÖÃ²»Ñ¡ÖĞ
 		
-		//æ·»åŠ ç›‘å¬å‡½æ•°
+		//Ìí¼Ó¼àÌıº¯Êı
 		self.driver_bobox.addItemListener(itemListener2);
 		
 		self.driver_panel2.add(self.driver_bobox);
@@ -501,28 +501,28 @@ public class Driver_ContentMessagePanel {
 		self.add(self.driver_mpanel);
 		self.revalidate();
 		self.repaint();
-		DebugInfo.DebugInfo("å®Œæˆç»˜åˆ¶ä¿®æ”¹é©¾é©¶å‘˜ä¿¡æ¯Panel");
+		DebugInfo.DebugInfo("Íê³É»æÖÆĞŞ¸Ä¼İÊ»Ô±ĞÅÏ¢Panel");
 		return;
 	}
 
-	public static void delDriverInfo(ContentMessagePanel p_self){//åˆ é™¤é©¾é©¶å‘˜ä¿¡æ¯
+	public static void delDriverInfo(ContentMessagePanel p_self){//É¾³ı¼İÊ»Ô±ĞÅÏ¢
 		self=p_self;
-		DebugInfo.DebugInfo("å¼€å§‹ç»˜åˆ¶åˆ é™¤è·¯çº¿ä¿¡æ¯Panel");
-		self.removeAll();//å°†é¢æ¿ä¸Šé¢çš„ç»„ä»¶å…¨éƒ¨æ¸…ç©º
+		DebugInfo.DebugInfo("¿ªÊ¼»æÖÆÉ¾³ıÂ·ÏßĞÅÏ¢Panel");
+		self.removeAll();//½«Ãæ°åÉÏÃæµÄ×é¼şÈ«²¿Çå¿Õ
 		
-		flag=true;//åˆå§‹åŒ–ä¸ºåˆ é™¤è·¯çº¿ç¼–å·æ¥è‡ªäºæ–‡æœ¬æ¡†
-		del_drivernum=" ";//åˆå§‹åŒ–
+		flag=true;//³õÊ¼»¯ÎªÉ¾³ıÂ·Ïß±àºÅÀ´×ÔÓÚÎÄ±¾¿ò
+		del_drivernum=" ";//³õÊ¼»¯
 		
-		//è®¾ç½®panel
+		//ÉèÖÃpanel
 		JPanel panel=new JPanel();
 		panel.setOpaque(false);
 		
-		//è®¾ç½®æœç´¢panel
+		//ÉèÖÃËÑË÷panel
 		JPanel spanel=new JPanel(new GridLayout(1,2,0,0));
 		spanel.setOpaque(false);
 		panel.add(spanel,BorderLayout.NORTH);
 		
-		//è®¾ç½®æ˜¾ç¤ºæœç´¢çš„ç»„ä»¶
+		//ÉèÖÃÏÔÊ¾ËÑË÷µÄ×é¼ş
 		JPanel cpanel=new JPanel();
 		cpanel.setOpaque(false);
 		panel.add(cpanel,BorderLayout.CENTER);
@@ -532,34 +532,34 @@ public class Driver_ContentMessagePanel {
 		self.driver_deltext.setOpaque(false);
 		spanel.add(self.driver_deltext);
 		
-		JButton b=new JButton("æœç´¢");
-		b.setFont(new Font("å®‹ä½“",Font.PLAIN,14));
+		JButton b=new JButton("ËÑË÷");
+		b.setFont(new Font("ËÎÌå",Font.PLAIN,14));
 		b.setSize(4, 1);
 		b.setOpaque(false);
 		spanel.add(b);
 		
-		//æŒ‰é’®æ·»åŠ å“åº”å‡½æ•°
-		b.addActionListener(new ActionListener(){//å¢åŠ æŒ‰é’®æ·»åŠ å“åº”å‡½æ•°
+		//°´Å¥Ìí¼ÓÏìÓ¦º¯Êı
+		b.addActionListener(new ActionListener(){//Ôö¼Ó°´Å¥Ìí¼ÓÏìÓ¦º¯Êı
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				Thread t=new Thread(new Runnable() {
 					@Override
 					public void run() {
-						DebugInfo.DebugInfo("æœç´¢æŒ‰é’®è¢«æŒ‰ä¸‹");
+						DebugInfo.DebugInfo("ËÑË÷°´Å¥±»°´ÏÂ");
 						String s=self.driver_deltext.getText();
 						Driver[] array=Driver_Database.getMohuDriverInfo(s);
 						
 						if(array==null||array.length==0){
-							//JOptionPane.showMessageDialog(self,"ç³»ç»Ÿä¸­æš‚æ— é©¾é©¶å‘˜ä¿¡æ¯","information",JOptionPane.INFORMATION_MESSAGE);
+							//JOptionPane.showMessageDialog(self,"ÏµÍ³ÖĞÔİÎŞ¼İÊ»Ô±ĞÅÏ¢","information",JOptionPane.INFORMATION_MESSAGE);
 							cpanel.removeAll();
-							cpanel.add(new JLabel("è¯¥ç³»ç»Ÿä¸­æš‚æ— è¯¥é©¾é©¶å‘˜ä¿¡æ¯!"));
+							cpanel.add(new JLabel("¸ÃÏµÍ³ÖĞÔİÎŞ¸Ã¼İÊ»Ô±ĞÅÏ¢!"));
 							cpanel.revalidate();
 							cpanel.repaint();
 						}
 						else{
 							cpanel.removeAll();
 							
-							String[] name= {"é©¾é©¶å‘˜ç¼–å·","é©¾é©¶å‘˜å§“å","å·¥ä½œçŠ¶æ€"};
+							String[] name= {"¼İÊ»Ô±±àºÅ","¼İÊ»Ô±ĞÕÃû","¹¤×÷×´Ì¬"};
 							
 							String[][] data=new String[array.length][3];
 							
@@ -584,8 +584,8 @@ public class Driver_ContentMessagePanel {
 											int row = table.getSelectedRow();
 									        int col = table.getSelectedColumn();
 									        if(col==0){
-									        	del_drivernum=table.getValueAt(row, 0).toString();//è·å–å½“å‰ç‚¹å‡»çš„é©¾é©¶å‘˜çš„ç¼–å·
-									        	flag=false;//ç‚¹å‡»æœç´¢ç»“æœåï¼Œåˆ é™¤ä¿¡æ¯å°±æ¥è‡ªäºæ¨¡ç³Šæœç´¢ç»“æœ
+									        	del_drivernum=table.getValueAt(row, 0).toString();//»ñÈ¡µ±Ç°µã»÷µÄ¼İÊ»Ô±µÄ±àºÅ
+									        	flag=false;//µã»÷ËÑË÷½á¹ûºó£¬É¾³ıĞÅÏ¢¾ÍÀ´×ÔÓÚÄ£ºıËÑË÷½á¹û
 									        }
 										}
 									});
@@ -620,8 +620,8 @@ public class Driver_ContentMessagePanel {
 							
 							cpanel.add(scroll,BorderLayout.CENTER);
 							
-							JButton bb=new JButton("åˆ é™¤");
-							bb.setFont(new Font("å®‹ä½“",Font.PLAIN,14));
+							JButton bb=new JButton("É¾³ı");
+							bb.setFont(new Font("ËÎÌå",Font.PLAIN,14));
 							bb.setSize(4, 1);
 							bb.setOpaque(false);
 							cpanel.add(bb,BorderLayout.SOUTH);
@@ -632,13 +632,13 @@ public class Driver_ContentMessagePanel {
 									Thread t=new Thread(new Runnable(){
 										@Override
 										public void run() {
-											if(flag){//åˆ é™¤ä¿¡æ¯æ¥è‡ªæ–‡æœ¬æ¡†
-												del_drivernum=self.driver_deltext.getText();//è·å–å½“å‰æ–‡æœ¬æ¡†ä¸­çš„è·¯çº¿ç¼–å·
+											if(flag){//É¾³ıĞÅÏ¢À´×ÔÎÄ±¾¿ò
+												del_drivernum=self.driver_deltext.getText();//»ñÈ¡µ±Ç°ÎÄ±¾¿òÖĞµÄÂ·Ïß±àºÅ
 											}
 											String message=Driver_Database.delDriverInfo(del_drivernum);
 											
 											JOptionPane.showMessageDialog(self,message,"information",JOptionPane.INFORMATION_MESSAGE);
-											self.driver_deltext.setText("");//æ¸…ç©ºæ–‡æœ¬æ¡†ä¸­å†…å®¹
+											self.driver_deltext.setText("");//Çå¿ÕÎÄ±¾¿òÖĞÄÚÈİ
 											cpanel.removeAll();
 											cpanel.revalidate();
 											cpanel.repaint();						
@@ -659,7 +659,7 @@ public class Driver_ContentMessagePanel {
 		self.add(panel);
 		self.revalidate();
 		self.repaint();
-		DebugInfo.DebugInfo("å®Œæˆç»˜åˆ¶åˆ é™¤é©¾é©¶å‘˜ä¿¡æ¯Panel");
+		DebugInfo.DebugInfo("Íê³É»æÖÆÉ¾³ı¼İÊ»Ô±ĞÅÏ¢Panel");
 		return;
 		
 		
@@ -679,7 +679,7 @@ public class Driver_ContentMessagePanel {
 		
 		String s=self.driver_modifytext1.getText();
 		
-		String[] temp_driver=Driver_Database.getMohuDriverNumInfo(s);//ç”¨æ¥ä¿å­˜æ¨¡ç³ŠæŸ¥è¯¢å¾—åˆ°çš„é©¾é©¶å‘˜ç¼–å·
+		String[] temp_driver=Driver_Database.getMohuDriverNumInfo(s);//ÓÃÀ´±£´æÄ£ºı²éÑ¯µÃµ½µÄ¼İÊ»Ô±±àºÅ
 		
 		DefaultComboBoxModel<String> driver_model=new DefaultComboBoxModel<String>();
 		for(int i=0;i<temp_driver.length;i++){
@@ -688,7 +688,7 @@ public class Driver_ContentMessagePanel {
 		
 		self.driver_bobox.setModel(driver_model);
 		
-		//self.car_bobox.setSelectedIndex(-1);//å½“æ¨¡ç³ŠæŸ¥è¯¢ç»“æœæ”¹å˜äº†ï¼Œcaré¢æ¿ä¸Šé¢çš„ä¿¡æ¯ä¹Ÿå°±éœ€è¦æ”¹å˜
+		//self.car_bobox.setSelectedIndex(-1);//µ±Ä£ºı²éÑ¯½á¹û¸Ä±äÁË£¬carÃæ°åÉÏÃæµÄĞÅÏ¢Ò²¾ÍĞèÒª¸Ä±ä
 		self.driver_bobox.addItemListener(itemListener2);
 	}
 }

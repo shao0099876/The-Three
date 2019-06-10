@@ -12,7 +12,7 @@ public class Car_ServerTask extends ServerTask{
 	public Car_ServerTask(Socket p) {
 		super(p);
 	}
-	public static String getCarInfo() {		//é€šä¿¡åè®®1ï¼šæŸ¥è½¦é˜Ÿæ¦‚è¦åˆ—è¡¨
+	public static String getCarInfo() {		//Í¨ĞÅĞ­Òé1£º²é³µ¶Ó¸ÅÒªÁĞ±í
 		try {
 			initDB();
 		} catch (ClassNotFoundException | SQLException e1) {
@@ -48,9 +48,9 @@ public class Car_ServerTask extends ServerTask{
 		}
 		return sb.toString();
 	}
-	public static String getCarNum(String s){//é€šè®¯åè®®4ï¼šæŸ¥è¯¢è½¦è¾†çš„è½¦ç‰Œå·ï¼ˆæ¨¡ç³ŠæŸ¥è¯¢ï¼‰
-		System.out.print("æŸ¥æ•°æ®åº“");
-		s=s+"%";//å®ç°æ¨¡ç³ŠæŸ¥è¯¢
+	public static String getCarNum(String s){//Í¨Ñ¶Ğ­Òé4£º²éÑ¯³µÁ¾µÄ³µÅÆºÅ£¨Ä£ºı²éÑ¯£©
+		System.out.print("²éÊı¾İ¿â");
+		s=s+"%";//ÊµÏÖÄ£ºı²éÑ¯
 		try {
 			initDB();
 		} catch (ClassNotFoundException | SQLException e1) {
@@ -83,11 +83,11 @@ public class Car_ServerTask extends ServerTask{
 		System.out.println(sb.toString());
 		return sb.toString();
 	}
-	public static String AddCarInfo(String s){//é€šè®¯åè®®5ï¼šå¢åŠ è½¦è¾†ä¿¡æ¯
-		System.out.println("å¼€å§‹ä¿®æ”¹è½¦è¾†ä¿¡æ¯");//æµ‹è¯•
-		String message="";//æ“ä½œç»“æœ
+	public static String AddCarInfo(String s){//Í¨Ñ¶Ğ­Òé5£ºÔö¼Ó³µÁ¾ĞÅÏ¢
+		System.out.println("¿ªÊ¼ĞŞ¸Ä³µÁ¾ĞÅÏ¢");//²âÊÔ
+		String message="";//²Ù×÷½á¹û
 		
-		String[] data=s.split("#");//è·å–ä¿¡æ¯
+		String[] data=s.split("#");//»ñÈ¡ĞÅÏ¢
 		
 		try {
 			initDB();
@@ -96,7 +96,7 @@ public class Car_ServerTask extends ServerTask{
 			e1.printStackTrace();
 		}
 		
-		//æ•°æ®ç±»å‹è½¬æ¢
+		//Êı¾İÀàĞÍ×ª»»
 		String newcarNumber=data[0];
 		int newpeople1Number=Integer.valueOf(data[1]);
 		int newpeople2Number=Integer.valueOf(data[2]);
@@ -117,8 +117,8 @@ public class Car_ServerTask extends ServerTask{
 				n=n+1;
 			}
 			
-			if(n==0){//ä¸ºç©ºï¼Œè¯´æ˜æ— ç»“æœï¼Œä¸ºæ·»åŠ 
-				System.out.println("å¼€å§‹æ·»åŠ æ•°æ®åº“");
+			if(n==0){//Îª¿Õ£¬ËµÃ÷ÎŞ½á¹û£¬ÎªÌí¼Ó
+				System.out.println("¿ªÊ¼Ìí¼ÓÊı¾İ¿â");
 				PreparedStatement pstmt1=conn.prepareStatement("insert into Car values(?,?,?,?)");
 				pstmt1.setString(1,newcarNumber);
 				pstmt1.setInt(2,newpeople1Number);
@@ -126,10 +126,10 @@ public class Car_ServerTask extends ServerTask{
 				pstmt1.setInt(4,newrouteNumber);	
 				pstmt1.executeUpdate();  
 				pstmt1.close();
-				message="æ·»åŠ ä¿¡æ¯æˆåŠŸ";
+				message="Ìí¼ÓĞÅÏ¢³É¹¦";
 			}
-			if(n>0){//éç©ºï¼Œä¸èƒ½æ·»åŠ 
-				message="å­˜åœ¨è½¦è¾†ä¿¡æ¯ï¼Œä¸èƒ½æ·»åŠ ";
+			if(n>0){//·Ç¿Õ£¬²»ÄÜÌí¼Ó
+				message="´æÔÚ³µÁ¾ĞÅÏ¢£¬²»ÄÜÌí¼Ó";
 			}
 			res.close();
 			pstmt.close();
@@ -140,9 +140,9 @@ public class Car_ServerTask extends ServerTask{
 		}
 		return message;
 	}
-	public static String DelCarInfo(String s){//é€šè®¯åè®®6ï¼šç”¨äºåˆ é™¤è½¦è¾†ä¿¡æ¯
-		System.out.println("å¼€å§‹åˆ é™¤è½¦è¾†ä¿¡æ¯");//æµ‹è¯•
-		String[] data=s.split("#");//è·å–ä¿¡æ¯
+	public static String DelCarInfo(String s){//Í¨Ñ¶Ğ­Òé6£ºÓÃÓÚÉ¾³ı³µÁ¾ĞÅÏ¢
+		System.out.println("¿ªÊ¼É¾³ı³µÁ¾ĞÅÏ¢");//²âÊÔ
+		String[] data=s.split("#");//»ñÈ¡ĞÅÏ¢
 		String message="";
 		
 		try {
@@ -161,16 +161,16 @@ public class Car_ServerTask extends ServerTask{
 				n=n+1;
 			}
 			
-			if(n==0){//ä¸ºç©ºï¼Œè¯´æ˜æ— ç»“æœï¼Œæ²¡æœ‰åŠæ³•è¿›è¡Œåˆ é™¤æ“ä½œ
-				message="æ²¡æœ‰è¯¥è½¦è¾†ä¿¡æ¯ï¼Œæ²¡æœ‰åŠæ³•è¿›è¡Œåˆ é™¤";
+			if(n==0){//Îª¿Õ£¬ËµÃ÷ÎŞ½á¹û£¬Ã»ÓĞ°ì·¨½øĞĞÉ¾³ı²Ù×÷
+				message="Ã»ÓĞ¸Ã³µÁ¾ĞÅÏ¢£¬Ã»ÓĞ°ì·¨½øĞĞÉ¾³ı";
 			}
-			if(n>0){//éç©ºï¼Œè¿›è¡Œåˆ é™¤
+			if(n>0){//·Ç¿Õ£¬½øĞĞÉ¾³ı
 				try {
 					PreparedStatement pstmt0 = conn.prepareStatement("delete from Car where carNumber=?");
 					pstmt0.setString(1,data[0]);
 					pstmt0.executeUpdate();  
 					pstmt0.close();
-					message="åˆ é™¤æˆåŠŸ";
+					message="É¾³ı³É¹¦";
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -185,11 +185,11 @@ public class Car_ServerTask extends ServerTask{
 		}
 		return message;
 	}
-	public static String ModCarInfo(String s){//ç”¨äºä¿®æ”¹è½¦è¾†ä¿¡æ¯
-		System.out.println("å¼€å§‹ä¿®æ”¹è½¦è¾†ä¿¡æ¯");//æµ‹è¯•
-		String message="";//æ“ä½œç»“æœ
+	public static String ModCarInfo(String s){//ÓÃÓÚĞŞ¸Ä³µÁ¾ĞÅÏ¢
+		System.out.println("¿ªÊ¼ĞŞ¸Ä³µÁ¾ĞÅÏ¢");//²âÊÔ
+		String message="";//²Ù×÷½á¹û
 		
-		String[] data=s.split("#");//è·å–ä¿¡æ¯
+		String[] data=s.split("#");//»ñÈ¡ĞÅÏ¢
 		
 		try {
 			initDB();
@@ -198,7 +198,7 @@ public class Car_ServerTask extends ServerTask{
 			e1.printStackTrace();
 		}
 		
-		//æ•°æ®ç±»å‹è½¬æ¢
+		//Êı¾İÀàĞÍ×ª»»
 		String newcarNumber=data[0];
 		int newpeople1Number=Integer.valueOf(data[1]);
 		int newpeople2Number=Integer.valueOf(data[2]);
@@ -219,12 +219,12 @@ public class Car_ServerTask extends ServerTask{
 				n=n+1;
 			}
 			
-			if(n==0){//ä¸ºç©ºï¼Œè¯´æ˜æ— ç»“æœï¼Œæ— æ³•ä¿®æ”¹
-				message="ä¸å­˜åœ¨è¯¥è½¦è¾†ä¿¡æ¯ï¼Œä¸èƒ½ä¿®æ”¹";
+			if(n==0){//Îª¿Õ£¬ËµÃ÷ÎŞ½á¹û£¬ÎŞ·¨ĞŞ¸Ä
+				message="²»´æÔÚ¸Ã³µÁ¾ĞÅÏ¢£¬²»ÄÜĞŞ¸Ä";
 			}
-			if(n>0){//éç©ºï¼Œæœ‰ç»“æœï¼Œå¯ä»¥è¿›è¡Œä¿®æ”¹
-				System.out.println("å¼€å§‹æ›´æ–°æ•°æ®åº“");
-				//å¾…ä¿®æ”¹
+			if(n>0){//·Ç¿Õ£¬ÓĞ½á¹û£¬¿ÉÒÔ½øĞĞĞŞ¸Ä
+				System.out.println("¿ªÊ¼¸üĞÂÊı¾İ¿â");
+				//´ıĞŞ¸Ä
 				PreparedStatement pstmt2=conn.prepareStatement("update Car set people1Number = ? , people2Number = ? , routeNumber = ? where carNumber = ?");			
 				pstmt2.setInt(1,newpeople1Number);
 				pstmt2.setInt(2,newpeople2Number);
@@ -232,7 +232,7 @@ public class Car_ServerTask extends ServerTask{
 				pstmt2.setString(4,newcarNumber);
 				pstmt2.executeUpdate();
 				pstmt2.close();
-				message="ä¿®æ”¹æˆåŠŸ";
+				message="ĞŞ¸Ä³É¹¦";
 			}
 			res.close();
 			pstmt.close();

@@ -11,13 +11,13 @@ import entity.Route;
 
 public class Route_Database {
 	private static String addr="cal.srcserver.xyz";//"cal.srcserver.xyz";
-	public static Route getRouteInfo(int n){//æŸ¥è¯¢å•æ¡è·¯çº¿ä¿¡æ¯
+	public static Route getRouteInfo(int n){//²éÑ¯µ¥ÌõÂ·ÏßĞÅÏ¢
 		try {
 			Socket socket= new Socket(addr,8081);
 			DataInputStream input=new DataInputStream(socket.getInputStream());
 			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
-			IO.write(output, "3");//æŸ¥è¯¢è½¦è¾†ä¿¡æ¯å…·ä½“ä¿¡æ¯ä¸­çš„è·¯çº¿çš„ä¿¡æ¯
-			IO.write(output, Integer.toString(n));//å†™å…¥è·¯çº¿çš„ç¼–å·
+			IO.write(output, "3");//²éÑ¯³µÁ¾ĞÅÏ¢¾ßÌåĞÅÏ¢ÖĞµÄÂ·ÏßµÄĞÅÏ¢
+			IO.write(output, Integer.toString(n));//Ğ´ÈëÂ·ÏßµÄ±àºÅ
 			String raw_string=IO.read(input);
 			String[] data=raw_string.split("#");
 			Route[] res=new Route[data.length/4];
@@ -38,13 +38,13 @@ public class Route_Database {
 		return null;
 	}
 
-	public static Route[] getAllRouteInfo(){//æŸ¥è¯¢æ‰€æœ‰è·¯çº¿ä¿¡æ¯
+	public static Route[] getAllRouteInfo(){//²éÑ¯ËùÓĞÂ·ÏßĞÅÏ¢
 		try {
 			Socket socket= new Socket(addr,8081);
 			DataInputStream input=new DataInputStream(socket.getInputStream());
 			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
 			
-			IO.write(output, "8");//æŸ¥è¯¢æ‰€æœ‰è·¯çº¿çš„ä¿¡æ¯
+			IO.write(output, "8");//²éÑ¯ËùÓĞÂ·ÏßµÄĞÅÏ¢
 			
 			String raw_string=IO.read(input);
 			String[] data=raw_string.split("#");
@@ -66,16 +66,16 @@ public class Route_Database {
 		return null;
 	}
 
-	public static Route[] getMohuRouteInfo(String s){//æ¨¡ç³ŠæŸ¥è¯¢è·¯çº¿ä¿¡æ¯
+	public static Route[] getMohuRouteInfo(String s){//Ä£ºı²éÑ¯Â·ÏßĞÅÏ¢
 		try {
 			Socket socket= new Socket(addr,8081);
 			DataInputStream input=new DataInputStream(socket.getInputStream());
 			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
 			
-			IO.write(output, "9");//æ¨¡ç³ŠæŸ¥è¯¢è·¯çº¿ä¿¡æ¯
-			System.out.println("å¼€å§‹å‘é€åˆ é™¤éœ€è¦ç”¨çš„æ¨¡ç³ŠæŸ¥è¯¢è·¯çº¿ç¼–å·");
-			IO.write(output, s);//æ¨¡ç³ŠæŸ¥è¯¢è·¯çº¿çš„è·¯çº¿ä¿¡æ¯ç‰‡æ®µ
-			System.out.println("å‘é€åˆ é™¤éœ€è¦ç”¨çš„æ¨¡ç³ŠæŸ¥è¯¢è·¯çº¿ç¼–å·ç»“æŸ");
+			IO.write(output, "9");//Ä£ºı²éÑ¯Â·ÏßĞÅÏ¢
+			System.out.println("¿ªÊ¼·¢ËÍÉ¾³ıĞèÒªÓÃµÄÄ£ºı²éÑ¯Â·Ïß±àºÅ");
+			IO.write(output, s);//Ä£ºı²éÑ¯Â·ÏßµÄÂ·ÏßĞÅÏ¢Æ¬¶Î
+			System.out.println("·¢ËÍÉ¾³ıĞèÒªÓÃµÄÄ£ºı²éÑ¯Â·Ïß±àºÅ½áÊø");
 			
 			String raw_string=IO.read(input);
 			String[] data=raw_string.split("#");
@@ -97,21 +97,21 @@ public class Route_Database {
 		return null;
 	}
 
-	public static String[] getMohuRouteNumInfo(String s){//æ¨¡ç³ŠæŸ¥è¯¢è·¯çº¿ä¿¡æ¯
+	public static String[] getMohuRouteNumInfo(String s){//Ä£ºı²éÑ¯Â·ÏßĞÅÏ¢
 		try {
 			Socket socket= new Socket(addr,8081);
 			DataInputStream input=new DataInputStream(socket.getInputStream());
 			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
 			
-			IO.write(output, "9");//æ¨¡ç³ŠæŸ¥è¯¢è·¯çº¿ä¿¡æ¯
-			System.out.println("å¼€å§‹å‘é€æ¨¡ç³ŠæŸ¥è¯¢æ–‡æœ¬æ¡†é‡Œé¢çš„è·¯çº¿ç¼–å·");
-			IO.write(output, s);//æ¨¡ç³ŠæŸ¥è¯¢è·¯çº¿çš„è·¯çº¿ä¿¡æ¯ç‰‡æ®µ
-			System.out.println("å‘é€æ¨¡ç³ŠæŸ¥è¯¢æ–‡æœ¬æ¡†é‡Œé¢çš„è·¯çº¿ç¼–å·ç»“æŸ");
+			IO.write(output, "9");//Ä£ºı²éÑ¯Â·ÏßĞÅÏ¢
+			System.out.println("¿ªÊ¼·¢ËÍÄ£ºı²éÑ¯ÎÄ±¾¿òÀïÃæµÄÂ·Ïß±àºÅ");
+			IO.write(output, s);//Ä£ºı²éÑ¯Â·ÏßµÄÂ·ÏßĞÅÏ¢Æ¬¶Î
+			System.out.println("·¢ËÍÄ£ºı²éÑ¯ÎÄ±¾¿òÀïÃæµÄÂ·Ïß±àºÅ½áÊø");
 			
 			String raw_string=IO.read(input);
 			String[] data=raw_string.split("#");
 			
-			String[] res=new String[data.length];//ç”¨æ¥ä¿å­˜ç¼–å·
+			String[] res=new String[data.length];//ÓÃÀ´±£´æ±àºÅ
 			
 			for(int i=0;i<data.length;i+=4) {
 				res[i]=data[i];
@@ -130,13 +130,13 @@ public class Route_Database {
 		return null;
 	}
 
-	public static String delRouteInfo(String s){//åˆ é™¤å…·ä½“çš„è·¯çº¿ä¿¡æ¯
+	public static String delRouteInfo(String s){//É¾³ı¾ßÌåµÄÂ·ÏßĞÅÏ¢
 		try {
 			Socket socket= new Socket(addr,8081);
 			DataInputStream input=new DataInputStream(socket.getInputStream());
 			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
-			IO.write(output, "10");//åˆ é™¤å…·ä½“çš„è·¯çº¿ä¿¡æ¯
-			IO.write(output, s);//è·¯çº¿ç¼–å·
+			IO.write(output, "10");//É¾³ı¾ßÌåµÄÂ·ÏßĞÅÏ¢
+			IO.write(output, s);//Â·Ïß±àºÅ
 			
 			String raw_string=IO.read(input);
 			output.close();
@@ -153,18 +153,18 @@ public class Route_Database {
 		return null;
 	}
 
-	public static String addRouteInfo(String s){//å¢åŠ è·¯çº¿ä¿¡æ¯
+	public static String addRouteInfo(String s){//Ôö¼ÓÂ·ÏßĞÅÏ¢
 		try {
 			String S=s;
-			System.out.println("å¢åŠ è·¯çº¿ä¿¡æ¯ä¸º"+S);
+			System.out.println("Ôö¼ÓÂ·ÏßĞÅÏ¢Îª"+S);
 			
 			Socket socket= new Socket(addr,8081);
 			DataInputStream input=new DataInputStream(socket.getInputStream());
 			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
-			IO.write(output,"11");//å¢åŠ è·¯çº¿ä¿¡æ¯
-			System.out.println("å¼€å§‹å‘é€æ·»åŠ è·¯çº¿ä¿¡æ¯");
-			IO.write(output,S);//è·¯çº¿çš„ä¿¡æ¯
-			System.out.println("å‘é€æ·»åŠ è·¯çº¿ä¿¡æ¯ç»“æŸ");
+			IO.write(output,"11");//Ôö¼ÓÂ·ÏßĞÅÏ¢
+			System.out.println("¿ªÊ¼·¢ËÍÌí¼ÓÂ·ÏßĞÅÏ¢");
+			IO.write(output,S);//Â·ÏßµÄĞÅÏ¢
+			System.out.println("·¢ËÍÌí¼ÓÂ·ÏßĞÅÏ¢½áÊø");
 			
 			String raw_string=IO.read(input);
 			output.close();
@@ -181,16 +181,16 @@ public class Route_Database {
 		return null;
 	}
 
-	public static String modRouteInfo(String s){//ä¿®æ”¹å…·ä½“çš„è·¯çº¿ä¿¡æ¯
+	public static String modRouteInfo(String s){//ĞŞ¸Ä¾ßÌåµÄÂ·ÏßĞÅÏ¢
 		try {
 			
-			String S=s;//å°†è·¯çº¿ä¿¡æ¯è½¬åŒ–ä¸ºå­—ç¬¦åˆ›
+			String S=s;//½«Â·ÏßĞÅÏ¢×ª»¯Îª×Ö·û´´
 			
 			Socket socket= new Socket(addr,8081);
 			DataInputStream input=new DataInputStream(socket.getInputStream());
 			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
-			IO.write(output, "12");//ä¿®æ”¹è·¯çº¿
-			IO.write(output, S);//è·¯çº¿ä¿¡æ¯
+			IO.write(output, "12");//ĞŞ¸ÄÂ·Ïß
+			IO.write(output, S);//Â·ÏßĞÅÏ¢
 			
 			String raw_string=IO.read(input);
 			output.close();
@@ -207,7 +207,7 @@ public class Route_Database {
 		return null;
 		
 	}
-	public static String[] getCarGPSonRoute(String s) {//æŸ¥è¯¢è¯¥è·¯çº¿ä¸Šæ‰€æœ‰è½¦è¾†çš„GPSä½ç½®ä¿¡æ¯
+	public static String[] getCarGPSonRoute(String s) {//²éÑ¯¸ÃÂ·ÏßÉÏËùÓĞ³µÁ¾µÄGPSÎ»ÖÃĞÅÏ¢
 		try {
 			Socket socket=new Socket(addr,8081);
 			DataInputStream input=new DataInputStream(socket.getInputStream());

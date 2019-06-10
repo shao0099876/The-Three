@@ -13,7 +13,7 @@ public class Driver_ServerTask extends ServerTask {
 		// TODO Auto-generated constructor stub
 	}
 
-	public static String getDriverInfo(int peonum) {//æŸ¥è¯¢æŸä¸€é©¾é©¶å‘˜ä¿¡æ¯
+	public static String getDriverInfo(int peonum) {//²éÑ¯Ä³Ò»¼İÊ»Ô±ĞÅÏ¢
 		// TODO Auto-generated method stub
 		try {
 			initDB();
@@ -63,7 +63,7 @@ public class Driver_ServerTask extends ServerTask {
 	}
 
 
-	public static String getAllDriverInfo(){//æŸ¥è¯¢æ‰€æœ‰é©¾é©¶å‘˜ä¿¡æ¯
+	public static String getAllDriverInfo(){//²éÑ¯ËùÓĞ¼İÊ»Ô±ĞÅÏ¢
 		// TODO Auto-generated method stub
 		try {
 			initDB();
@@ -112,12 +112,12 @@ public class Driver_ServerTask extends ServerTask {
 		return sb.toString();
 	}
 
-	public static String addDriverInfo(String s){//å¢åŠ é©¾é©¶å‘˜ä¿¡æ¯
-		System.out.println("å¼€å§‹å¢åŠ é©¾é©¶å‘˜ä¿¡æ¯");//æµ‹è¯•
-		String message="";//æ“ä½œç»“æœ
+	public static String addDriverInfo(String s){//Ôö¼Ó¼İÊ»Ô±ĞÅÏ¢
+		System.out.println("¿ªÊ¼Ôö¼Ó¼İÊ»Ô±ĞÅÏ¢");//²âÊÔ
+		String message="";//²Ù×÷½á¹û
 		
 		String[] data=new String[7];
-		data=s.split("#");//è·å–ä¿¡æ¯
+		data=s.split("#");//»ñÈ¡ĞÅÏ¢
 		
 		for(int i=0;i<data.length;i++){
 			System.out.println(data[i]);
@@ -130,7 +130,7 @@ public class Driver_ServerTask extends ServerTask {
 			e1.printStackTrace();
 		}
 		
-		//æ•°æ®ç±»å‹è½¬æ¢
+		//Êı¾İÀàĞÍ×ª»»
 		int newpeopleNumber=Integer.valueOf(data[0]);
 		System.out.println(newpeopleNumber);
 		
@@ -157,14 +157,14 @@ public class Driver_ServerTask extends ServerTask {
 			pstmt.setInt(1,newpeopleNumber);
 			ResultSet res=pstmt.executeQuery();
 			
-			int n=0;//è®°å½•æŸ¥è¯¢çš„ä¸ªæ•°
+			int n=0;//¼ÇÂ¼²éÑ¯µÄ¸öÊı
 			
 			while(res.next()){
-				n=n+1;//æœ‰è®°å½• å°±åŠ ä¸€
+				n=n+1;//ÓĞ¼ÇÂ¼ ¾Í¼ÓÒ»
 			}
 			
-			if(n==0){//ä¸ºç©ºï¼Œè¯´æ˜æ— ç»“æœï¼Œä¸ºæ·»åŠ 
-				System.out.println("å¼€å§‹æ·»åŠ æ•°æ®åº“");
+			if(n==0){//Îª¿Õ£¬ËµÃ÷ÎŞ½á¹û£¬ÎªÌí¼Ó
+				System.out.println("¿ªÊ¼Ìí¼ÓÊı¾İ¿â");
 				PreparedStatement pstmt1=conn.prepareStatement("insert into Driver values(?,?,?,?,?,?,?)");
 				
 				pstmt1.setInt(1,newpeopleNumber);
@@ -177,11 +177,11 @@ public class Driver_ServerTask extends ServerTask {
 				
 				pstmt1.executeUpdate();  
 				pstmt1.close();
-				message="æ·»åŠ ä¿¡æ¯æˆåŠŸ";
+				message="Ìí¼ÓĞÅÏ¢³É¹¦";
 				System.out.println("1");
 			}
-			if(n>0){//éç©ºï¼Œä¸èƒ½æ·»åŠ 
-				message="å­˜åœ¨é©¾é©¶å‘˜ä¿¡æ¯ï¼Œä¸èƒ½æ·»åŠ ";
+			if(n>0){//·Ç¿Õ£¬²»ÄÜÌí¼Ó
+				message="´æÔÚ¼İÊ»Ô±ĞÅÏ¢£¬²»ÄÜÌí¼Ó";
 				System.out.println("0");
 			}
 			res.close();
@@ -194,12 +194,12 @@ public class Driver_ServerTask extends ServerTask {
 		return message;
 	}
 
-	public static String modDriverInfo(String s){//ä¿®æ”¹é©¾é©¶å‘˜ä¿¡æ¯
-		System.out.println("å¼€å§‹ä¿®æ”¹é©¾é©¶å‘˜ä¿¡æ¯");//æµ‹è¯•
-		String message="";//æ“ä½œç»“æœ
+	public static String modDriverInfo(String s){//ĞŞ¸Ä¼İÊ»Ô±ĞÅÏ¢
+		System.out.println("¿ªÊ¼ĞŞ¸Ä¼İÊ»Ô±ĞÅÏ¢");//²âÊÔ
+		String message="";//²Ù×÷½á¹û
 		
 		String[] data=new String[7];
-		data=s.split("#");//è·å–ä¿¡æ¯
+		data=s.split("#");//»ñÈ¡ĞÅÏ¢
 		
 		for(int i=0;i<data.length;i++){
 			System.out.println(data[i]);
@@ -212,7 +212,7 @@ public class Driver_ServerTask extends ServerTask {
 			e1.printStackTrace();
 		}
 		
-		//æ•°æ®ç±»å‹è½¬æ¢
+		//Êı¾İÀàĞÍ×ª»»
 		int newpeopleNumber=Integer.valueOf(data[0]);
 		System.out.println(newpeopleNumber);
 		
@@ -239,19 +239,19 @@ public class Driver_ServerTask extends ServerTask {
 			pstmt.setInt(1,newpeopleNumber);
 			ResultSet res=pstmt.executeQuery();
 			
-			int n=0;//è®°å½•æŸ¥è¯¢çš„ä¸ªæ•°
+			int n=0;//¼ÇÂ¼²éÑ¯µÄ¸öÊı
 			
 			while(res.next()){
-				n=n+1;//æœ‰è®°å½• å°±åŠ ä¸€
+				n=n+1;//ÓĞ¼ÇÂ¼ ¾Í¼ÓÒ»
 			}
 			
-			if(n==0){//ä¸ºç©ºï¼Œè¯´æ˜æ— ç»“æœï¼Œæ— æ³•ä¿®æ”¹
-				message="ä¸å­˜åœ¨é©¾é©¶å‘˜ä¿¡æ¯ï¼Œä¸èƒ½ä¿®æ”¹";
+			if(n==0){//Îª¿Õ£¬ËµÃ÷ÎŞ½á¹û£¬ÎŞ·¨ĞŞ¸Ä
+				message="²»´æÔÚ¼İÊ»Ô±ĞÅÏ¢£¬²»ÄÜĞŞ¸Ä";
 				System.out.println("0");
 				
 			}
-			if(n>0){//éç©ºï¼Œå¯ä»¥ä¿®æ”¹
-				System.out.println("å¼€å§‹ä¿®æ”¹æ•°æ®åº“");
+			if(n>0){//·Ç¿Õ£¬¿ÉÒÔĞŞ¸Ä
+				System.out.println("¿ªÊ¼ĞŞ¸ÄÊı¾İ¿â");
 				PreparedStatement pstmt1=conn.prepareStatement("update Driver set driverNumber = ? , peopleName = ? , peopleAge = ? , driverAge = ? , phoNumber = ? , peopleState = ? where peopleNumber = ?");
 			
 				pstmt1.setString(1,newdriverNumber);
@@ -264,7 +264,7 @@ public class Driver_ServerTask extends ServerTask {
 				
 				pstmt1.executeUpdate();  
 				pstmt1.close();
-				message="ä¿®æ”¹ä¿¡æ¯æˆåŠŸ";
+				message="ĞŞ¸ÄĞÅÏ¢³É¹¦";
 				System.out.println("1");
 			}
 			res.close();
@@ -277,7 +277,7 @@ public class Driver_ServerTask extends ServerTask {
 		return message;
 	}
 
-	public static String mohuDriverInfo(String s){//æ¨¡ç³ŠæŸ¥è¯¢é©¾é©¶å‘˜ä¿¡æ¯
+	public static String mohuDriverInfo(String s){//Ä£ºı²éÑ¯¼İÊ»Ô±ĞÅÏ¢
 		int peoplenum=Integer.valueOf(s);
 		
 		try {
@@ -326,10 +326,10 @@ public class Driver_ServerTask extends ServerTask {
 		return sb.toString();
 	}
 
-	public static String delDriverInfo(String s){//åˆ é™¤é©¾é©¶å‘˜ä¿¡æ¯
-		System.out.println("å¼€å§‹åˆ é™¤é©¾é©¶å‘˜ä¿¡æ¯");//æµ‹è¯•
+	public static String delDriverInfo(String s){//É¾³ı¼İÊ»Ô±ĞÅÏ¢
+		System.out.println("¿ªÊ¼É¾³ı¼İÊ»Ô±ĞÅÏ¢");//²âÊÔ
 		
-		int deln=Integer.valueOf(s);//å°†é©¾é©¶å‘˜ç¼–å·è½¬åŒ–ä¸ºINTå‹
+		int deln=Integer.valueOf(s);//½«¼İÊ»Ô±±àºÅ×ª»¯ÎªINTĞÍ
 		
 		String message="";
 		
@@ -349,16 +349,16 @@ public class Driver_ServerTask extends ServerTask {
 				n=n+1;
 			}
 			
-			if(n==0){//ä¸ºç©ºï¼Œè¯´æ˜æ— ç»“æœï¼Œæ²¡æœ‰åŠæ³•è¿›è¡Œåˆ é™¤æ“ä½œ
-				message="æ²¡æœ‰è¯¥é©¾é©¶å‘˜ä¿¡æ¯ï¼Œæ²¡æœ‰åŠæ³•è¿›è¡Œåˆ é™¤";
+			if(n==0){//Îª¿Õ£¬ËµÃ÷ÎŞ½á¹û£¬Ã»ÓĞ°ì·¨½øĞĞÉ¾³ı²Ù×÷
+				message="Ã»ÓĞ¸Ã¼İÊ»Ô±ĞÅÏ¢£¬Ã»ÓĞ°ì·¨½øĞĞÉ¾³ı";
 			}
-			if(n>0){//éç©ºï¼Œè¿›è¡Œåˆ é™¤
+			if(n>0){//·Ç¿Õ£¬½øĞĞÉ¾³ı
 				try {
 					PreparedStatement pstmt0 = conn.prepareStatement("delete from Driver where peopleNumber=?");
 					pstmt0.setInt(1,deln);
 					pstmt0.executeUpdate();  
 					pstmt0.close();
-					message="åˆ é™¤æˆåŠŸ";
+					message="É¾³ı³É¹¦";
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

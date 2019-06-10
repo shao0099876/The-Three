@@ -13,10 +13,10 @@ public class Level2NaviPanel extends JPanel {
 	}
 	public void change(int num) {
 		switch(num) {
-		case 0:Car_Level2NaviPanel.car(this);break;//è½¦é˜Ÿç®¡ç†ç•Œé¢æ˜¾ç¤ºè¯¦æƒ…
-		case 1:Route_Level2NaviPanel.route(this);break;//è·¯çº¿ç®¡ç†æ˜¾ç¤ºè¯¦æƒ…
-		case 2:break;//è´§ç‰©ç®¡ç†
-		case 3:Driver_Level2NaviPanel.driver(this);break;//é©¾é©¶å‘˜ç®¡ç†
+		case 0:Car_Level2NaviPanel.car(this);break;//³µ¶Ó¹ÜÀí½çÃæÏÔÊ¾ÏêÇé
+		case 1:Route_Level2NaviPanel.route(this);break;//Â·Ïß¹ÜÀíÏÔÊ¾ÏêÇé
+		case 2:break;//»õÎï¹ÜÀí
+		case 3:Driver_Level2NaviPanel.driver(this);break;//¼İÊ»Ô±¹ÜÀí
 		}
 	}
 }
