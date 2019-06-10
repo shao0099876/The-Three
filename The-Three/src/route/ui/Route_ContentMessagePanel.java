@@ -239,6 +239,8 @@ public class Route_ContentMessagePanel {
 						if(array==null||array.length==0){
 							cpanel.removeAll();
 							cpanel.add(new JLabel("该系统中暂无该车辆信息!"));
+							cpanel.revalidate();
+							cpanel.repaint();
 						}
 						else{
 							cpanel.removeAll();

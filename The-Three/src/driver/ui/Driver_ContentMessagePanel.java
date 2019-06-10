@@ -261,7 +261,7 @@ public class Driver_ContentMessagePanel {
 		p.add(self.driver_addtext5);
 		
 		//第六行  驾驶员联系方式
-		JLabel lab6=new JLabel("驾龄");
+		JLabel lab6=new JLabel("联系方式");
 		lab6.setFont(new Font("宋体",Font.PLAIN,20));
 		lab6.setOpaque(false);
 		p.add(lab6);
@@ -272,7 +272,7 @@ public class Driver_ContentMessagePanel {
 		p.add(self.driver_addtext6);
 		
 		//第七行  驾驶员当前状态
-		JLabel lab7=new JLabel("驾龄");
+		JLabel lab7=new JLabel("当前工作状态");
 		lab7.setFont(new Font("宋体",Font.PLAIN,20));
 		lab7.setOpaque(false);
 		p.add(lab7);
@@ -411,7 +411,7 @@ public class Driver_ContentMessagePanel {
 		p.add(self.driver_modifytext5);
 		
 		//第六行  驾驶员联系方式
-		JLabel lab6=new JLabel("驾龄");
+		JLabel lab6=new JLabel("联系方式");
 		lab6.setFont(new Font("宋体",Font.PLAIN,20));
 		lab6.setOpaque(false);
 		p.add(lab6);
@@ -422,7 +422,7 @@ public class Driver_ContentMessagePanel {
 		p.add(self.driver_modifytext6);
 		
 		//第七行  驾驶员当前状态
-		JLabel lab7=new JLabel("驾龄");
+		JLabel lab7=new JLabel("当前工作状态");
 		lab7.setFont(new Font("宋体",Font.PLAIN,20));
 		lab7.setOpaque(false);
 		p.add(lab7);
@@ -550,7 +550,11 @@ public class Driver_ContentMessagePanel {
 						Driver[] array=Driver_Database.getMohuDriverInfo(s);
 						
 						if(array==null||array.length==0){
-							JOptionPane.showMessageDialog(self,"系统中暂无驾驶员信息","information",JOptionPane.INFORMATION_MESSAGE);
+							//JOptionPane.showMessageDialog(self,"系统中暂无驾驶员信息","information",JOptionPane.INFORMATION_MESSAGE);
+							cpanel.removeAll();
+							cpanel.add(new JLabel("该系统中暂无该驾驶员信息!"));
+							cpanel.revalidate();
+							cpanel.repaint();
 						}
 						else{
 							cpanel.removeAll();
