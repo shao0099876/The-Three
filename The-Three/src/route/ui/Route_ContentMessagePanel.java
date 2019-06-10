@@ -37,6 +37,7 @@ public class Route_ContentMessagePanel {
 	private static boolean flag;//用来标记删除路线信息时的路线编号来自哪里
 	//false表明删除的路线编号来自于文本框
 	//true表明删除的路线编号来自于点击的模糊搜索结果
+	
 	private static String del_routenum;//标记被删除的路线编号
 	
 	private static DocumentListener documentListener1=new DocumentListener() {
@@ -232,6 +233,8 @@ public class Route_ContentMessagePanel {
 						if(array==null||array.length==0){
 							cpanel.removeAll();
 							cpanel.add(new JLabel("该系统中暂无该车辆信息!"));
+							cpanel.revalidate();
+							cpanel.repaint();
 						}
 						else{
 							cpanel.removeAll();

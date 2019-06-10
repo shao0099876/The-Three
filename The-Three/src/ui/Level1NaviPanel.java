@@ -14,7 +14,7 @@ public class Level1NaviPanel extends JPanel {
 	private NaviPanel father;
 	private void setButton(){//设置按钮
 		button[0]=new JButton("车队管理");
-		button[0].setFont(new Font("宋体",Font.PLAIN,14));button[0].setOpaque(false);
+		button[0].setFont(new Font("宋体",Font.PLAIN,14));
 		button[0].setSize(4, 1);
 		button[0].setOpaque(false);
 		
@@ -38,7 +38,7 @@ public class Level1NaviPanel extends JPanel {
 		});
 		
 		button[1]=new JButton("路线管理");
-		button[1].setFont(new Font("宋体",Font.PLAIN,14));button[1].setOpaque(false);
+		button[1].setFont(new Font("宋体",Font.PLAIN,14));
 		button[1].setSize(4, 1);
 		button[1].setOpaque(false);
 		
@@ -61,8 +61,8 @@ public class Level1NaviPanel extends JPanel {
 			
 		});
 		
-		button[2]=new JButton("货物");
-		button[2].setFont(new Font("宋体",Font.PLAIN,14));button[2].setOpaque(false);
+		button[2]=new JButton("货物管理");
+		button[2].setFont(new Font("宋体",Font.PLAIN,14));
 		button[2].setSize(4, 1);
 		button[2].setOpaque(false);
 		
@@ -85,7 +85,55 @@ public class Level1NaviPanel extends JPanel {
 			
 		});
 		
+		button[3]=new JButton("退出登陆");
+		button[3].setFont(new Font("宋体",Font.PLAIN,14));
+		button[3].setSize(4, 1);
+		button[3].setOpaque(false);
 		
+		button[3].addActionListener(new ActionListener(){//添加响应函数
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				Thread t=new Thread(new Runnable() {
+
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						
+						//待添加函数，回到登陆前
+						
+						//退出登陆，退回登陆前
+						
+						
+						
+					}
+					
+				});
+				t.start();
+			}
+			
+		});
+		
+		button[4]=new JButton("驾驶员管理");
+		button[4].setFont(new Font("宋体",Font.PLAIN,14));
+		button[4].setSize(4, 1);
+		button[4].setOpaque(false);
+		
+		button[4].addActionListener(new ActionListener(){//添加响应函数
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				Thread t=new Thread(new Runnable() {
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						father.changeLevel2(3);//驾驶员管理
+					}
+				});
+				t.start();
+			}
+			
+		});
 	}
 	
 	public Level1NaviPanel(NaviPanel f){
@@ -99,7 +147,8 @@ public class Level1NaviPanel extends JPanel {
 		this.add(button[0]);
 		this.add(button[1]);
 		this.add(button[2]);
-		
+		this.add(button[4]);
+		this.add(button[3]);
 	}
 
 }

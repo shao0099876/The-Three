@@ -47,6 +47,14 @@ public class ContentMessagePanel extends JPanel{
 	public JComboBox route_bobox;
 	public JPanel route_mpanel,route_panel2;
 	
+	public JTextField driver_deltext;//用于驾驶员删除
+	public JTextField driver_addtext1,driver_addtext2,driver_addtext3,driver_addtext4,
+						driver_addtext5,driver_addtext6,driver_addtext7;//用于增加驾驶员
+	public JTextField driver_modifytext1,driver_modifytext2,driver_modifytext3,driver_modifytext4,
+						driver_modifytext5,driver_modifytext6,driver_modifytext7;//用于修改驾驶员
+	
+	public JComboBox driver_bobox;
+	public JPanel driver_mpanel,driver_panel2;
 	
 	public ContentMessagePanel() {
 		super();

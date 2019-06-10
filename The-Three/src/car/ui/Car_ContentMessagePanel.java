@@ -47,7 +47,7 @@ public class Car_ContentMessagePanel {
 		@Override
 		public void insertUpdate(DocumentEvent e) {
 			// TODO Auto-generated method stub
-			DebugInfo.DebugInfo("ÎÄ±¾¿òÄÚÈİÔö¼Ó£¡");
+			DebugInfo.DebugInfo("æ–‡æœ¬æ¡†å†…å®¹å¢åŠ ï¼");
 			Thread t=new Thread(new Runnable() {
 				
 				@Override
@@ -62,7 +62,7 @@ public class Car_ContentMessagePanel {
 		@Override
 		public void removeUpdate(DocumentEvent e) {
 			// TODO Auto-generated method stub
-			DebugInfo.DebugInfo("ÎÄ±¾¿òÄÚÈİ¼õÉÙ£¡");
+			DebugInfo.DebugInfo("æ–‡æœ¬æ¡†å†…å®¹å‡å°‘ï¼");
 			Thread t=new Thread(new Runnable() {
 				
 				@Override
@@ -80,7 +80,7 @@ public class Car_ContentMessagePanel {
 		@Override
 		public void itemStateChanged(ItemEvent arg0) {
 			// TODO Auto-generated method stub
-			DebugInfo.DebugInfo("ComboboxÏî±»Ñ¡ÖĞ£¡");
+			DebugInfo.DebugInfo("Comboboxé¡¹è¢«é€‰ä¸­ï¼");
 			Thread t=new Thread(new Runnable(){
 
 				@Override
@@ -93,21 +93,19 @@ public class Car_ContentMessagePanel {
 			t.start();
 		}};
 		
-	public static void setCarInfo(ContentMessagePanel p_self) {//³µ¶Ó¹ÜÀí¸ÅÒªĞÅÏ¢
+	public static void setCarInfo(ContentMessagePanel p_self) {//è½¦é˜Ÿç®¡ç†æ¦‚è¦ä¿¡æ¯
 		self=p_self;
-		DebugInfo.DebugInfo("¿ªÊ¼»æÖÆ³µ¶Ó¹ÜÀí¸ÅÒªĞÅÏ¢Panel");
-		self.removeAll();//½«Ãæ°åÉÏÃæµÄ×é¼şÈ«²¿Çå¿Õ
+		DebugInfo.DebugInfo("å¼€å§‹ç»˜åˆ¶è½¦é˜Ÿç®¡ç†æ¦‚è¦ä¿¡æ¯Panel");
+		self.removeAll();//å°†é¢æ¿ä¸Šé¢çš„ç»„ä»¶å…¨éƒ¨æ¸…ç©º
 		
-		String[] name= {"³µÅÆºÅ","¼İÊ»Ô±1","¼İÊ»Ô±2","Â·Ïß"};
+		String[] name= {"è½¦ç‰Œå·","é©¾é©¶å‘˜1","é©¾é©¶å‘˜2","è·¯çº¿"};
 		array=Car_Database.getCarInfo();
+		
 		if(array==null||array.length==0) {
-			JLabel label=new JLabel("µ±Ç°ÏµÍ³ÎŞ¿ÉÓÃ³µÁ¾ĞÅÏ¢£¡");
-			self.add(label);
-			self.revalidate();
-			self.repaint();
-			DebugInfo.DebugInfo("Íê³É»æÖÆ³µ¶Ó¹ÜÀí¸ÅÒªĞÅÏ¢Panel");
+			JOptionPane.showMessageDialog(self,"å½“å‰ç³»ç»Ÿæ— å¯ç”¨è½¦è¾†ä¿¡æ¯ï¼","information",JOptionPane.INFORMATION_MESSAGE);
 			return;
 		}
+		
 		String[][] data=new String[array.length][4];
 		for(int i=0;i<array.length;i++) {
 			data[i]=array[i].toStringArray();
@@ -122,7 +120,7 @@ public class Car_ContentMessagePanel {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				DebugInfo.DebugInfo("³µ¶Ó¸ÅÒªĞÅÏ¢±í¸ñÏî±»µã»÷£¡");
+				DebugInfo.DebugInfo("è½¦é˜Ÿæ¦‚è¦ä¿¡æ¯è¡¨æ ¼é¡¹è¢«ç‚¹å‡»ï¼");
 				Thread t=new Thread(new Runnable() {
 
 					@Override
@@ -167,88 +165,88 @@ public class Car_ContentMessagePanel {
 		self.add(scroll);
 		self.revalidate();
 		self.repaint();
-		DebugInfo.DebugInfo("Íê³É»æÖÆ³µÁ¾¸ÅÒªĞÅÏ¢Panel");
+		DebugInfo.DebugInfo("å®Œæˆç»˜åˆ¶è½¦è¾†æ¦‚è¦ä¿¡æ¯Panel");
 		return;
 	}
-	public static void carInfo_Add_Del(ContentMessagePanel p_self){//³µÁ¾ĞÅÏ¢µÄÔö¼ÓĞŞ¸ÄÉ¾³ı²Ù×÷
-		DebugInfo.DebugInfo("¿ªÊ¼»æÖÆ³µÁ¾ÔöÉ¾¸ÄPanel");
+	public static void carInfo_Add_Del(ContentMessagePanel p_self){//è½¦è¾†ä¿¡æ¯çš„å¢åŠ ä¿®æ”¹åˆ é™¤æ“ä½œ
+		DebugInfo.DebugInfo("å¼€å§‹ç»˜åˆ¶è½¦è¾†å¢åˆ æ”¹Panel");
 		self=p_self;
-		self.removeAll();//Çå³ıÃæ°åÉÏÃæµÄËùÓĞ×é¼ş
+		self.removeAll();//æ¸…é™¤é¢æ¿ä¸Šé¢çš„æ‰€æœ‰ç»„ä»¶
 
-		self.car_mpanel=new JPanel(new GridLayout(1,2,0,0));//Ò»ĞĞÁ½ÁĞ
+		self.car_mpanel=new JPanel(new GridLayout(1,2,0,0));//ä¸€è¡Œä¸¤åˆ—
 		self.car_mpanel.setOpaque(false);
 		
-		//µÚÒ»ÁĞ
-		JPanel panel=new JPanel(new GridLayout(6,3,5,5));//ÁùĞĞÈıÁĞ
+		//ç¬¬ä¸€åˆ—
+		JPanel panel=new JPanel(new GridLayout(6,3,5,5));//å…­è¡Œä¸‰åˆ—
 		panel.setOpaque(false);
 		
-		//µÚÒ»ĞĞ ³µÁ¾±àºÅ
-		JLabel label1=new JLabel("³µÁ¾±àºÅ");
-		label1.setFont(new Font("ËÎÌå",Font.PLAIN,20));
+		//ç¬¬ä¸€è¡Œ è½¦è¾†ç¼–å·
+		JLabel label1=new JLabel("è½¦è¾†ç¼–å·");
+		label1.setFont(new Font("å®‹ä½“",Font.PLAIN,20));
 		label1.setOpaque(false);
 		panel.add(label1);
 		
 		self.car_text1=new JTextField(20);
-		self.car_text1.setEditable(true);//ÉèÖÃÎª¿É±à¼­
+		self.car_text1.setEditable(true);//è®¾ç½®ä¸ºå¯ç¼–è¾‘
 		self.car_text1.setOpaque(false);
 		panel.add(self.car_text1);
 		panel.add(new JLabel("    "));
 		
-		//¶ÔÎÄ±¾¿òÔö¼ÓÏàÓ¦º¯Êı
+		//å¯¹æ–‡æœ¬æ¡†å¢åŠ ç›¸åº”å‡½æ•°
 		Document document = self.car_text1.getDocument();
 		document.addDocumentListener(documentListener);
 		
-		//µÚ¶şĞĞ ¼İÊ»Ô±1ºÅ
-		JLabel label2=new JLabel("¼İÊ»Ô±Ò»ºÅ±àºÅ");
-		label2.setFont(new Font("ËÎÌå",Font.PLAIN,20));
+		//ç¬¬äºŒè¡Œ é©¾é©¶å‘˜1å·
+		JLabel label2=new JLabel("é©¾é©¶å‘˜ä¸€å·ç¼–å·");
+		label2.setFont(new Font("å®‹ä½“",Font.PLAIN,20));
 		label2.setOpaque(false);
 		panel.add(label2);
 		
 		self.car_text2=new JTextField();
-		self.car_text2.setEditable(true);//ÉèÖÃÎª¿É±à¼­
+		self.car_text2.setEditable(true);//è®¾ç½®ä¸ºå¯ç¼–è¾‘
 		self.car_text2.setOpaque(false);
 		panel.add(self.car_text2);
 		panel.add(new JLabel("    "));
 		
-		//µÚÈıĞĞ ¼İÊ»Ô±2ºÅ
-		JLabel label3=new JLabel("¼İÊ»Ô±¶şºÅ±àºÅ");
-		label3.setFont(new Font("ËÎÌå",Font.PLAIN,20));
+		//ç¬¬ä¸‰è¡Œ é©¾é©¶å‘˜2å·
+		JLabel label3=new JLabel("é©¾é©¶å‘˜äºŒå·ç¼–å·");
+		label3.setFont(new Font("å®‹ä½“",Font.PLAIN,20));
 		label3.setOpaque(false);
 		panel.add(label3);
 		
 		self.car_text3=new JTextField();
-		self.car_text3.setEditable(true);//ÉèÖÃÎª¿É±à¼­
+		self.car_text3.setEditable(true);//è®¾ç½®ä¸ºå¯ç¼–è¾‘
 		self.car_text3.setOpaque(false);
 		panel.add(self.car_text3);
 		panel.add(new JLabel("    "));
 		
-		//µÚËÄĞĞ Â·Ïß±àºÅ
-		JLabel label4=new JLabel("Â·Ïß±àºÅ");
-		label4.setFont(new Font("ËÎÌå",Font.PLAIN,20));
+		//ç¬¬å››è¡Œ è·¯çº¿ç¼–å·
+		JLabel label4=new JLabel("è·¯çº¿ç¼–å·");
+		label4.setFont(new Font("å®‹ä½“",Font.PLAIN,20));
 		label4.setOpaque(false);
 		panel.add(label4);
 		
 		self.car_text4=new JTextField();
-		self.car_text4.setEditable(true);//ÉèÖÃÎª¿É±à¼­
+		self.car_text4.setEditable(true);//è®¾ç½®ä¸ºå¯ç¼–è¾‘
 		self.car_text4.setOpaque(false);
 		panel.add(self.car_text4);
 		panel.add(new JLabel("    "));
 		
-		//µÚÎåĞĞ Ôö¼Ó¿ÕĞĞ
+		//ç¬¬äº”è¡Œ å¢åŠ ç©ºè¡Œ
 		panel.add(new JLabel("    "));
 		panel.add(new JLabel("    "));
 		panel.add(new JLabel("    "));
 		
-		//µÚÁùĞĞ Ìí¼Ó°´Å¥
+		//ç¬¬å…­è¡Œ æ·»åŠ æŒ‰é’®
 		JButton[] button=new JButton[3];
 		
-		button[0]=new JButton("Ìí¼Ó");
-		button[0].setFont(new Font("ËÎÌå",Font.PLAIN,14));
+		button[0]=new JButton("æ·»åŠ ");
+		button[0].setFont(new Font("å®‹ä½“",Font.PLAIN,14));
 		button[0].setSize(4, 1);
 		button[0].setOpaque(false);
 		panel.add(button[0]);
 		
-		button[0].addActionListener(new ActionListener(){//Ôö¼Ó°´Å¥Ìí¼ÓÏìÓ¦º¯Êı
+		button[0].addActionListener(new ActionListener(){//å¢åŠ æŒ‰é’®æ·»åŠ å“åº”å‡½æ•°
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
@@ -257,8 +255,8 @@ public class Car_ContentMessagePanel {
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
-						DebugInfo.DebugInfo("Ìí¼Ó°´Å¥±»°´ÏÂ");
-						StringBuilder carinfo=new StringBuilder();//±£´æÎÄ±¾¿òÖĞ¶ÔÓ¦µÄĞÅÏ¢
+						DebugInfo.DebugInfo("æ·»åŠ æŒ‰é’®è¢«æŒ‰ä¸‹");
+						StringBuilder carinfo=new StringBuilder();//ä¿å­˜æ–‡æœ¬æ¡†ä¸­å¯¹åº”çš„ä¿¡æ¯
 						carinfo.append(self.car_text1.getText());
 						carinfo.append("#");
 						carinfo.append(self.car_text2.getText());
@@ -269,7 +267,7 @@ public class Car_ContentMessagePanel {
 						
 						String newcarinfo=carinfo.toString();
 						
-						String s=carInfo_addCarInfo(newcarinfo);//½«¸ÃĞÅÏ¢Êä³öÔÚ½çÃæÉÏÃæ
+						String s=carInfo_addCarInfo(newcarinfo);//å°†è¯¥ä¿¡æ¯è¾“å‡ºåœ¨ç•Œé¢ä¸Šé¢
 						JOptionPane.showMessageDialog(self,s,"information",JOptionPane.INFORMATION_MESSAGE);
 						
 						self.car_text1.setText("");
@@ -283,24 +281,24 @@ public class Car_ContentMessagePanel {
 			
 		});
 		
-		button[1]=new JButton("ĞŞ¸Ä");
-		button[1].setFont(new Font("ËÎÌå",Font.PLAIN,14));
+		button[1]=new JButton("ä¿®æ”¹");
+		button[1].setFont(new Font("å®‹ä½“",Font.PLAIN,14));
 		button[1].setSize(4, 1);
 		button[1].setOpaque(false);
 		panel.add(button[1]);
 		
-		button[1].addActionListener(new ActionListener(){//ĞŞ¸Ä°´Å¥Ìí¼ÓÏìÓ¦º¯Êı
+		button[1].addActionListener(new ActionListener(){//ä¿®æ”¹æŒ‰é’®æ·»åŠ å“åº”å‡½æ•°
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				DebugInfo.DebugInfo("ĞŞ¸Ä°´Å¥±»°´ÏÂ");
+				DebugInfo.DebugInfo("ä¿®æ”¹æŒ‰é’®è¢«æŒ‰ä¸‹");
 				Thread t=new Thread(new Runnable() {
 
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
-						StringBuilder carinfo=new StringBuilder();//±£´æÎÄ±¾¿òÖĞ¶ÔÓ¦µÄĞÅÏ¢
+						StringBuilder carinfo=new StringBuilder();//ä¿å­˜æ–‡æœ¬æ¡†ä¸­å¯¹åº”çš„ä¿¡æ¯
 						carinfo.append(self.car_text1.getText());
 						carinfo.append("#");
 						carinfo.append(self.car_text2.getText());
@@ -310,7 +308,7 @@ public class Car_ContentMessagePanel {
 						carinfo.append(self.car_text4.getText());
 						
 						String newcarinfo=carinfo.toString();
-						String s=carInfo_ModifyCarInfo(newcarinfo);//½«¸ÃĞÅÏ¢Êä³öÔÚ½çÃæÉÏÃæ
+						String s=carInfo_ModifyCarInfo(newcarinfo);//å°†è¯¥ä¿¡æ¯è¾“å‡ºåœ¨ç•Œé¢ä¸Šé¢
 						JOptionPane.showMessageDialog(self,s,"information",JOptionPane.INFORMATION_MESSAGE);
 						
 						self.car_text1.setText("");
@@ -325,23 +323,23 @@ public class Car_ContentMessagePanel {
 			
 		});
 		
-		button[2]=new JButton("É¾³ı");
-		button[2].setFont(new Font("ËÎÌå",Font.PLAIN,14));
+		button[2]=new JButton("åˆ é™¤");
+		button[2].setFont(new Font("å®‹ä½“",Font.PLAIN,14));
 		button[2].setSize(4, 1);
 		button[2].setOpaque(false);
 		panel.add(button[2]);
 		
-		button[2].addActionListener(new ActionListener(){//É¾³ı°´Å¥Ìí¼ÓÏìÓ¦º¯Êı
+		button[2].addActionListener(new ActionListener(){//åˆ é™¤æŒ‰é’®æ·»åŠ å“åº”å‡½æ•°
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				DebugInfo.DebugInfo("É¾³ı°´Å¥±»°´ÏÂ");
+				DebugInfo.DebugInfo("åˆ é™¤æŒ‰é’®è¢«æŒ‰ä¸‹");
 				Thread t=new Thread(new Runnable() {
 
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
-						StringBuilder carinfo=new StringBuilder();//±£´æÎÄ±¾¿òÖĞ¶ÔÓ¦µÄĞÅÏ¢
+						StringBuilder carinfo=new StringBuilder();//ä¿å­˜æ–‡æœ¬æ¡†ä¸­å¯¹åº”çš„ä¿¡æ¯
 						carinfo.append(self.car_text1.getText());
 						carinfo.append("#");
 						carinfo.append(self.car_text2.getText());
@@ -351,7 +349,7 @@ public class Car_ContentMessagePanel {
 						carinfo.append(self.car_text4.getText());
 						
 						String newcarinfo=carinfo.toString();
-						String s=carInfo_deletCarInfo(newcarinfo);//½«¸ÃĞÅÏ¢Êä³öÔÚ½çÃæÉÏÃæ
+						String s=carInfo_deletCarInfo(newcarinfo);//å°†è¯¥ä¿¡æ¯è¾“å‡ºåœ¨ç•Œé¢ä¸Šé¢
 						JOptionPane.showMessageDialog(self,s,"information",JOptionPane.INFORMATION_MESSAGE);
 					
 						self.car_text1.setText("");
@@ -369,16 +367,16 @@ public class Car_ContentMessagePanel {
 		
 		self.car_mpanel.add(panel);
 		
-		//µÚ¶şÁĞ
+		//ç¬¬äºŒåˆ—
 		self.car_panel2=new JPanel();
 		self.car_panel2.setOpaque(false);
 		
 		self.car_bobox=new JComboBox();
 		self.car_bobox.setOpaque(false);
-		self.car_bobox.setBorder(BorderFactory.createTitledBorder("³µÅÆºÅÄ£ºı²éÑ¯½á¹û"));
-		self.car_bobox.setSelectedIndex(-1);//ÉèÖÃ²»Ñ¡ÖĞ
+		self.car_bobox.setBorder(BorderFactory.createTitledBorder("è½¦ç‰Œå·æ¨¡ç³ŠæŸ¥è¯¢ç»“æœ"));
+		self.car_bobox.setSelectedIndex(-1);//è®¾ç½®ä¸é€‰ä¸­
 		
-		//Ìí¼Ó¼àÌıº¯Êı
+		//æ·»åŠ ç›‘å¬å‡½æ•°
 		self.car_bobox.addItemListener(itemListener);
 		
 		self.car_panel2.add(self.car_bobox);
@@ -387,17 +385,17 @@ public class Car_ContentMessagePanel {
 		self.add(self.car_mpanel);
 		self.revalidate();
 		self.repaint();
-		DebugInfo.DebugInfo("Íê³É»æÖÆ³µÁ¾ÔöÉ¾¸ÄPanel");
+		DebugInfo.DebugInfo("å®Œæˆç»˜åˆ¶è½¦è¾†å¢åˆ æ”¹Panel");
 		return;
 		
 	}
-	public static void setCarDetailInfo(ContentMessagePanel p_self,Car carDetail){//²é¿´³µÁ¾ÏêÏ¸ĞÅÏ¢
-		DebugInfo.DebugInfo("¿ªÊ¼»æÖÆ³µÁ¾ÏêÏ¸ĞÅÏ¢Panel");
+	public static void setCarDetailInfo(ContentMessagePanel p_self,Car carDetail){//æŸ¥çœ‹è½¦è¾†è¯¦ç»†ä¿¡æ¯
+		DebugInfo.DebugInfo("å¼€å§‹ç»˜åˆ¶è½¦è¾†è¯¦ç»†ä¿¡æ¯Panel");
 		self=p_self;
 		self.removeAll();
 		
-		//ÏÔÊ¾»ù±¾ĞÅÏ¢
-		String[] name1= {"³µÅÆºÅ","¼İÊ»Ô±1","¼İÊ»Ô±2","Â·Ïß"};
+		//æ˜¾ç¤ºåŸºæœ¬ä¿¡æ¯
+		String[] name1= {"è½¦ç‰Œå·","é©¾é©¶å‘˜1","é©¾é©¶å‘˜2","è·¯çº¿"};
 		String[][] data1=new String[1][4];
 		data1[0]=carDetail.toStringArray();
 		JTable table1=new JTable(data1,name1);
@@ -405,13 +403,13 @@ public class Car_ContentMessagePanel {
 		JScrollPane scroll1=new JScrollPane(table1);
 		scroll1.setOpaque(false);
 		
-		//ÏÔÊ¾¼İÊ»Ô±µÄÏêÏ¸ĞÅÏ¢
-		String[] name2={"¼İÊ»Ô±±àºÅ","¼İÊ»Ö¤","¼İÊ»Ô±ĞÕÃû","¼İÊ»Ô±ÄêÁä","¼İÊ»Äê³¤","¼İÊ»Ô±ÁªÏµ·½Ê½","¼İÊ»Ô±Ä¿Ç°×´Ì¬"};
+		//æ˜¾ç¤ºé©¾é©¶å‘˜çš„è¯¦ç»†ä¿¡æ¯
+		String[] name2={"é©¾é©¶å‘˜ç¼–å·","é©¾é©¶è¯","é©¾é©¶å‘˜å§“å","é©¾é©¶å‘˜å¹´é¾„","é©¾é©¶å¹´é•¿","é©¾é©¶å‘˜è”ç³»æ–¹å¼","é©¾é©¶å‘˜ç›®å‰çŠ¶æ€"};
 		Driver driInfo1=new Driver();
-		driInfo1=Driver_Database.getDriverInfo(carDetail.people1Number);//²éÑ¯¼İÊ»Ô±1µÄĞÅÏ¢
+		driInfo1=Driver_Database.getDriverInfo(carDetail.people1Number);//æŸ¥è¯¢é©¾é©¶å‘˜1çš„ä¿¡æ¯
 		
 		Driver driInfo2=new Driver();
-		driInfo2=Driver_Database.getDriverInfo(carDetail.people2Number);//²éÑ¯¼İÊ»Ô±2µÄĞÅÏ¢
+		driInfo2=Driver_Database.getDriverInfo(carDetail.people2Number);//æŸ¥è¯¢é©¾é©¶å‘˜2çš„ä¿¡æ¯
 		
 		String[][] data2=new String[2][7];
 		data2[0]=driInfo1.toStringArray();
@@ -422,10 +420,10 @@ public class Car_ContentMessagePanel {
 		JScrollPane scroll2=new JScrollPane(table2);
 		scroll2.setOpaque(false);
 		
-		//ÏÔÊ¾Â·ÏßµÄÏêÏ¸ĞÅÏ¢
-		String[] name3={"Â·Ïß±àºÅ","ÆğÊ¼Õ¾µã","ÖÕµãÕ¾","ÖĞ×ªÕ¾µã"};
+		//æ˜¾ç¤ºè·¯çº¿çš„è¯¦ç»†ä¿¡æ¯
+		String[] name3={"è·¯çº¿ç¼–å·","èµ·å§‹ç«™ç‚¹","ç»ˆç‚¹ç«™","ä¸­è½¬ç«™ç‚¹"};
 		Route routeInfo=new Route();
-		routeInfo=Route_Database.getRouteInfo(carDetail.routeNumber);//²éÑ¯Â·ÏßµÄÏêÏ¸ĞÅÏ¢
+		routeInfo=Route_Database.getRouteInfo(carDetail.routeNumber);//æŸ¥è¯¢è·¯çº¿çš„è¯¦ç»†ä¿¡æ¯
 		
 		String[][] data3=new String[1][4];
 		data3[0]=routeInfo.toStringArray();
@@ -435,7 +433,7 @@ public class Car_ContentMessagePanel {
 		JScrollPane scroll3=new JScrollPane(table3);
 		scroll3.setOpaque(false);
 		
-		JPanel panel=new JPanel(new GridLayout(1,3,0,0));//Ò»ĞĞÈıÁĞ ÏÔÊ¾ÁĞ±í
+		JPanel panel=new JPanel(new GridLayout(1,3,0,0));//ä¸€è¡Œä¸‰åˆ— æ˜¾ç¤ºåˆ—è¡¨
 		panel.setOpaque(false);
 		
 		panel.add(scroll1);
@@ -445,19 +443,19 @@ public class Car_ContentMessagePanel {
 		self.add(panel);
 		self.revalidate();
 		self.repaint();
-		DebugInfo.DebugInfo("Íê³É»æÖÆ³µÁ¾ÏêÏ¸ĞÅÏ¢Panel");
+		DebugInfo.DebugInfo("å®Œæˆç»˜åˆ¶è½¦è¾†è¯¦ç»†ä¿¡æ¯Panel");
 		return;
 	}
 	public static void comboboxChange(){
 		self.car_bobox.removeItemListener(itemListener);
 		String s=self.car_text1.getText();
-		String[] temp_car=Car_Database.getCarNumber(s);//ÓÃÀ´±£´æÄ£ºı²éÑ¯µÃµ½µÄ³µÅÆºÅĞÅÏ¢
+		String[] temp_car=Car_Database.getCarNumber(s);//ç”¨æ¥ä¿å­˜æ¨¡ç³ŠæŸ¥è¯¢å¾—åˆ°çš„è½¦ç‰Œå·ä¿¡æ¯
 		DefaultComboBoxModel<String> car_model=new DefaultComboBoxModel<String>();
 		for(int i=0;i<temp_car.length;i++){
 			car_model.addElement(temp_car[i]);
 		}
 		self.car_bobox.setModel(car_model);
-		//self.car_bobox.setSelectedIndex(-1);//µ±Ä£ºı²éÑ¯½á¹û¸Ä±äÁË£¬carÃæ°åÉÏÃæµÄĞÅÏ¢Ò²¾ÍĞèÒª¸Ä±ä
+		//self.car_bobox.setSelectedIndex(-1);//å½“æ¨¡ç³ŠæŸ¥è¯¢ç»“æœæ”¹å˜äº†ï¼Œcaré¢æ¿ä¸Šé¢çš„ä¿¡æ¯ä¹Ÿå°±éœ€è¦æ”¹å˜
 		self.car_bobox.addItemListener(itemListener);
 	}
 	public static void textChange() {
@@ -467,20 +465,20 @@ public class Car_ContentMessagePanel {
 		self.car_text1.setText(s);
 		document.addDocumentListener(documentListener);
 	}
-	public static String carInfo_addCarInfo(String newcarinfo){//Ôö¼Ó»òÕßĞŞ¸Ä³µÁ¾ĞÅÏ¢
+	public static String carInfo_addCarInfo(String newcarinfo){//å¢åŠ æˆ–è€…ä¿®æ”¹è½¦è¾†ä¿¡æ¯
 		String s=Car_Database.AddCarInfo(newcarinfo);
 		return s;
 	}
-	public static String carInfo_ModifyCarInfo(String newcarinfo){//ĞŞ¸Ä³µÁ¾ĞÅÏ¢
+	public static String carInfo_ModifyCarInfo(String newcarinfo){//ä¿®æ”¹è½¦è¾†ä¿¡æ¯
 		String s=Car_Database.ModifyCarInfo(newcarinfo);
 		return s;
 	}
-	public static String carInfo_deletCarInfo(String newcarinfo){//É¾³ı³µÁ¾ĞÅÏ¢
+	public static String carInfo_deletCarInfo(String newcarinfo){//åˆ é™¤è½¦è¾†ä¿¡æ¯
 		String s=Car_Database.DeleteCarInfo(newcarinfo);
 		return s;
 	}
-//	public static void setCarSecondPanel(ContentMessagePanel self,ArrayList<String> num){//¶¯Ì¬ÏÔÊ¾carpanel½çÃæµÄµÚ¶şÁĞ
-//		self.car_model=new DefaultComboBoxModel();//ÏÈÇå¿Õ
+//	public static void setCarSecondPanel(ContentMessagePanel self,ArrayList<String> num){//åŠ¨æ€æ˜¾ç¤ºcarpanelç•Œé¢çš„ç¬¬äºŒåˆ—
+//		self.car_model=new DefaultComboBoxModel();//å…ˆæ¸…ç©º
 //		self.car_num=num;
 //		int len=self.car_num.size();
 //		System.out.println(len);
