@@ -99,6 +99,30 @@ public class ServerTask implements Runnable {
 				int routeNumber=IO.readInt(input);
 				IO.write(output, Device_ServerTask.getCarGPSonRoute(routeNumber));
 				break;
+			case 20:
+				System.out.println("开始查询所有驾驶员信息");
+				IO.write(output, Driver_ServerTask.getAllDriverInfo());//查询所有驾驶员信息
+				break;
+			case 21:
+				String adddriverinfo=IO.read(input);//将添加的驾驶员信息读进来
+				System.out.println(adddriverinfo);//测试
+				IO.write(output, Driver_ServerTask.addDriverInfo(adddriverinfo));//查询所有驾驶员信息
+				break;
+			case 22:
+				String moddriverinfo=IO.read(input);//将修改的驾驶员信息读进来
+				System.out.println(moddriverinfo);//测试
+				IO.write(output, Driver_ServerTask.modDriverInfo(moddriverinfo));//查询所有驾驶员信息
+				break;
+			case 23:
+				String mohuinfo=IO.read(input);//将模糊查询驾驶员的信息读进来
+				System.out.println(mohuinfo);//测试
+				IO.write(output, Driver_ServerTask.mohuDriverInfo(mohuinfo));//模糊查询驾驶员信息
+				break;
+			case 24:
+				String delnum=IO.read(input);//将删除的驾驶员编号读进来
+				System.out.println(delnum);//测试
+				IO.write(output, Driver_ServerTask.delDriverInfo(delnum));//删除驾驶员
+				break;
 			}
 			input.close();
 			output.close();

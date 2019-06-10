@@ -100,14 +100,12 @@ public class Car_ContentMessagePanel {
 		
 		String[] name= {"车牌号","驾驶员1","驾驶员2","路线"};
 		array=Car_Database.getCarInfo();
+		
 		if(array==null||array.length==0) {
-			JLabel label=new JLabel("当前系统无可用车辆信息！");
-			self.add(label);
-			self.revalidate();
-			self.repaint();
-			DebugInfo.DebugInfo("完成绘制车队管理概要信息Panel");
+			JOptionPane.showMessageDialog(self,"当前系统无可用车辆信息！","information",JOptionPane.INFORMATION_MESSAGE);
 			return;
 		}
+		
 		String[][] data=new String[array.length][4];
 		for(int i=0;i<array.length;i++) {
 			data[i]=array[i].toStringArray();

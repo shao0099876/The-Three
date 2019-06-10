@@ -35,14 +35,11 @@ public class Driver_Level2NaviPanel {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				DebugInfo.DebugInfo("二级导航：查看驾驶员信息按钮被按下");
-				Thread t=new Thread(new Runnable() {
-					
+				Thread t=new Thread(new Runnable() {		
 					@Override
 					public void run() {
-						// TODO Auto-generated method stub
-						//Route_ContentMessagePanel.setRouteInfo(BaseUI.contentPanel);
-					}
-					
+						Driver_ContentMessagePanel.setDriverInfo(BaseUI.contentPanel);
+					}	
 				});
 				t.start();
 			}});
@@ -55,8 +52,7 @@ public class Driver_Level2NaviPanel {
 		button[1].addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				//Route_ContentMessagePanel.addRouteInfo(BaseUI.contentPanel);
+				Driver_ContentMessagePanel.addDriverInfo(BaseUI.contentPanel);
 			}});
 		
 		//修改驾驶员信息
@@ -67,8 +63,7 @@ public class Driver_Level2NaviPanel {
 		button[2].addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				//Route_ContentMessagePanel.modifyRouteInfo(BaseUI.contentPanel);
+				Driver_ContentMessagePanel.modifyDriverInfo(BaseUI.contentPanel);
 			}});
 		
 		//删除驾驶员信息
@@ -79,8 +74,7 @@ public class Driver_Level2NaviPanel {
 		button[3].addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				//Route_ContentMessagePanel.delRouteInfo(BaseUI.contentPanel);
+				Driver_ContentMessagePanel.delDriverInfo(BaseUI.contentPanel);
 			}});
 		
 		self.add(button[0]);

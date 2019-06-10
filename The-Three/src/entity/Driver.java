@@ -1,13 +1,13 @@
 package entity;
 
 public class Driver {
-	private int peopleNumber;
-	private String driverNumber;
-	private String peopleName;
-	private int peopleAge;
-	private int driverAge;
-	private String phoNumber;
-	private int peopleState;
+	public int peopleNumber;
+	public String driverNumber;
+	public String peopleName;
+	public int peopleAge;
+	public int driverAge;
+	public String phoNumber;
+	public int peopleState;
 	public Driver(){
 		
 	}
