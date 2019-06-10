@@ -147,7 +147,7 @@ public class Route_ContentMessagePanel {
 				        	BrowserDialog map=new BrowserDialog();
 				        	map.clean();
 				        	map.Draw_Cars_on_Route(data[row], res);
-				        	map.setVisible(true);
+				        	map.ShowGUI();
 				        	
 				        	
 				        	

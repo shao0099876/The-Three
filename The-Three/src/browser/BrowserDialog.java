@@ -84,4 +84,10 @@ public class BrowserDialog extends JDialog {
 		browser.execute("ErasePoints()");
 		browser.execute("EraseRoute()");
 	}
+	public void Draw_Cars_Point(String[] res) {
+		// TODO Auto-generated method stub
+		for(String i:res) {
+			browser.execute("DrawPoint("+i+")");
+		}
+	}
 }

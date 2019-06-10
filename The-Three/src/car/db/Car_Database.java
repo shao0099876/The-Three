@@ -130,5 +130,27 @@ public class Car_Database {
 		}
 		return null;
 	}
+	public static String getCarGPS() {
+		// TODO Auto-generated method stub
+		try {
+			Socket socket= new Socket(addr,8081);
+			DataInputStream input=new DataInputStream(socket.getInputStream());
+			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
+			IO.write(output, "14");//查询所有车辆GPS位置信息
+			
+			String raw_string=IO.read(input);
+			output.close();
+			input.close();
+			socket.close();
+			return raw_string;
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 }
