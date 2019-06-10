@@ -33,10 +33,10 @@ import entity.Route;
 public class Route_ContentMessagePanel {
 	private static Route[] array=null;
 	private static ContentMessagePanel self;
-	private static boolean flag;//ÓÃÀ´±ê¼ÇÉ¾³ıÂ·ÏßĞÅÏ¢Ê±µÄÂ·Ïß±àºÅÀ´×ÔÄÄÀï
-	//false±íÃ÷É¾³ıµÄÂ·Ïß±àºÅÀ´×ÔÓÚÎÄ±¾¿ò
-	//true±íÃ÷É¾³ıµÄÂ·Ïß±àºÅÀ´×ÔÓÚµã»÷µÄÄ£ºıËÑË÷½á¹û
-	private static String del_routenum;//±ê¼Ç±»É¾³ıµÄÂ·Ïß±àºÅ
+	private static boolean flag;//ç”¨æ¥æ ‡è®°åˆ é™¤è·¯çº¿ä¿¡æ¯æ—¶çš„è·¯çº¿ç¼–å·æ¥è‡ªå“ªé‡Œ
+	//falseè¡¨æ˜åˆ é™¤çš„è·¯çº¿ç¼–å·æ¥è‡ªäºæ–‡æœ¬æ¡†
+	//trueè¡¨æ˜åˆ é™¤çš„è·¯çº¿ç¼–å·æ¥è‡ªäºç‚¹å‡»çš„æ¨¡ç³Šæœç´¢ç»“æœ
+	private static String del_routenum;//æ ‡è®°è¢«åˆ é™¤çš„è·¯çº¿ç¼–å·
 	
 	private static DocumentListener documentListener1=new DocumentListener() {
 
@@ -49,7 +49,7 @@ public class Route_ContentMessagePanel {
 		@Override
 		public void insertUpdate(DocumentEvent e) {
 			// TODO Auto-generated method stub
-			DebugInfo.DebugInfo("ÎÄ±¾¿òÄÚÈİÔö¼Ó£¡");
+			DebugInfo.DebugInfo("æ–‡æœ¬æ¡†å†…å®¹å¢åŠ ï¼");
 			Thread t=new Thread(new Runnable() {
 				
 				@Override
@@ -64,7 +64,7 @@ public class Route_ContentMessagePanel {
 		@Override
 		public void removeUpdate(DocumentEvent e) {
 			// TODO Auto-generated method stub
-			DebugInfo.DebugInfo("ÎÄ±¾¿òÄÚÈİ¼õÉÙ£¡");
+			DebugInfo.DebugInfo("æ–‡æœ¬æ¡†å†…å®¹å‡å°‘ï¼");
 			Thread t=new Thread(new Runnable() {
 				
 				@Override
@@ -82,7 +82,7 @@ public class Route_ContentMessagePanel {
 		@Override
 		public void itemStateChanged(ItemEvent arg0) {
 			// TODO Auto-generated method stub
-			DebugInfo.DebugInfo("ComboboxÏî±»Ñ¡ÖĞ£¡");
+			DebugInfo.DebugInfo("Comboboxé¡¹è¢«é€‰ä¸­ï¼");
 			Thread t=new Thread(new Runnable(){
 
 				@Override
@@ -95,20 +95,20 @@ public class Route_ContentMessagePanel {
 			t.start();
 		}};
 	
-	public static void setRouteInfo(ContentMessagePanel p_self) {//²é¿´Â·ÏßĞÅÏ¢ ²»°üº¬GPSĞÅÏ¢
+	public static void setRouteInfo(ContentMessagePanel p_self) {//æŸ¥çœ‹è·¯çº¿ä¿¡æ¯ ä¸åŒ…å«GPSä¿¡æ¯
 		self=p_self;
-		DebugInfo.DebugInfo("¿ªÊ¼»æÖÆÂ·Ïß¸ÅÒªĞÅÏ¢Panel");
-		self.removeAll();//½«Ãæ°åÉÏÃæµÄ×é¼şÈ«²¿Çå¿Õ
+		DebugInfo.DebugInfo("å¼€å§‹ç»˜åˆ¶è·¯çº¿æ¦‚è¦ä¿¡æ¯Panel");
+		self.removeAll();//å°†é¢æ¿ä¸Šé¢çš„ç»„ä»¶å…¨éƒ¨æ¸…ç©º
 		
-		String[] name= {"Â·Ïß±àºÅ","ÆğÊ¼Õ¾µã","ÖÕµãÕ¾","ÖĞ×ªÕ¾µã"};
-		array=Route_Database.getAllRouteInfo();//²éÑ¯ËùÓĞÂ·ÏßĞÅÏ¢
+		String[] name= {"è·¯çº¿ç¼–å·","èµ·å§‹ç«™ç‚¹","ç»ˆç‚¹ç«™","ä¸­è½¬ç«™ç‚¹"};
+		array=Route_Database.getAllRouteInfo();//æŸ¥è¯¢æ‰€æœ‰è·¯çº¿ä¿¡æ¯
 		
 		if(array==null||array.length==0) {
-			JLabel label=new JLabel("µ±Ç°ÏµÍ³ÎŞ¿ÉÓÃÂ·ÏßĞÅÏ¢£¡");
+			JLabel label=new JLabel("å½“å‰ç³»ç»Ÿæ— å¯ç”¨è·¯çº¿ä¿¡æ¯ï¼");
 			self.add(label);
 			self.revalidate();
 			self.repaint();
-			DebugInfo.DebugInfo("Íê³É»æÖÆ²é¿´Â·ÏßĞÅÏ¢Panel");
+			DebugInfo.DebugInfo("å®Œæˆç»˜åˆ¶æŸ¥çœ‹è·¯çº¿ä¿¡æ¯Panel");
 			return;
 		}
 		
@@ -127,7 +127,7 @@ public class Route_ContentMessagePanel {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				DebugInfo.DebugInfo("Â·ÏßĞÅÏ¢±í¸ñÏî±»µã»÷£¡");
+				DebugInfo.DebugInfo("è·¯çº¿ä¿¡æ¯è¡¨æ ¼é¡¹è¢«ç‚¹å‡»ï¼");
 				
 				Thread t=new Thread(new Runnable() {
 
@@ -138,10 +138,10 @@ public class Route_ContentMessagePanel {
 				        int col = table.getSelectedColumn();
 				        if(col==0){
 				        	
-				        	//ÒÔÂ·ÏßÎªÖ÷Ìå
+				        	//ä»¥è·¯çº¿ä¸ºä¸»ä½“
 				        	
 				        	
-				        	//´ıÌí¼Ó »æÖÆ¾ßÌåÂ·ÏßÉÏÃæµÄËùÓĞ³µÁ¾µÄGPSĞÅÏ¢
+				        	//å¾…æ·»åŠ  ç»˜åˆ¶å…·ä½“è·¯çº¿ä¸Šé¢çš„æ‰€æœ‰è½¦è¾†çš„GPSä¿¡æ¯
 				        	String routeNumber=data[row][col];
 				        	String[] res=Route_Database.getCarGPSonRoute(routeNumber);
 				        	BrowserDialog map=new BrowserDialog();
@@ -186,29 +186,29 @@ public class Route_ContentMessagePanel {
 		self.add(scroll);
 		self.revalidate();
 		self.repaint();
-		DebugInfo.DebugInfo("Íê³É»æÖÆ²é¿´Â·ÏßĞÅÏ¢Panel");
+		DebugInfo.DebugInfo("å®Œæˆç»˜åˆ¶æŸ¥çœ‹è·¯çº¿ä¿¡æ¯Panel");
 		return;
 	}
 
-	public static void delRouteInfo(ContentMessagePanel p_self) {//É¾³ıÂ·ÏßĞÅÏ¢
+	public static void delRouteInfo(ContentMessagePanel p_self) {//åˆ é™¤è·¯çº¿ä¿¡æ¯
 		// TODO Auto-generated method stub
 		self=p_self;
-		DebugInfo.DebugInfo("¿ªÊ¼»æÖÆÉ¾³ıÂ·ÏßĞÅÏ¢Panel");
-		self.removeAll();//½«Ãæ°åÉÏÃæµÄ×é¼şÈ«²¿Çå¿Õ
+		DebugInfo.DebugInfo("å¼€å§‹ç»˜åˆ¶åˆ é™¤è·¯çº¿ä¿¡æ¯Panel");
+		self.removeAll();//å°†é¢æ¿ä¸Šé¢çš„ç»„ä»¶å…¨éƒ¨æ¸…ç©º
 		
-		flag=true;//³õÊ¼»¯ÎªÉ¾³ıÂ·Ïß±àºÅÀ´×ÔÓÚÎÄ±¾¿ò
-		del_routenum=" ";//³õÊ¼»¯
+		flag=true;//åˆå§‹åŒ–ä¸ºåˆ é™¤è·¯çº¿ç¼–å·æ¥è‡ªäºæ–‡æœ¬æ¡†
+		del_routenum=" ";//åˆå§‹åŒ–
 		
-		//ÉèÖÃpanel
+		//è®¾ç½®panel
 		JPanel panel=new JPanel();
 		panel.setOpaque(false);
 		
-		//ÉèÖÃËÑË÷panel
+		//è®¾ç½®æœç´¢panel
 		JPanel spanel=new JPanel(new GridLayout(1,2,0,0));
 		spanel.setOpaque(false);
 		panel.add(spanel,BorderLayout.NORTH);
 		
-		//ÉèÖÃÏÔÊ¾ËÑË÷µÄ×é¼ş
+		//è®¾ç½®æ˜¾ç¤ºæœç´¢çš„ç»„ä»¶
 		JPanel cpanel=new JPanel();
 		cpanel.setOpaque(false);
 		panel.add(cpanel,BorderLayout.CENTER);
@@ -218,31 +218,31 @@ public class Route_ContentMessagePanel {
 		self.route_deltext.setOpaque(false);
 		spanel.add(self.route_deltext);
 		
-		JButton b=new JButton("ËÑË÷");
-		b.setFont(new Font("ËÎÌå",Font.PLAIN,14));
+		JButton b=new JButton("æœç´¢");
+		b.setFont(new Font("å®‹ä½“",Font.PLAIN,14));
 		b.setSize(4, 1);
 		b.setOpaque(false);
 		spanel.add(b);
 		
-		//°´Å¥Ìí¼ÓÏìÓ¦º¯Êı
-		b.addActionListener(new ActionListener(){//Ôö¼Ó°´Å¥Ìí¼ÓÏìÓ¦º¯Êı
+		//æŒ‰é’®æ·»åŠ å“åº”å‡½æ•°
+		b.addActionListener(new ActionListener(){//å¢åŠ æŒ‰é’®æ·»åŠ å“åº”å‡½æ•°
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				Thread t=new Thread(new Runnable() {
 					@Override
 					public void run() {
-						DebugInfo.DebugInfo("ËÑË÷°´Å¥±»°´ÏÂ");
+						DebugInfo.DebugInfo("æœç´¢æŒ‰é’®è¢«æŒ‰ä¸‹");
 						String s=self.route_deltext.getText();
 						Route[] array=Route_Database.getMohuRouteInfo(s);
 						
 						if(array==null||array.length==0){
 							cpanel.removeAll();
-							cpanel.add(new JLabel("¸ÃÏµÍ³ÖĞÔİÎŞ¸Ã³µÁ¾ĞÅÏ¢!"));
+							cpanel.add(new JLabel("è¯¥ç³»ç»Ÿä¸­æš‚æ— è¯¥è½¦è¾†ä¿¡æ¯!"));
 						}
 						else{
 							cpanel.removeAll();
 							
-							String[] name= {"Â·Ïß±àºÅ","ÆğÊ¼Õ¾µã","ÖÕµãÕ¾","ÖĞ×ªÕ¾µã"};
+							String[] name= {"è·¯çº¿ç¼–å·","èµ·å§‹ç«™ç‚¹","ç»ˆç‚¹ç«™","ä¸­è½¬ç«™ç‚¹"};
 							
 							String[][] data=new String[array.length][4];
 							for(int i=0;i<array.length;i++) {
@@ -264,8 +264,8 @@ public class Route_ContentMessagePanel {
 											int row = table.getSelectedRow();
 									        int col = table.getSelectedColumn();
 									        if(col==0){
-									        	del_routenum=table.getValueAt(row, 0).toString();//»ñÈ¡µ±Ç°µã»÷µÄÂ·ÏßµÄ±àºÅ
-									        	flag=false;//µã»÷ËÑË÷½á¹ûºó£¬É¾³ıĞÅÏ¢¾ÍÀ´×ÔÓÚÄ£ºıËÑË÷½á¹û
+									        	del_routenum=table.getValueAt(row, 0).toString();//è·å–å½“å‰ç‚¹å‡»çš„è·¯çº¿çš„ç¼–å·
+									        	flag=false;//ç‚¹å‡»æœç´¢ç»“æœåï¼Œåˆ é™¤ä¿¡æ¯å°±æ¥è‡ªäºæ¨¡ç³Šæœç´¢ç»“æœ
 									        }
 										}
 									});
@@ -300,8 +300,8 @@ public class Route_ContentMessagePanel {
 							
 							cpanel.add(scroll,BorderLayout.CENTER);
 							
-							JButton bb=new JButton("É¾³ı");
-							bb.setFont(new Font("ËÎÌå",Font.PLAIN,14));
+							JButton bb=new JButton("åˆ é™¤");
+							bb.setFont(new Font("å®‹ä½“",Font.PLAIN,14));
 							bb.setSize(4, 1);
 							bb.setOpaque(false);
 							cpanel.add(bb,BorderLayout.SOUTH);
@@ -312,12 +312,12 @@ public class Route_ContentMessagePanel {
 									Thread t=new Thread(new Runnable(){
 										@Override
 										public void run() {
-											if(flag){//É¾³ıĞÅÏ¢À´×ÔÎÄ±¾¿ò
-												del_routenum=self.route_deltext.getText();//»ñÈ¡µ±Ç°ÎÄ±¾¿òÖĞµÄÂ·Ïß±àºÅ
+											if(flag){//åˆ é™¤ä¿¡æ¯æ¥è‡ªæ–‡æœ¬æ¡†
+												del_routenum=self.route_deltext.getText();//è·å–å½“å‰æ–‡æœ¬æ¡†ä¸­çš„è·¯çº¿ç¼–å·
 											}
 											String message=Route_Database.delRouteInfo(del_routenum);
 											JOptionPane.showMessageDialog(self,message,"information",JOptionPane.INFORMATION_MESSAGE);
-											self.route_deltext.setText("");//Çå¿ÕÎÄ±¾¿òÖĞÄÚÈİ
+											self.route_deltext.setText("");//æ¸…ç©ºæ–‡æœ¬æ¡†ä¸­å†…å®¹
 											cpanel.removeAll();
 											cpanel.revalidate();
 											cpanel.repaint();						
@@ -338,68 +338,68 @@ public class Route_ContentMessagePanel {
 		self.add(panel);
 		self.revalidate();
 		self.repaint();
-		DebugInfo.DebugInfo("Íê³É»æÖÆ²é¿´Â·ÏßĞÅÏ¢Panel");
+		DebugInfo.DebugInfo("å®Œæˆç»˜åˆ¶æŸ¥çœ‹è·¯çº¿ä¿¡æ¯Panel");
 		return;
 	}
 
-	public static void addRouteInfo(ContentMessagePanel p_self){//Ôö¼ÓÂ·ÏßĞÅÏ¢
+	public static void addRouteInfo(ContentMessagePanel p_self){//å¢åŠ è·¯çº¿ä¿¡æ¯
 		self=p_self;
-		DebugInfo.DebugInfo("¿ªÊ¼»æÖÆÔö¼ÓÂ·ÏßĞÅÏ¢Panel");
-		self.removeAll();//½«Ãæ°åÉÏÃæµÄ×é¼şÈ«²¿Çå¿Õ
+		DebugInfo.DebugInfo("å¼€å§‹ç»˜åˆ¶å¢åŠ è·¯çº¿ä¿¡æ¯Panel");
+		self.removeAll();//å°†é¢æ¿ä¸Šé¢çš„ç»„ä»¶å…¨éƒ¨æ¸…ç©º
 		
 		JPanel p = new JPanel(new GridLayout(5,2,5,5));
 		p.setOpaque(false);
 		
-		//µÚÒ»ĞĞ Â·Ïß±àºÅ
-		JLabel lab1=new JLabel("Â·Ïß±àºÅ");
-		lab1.setFont(new Font("ËÎÌå",Font.PLAIN,20));
+		//ç¬¬ä¸€è¡Œ è·¯çº¿ç¼–å·
+		JLabel lab1=new JLabel("è·¯çº¿ç¼–å·");
+		lab1.setFont(new Font("å®‹ä½“",Font.PLAIN,20));
 		lab1.setOpaque(false);
 		p.add(lab1);
 		
 		self.route_addtext1=new JTextField(20);
-		self.route_addtext1.setEditable(true);//ÉèÖÃÎª¿É±à¼­
+		self.route_addtext1.setEditable(true);//è®¾ç½®ä¸ºå¯ç¼–è¾‘
 		self.route_addtext1.setOpaque(false);
 		p.add(self.route_addtext1);
 		
-		//µÚ¶şĞĞ ÆğÊ¼Õ¾Ì¨
-		JLabel lab2=new JLabel("ÆğÊ¼Õ¾Ì¨");
-		lab2.setFont(new Font("ËÎÌå",Font.PLAIN,20));
+		//ç¬¬äºŒè¡Œ èµ·å§‹ç«™å°
+		JLabel lab2=new JLabel("èµ·å§‹ç«™å°");
+		lab2.setFont(new Font("å®‹ä½“",Font.PLAIN,20));
 		lab2.setOpaque(false);
 		p.add(lab2);
 		
 		self.route_addtext2=new JTextField(20);
-		self.route_addtext2.setEditable(true);//ÉèÖÃÎª¿É±à¼­
+		self.route_addtext2.setEditable(true);//è®¾ç½®ä¸ºå¯ç¼–è¾‘
 		self.route_addtext2.setOpaque(false);
 		p.add(self.route_addtext2);
 		
-		//µÚÈıĞĞ ÖÕµãÕ¾
-		JLabel lab3=new JLabel("ÖÕµãÕ¾");
-		lab3.setFont(new Font("ËÎÌå",Font.PLAIN,20));
+		//ç¬¬ä¸‰è¡Œ ç»ˆç‚¹ç«™
+		JLabel lab3=new JLabel("ç»ˆç‚¹ç«™");
+		lab3.setFont(new Font("å®‹ä½“",Font.PLAIN,20));
 		lab3.setOpaque(false);
 		p.add(lab3);
 		
 		self.route_addtext3=new JTextField(20);
-		self.route_addtext3.setEditable(true);//ÉèÖÃÎª¿É±à¼­
+		self.route_addtext3.setEditable(true);//è®¾ç½®ä¸ºå¯ç¼–è¾‘
 		self.route_addtext3.setOpaque(false);
 		p.add(self.route_addtext3);
 		
-		//µÚËÄĞĞ ÖĞ×ªÕ¾
-		JLabel lab4=new JLabel("ÖĞ×ªÕ¾");
-		lab4.setFont(new Font("ËÎÌå",Font.PLAIN,20));
+		//ç¬¬å››è¡Œ ä¸­è½¬ç«™
+		JLabel lab4=new JLabel("ä¸­è½¬ç«™");
+		lab4.setFont(new Font("å®‹ä½“",Font.PLAIN,20));
 		lab4.setOpaque(false);
 		p.add(lab4);
 		
 		self.route_addtext4=new JTextField(20);
-		self.route_addtext4.setEditable(true);//ÉèÖÃÎª¿É±à¼­
+		self.route_addtext4.setEditable(true);//è®¾ç½®ä¸ºå¯ç¼–è¾‘
 		self.route_addtext4.setOpaque(false);
 		p.add(self.route_addtext4);
 		
-		//µÚÎåĞĞ Ôö¼Ó°´Å¥
-		p.add(new JLabel("Ìí¼ÓÖĞ×ªÕ¾ĞÅÏ¢¸ñÊ½£ºÇàµº-³É¶¼-¼ÃÄÏ"));
-		//ÖĞ×ªÕ¾¸ñÊ½´ıĞŞ¸ÄÍêÉÆ
+		//ç¬¬äº”è¡Œ å¢åŠ æŒ‰é’®
+		p.add(new JLabel("æ·»åŠ ä¸­è½¬ç«™ä¿¡æ¯æ ¼å¼ï¼šé’å²›-æˆéƒ½-æµå—"));
+		//ä¸­è½¬ç«™æ ¼å¼å¾…ä¿®æ”¹å®Œå–„
 		
-		JButton b=new JButton("È·ÈÏ");
-		b.setFont(new Font("ËÎÌå",Font.PLAIN,14));
+		JButton b=new JButton("ç¡®è®¤");
+		b.setFont(new Font("å®‹ä½“",Font.PLAIN,14));
 		b.setSize(4, 1);
 		b.setOpaque(false);
 		p.add(b);
@@ -412,17 +412,17 @@ public class Route_ContentMessagePanel {
 				Thread t=new Thread(new Runnable(){
 					@Override
 					public void run() {
-						DebugInfo.DebugInfo("Ìí¼ÓÂ·ÏßĞÅÏ¢µÄ°´Å¥±»°´ÏÂ");
+						DebugInfo.DebugInfo("æ·»åŠ è·¯çº¿ä¿¡æ¯çš„æŒ‰é’®è¢«æŒ‰ä¸‹");
 						String[] s=new String[4]; 
 						s[0]=self.route_addtext1.getText();
 						s[1]=self.route_addtext2.getText();
 						s[2]=self.route_addtext3.getText();
 						s[3]=self.route_addtext4.getText();
 						
-						String S=s[0]+"#"+s[1]+"#"+s[2]+"#"+s[3];//±£´æÔö¼ÓµÄÂ·¾¶ĞÅÏ¢
-						System.out.println("Ôö¼ÓÂ·¾¶ĞÅÏ¢:"+S);
+						String S=s[0]+"#"+s[1]+"#"+s[2]+"#"+s[3];//ä¿å­˜å¢åŠ çš„è·¯å¾„ä¿¡æ¯
+						System.out.println("å¢åŠ è·¯å¾„ä¿¡æ¯:"+S);
 						
-						String message=Route_Database.addRouteInfo(S);//½«¸ÃĞÅÏ¢Êä³öÔÚ½çÃæÉÏÃæ
+						String message=Route_Database.addRouteInfo(S);//å°†è¯¥ä¿¡æ¯è¾“å‡ºåœ¨ç•Œé¢ä¸Šé¢
 						JOptionPane.showMessageDialog(self,message,"information",JOptionPane.INFORMATION_MESSAGE);
 					
 						self.route_addtext1.setText("");
@@ -439,76 +439,76 @@ public class Route_ContentMessagePanel {
 		self.add(p);
 		self.revalidate();
 		self.repaint();
-		DebugInfo.DebugInfo("Íê³É»æÖÆÔö¼ÓÂ·ÏßĞÅÏ¢Panel");
+		DebugInfo.DebugInfo("å®Œæˆç»˜åˆ¶å¢åŠ è·¯çº¿ä¿¡æ¯Panel");
 		return;
 	}
 
-	public static void modifyRouteInfo(ContentMessagePanel p_self){//ĞŞ¸ÄÂ·ÏßĞÅÏ¢
+	public static void modifyRouteInfo(ContentMessagePanel p_self){//ä¿®æ”¹è·¯çº¿ä¿¡æ¯
 		self=p_self;
-		DebugInfo.DebugInfo("¿ªÊ¼»æÖÆĞŞ¸ÄÂ·ÏßĞÅÏ¢Panel");
-		self.removeAll();//½«Ãæ°åÉÏÃæµÄ×é¼şÈ«²¿Çå¿Õ
+		DebugInfo.DebugInfo("å¼€å§‹ç»˜åˆ¶ä¿®æ”¹è·¯çº¿ä¿¡æ¯Panel");
+		self.removeAll();//å°†é¢æ¿ä¸Šé¢çš„ç»„ä»¶å…¨éƒ¨æ¸…ç©º
 		
 		self.route_mpanel=new JPanel(new GridLayout(1,2,0,0));
 		self.route_mpanel.setOpaque(false);
 		
-		//µÚÒ»ÁĞ
+		//ç¬¬ä¸€åˆ—
 		JPanel panel=new JPanel(new GridLayout(5,2,5,5));
 		panel.setOpaque(false);
 		
-		//µÚÒ»ĞĞ Â·Ïß±àºÅ
-		JLabel label1=new JLabel("Â·Ïß±àºÅ");
-		label1.setFont(new Font("ËÎÌå",Font.PLAIN,20));
+		//ç¬¬ä¸€è¡Œ è·¯çº¿ç¼–å·
+		JLabel label1=new JLabel("è·¯çº¿ç¼–å·");
+		label1.setFont(new Font("å®‹ä½“",Font.PLAIN,20));
 		label1.setOpaque(false);
 		panel.add(label1);
 		
 		self.route_modifytext1=new JTextField(20);
-		self.route_modifytext1.setEditable(true);//ÉèÖÃÎª¿É±à¼­
+		self.route_modifytext1.setEditable(true);//è®¾ç½®ä¸ºå¯ç¼–è¾‘
 		self.route_modifytext1.setOpaque(false);
 		panel.add(self.route_modifytext1);
 		
-		//¶ÔÎÄ±¾¿òÔö¼ÓÏìÓ¦º¯Êı
+		//å¯¹æ–‡æœ¬æ¡†å¢åŠ å“åº”å‡½æ•°
 		Document document1 = self.route_modifytext1.getDocument();
 		document1.addDocumentListener(documentListener1);
 		
-		//µÚ¶şĞĞ ÆğÊ¼Õ¾Ì¨
-		JLabel label2=new JLabel("ÆğÊ¼Õ¾Ì¨");
-		label2.setFont(new Font("ËÎÌå",Font.PLAIN,20));
+		//ç¬¬äºŒè¡Œ èµ·å§‹ç«™å°
+		JLabel label2=new JLabel("èµ·å§‹ç«™å°");
+		label2.setFont(new Font("å®‹ä½“",Font.PLAIN,20));
 		label2.setOpaque(false);
 		panel.add(label2);
 		
 		self.route_modifytext2=new JTextField(20);
-		self.route_modifytext2.setEditable(true);//ÉèÖÃÎª¿É±à¼­
+		self.route_modifytext2.setEditable(true);//è®¾ç½®ä¸ºå¯ç¼–è¾‘
 		self.route_modifytext2.setOpaque(false);
 		panel.add(self.route_modifytext2);
 		
-		//µÚÈıĞĞ ÖÕµãÕ¾
-		JLabel label3=new JLabel("ÖÕµãÕ¾");
-		label3.setFont(new Font("ËÎÌå",Font.PLAIN,20));
+		//ç¬¬ä¸‰è¡Œ ç»ˆç‚¹ç«™
+		JLabel label3=new JLabel("ç»ˆç‚¹ç«™");
+		label3.setFont(new Font("å®‹ä½“",Font.PLAIN,20));
 		label3.setOpaque(false);
 		panel.add(label3);
 		
 		self.route_modifytext3=new JTextField(20);
-		self.route_modifytext3.setEditable(true);//ÉèÖÃÎª¿É±à¼­
+		self.route_modifytext3.setEditable(true);//è®¾ç½®ä¸ºå¯ç¼–è¾‘
 		self.route_modifytext3.setOpaque(false);
 		panel.add(self.route_modifytext3);
 		
-		//µÚËÄĞĞ ÖĞ×ªÕ¾
-		JLabel label4=new JLabel("ÖĞ×ªÕ¾");
-		label4.setFont(new Font("ËÎÌå",Font.PLAIN,20));
+		//ç¬¬å››è¡Œ ä¸­è½¬ç«™
+		JLabel label4=new JLabel("ä¸­è½¬ç«™");
+		label4.setFont(new Font("å®‹ä½“",Font.PLAIN,20));
 		label4.setOpaque(false);
 		panel.add(label4);
 		
 		self.route_modifytext4=new JTextField(20);
-		self.route_modifytext4.setEditable(true);//ÉèÖÃÎª¿É±à¼­
+		self.route_modifytext4.setEditable(true);//è®¾ç½®ä¸ºå¯ç¼–è¾‘
 		self.route_modifytext4.setOpaque(false);
 		panel.add(self.route_modifytext4);
 		
-		//µÚÎåĞĞ Ôö¼Ó°´Å¥
-		panel.add(new JLabel("ĞŞ¸ÄÖĞ×ªÕ¾ĞÅÏ¢¸ñÊ½£ºÇàµº-³É¶¼-¼ÃÄÏ"));
-		//ÖĞ×ªÕ¾¸ñÊ½´ıĞŞ¸ÄÍêÉÆ
+		//ç¬¬äº”è¡Œ å¢åŠ æŒ‰é’®
+		panel.add(new JLabel("ä¿®æ”¹ä¸­è½¬ç«™ä¿¡æ¯æ ¼å¼ï¼šé’å²›-æˆéƒ½-æµå—"));
+		//ä¸­è½¬ç«™æ ¼å¼å¾…ä¿®æ”¹å®Œå–„
 		
-		JButton b=new JButton("È·ÈÏ");
-		b.setFont(new Font("ËÎÌå",Font.PLAIN,14));
+		JButton b=new JButton("ç¡®è®¤");
+		b.setFont(new Font("å®‹ä½“",Font.PLAIN,14));
 		b.setSize(4, 1);
 		b.setOpaque(false);
 		panel.add(b);
@@ -518,7 +518,7 @@ public class Route_ContentMessagePanel {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				DebugInfo.DebugInfo("ĞŞ¸ÄÂ·ÏßĞÅÏ¢µÄ°´Å¥±»°´ÏÂ");
+				DebugInfo.DebugInfo("ä¿®æ”¹è·¯çº¿ä¿¡æ¯çš„æŒ‰é’®è¢«æŒ‰ä¸‹");
 				Thread t=new Thread(new Runnable(){
 					@Override
 					public void run() {
@@ -530,9 +530,9 @@ public class Route_ContentMessagePanel {
 						s[3]=self.route_modifytext4.getText();
 						
 						String S=s[0]+"#"+s[1]+"#"+s[2]+"#"+s[3];
-						System.out.println("ĞŞ¸ÄĞÅÏ¢Îª£º"+S);
+						System.out.println("ä¿®æ”¹ä¿¡æ¯ä¸ºï¼š"+S);
 						
-						String message=Route_Database.modRouteInfo(S);//½«¸ÃĞÅÏ¢Êä³öÔÚ½çÃæÉÏÃæ
+						String message=Route_Database.modRouteInfo(S);//å°†è¯¥ä¿¡æ¯è¾“å‡ºåœ¨ç•Œé¢ä¸Šé¢
 						JOptionPane.showMessageDialog(self,message,"information",JOptionPane.INFORMATION_MESSAGE);
 					
 						self.route_modifytext1.setText("");
@@ -546,16 +546,16 @@ public class Route_ContentMessagePanel {
 		});
 		self.route_mpanel.add(panel);
 		
-		//µÚ¶şÁĞ
+		//ç¬¬äºŒåˆ—
 		self.route_panel2=new JPanel();
 		self.route_panel2.setOpaque(false);
 		
 		self.route_bobox=new JComboBox();
 		self.route_bobox.setOpaque(false);
-		self.route_bobox.setBorder(BorderFactory.createTitledBorder("Â·Ïß±àºÅÄ£ºı²éÑ¯½á¹û"));
-		self.route_bobox.setSelectedIndex(-1);//ÉèÖÃ²»Ñ¡ÖĞ
+		self.route_bobox.setBorder(BorderFactory.createTitledBorder("è·¯çº¿ç¼–å·æ¨¡ç³ŠæŸ¥è¯¢ç»“æœ"));
+		self.route_bobox.setSelectedIndex(-1);//è®¾ç½®ä¸é€‰ä¸­
 		
-		//Ìí¼Ó¼àÌıº¯Êı
+		//æ·»åŠ ç›‘å¬å‡½æ•°
 		self.route_bobox.addItemListener(itemListener1);
 		
 		self.route_panel2.add(self.route_bobox);
@@ -566,7 +566,7 @@ public class Route_ContentMessagePanel {
 		self.add(self.route_mpanel);
 		self.revalidate();
 		self.repaint();
-		DebugInfo.DebugInfo("Íê³É»æÖÆĞŞ¸ÄÂ·ÏßĞÅÏ¢Panel");
+		DebugInfo.DebugInfo("å®Œæˆç»˜åˆ¶ä¿®æ”¹è·¯çº¿ä¿¡æ¯Panel");
 		return;
 	}
 	
@@ -581,14 +581,14 @@ public class Route_ContentMessagePanel {
 	public static void modroute_comboboxChange(){
 		self.route_bobox.removeItemListener(itemListener1);
 		String s=self.route_modifytext1.getText();
-		String[] temp_route=Route_Database.getMohuRouteNumInfo(s);//ÓÃÀ´±£´æÄ£ºı²éÑ¯µÃµ½µÄÂ·Ïß±àºÅ
+		String[] temp_route=Route_Database.getMohuRouteNumInfo(s);//ç”¨æ¥ä¿å­˜æ¨¡ç³ŠæŸ¥è¯¢å¾—åˆ°çš„è·¯çº¿ç¼–å·
 		
 		DefaultComboBoxModel<String> route_model=new DefaultComboBoxModel<String>();
 		for(int i=0;i<temp_route.length;i++){
 			route_model.addElement(temp_route[i]);
 		}
 		self.route_bobox.setModel(route_model);
-		//self.car_bobox.setSelectedIndex(-1);//µ±Ä£ºı²éÑ¯½á¹û¸Ä±äÁË£¬carÃæ°åÉÏÃæµÄĞÅÏ¢Ò²¾ÍĞèÒª¸Ä±ä
+		//self.car_bobox.setSelectedIndex(-1);//å½“æ¨¡ç³ŠæŸ¥è¯¢ç»“æœæ”¹å˜äº†ï¼Œcaré¢æ¿ä¸Šé¢çš„ä¿¡æ¯ä¹Ÿå°±éœ€è¦æ”¹å˜
 		self.route_bobox.addItemListener(itemListener1);
 	}
 }

@@ -3,7 +3,7 @@ package code;
 import java.io.UnsupportedEncodingException;
 
 public class Code {
-	//±à½âÂëº¯Êı
+	//ç¼–è§£ç å‡½æ•°
 	public static byte[] encode(String s){
 		try {
 			return s.getBytes("GBK");

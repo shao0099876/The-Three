@@ -13,7 +13,7 @@ public class Driver_ServerTask extends ServerTask {
 		// TODO Auto-generated constructor stub
 	}
 
-	public static String getDriverInfo(int peonum) {//²éÑ¯¼İÊ»Ô±ĞÅÏ¢
+	public static String getDriverInfo(int peonum) {//æŸ¥è¯¢é©¾é©¶å‘˜ä¿¡æ¯
 		// TODO Auto-generated method stub
 		try {
 			initDB();

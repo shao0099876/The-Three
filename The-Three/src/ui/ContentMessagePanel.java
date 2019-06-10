@@ -41,9 +41,9 @@ public class ContentMessagePanel extends JPanel{
 	public JComboBox car_bobox;
 	public JPanel car_mpanel,car_panel2;
 	
-	public JTextField route_deltext;//ÓÃÓÚÂ·ÏßÉ¾³ı
-	public JTextField route_addtext1,route_addtext2,route_addtext3,route_addtext4;//ÓÃÓÚÔö¼ÓÂ·ÏßÊ±
-	public JTextField route_modifytext1,route_modifytext2,route_modifytext3,route_modifytext4;//ÓÃÓÚĞŞ¸ÄÂ·ÏßÊ±
+	public JTextField route_deltext;//ç”¨äºè·¯çº¿åˆ é™¤
+	public JTextField route_addtext1,route_addtext2,route_addtext3,route_addtext4;//ç”¨äºå¢åŠ è·¯çº¿æ—¶
+	public JTextField route_modifytext1,route_modifytext2,route_modifytext3,route_modifytext4;//ç”¨äºä¿®æ”¹è·¯çº¿æ—¶
 	public JComboBox route_bobox;
 	public JPanel route_mpanel,route_panel2;
 	

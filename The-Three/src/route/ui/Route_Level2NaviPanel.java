@@ -14,18 +14,18 @@ import ui.Level2NaviPanel;
 
 public class Route_Level2NaviPanel {
 	public static void route(Level2NaviPanel self) {
-		//½«ÄÚÈİÄ£°åÇå¿Õ
+		//å°†å†…å®¹æ¨¡æ¿æ¸…ç©º
 		BaseUI.contentPanel.removeAll();
 		BaseUI.contentPanel.revalidate();
 		BaseUI.contentPanel.repaint();
 		
 		self.removeAll();
 		
-		JButton[] button=new JButton[10];//ÉèÖÃ°´Å¥
+		JButton[] button=new JButton[10];//è®¾ç½®æŒ‰é’®
 		
-		//²é¿´Â·Ïß
-		button[0]=new JButton("²é¿´Â·Ïß");
-		button[0].setFont(new Font("ËÎÌå",Font.PLAIN,14));
+		//æŸ¥çœ‹è·¯çº¿
+		button[0]=new JButton("æŸ¥çœ‹è·¯çº¿");
+		button[0].setFont(new Font("å®‹ä½“",Font.PLAIN,14));
 		button[0].setSize(4, 1);
 		button[0].setOpaque(false);
 		button[0].addActionListener(new ActionListener() {
@@ -33,7 +33,7 @@ public class Route_Level2NaviPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				DebugInfo.DebugInfo("¶ş¼¶µ¼º½£º²é¿´Â·Ïß°´Å¥±»°´ÏÂ");
+				DebugInfo.DebugInfo("äºŒçº§å¯¼èˆªï¼šæŸ¥çœ‹è·¯çº¿æŒ‰é’®è¢«æŒ‰ä¸‹");
 				Thread t=new Thread(new Runnable() {
 					
 					@Override
@@ -46,9 +46,9 @@ public class Route_Level2NaviPanel {
 				t.start();
 			}});
 		
-		//Ôö¼ÓÂ·Ïß
-		button[1]=new JButton("Ôö¼ÓÂ·Ïß");
-		button[1].setFont(new Font("ËÎÌå",Font.PLAIN,14));
+		//å¢åŠ è·¯çº¿
+		button[1]=new JButton("å¢åŠ è·¯çº¿");
+		button[1].setFont(new Font("å®‹ä½“",Font.PLAIN,14));
 		button[1].setSize(4, 1);
 		button[1].setOpaque(false);
 		button[1].addActionListener(new ActionListener() {
@@ -58,9 +58,9 @@ public class Route_Level2NaviPanel {
 				Route_ContentMessagePanel.addRouteInfo(BaseUI.contentPanel);
 			}});
 		
-		//ĞŞ¸ÄÂ·Ïß
-		button[2]=new JButton("ĞŞ¸ÄÂ·Ïß");
-		button[2].setFont(new Font("ËÎÌå",Font.PLAIN,14));
+		//ä¿®æ”¹è·¯çº¿
+		button[2]=new JButton("ä¿®æ”¹è·¯çº¿");
+		button[2].setFont(new Font("å®‹ä½“",Font.PLAIN,14));
 		button[2].setSize(4, 1);
 		button[2].setOpaque(false);
 		button[2].addActionListener(new ActionListener() {
@@ -70,9 +70,9 @@ public class Route_Level2NaviPanel {
 				Route_ContentMessagePanel.modifyRouteInfo(BaseUI.contentPanel);
 			}});
 		
-		//É¾³ıÂ·Ïß
-		button[3]=new JButton("É¾³ıÂ·Ïß");
-		button[3].setFont(new Font("ËÎÌå",Font.PLAIN,14));
+		//åˆ é™¤è·¯çº¿
+		button[3]=new JButton("åˆ é™¤è·¯çº¿");
+		button[3].setFont(new Font("å®‹ä½“",Font.PLAIN,14));
 		button[3].setSize(4, 1);
 		button[3].setOpaque(false);
 		button[3].addActionListener(new ActionListener() {

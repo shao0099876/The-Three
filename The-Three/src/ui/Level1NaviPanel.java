@@ -10,15 +10,15 @@ import javax.swing.JPanel;
 import client.DebugInfo;
 
 public class Level1NaviPanel extends JPanel {
-	private JButton[] button=new JButton[5];//½çÃæ°´Å¥
+	private JButton[] button=new JButton[5];//ç•Œé¢æŒ‰é’®
 	private NaviPanel father;
-	private void setButton(){//ÉèÖÃ°´Å¥
-		button[0]=new JButton("³µ¶Ó¹ÜÀí");
-		button[0].setFont(new Font("ËÎÌå",Font.PLAIN,14));button[0].setOpaque(false);
+	private void setButton(){//è®¾ç½®æŒ‰é’®
+		button[0]=new JButton("è½¦é˜Ÿç®¡ç†");
+		button[0].setFont(new Font("å®‹ä½“",Font.PLAIN,14));button[0].setOpaque(false);
 		button[0].setSize(4, 1);
 		button[0].setOpaque(false);
 		
-		button[0].addActionListener(new ActionListener(){//Ìí¼ÓÏìÓ¦º¯Êı
+		button[0].addActionListener(new ActionListener(){//æ·»åŠ å“åº”å‡½æ•°
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
@@ -27,7 +27,7 @@ public class Level1NaviPanel extends JPanel {
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
-						DebugInfo.DebugInfo("Ò»¼¶µ¼º½£º³µ¶Ó¹ÜÀí°´Å¥±»°´ÏÂ");
+						DebugInfo.DebugInfo("ä¸€çº§å¯¼èˆªï¼šè½¦é˜Ÿç®¡ç†æŒ‰é’®è¢«æŒ‰ä¸‹");
 						father.changeLevel2(0);
 					}
 					
@@ -37,12 +37,12 @@ public class Level1NaviPanel extends JPanel {
 			
 		});
 		
-		button[1]=new JButton("Â·Ïß¹ÜÀí");
-		button[1].setFont(new Font("ËÎÌå",Font.PLAIN,14));button[1].setOpaque(false);
+		button[1]=new JButton("è·¯çº¿ç®¡ç†");
+		button[1].setFont(new Font("å®‹ä½“",Font.PLAIN,14));button[1].setOpaque(false);
 		button[1].setSize(4, 1);
 		button[1].setOpaque(false);
 		
-		button[1].addActionListener(new ActionListener(){//Ìí¼ÓÏìÓ¦º¯Êı
+		button[1].addActionListener(new ActionListener(){//æ·»åŠ å“åº”å‡½æ•°
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
@@ -51,7 +51,7 @@ public class Level1NaviPanel extends JPanel {
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
-						DebugInfo.DebugInfo("Ò»¼¶µ¼º½£ºÂ·Ïß°´Å¥±»°´ÏÂ");
+						DebugInfo.DebugInfo("ä¸€çº§å¯¼èˆªï¼šè·¯çº¿æŒ‰é’®è¢«æŒ‰ä¸‹");
 						father.changeLevel2(1);
 					}
 					
@@ -61,12 +61,12 @@ public class Level1NaviPanel extends JPanel {
 			
 		});
 		
-		button[2]=new JButton("»õÎï");
-		button[2].setFont(new Font("ËÎÌå",Font.PLAIN,14));button[2].setOpaque(false);
+		button[2]=new JButton("è´§ç‰©");
+		button[2].setFont(new Font("å®‹ä½“",Font.PLAIN,14));button[2].setOpaque(false);
 		button[2].setSize(4, 1);
 		button[2].setOpaque(false);
 		
-		button[2].addActionListener(new ActionListener(){//Ìí¼ÓÏìÓ¦º¯Êı
+		button[2].addActionListener(new ActionListener(){//æ·»åŠ å“åº”å‡½æ•°
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
@@ -75,7 +75,7 @@ public class Level1NaviPanel extends JPanel {
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
-						DebugInfo.DebugInfo("Ò»¼¶µ¼º½£º»õÎï°´Å¥±»°´ÏÂ");
+						DebugInfo.DebugInfo("ä¸€çº§å¯¼èˆªï¼šè´§ç‰©æŒ‰é’®è¢«æŒ‰ä¸‹");
 						father.changeLevel2(2);
 					}
 					
@@ -90,11 +90,11 @@ public class Level1NaviPanel extends JPanel {
 	
 	public Level1NaviPanel(NaviPanel f){
 		super();
-		this.setOpaque(false);//½«¸ÃÃæ°åÉèÖÃÎªÍ¸Ã÷
+		this.setOpaque(false);//å°†è¯¥é¢æ¿è®¾ç½®ä¸ºé€æ˜
 		father=f;
 		setButton();
 		
-		//Ôö¼ÓÏÖÔÚµÄ×´Ì¬£¬ÅĞ¶ÏÊÇÏÔÊ¾µÄÊÇµÇÂ½»¹ÊÇÍË³ö
+		//å¢åŠ ç°åœ¨çš„çŠ¶æ€ï¼Œåˆ¤æ–­æ˜¯æ˜¾ç¤ºçš„æ˜¯ç™»é™†è¿˜æ˜¯é€€å‡º
 		
 		this.add(button[0]);
 		this.add(button[1]);

@@ -10,8 +10,8 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 public class BaseUI extends JFrame{
-	public static NaviPanel naviPanel;//µ¼º½À¸
-	public static ContentMessagePanel contentPanel;//ÏÔÊ¾ÄÚÈİÀ¸
+	public static NaviPanel naviPanel;//å¯¼èˆªæ 
+	public static ContentMessagePanel contentPanel;//æ˜¾ç¤ºå†…å®¹æ 
 	private JPanel mainPanel;
 	private JLayeredPane layer;
 	private ImageIcon image;
@@ -23,20 +23,20 @@ public class BaseUI extends JFrame{
 		background.setBounds(0,0,image.getIconWidth(),image.getIconHeight());
 		JLabel jl=new JLabel(image);
 		background.add(jl);
-		layer.add(background,JLayeredPane.DEFAULT_LAYER);//µ×²ãÍ¼Æ¬
+		layer.add(background,JLayeredPane.DEFAULT_LAYER);//åº•å±‚å›¾ç‰‡
 		return;
 	}
 	
 	private void setLocation() {
-		Toolkit kit = Toolkit.getDefaultToolkit();              //¶¨Òå¹¤¾ß°ü
-	    Dimension screenSize = kit.getScreenSize();             //»ñÈ¡ÆÁÄ»µÄ³ß´ç
-	    int screenWidth = screenSize.width;                     //»ñÈ¡ÆÁÄ»µÄ¿í
-	    int screenHeight = screenSize.height;                   //»ñÈ¡ÆÁÄ»µÄ¸ß
-	    this.setLocation(screenWidth/2-image.getIconWidth()/2, screenHeight/2-image.getIconHeight()/2);//ÉèÖÃ´°¿Ú¾ÓÖĞÏÔÊ¾
+		Toolkit kit = Toolkit.getDefaultToolkit();              //å®šä¹‰å·¥å…·åŒ…
+	    Dimension screenSize = kit.getScreenSize();             //è·å–å±å¹•çš„å°ºå¯¸
+	    int screenWidth = screenSize.width;                     //è·å–å±å¹•çš„å®½
+	    int screenHeight = screenSize.height;                   //è·å–å±å¹•çš„é«˜
+	    this.setLocation(screenWidth/2-image.getIconWidth()/2, screenHeight/2-image.getIconHeight()/2);//è®¾ç½®çª—å£å±…ä¸­æ˜¾ç¤º
 	}
 	
 	public BaseUI() {
-		super("ÎïÁ÷×ÛºÏĞÅÏ¢Æ½Ì¨");
+		super("ç‰©æµç»¼åˆä¿¡æ¯å¹³å°");
 		layer=new JLayeredPane();
 		setBackgroundImage();
 		int width=image.getIconWidth();

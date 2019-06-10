@@ -60,11 +60,11 @@ public class BrowserDialog extends JDialog {
 		});
 	}
 	public BrowserDialog() {
-		super(frame,"ä¯ÀÀÆ÷",false);
+		super(frame,"æµè§ˆå™¨",false);
 		this.setLayout(new BorderLayout());
 	}
 	public void Draw_Cars_on_Route(String[] route,String[] cars) {
-		//"Â·Ïß±àºÅ","ÆğÊ¼Õ¾µã","ÖÕµãÕ¾","ÖĞ×ªÕ¾µã"
+		//"è·¯çº¿ç¼–å·","èµ·å§‹ç«™ç‚¹","ç»ˆç‚¹ç«™","ä¸­è½¬ç«™ç‚¹"
 		ArrayList<String> array=new ArrayList<String>();
 		array.add(route[1]);
 		String[] tmp=route[3].split("-");

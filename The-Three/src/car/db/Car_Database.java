@@ -12,7 +12,7 @@ import entity.GPS;
 
 public class Car_Database {
 	private static String addr="cal.srcserver.xyz";//"cal.srcserver.xyz"
-	public static Car[] getCarInfo() {//²éÑ¯³µÁ¾µÄ¸ÅÒªĞÅÏ¢
+	public static Car[] getCarInfo() {//æŸ¥è¯¢è½¦è¾†çš„æ¦‚è¦ä¿¡æ¯
 		try {
 			Socket socket= new Socket(addr,8081);
 			DataInputStream input=new DataInputStream(socket.getInputStream());
@@ -41,16 +41,16 @@ public class Car_Database {
 		}
 		return null;
 	}
-	public static String[] getCarNumber(String s){//Ôö¼ÓÉ¾³ıĞŞ¸Ä³µÁ¾ĞÅÏ¢Ê±£¬»ñÈ¡³µÁ¾µÄ³µÅÆºÅ
+	public static String[] getCarNumber(String s){//å¢åŠ åˆ é™¤ä¿®æ”¹è½¦è¾†ä¿¡æ¯æ—¶ï¼Œè·å–è½¦è¾†çš„è½¦ç‰Œå·
 		try {
 			Socket socket= new Socket(addr,8081);
 			DataInputStream input=new DataInputStream(socket.getInputStream());
 			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
-			IO.write(output, "4");//²éÑ¯³µÁ¾µÄ±àºÅ
-			IO.write(output, s);//²éÑ¯µÄ³µÅÆºÅ²¿·ÖĞÅÏ¢
+			IO.write(output, "4");//æŸ¥è¯¢è½¦è¾†çš„ç¼–å·
+			IO.write(output, s);//æŸ¥è¯¢çš„è½¦ç‰Œå·éƒ¨åˆ†ä¿¡æ¯
 			
 			String raw_string=IO.read(input);
-			String[] data=raw_string.split("#");//È¥µô#
+			String[] data=raw_string.split("#");//å»æ‰#
 			output.close();
 			input.close();
 			socket.close();
@@ -64,13 +64,13 @@ public class Car_Database {
 		}
 		return null;
 	}
-	public static String AddCarInfo(String newcarinfo){//¶Ô³µÁ¾ĞÅÏ¢µÄÊµ¼ÊÔö¼Ó²Ù×÷
+	public static String AddCarInfo(String newcarinfo){//å¯¹è½¦è¾†ä¿¡æ¯çš„å®é™…å¢åŠ æ“ä½œ
 		try {
 			Socket socket= new Socket(addr,8081);
 			DataInputStream input=new DataInputStream(socket.getInputStream());
 			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
-			IO.write(output, "5");//Ôö¼Ó»òÕßĞŞ¸Ä³µÁ¾ĞÅÏ¢
-			IO.write(output, newcarinfo);//³µÁ¾µÄĞÅÏ¢
+			IO.write(output, "5");//å¢åŠ æˆ–è€…ä¿®æ”¹è½¦è¾†ä¿¡æ¯
+			IO.write(output, newcarinfo);//è½¦è¾†çš„ä¿¡æ¯
 			
 			String raw_string=IO.read(input);
 			output.close();
@@ -91,8 +91,8 @@ public class Car_Database {
 			Socket socket= new Socket(addr,8081);
 			DataInputStream input=new DataInputStream(socket.getInputStream());
 			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
-			IO.write(output, "7");//ĞŞ¸Ä³µÁ¾ĞÅÏ¢
-			IO.write(output, newcarinfo);//³µÁ¾µÄĞÅÏ¢
+			IO.write(output, "7");//ä¿®æ”¹è½¦è¾†ä¿¡æ¯
+			IO.write(output, newcarinfo);//è½¦è¾†çš„ä¿¡æ¯
 			
 			String raw_string=IO.read(input);
 			output.close();
@@ -108,13 +108,13 @@ public class Car_Database {
 		}
 		return null;
 	}
-	public static String DeleteCarInfo(String newcarinfo){//¶Ô³µÁ¾ĞÅÏ¢µÄÊµ¼ÊÉ¾³ı²Ù×÷
+	public static String DeleteCarInfo(String newcarinfo){//å¯¹è½¦è¾†ä¿¡æ¯çš„å®é™…åˆ é™¤æ“ä½œ
 		try {
 			Socket socket= new Socket(addr,8081);
 			DataInputStream input=new DataInputStream(socket.getInputStream());
 			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
-			IO.write(output, "6");//Ôö¼Ó»òÕßĞŞ¸Ä³µÁ¾ĞÅÏ¢
-			IO.write(output, newcarinfo);//³µÁ¾µÄĞÅÏ¢
+			IO.write(output, "6");//å¢åŠ æˆ–è€…ä¿®æ”¹è½¦è¾†ä¿¡æ¯
+			IO.write(output, newcarinfo);//è½¦è¾†çš„ä¿¡æ¯
 			
 			String raw_string=IO.read(input);
 			output.close();

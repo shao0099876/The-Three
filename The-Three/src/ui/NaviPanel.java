@@ -8,7 +8,7 @@ public class NaviPanel extends JPanel {
 	
 	public NaviPanel(int x,int y) {
 		super();
-		this.setLayout(null);//ÉèÖÃ¿ÕµÄ²¼¾Ö¹ÜÀíÆ÷
+		this.setLayout(null);//è®¾ç½®ç©ºçš„å¸ƒå±€ç®¡ç†å™¨
 		this.setOpaque(false);
 		
 		level1=new Level1NaviPanel(this);

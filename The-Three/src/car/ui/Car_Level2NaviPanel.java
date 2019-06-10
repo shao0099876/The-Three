@@ -13,18 +13,18 @@ import ui.Level2NaviPanel;
 
 public class Car_Level2NaviPanel {
 	public static void car(Level2NaviPanel self) {
-		//½«ÄÚÈİÄ£°åÇå¿Õ
+		//å°†å†…å®¹æ¨¡æ¿æ¸…ç©º
 		BaseUI.contentPanel.removeAll();
 		BaseUI.contentPanel.revalidate();
 		BaseUI.contentPanel.repaint();
 		
-		DebugInfo.DebugInfo("¶ş¼¶µ¼º½£ºÕıÔÚÉèÖÃÎª³µÁ¾¹ÜÀíPanel");
+		DebugInfo.DebugInfo("äºŒçº§å¯¼èˆªï¼šæ­£åœ¨è®¾ç½®ä¸ºè½¦è¾†ç®¡ç†Panel");
 		self.removeAll();
 		JButton[] button=new JButton[10];
 		
-		//²éÑ¯³µÁ¾ĞÅÏ¢
-		button[0]=new JButton("³µÁ¾ĞÅÏ¢");
-		button[0].setFont(new Font("ËÎÌå",Font.PLAIN,14));
+		//æŸ¥è¯¢è½¦è¾†ä¿¡æ¯
+		button[0]=new JButton("è½¦è¾†ä¿¡æ¯");
+		button[0].setFont(new Font("å®‹ä½“",Font.PLAIN,14));
 		button[0].setSize(4, 1);
 		button[0].setOpaque(false);
 		button[0].addActionListener(new ActionListener() {
@@ -32,7 +32,7 @@ public class Car_Level2NaviPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				DebugInfo.DebugInfo("¶ş¼¶µ¼º½£º³µÁ¾ĞÅÏ¢°´Å¥±»°´ÏÂ");
+				DebugInfo.DebugInfo("äºŒçº§å¯¼èˆªï¼šè½¦è¾†ä¿¡æ¯æŒ‰é’®è¢«æŒ‰ä¸‹");
 				Thread t=new Thread(new Runnable() {
 
 					@Override
@@ -45,9 +45,9 @@ public class Car_Level2NaviPanel {
 				t.start();
 			}});
 		
-		//Ôö¼Ó£¬ĞŞ¸Ä£¬É¾³ı³µÁ¾ĞÅÏ¢
-		button[1]=new JButton("³µÁ¾Î¬»¤");
-		button[1].setFont(new Font("ËÎÌå",Font.PLAIN,14));
+		//å¢åŠ ï¼Œä¿®æ”¹ï¼Œåˆ é™¤è½¦è¾†ä¿¡æ¯
+		button[1]=new JButton("è½¦è¾†ç»´æŠ¤");
+		button[1].setFont(new Font("å®‹ä½“",Font.PLAIN,14));
 		button[1].setSize(4, 1);
 		button[1].setOpaque(false);
 		button[1].addActionListener(new ActionListener() {
@@ -55,7 +55,7 @@ public class Car_Level2NaviPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				DebugInfo.DebugInfo("¶ş¼¶µ¼º½£º³µÁ¾Î¬»¤°´Å¥±»°´ÏÂ");
+				DebugInfo.DebugInfo("äºŒçº§å¯¼èˆªï¼šè½¦è¾†ç»´æŠ¤æŒ‰é’®è¢«æŒ‰ä¸‹");
 				Thread t=new Thread(new Runnable() {
 
 					@Override
@@ -68,8 +68,8 @@ public class Car_Level2NaviPanel {
 				t.start();
 			}});
 		
-		button[2]=new JButton("»æÖÆGPS");
-		button[2].setFont(new Font("ËÎÌå",Font.PLAIN,14));
+		button[2]=new JButton("ç»˜åˆ¶GPS");
+		button[2].setFont(new Font("å®‹ä½“",Font.PLAIN,14));
 		button[2].setSize(4, 1);
 		button[2].setOpaque(false);
 		button[2].addActionListener(new ActionListener() {
@@ -78,9 +78,9 @@ public class Car_Level2NaviPanel {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				
-				//ÒÔ³µÁ¾ÎªÖ÷Ìå
+				//ä»¥è½¦è¾†ä¸ºä¸»ä½“
 				
-				//´ıÌí¼Ó»æÖÆGPSº¯Êı ÕâÀïÊÇ»æÖÆËùÓĞ³µÁ¾µÄGPSÎ»ÖÃĞÅÏ¢
+				//å¾…æ·»åŠ ç»˜åˆ¶GPSå‡½æ•° è¿™é‡Œæ˜¯ç»˜åˆ¶æ‰€æœ‰è½¦è¾†çš„GPSä½ç½®ä¿¡æ¯
 				
 				
 				
@@ -93,6 +93,6 @@ public class Car_Level2NaviPanel {
 		
 		self.revalidate();
 		self.repaint();
-		DebugInfo.DebugInfo("¶ş¼¶µ¼º½£º³µÁ¾¹ÜÀíPanelÖØ»æÍê±Ï");
+		DebugInfo.DebugInfo("äºŒçº§å¯¼èˆªï¼šè½¦è¾†ç®¡ç†Panelé‡ç»˜å®Œæ¯•");
 	}
 }

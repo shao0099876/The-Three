@@ -11,14 +11,14 @@ import entity.Driver;
 
 public class Driver_Database {
 	private static String addr="cal.srcserver.xyz";//"cal.srcserver.xyz";
-	public static Driver getDriverInfo(int n){//²éÑ¯¼İÊ»Ô±ĞÅÏ¢
+	public static Driver getDriverInfo(int n){//æŸ¥è¯¢é©¾é©¶å‘˜ä¿¡æ¯
 		try {
 			Socket socket= new Socket(addr,8081);
 			DataInputStream input=new DataInputStream(socket.getInputStream());
 			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
 			
-			IO.write(output, "2");//²éÑ¯³µÁ¾ĞÅÏ¢¾ßÌåĞÅÏ¢ÖĞµÄ¼İÊ»Ô±µÄĞÅÏ¢
-			IO.write(output, Integer.toString(n));//Ğ´Èë¼İÊ»Ô±±àºÅ
+			IO.write(output, "2");//æŸ¥è¯¢è½¦è¾†ä¿¡æ¯å…·ä½“ä¿¡æ¯ä¸­çš„é©¾é©¶å‘˜çš„ä¿¡æ¯
+			IO.write(output, Integer.toString(n));//å†™å…¥é©¾é©¶å‘˜ç¼–å·
 			String raw_string=IO.read(input);
 			System.out.println(raw_string);
 			String[] data=raw_string.split("#");
