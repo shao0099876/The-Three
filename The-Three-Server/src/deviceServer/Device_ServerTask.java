@@ -109,4 +109,29 @@ public class Device_ServerTask extends ServerTask{
 		return null;
 	}
 
+	public static String getSpecifiedCarGPS(String carNumber) {
+		// TODO Auto-generated method stub
+		try {
+			initDB();
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		StringBuilder sb=new StringBuilder();
+		try {
+			PreparedStatement pstmt=conn.prepareStatement("select TOP 1 GPS from Devicerecord where CarNumber=? ORDER BY Time DESC");
+			pstmt.setString(1, carNumber);
+			ResultSet res=pstmt.executeQuery();
+			while(res.next()) {
+				sb.append(res.getString("GPS"));
+				break;
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return sb.toString();
+	}
+
 }

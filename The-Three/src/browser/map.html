@@ -36,10 +36,6 @@
         ]
     }));
     map.enableScrollWheelZoom(true);
-    //beijing 116.404, 39.915
-
-    var driving = new Array();
-    var cnt = 0;
 
     function DrawPoint(x, y) {
         map.centerAndZoom(new BMap.Point(x, y), 8);
@@ -63,11 +59,8 @@
         map.clearOverlays();
     }
 
-    function EraseRoute() {
-        for (i in driving) {
-            i.clearResults();
-        }
-        cnt = 0;
+    function FocusOn(x, y) {
+        map.centerAndZoom(new BMap.Point(x, y), 10);
     }
 </script>
 

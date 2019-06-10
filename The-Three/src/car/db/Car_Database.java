@@ -197,5 +197,26 @@ public class Car_Database {
 		
 		return null;
 	}
+	public static String getSpecifiedCarGPS(String carNum) {
+		try {
+			Socket socket= new Socket(addr,8081);
+			DataInputStream input=new DataInputStream(socket.getInputStream());
+			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
+			IO.write(output, "17");//查询所有车辆车牌号
+			IO.write(output, carNum);
+			String raw_string=IO.read(input);
+			output.close();
+			input.close();
+			socket.close();
+			return raw_string;
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 }

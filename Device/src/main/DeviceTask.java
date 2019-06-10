@@ -53,7 +53,7 @@ public class DeviceTask implements Runnable{
 		}
 	}
 	private void init() {
-		carNumber="鲁E8K039";
+		carNumber="E12345";
 		x=116.404;
 		y=39.915;
 		fuel=100;

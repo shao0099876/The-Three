@@ -28,6 +28,7 @@ public class BrowserDialog extends JDialog {
 	private static Browser browser;
 	private static JFXPanel fxPanel;
 	public static JFrame frame;
+	public static ArrayList<Point> pointArray=new ArrayList<Point>();
 	public void ShowGUI(String[] array) {
 		this.add(fxPanel,BorderLayout.CENTER);
 		JPanel listPanel=new JPanel();
@@ -41,7 +42,7 @@ public class BrowserDialog extends JDialog {
 			@Override
 			public void valueChanged(ListSelectionEvent arg0) {
 				// TODO Auto-generated method stub
-				
+				browser.execute("FocusOn("+Car_Database.getSpecifiedCarGPS(list.getSelectedValue())+")");
 			}
 			
 		});
@@ -85,13 +86,19 @@ public class BrowserDialog extends JDialog {
 	}
 	public void clean() {
 		// TODO Auto-generated method stub
+		pointArray.clear();
 		browser.execute("ErasePoints()");
-		browser.execute("EraseRoute()");
 	}
-	public void Draw_Cars_Point(String[] res) {
+	public void Add_Cars_Point(String[] res) {
 		// TODO Auto-generated method stub
 		for(String i:res) {
-			browser.execute("DrawPoint("+i+")");
+			pointArray.add(new Point(i));
+		}
+	}
+	public void DrawPoints() {
+		// TODO Auto-generated method stub
+		for(Point i:pointArray) {
+			browser.execute("DrawPoint("+Double.toString(i.x)+","+Double.toString(i.y)+")");
 		}
 	}
 }

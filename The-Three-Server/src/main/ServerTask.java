@@ -108,6 +108,9 @@ public class ServerTask implements Runnable {
 			case 16:
 				IO.write(output, Car_ServerTask.getAllCarNumber());
 				break;
+			case 17:
+				IO.write(output, Device_ServerTask.getSpecifiedCarGPS(IO.read(input)));
+				break;
 			}
 			input.close();
 			output.close();
