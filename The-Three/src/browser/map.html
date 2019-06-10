@@ -37,22 +37,56 @@
     }));
     map.enableScrollWheelZoom(true);
 
-    function DrawPoint(x, y) {
-        map.centerAndZoom(new BMap.Point(x, y), 8);
-        var marker = new BMap.Marker(new BMap.Point(x, y));
-        map.addOverlay(marker);
-        map.enableScrollWheelZoom(true);
+    var pointArray = new Array();
+
+    function AddPoint(x, y) {
+        pointArray.push(new BMap.Point(x, y));
     }
 
-    function Drawroute(start, end) {
-        driving[cnt] = new BMap.DrivingRoute(map, {
-            renderOptions: {
-                map: map,
-                autoViewport: true
-            }
+    function DrawPoint() {
+        for (var i = 0; i < pointArray.length; i++) {
+            var marker = new BMap.Marker(pointArray[i]);
+            map.addOverlay(marker);
+        }
+    }
+
+    var routeArray = new Array();
+
+    function AddRoute(x, y, z) {
+        var start;
+        var geocoder = new BMap.Geocoder();
+        geocoder.getPoint(x, function(point) {
+            start = point;
         });
-        driving[cnt].search(start, end);
-        cnt += 1;
+        var end;
+        geocoder = new BMap.Geocoder();
+        geocoder.getPoint(y, function(point) {
+            end = point;
+        });
+        var midArray = new Array();
+        for (var i = 0; i < z.length; i++) {
+            var tmp = z[i];
+            midArray.push(new BMap.Point(tmp[0], tmp[1]));
+        }
+        routeArray.push({
+            start: start,
+            end: end,
+            mid: midArray
+        });
+    }
+
+    function DrawRoutes() {
+        for (var i = 0; i < routeArray.length; i++) {
+            var driving = new BMap.DrivingRoute(map, {
+                renderOptions: {
+                    map: map,
+                    autoViewport: true
+                }
+            });
+            driving.search(routeArray[i].start, routeArray[i].end, {
+                waypoints: routeArray[i].mid
+            });
+        }
     }
     //Drawroute("威海","济南")
     function ErasePoints() {
@@ -61,6 +95,15 @@
 
     function FocusOn(x, y) {
         map.centerAndZoom(new BMap.Point(x, y), 10);
+    }
+    var tmp;
+
+    function addr_to_GPS(x) {
+        var geocoder = new BMap.Geocoder();
+        geocoder.getPoint(x, function(point) {
+            tmp = point;
+        });
+        return new String(tmp.Ing) + new String(tmp.Iat);
     }
 </script>
 

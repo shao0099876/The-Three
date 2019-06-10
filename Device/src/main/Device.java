@@ -1,8 +1,8 @@
 package main;
 
 public class Device {
-	private static int amount=1;					//æœºå™¨æ•°é‡
-	private static Thread[] t=new Thread[amount];	//æœºå™¨çº¿ç¨‹ç»„
+	private static int amount=1;					//»úÆ÷ÊıÁ¿
+	private static Thread[] t=new Thread[amount];	//»úÆ÷Ïß³Ì×é
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		for(int i=0;i<amount;i++) {

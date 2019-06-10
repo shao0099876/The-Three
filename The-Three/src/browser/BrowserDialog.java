@@ -28,7 +28,6 @@ public class BrowserDialog extends JDialog {
 	private static Browser browser;
 	private static JFXPanel fxPanel;
 	public static JFrame frame;
-	public static ArrayList<Point> pointArray=new ArrayList<Point>();
 	public void ShowGUI(String[] array) {
 		this.add(fxPanel,BorderLayout.CENTER);
 		JPanel listPanel=new JPanel();
@@ -65,40 +64,45 @@ public class BrowserDialog extends JDialog {
 		});
 	}
 	public BrowserDialog() {
-		super(frame,"æµè§ˆå™¨",false);
+		super(frame,"ä¯ÀÀÆ÷",false);
 		this.setLayout(new BorderLayout());
 	}
-	public void Draw_Cars_on_Route(String[] route,String[] cars) {
-		//"è·¯çº¿ç¼–å·","èµ·å§‹ç«™ç‚¹","ç»ˆç‚¹ç«™","ä¸­è½¬ç«™ç‚¹"
-		ArrayList<String> array=new ArrayList<String>();
-		array.add(route[1]);
-		String[] tmp=route[3].split("-");
-		for(String i:tmp) {
-			array.add(i);
-		}
-		array.add(route[2]);
-		for(int i=1;i<array.size();i++) {
-			browser.execute("Drawroute(\""+array.get(i-1)+"\",\""+array.get(i)+"\")");
-		}
-		for(String i:cars) {
-			browser.execute("DrawPoint("+i+")");
-		}
-	}
+	//"Â·Ïß±àºÅ","ÆğÊ¼Õ¾µã","ÖÕµãÕ¾","ÖĞ×ªÕ¾µã"
 	public void clean() {
 		// TODO Auto-generated method stub
-		pointArray.clear();
 		browser.execute("ErasePoints()");
 	}
 	public void Add_Cars_Point(String[] res) {
 		// TODO Auto-generated method stub
 		for(String i:res) {
-			pointArray.add(new Point(i));
+			String[] tmp=i.split("-");
+			StringBuilder sb=new StringBuilder();
+			sb.append("AddPoint(");
+			sb.append(tmp[0]);
+			sb.append(",");
+			sb.append(tmp[1]);
+			sb.append(")");
+			browser.execute(sb.toString());
 		}
 	}
 	public void DrawPoints() {
 		// TODO Auto-generated method stub
-		for(Point i:pointArray) {
-			browser.execute("DrawPoint("+Double.toString(i.x)+","+Double.toString(i.y)+")");
-		}
+		browser.execute("DrawPoints()");
+	}
+	public void addRoute(String[] strings) {
+		// TODO Auto-generated method stub
+		StringBuilder sb=new StringBuilder();
+		sb.append("AddRoute(");
+		sb.append(strings[1]);
+		sb.append(",");
+		sb.append(strings[2]);
+		sb.append(",");
+		sb.append(strings[3]);
+		sb.append(")");
+		browser.execute(sb.toString());
+	}
+	public void DrawRoutes() {
+		// TODO Auto-generated method stub
+		browser.execute("DrawRoutes()");
 	}
 }

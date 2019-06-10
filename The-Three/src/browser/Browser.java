@@ -48,4 +48,16 @@ public class Browser extends Region {
 		});
     	
     }
+	public void execute(String s, String x) {
+		// TODO Auto-generated method stub
+		Platform.runLater(new Runnable() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				String x=(String) browser.getEngine().executeScript(s);
+			}
+			
+		});
+	}
 }

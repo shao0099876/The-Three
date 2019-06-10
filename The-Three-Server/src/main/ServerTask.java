@@ -96,8 +96,7 @@ public class ServerTask implements Runnable {
 				IO.write(output, Route_ServerTask.modOneRouteInfo(mod_routeinfo));
 				break;
 			case 13:
-				int routeNumber=IO.readInt(input);
-				IO.write(output, Device_ServerTask.getCarGPSonRoute(routeNumber));
+				IO.write(output, Device_ServerTask.getCarGPSonRoute(IO.readInt(input)));
 				break;
 			case 14:
 				IO.write(output, Device_ServerTask.getCarGPS());

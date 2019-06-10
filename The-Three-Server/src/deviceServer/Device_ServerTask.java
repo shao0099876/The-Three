@@ -53,9 +53,22 @@ public class Device_ServerTask extends ServerTask{
 			PreparedStatement pstmt = conn.prepareStatement("select carNumber from Car where routeNumber=?");
 			pstmt.setInt(1,routeNumber);
 			ResultSet res=pstmt.executeQuery();
+			boolean flag=true;
 			while(res.next()) {
 				String s=res.getString(1);
-				sb.append(getCarLatestGPS(s));
+				PreparedStatement pstmt1=conn.prepareStatement("select TOP 1 GPS from Devicerecord where CarNumber=? ORDER BY Time DESC");
+				pstmt1.setString(1, s);
+				ResultSet res1=pstmt1.executeQuery();
+				while(res1.next()){
+					if(!flag) {
+						sb.append("#");
+					}
+					flag=false;
+					sb.append(res1.getString(1));
+					break;
+				}
+				res1.close();
+				pstmt1.close();
 			}
 			res.close();
 			pstmt.close();

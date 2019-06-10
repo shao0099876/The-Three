@@ -138,16 +138,12 @@ public class Route_ContentMessagePanel {
 						int row = table.getSelectedRow();
 				        int col = table.getSelectedColumn();
 				        if(col==0){
-				        	
-				        	//以路线为主体
-				        	
-				        	
-				        	//待添加 绘制具体路线上面的所有车辆的GPS信息
 				        	String routeNumber=data[row][col];
 				        	String[] res=Route_Database.getCarGPSonRoute(routeNumber);
 				        	BrowserDialog map=new BrowserDialog();
 				        	map.clean();
-				        	map.Draw_Cars_on_Route(data[row], res);
+				        	map.addRoute(data[row]);
+				        	map.DrawRoutes();
 				        	map.ShowGUI(Car_Database.getCarNumberonRoute(routeNumber).split("#"));
 				        }
 					}
