@@ -216,77 +216,84 @@ public class Driver_ContentMessagePanel {
 		
 		//第一行 驾驶员编号
 		JLabel lab1=new JLabel("驾驶员编号");
-		lab1.setFont(new Font("宋体",Font.PLAIN,20));
+		lab1.setFont(new Font("宋体",Font.PLAIN,30));
 		lab1.setOpaque(false);
 		p.add(lab1);
 		
 		driver_addtext1=new JTextField(20);
+		driver_addtext1.setFont(new Font("宋体",Font.PLAIN,30));
 		driver_addtext1.setEditable(true);//设置为可编辑
 		driver_addtext1.setOpaque(false);
 		p.add(driver_addtext1);
 		
 		//第二行 驾驶证编号
 		JLabel lab2=new JLabel("驾驶证编号");
-		lab2.setFont(new Font("宋体",Font.PLAIN,20));
+		lab2.setFont(new Font("宋体",Font.PLAIN,30));
 		lab2.setOpaque(false);
 		p.add(lab2);
 		
-		driver_addtext2=new JTextField(20);
+		driver_addtext2=new JTextField();
+		driver_addtext2.setFont(new Font("宋体",Font.PLAIN,30));
 		driver_addtext2.setEditable(true);//设置为可编辑
 		driver_addtext2.setOpaque(false);
 		p.add(driver_addtext2);
 		
 		//第三行 驾驶员姓名
 		JLabel lab3=new JLabel("驾驶员姓名");
-		lab3.setFont(new Font("宋体",Font.PLAIN,20));
+		lab3.setFont(new Font("宋体",Font.PLAIN,30));
 		lab3.setOpaque(false);
 		p.add(lab3);
 		
-		driver_addtext3=new JTextField(20);
+		driver_addtext3=new JTextField();
+		driver_addtext3.setFont(new Font("宋体",Font.PLAIN,30));
 		driver_addtext3.setEditable(true);//设置为可编辑
 		driver_addtext3.setOpaque(false);
 		p.add(driver_addtext3);
 		
 		//第四行 驾驶员年纪
 		JLabel lab4=new JLabel("驾驶员年纪");
-		lab4.setFont(new Font("宋体",Font.PLAIN,20));
+		lab4.setFont(new Font("宋体",Font.PLAIN,30));
 		lab4.setOpaque(false);
 		p.add(lab4);
 		
-		driver_addtext4=new JTextField(20);
+		driver_addtext4=new JTextField();
+		driver_addtext4.setFont(new Font("宋体",Font.PLAIN,30));
 		driver_addtext4.setEditable(true);//设置为可编辑
 		driver_addtext4.setOpaque(false);
 		p.add(driver_addtext4);
 		
 		//第五行   驾龄
 		JLabel lab5=new JLabel("驾龄");
-		lab5.setFont(new Font("宋体",Font.PLAIN,20));
+		lab5.setFont(new Font("宋体",Font.PLAIN,30));
 		lab5.setOpaque(false);
 		p.add(lab5);
 		
-		driver_addtext5=new JTextField(20);
+		driver_addtext5=new JTextField();
+		driver_addtext5.setFont(new Font("宋体",Font.PLAIN,30));
 		driver_addtext5.setEditable(true);//设置为可编辑
 		driver_addtext5.setOpaque(false);
 		p.add(driver_addtext5);
 		
 		//第六行  驾驶员联系方式
 		JLabel lab6=new JLabel("联系方式");
-		lab6.setFont(new Font("宋体",Font.PLAIN,20));
+		lab6.setFont(new Font("宋体",Font.PLAIN,30));
 		lab6.setOpaque(false);
 		p.add(lab6);
 		
-		driver_addtext6=new JTextField(20);
+		driver_addtext6=new JTextField();
+		driver_addtext6.setFont(new Font("宋体",Font.PLAIN,30));
 		driver_addtext6.setEditable(true);//设置为可编辑
 		driver_addtext6.setOpaque(false);
 		p.add(driver_addtext6);
 		
 		//第七行  驾驶员当前状态
 		JLabel lab7=new JLabel("当前工作状态");
-		lab7.setFont(new Font("宋体",Font.PLAIN,20));
+		lab7.setFont(new Font("宋体",Font.PLAIN,30));
 		lab7.setOpaque(false);
 		p.add(lab7);
 		
-		driver_addtext7=new JTextField(20);
+		driver_addtext7=new JTextField();
+		driver_addtext7.setFont(new Font("宋体",Font.PLAIN,30));
 		driver_addtext7.setEditable(true);//设置为可编辑
 		driver_addtext7.setOpaque(false);
 		p.add(driver_addtext7);
@@ -296,7 +303,7 @@ public class Driver_ContentMessagePanel {
 		//中转站格式待修改完善
 		
 		JButton b=new JButton("确认");
-		b.setFont(new Font("宋体",Font.PLAIN,14));
+		b.setFont(new Font("宋体",Font.PLAIN,18));
 		b.setSize(4, 1);
 		b.setOpaque(false);
 		p.add(b);
@@ -362,11 +369,12 @@ public class Driver_ContentMessagePanel {
 		
 		//第一行 驾驶员编号
 		JLabel lab1=new JLabel("驾驶员编号");
-		lab1.setFont(new Font("宋体",Font.PLAIN,20));
+		lab1.setFont(new Font("宋体",Font.PLAIN,25));
 		lab1.setOpaque(false);
 		p.add(lab1);
 		
 		driver_modifytext1=new JTextField(20);
+		driver_modifytext1.setFont(new Font("宋体",Font.PLAIN,25));
 		driver_modifytext1.setEditable(true);//设置为可编辑
 		driver_modifytext1.setOpaque(false);
 		p.add(driver_modifytext1);
@@ -377,66 +385,72 @@ public class Driver_ContentMessagePanel {
 		
 		//第二行 驾驶证编号
 		JLabel lab2=new JLabel("驾驶证编号");
-		lab2.setFont(new Font("宋体",Font.PLAIN,20));
+		lab2.setFont(new Font("宋体",Font.PLAIN,25));
 		lab2.setOpaque(false);
 		p.add(lab2);
 		
 		driver_modifytext2=new JTextField(20);
+		driver_modifytext2.setFont(new Font("宋体",Font.PLAIN,25));
 		driver_modifytext2.setEditable(true);//设置为可编辑
 		driver_modifytext2.setOpaque(false);
 		p.add(driver_modifytext2);
 		
 		//第三行 驾驶员姓名
 		JLabel lab3=new JLabel("驾驶员姓名");
-		lab3.setFont(new Font("宋体",Font.PLAIN,20));
+		lab3.setFont(new Font("宋体",Font.PLAIN,25));
 		lab3.setOpaque(false);
 		p.add(lab3);
 		
 		driver_modifytext3=new JTextField(20);
+		driver_modifytext3.setFont(new Font("宋体",Font.PLAIN,25));
 		driver_modifytext3.setEditable(true);//设置为可编辑
 		driver_modifytext3.setOpaque(false);
 		p.add(driver_modifytext3);
 		
 		//第四行 驾驶员年纪
 		JLabel lab4=new JLabel("驾驶员年纪");
-		lab4.setFont(new Font("宋体",Font.PLAIN,20));
+		lab4.setFont(new Font("宋体",Font.PLAIN,25));
 		lab4.setOpaque(false);
 		p.add(lab4);
 		
 		driver_modifytext4=new JTextField(20);
+		driver_modifytext4.setFont(new Font("宋体",Font.PLAIN,25));
 		driver_modifytext4.setEditable(true);//设置为可编辑
 		driver_modifytext4.setOpaque(false);
 		p.add(driver_modifytext4);
 		
 		//第五行   驾龄
 		JLabel lab5=new JLabel("驾龄");
-		lab5.setFont(new Font("宋体",Font.PLAIN,20));
+		lab5.setFont(new Font("宋体",Font.PLAIN,25));
 		lab5.setOpaque(false);
 		p.add(lab5);
 		
 		driver_modifytext5=new JTextField(20);
+		driver_modifytext5.setFont(new Font("宋体",Font.PLAIN,25));
 		driver_modifytext5.setEditable(true);//设置为可编辑
 		driver_modifytext5.setOpaque(false);
 		p.add(driver_modifytext5);
 		
 		//第六行  驾驶员联系方式
 		JLabel lab6=new JLabel("联系方式");
-		lab6.setFont(new Font("宋体",Font.PLAIN,20));
+		lab6.setFont(new Font("宋体",Font.PLAIN,25));
 		lab6.setOpaque(false);
 		p.add(lab6);
 		
 		driver_modifytext6=new JTextField(20);
+		driver_modifytext6.setFont(new Font("宋体",Font.PLAIN,25));
 		driver_modifytext6.setEditable(true);//设置为可编辑
 		driver_modifytext6.setOpaque(false);
 		p.add(driver_modifytext6);
 		
 		//第七行  驾驶员当前状态
 		JLabel lab7=new JLabel("当前工作状态");
-		lab7.setFont(new Font("宋体",Font.PLAIN,20));
+		lab7.setFont(new Font("宋体",Font.PLAIN,25));
 		lab7.setOpaque(false);
 		p.add(lab7);
 		
 		driver_modifytext7=new JTextField(20);
+		driver_modifytext7.setFont(new Font("宋体",Font.PLAIN,25));
 		driver_modifytext7.setEditable(true);//设置为可编辑
 		driver_modifytext7.setOpaque(false);
 		p.add(driver_modifytext7);
@@ -446,7 +460,7 @@ public class Driver_ContentMessagePanel {
 		//中转站格式待修改完善
 		
 		JButton b=new JButton("确认");
-		b.setFont(new Font("宋体",Font.PLAIN,14));
+		b.setFont(new Font("宋体",Font.PLAIN,18));
 		b.setSize(4, 1);
 		b.setOpaque(false);
 		p.add(b);
@@ -494,16 +508,26 @@ public class Driver_ContentMessagePanel {
 		//第二列
 		driver_panel2=new JPanel();
 		driver_panel2.setOpaque(false);
+		driver_panel2.setLayout(new BorderLayout());
+		
+		JLabel ll=new JLabel("驾驶员编号模糊查询结果",JLabel.CENTER);
+		ll.setFont(new Font("宋体",Font.PLAIN,18));
+		
+		driver_panel2.add(ll,BorderLayout.NORTH);
 		
 		driver_bobox=new JComboBox();
+		driver_bobox.setFont(new Font("宋体",Font.PLAIN,25));
+		
 		driver_bobox.setOpaque(false);
-		driver_bobox.setBorder(BorderFactory.createTitledBorder("驾驶员编号模糊查询结果"));
 		driver_bobox.setSelectedIndex(-1);//设置不选中
 		
 		//添加监听函数
 		driver_bobox.addItemListener(itemListener2);
 		
-		driver_panel2.add(driver_bobox);
+		JPanel o=new JPanel();
+		o.add(driver_bobox);
+		
+		driver_panel2.add(o,BorderLayout.CENTER);
 		
 		driver_mpanel.add(driver_panel2);
 		
@@ -538,12 +562,13 @@ public class Driver_ContentMessagePanel {
 		panel.add(cpanel,BorderLayout.CENTER);
 		
 		driver_deltext=new JTextField(20);
+		driver_deltext.setFont(new Font("宋体",Font.PLAIN,30));
 		driver_deltext.setEditable(true);
 		driver_deltext.setOpaque(false);
 		spanel.add(driver_deltext);
 		
 		JButton b=new JButton("搜索");
-		b.setFont(new Font("宋体",Font.PLAIN,14));
+		b.setFont(new Font("宋体",Font.PLAIN,18));
 		b.setSize(4, 1);
 		b.setOpaque(false);
 		spanel.add(b);
@@ -629,7 +654,7 @@ public class Driver_ContentMessagePanel {
 							cpanel.add(scroll,BorderLayout.CENTER);
 							
 							JButton bb=new JButton("删除");
-							bb.setFont(new Font("宋体",Font.PLAIN,14));
+							bb.setFont(new Font("宋体",Font.PLAIN,18));
 							bb.setSize(4, 1);
 							bb.setOpaque(false);
 							cpanel.add(bb,BorderLayout.SOUTH);

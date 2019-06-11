@@ -2,6 +2,7 @@ package car.ui;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -209,49 +210,65 @@ public class Car_ContentMessagePanel{
 		self=p_self;
 		self.removeAll();//清除面板上面的所有组件
 
-		JPanel panel=new JPanel(new GridLayout(6,2,5,5));//六行三列
+		JPanel panel=new JPanel(new GridLayout(9,2,5,5));//六行三列
 		panel.setOpaque(false);
 		
 		//第一行 车辆编号
 		JLabel label1=new JLabel("车辆编号");
-		label1.setFont(new Font("宋体",Font.PLAIN,20));
+		label1.setFont(new Font("宋体",Font.PLAIN,30));
 		label1.setOpaque(false);
 		panel.add(label1);
 		
-		car_text1=new JTextField(20);
+		car_text1=new JTextField(30);
+		car_text1.setFont(new Font("宋体",Font.PLAIN,30));
 		car_text1.setEditable(true);//设置为可编辑
 		car_text1.setOpaque(false);
 		panel.add(car_text1);
 		
+		//新的空行
+		panel.add(new JLabel("    "));
+		panel.add(new JLabel("    "));
+		
 		//第二行 驾驶员1号
 		JLabel label2=new JLabel("驾驶员一号编号");
-		label2.setFont(new Font("宋体",Font.PLAIN,20));
+		label2.setFont(new Font("宋体",Font.PLAIN,30));
 		label2.setOpaque(false);
 		panel.add(label2);
 		
 		car_text2=new JTextField();
+		car_text2.setFont(new Font("宋体",Font.PLAIN,30));
 		car_text2.setEditable(true);//设置为可编辑
 		car_text2.setOpaque(false);
 		panel.add(car_text2);
 		
+		//新的空行
+		panel.add(new JLabel("    "));
+		panel.add(new JLabel("    "));
+		
 		//第三行 驾驶员2号
 		JLabel label3=new JLabel("驾驶员二号编号");
-		label3.setFont(new Font("宋体",Font.PLAIN,20));
+		label3.setFont(new Font("宋体",Font.PLAIN,30));
 		label3.setOpaque(false);
 		panel.add(label3);
 		
 		car_text3=new JTextField();
+		car_text3.setFont(new Font("宋体",Font.PLAIN,30));
 		car_text3.setEditable(true);//设置为可编辑
 		car_text3.setOpaque(false);
 		panel.add(car_text3);
 		
+		//新的空行
+		panel.add(new JLabel("    "));
+		panel.add(new JLabel("    "));
+		
 		//第四行 路线编号
 		JLabel label4=new JLabel("路线编号");
-		label4.setFont(new Font("宋体",Font.PLAIN,20));
+		label4.setFont(new Font("宋体",Font.PLAIN,30));
 		label4.setOpaque(false);
 		panel.add(label4);
 		
 		car_text4=new JTextField();
+		car_text4.setFont(new Font("宋体",Font.PLAIN,30));
 		car_text4.setEditable(true);//设置为可编辑
 		car_text4.setOpaque(false);
 		panel.add(car_text4);
@@ -339,52 +356,53 @@ public class Car_ContentMessagePanel{
 		
 		//显示的标签信息
 		JLabel l1=new JLabel("显示大概信息");
+		l1.setFont(new Font("宋体",Font.PLAIN,18));//设置字体
+		l1.setForeground(Color.red);
+		
 		JLabel l2=new JLabel("显示驾驶员信息");
+		l2.setFont(new Font("宋体",Font.PLAIN,18));//设置字体
+		l2.setForeground(Color.red);
+		
 		JLabel l3=new JLabel("显示路线信息");
+		l3.setFont(new Font("宋体",Font.PLAIN,18));//设置字体
+		l3.setForeground(Color.red);
 		
 		//添加响应函数
 		MouseListener A=new MouseListener(){
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
-				// 判断用户点击了哪个JLable
-				if (e.getSource() == l1) {
-					c1.show(p1,"1");
-				} else if (e.getSource() == l2) {
-					c1.show(p2,"2");
-				} else if (e.getSource() == l3) {
-					c1.show(p3,"3");
-				}
+				c1.next(panel);
 			}
 
 			@Override
-			public void mouseEntered(MouseEvent e) {
+			public void mouseEntered(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				
 			}
 
 			@Override
-			public void mouseExited(MouseEvent e) {
+			public void mouseExited(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				
 			}
 
 			@Override
-			public void mousePressed(MouseEvent e) {
+			public void mousePressed(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				
 			}
 
 			@Override
-			public void mouseReleased(MouseEvent e) {
+			public void mouseReleased(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				
 			}
-			
 		};
-		l1.addMouseListener(A);
-		l2.addMouseListener(A);
-		l3.addMouseListener(A);
+		
+		p1.addMouseListener(A);
+		p2.addMouseListener(A);
+		p3.addMouseListener(A);
 		
 		//显示基本信息
 		p1.add(l1,BorderLayout.NORTH);
@@ -434,12 +452,12 @@ public class Car_ContentMessagePanel{
 		p3.add(scroll3,BorderLayout.CENTER);
 		
 		//添加到布局里面
-		panel.add("1",p1);
-		panel.add("2",p2);
-		panel.add("3",p3);
+		panel.add(p1,"First");
+		panel.add(p2,"Second");
+		panel.add(p3,"Third");
 	
 		// 设置默认显示的卡片
-		//panel.show(p1,"1");		
+		c1.show(panel, "First");
 		
 		self.add(panel);
 		self.revalidate();
@@ -457,16 +475,17 @@ public class Car_ContentMessagePanel{
 		car_mpanel.setOpaque(false);
 		
 		//第一列
-		JPanel panel=new JPanel(new GridLayout(6,2,5,5));//六行三列
+		JPanel panel=new JPanel(new GridLayout(9,2,5,5));//六行三列
 		panel.setOpaque(false);
 		
 		//第一行 车辆编号
 		JLabel label1=new JLabel("车辆编号");
-		label1.setFont(new Font("宋体",Font.PLAIN,20));
+		label1.setFont(new Font("宋体",Font.PLAIN,30));
 		label1.setOpaque(false);
 		panel.add(label1);
 		
 		car_text1=new JTextField(20);
+		car_text1.setFont(new Font("宋体",Font.PLAIN,30));
 		car_text1.setEditable(true);//设置为可编辑
 		car_text1.setOpaque(false);
 		panel.add(car_text1);
@@ -475,35 +494,47 @@ public class Car_ContentMessagePanel{
 		Document document = car_text1.getDocument();
 		document.addDocumentListener(documentListener);
 		
+		panel.add(new JLabel("    "));
+		panel.add(new JLabel("    "));
+		
 		//第二行 驾驶员1号
 		JLabel label2=new JLabel("驾驶员一号编号");
-		label2.setFont(new Font("宋体",Font.PLAIN,20));
+		label2.setFont(new Font("宋体",Font.PLAIN,30));
 		label2.setOpaque(false);
 		panel.add(label2);
 		
 		car_text2=new JTextField();
+		car_text2.setFont(new Font("宋体",Font.PLAIN,30));
 		car_text2.setEditable(true);//设置为可编辑
 		car_text2.setOpaque(false);
 		panel.add(car_text2);
 		
+		panel.add(new JLabel("    "));
+		panel.add(new JLabel("    "));
+		
 		//第三行 驾驶员2号
 		JLabel label3=new JLabel("驾驶员二号编号");
-		label3.setFont(new Font("宋体",Font.PLAIN,20));
+		label3.setFont(new Font("宋体",Font.PLAIN,30));
 		label3.setOpaque(false);
 		panel.add(label3);
 		
 		car_text3=new JTextField();
+		car_text3.setFont(new Font("宋体",Font.PLAIN,30));
 		car_text3.setEditable(true);//设置为可编辑
 		car_text3.setOpaque(false);
 		panel.add(car_text3);
 		
+		panel.add(new JLabel("    "));
+		panel.add(new JLabel("    "));
+		
 		//第四行 路线编号
 		JLabel label4=new JLabel("路线编号");
-		label4.setFont(new Font("宋体",Font.PLAIN,20));
+		label4.setFont(new Font("宋体",Font.PLAIN,30));
 		label4.setOpaque(false);
 		panel.add(label4);
 		
 		car_text4=new JTextField();
+		car_text4.setFont(new Font("宋体",Font.PLAIN,30));
 		car_text4.setEditable(true);//设置为可编辑
 		car_text4.setOpaque(false);
 		panel.add(car_text4);
@@ -516,7 +547,7 @@ public class Car_ContentMessagePanel{
 		panel.add(new JLabel("    "));
 		JButton button=new JButton();
 		
-		button=new JButton("添加");
+		button=new JButton("确认");
 		button.setFont(new Font("宋体",Font.PLAIN,14));
 		button.setSize(4, 1);
 		button.setOpaque(false);
@@ -562,16 +593,26 @@ public class Car_ContentMessagePanel{
 		//第二列
 		car_panel2=new JPanel();
 		car_panel2.setOpaque(false);
+		car_panel2.setLayout(new BorderLayout());
+		
+		JLabel ll=new JLabel("车牌号模糊查询结果",JLabel.CENTER);
+		ll.setFont(new Font("宋体",Font.PLAIN,18));
+		
+		car_panel2.add(ll,BorderLayout.NORTH);
 		
 		car_bobox=new JComboBox();
+		car_bobox.setFont(new Font("宋体",Font.PLAIN,25));
+		
 		car_bobox.setOpaque(false);
-		car_bobox.setBorder(BorderFactory.createTitledBorder("车牌号模糊查询结果"));
 		car_bobox.setSelectedIndex(-1);//设置不选中
 		
 		//添加监听函数
 		car_bobox.addItemListener(itemListener);
 		
-		car_panel2.add(car_bobox);
+		JPanel o=new JPanel();
+		o.add(car_bobox);
+		
+		car_panel2.add(o,BorderLayout.CENTER);
 		car_mpanel.add(car_panel2);
 		
 		self.add(car_mpanel);
@@ -606,13 +647,14 @@ public class Car_ContentMessagePanel{
 		cpanel.setOpaque(false);
 		panel.add(cpanel,BorderLayout.CENTER);
 		
-		car_deltext=new JTextField(20);
+		car_deltext=new JTextField(30);
+		car_deltext.setFont(new Font("宋体",Font.PLAIN,30));
 		car_deltext.setEditable(true);
 		car_deltext.setOpaque(false);
 		spanel.add(car_deltext);
 		
 		JButton b=new JButton("搜索");
-		b.setFont(new Font("宋体",Font.PLAIN,14));
+		b.setFont(new Font("宋体",Font.PLAIN,20));
 		b.setSize(4, 1);
 		b.setOpaque(false);
 		spanel.add(b);
@@ -697,7 +739,7 @@ public class Car_ContentMessagePanel{
 							cpanel.add(scroll,BorderLayout.CENTER);
 							
 							JButton bb=new JButton("删除");
-							bb.setFont(new Font("宋体",Font.PLAIN,14));
+							bb.setFont(new Font("宋体",Font.PLAIN,20));
 							bb.setSize(4, 1);
 							bb.setOpaque(false);
 							cpanel.add(bb,BorderLayout.SOUTH);

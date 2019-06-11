@@ -3,6 +3,7 @@ package route.ui;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -212,12 +213,13 @@ public class Route_ContentMessagePanel {
 		panel.add(cpanel,BorderLayout.CENTER);
 		
 		route_deltext=new JTextField(20);
+		route_deltext.setFont(new Font("宋体",Font.PLAIN,30));
 		route_deltext.setEditable(true);
 		route_deltext.setOpaque(false);
 		spanel.add(route_deltext);
 		
 		JButton b=new JButton("搜索");
-		b.setFont(new Font("宋体",Font.PLAIN,14));
+		b.setFont(new Font("宋体",Font.PLAIN,20));
 		b.setSize(4, 1);
 		b.setOpaque(false);
 		spanel.add(b);
@@ -300,7 +302,7 @@ public class Route_ContentMessagePanel {
 							cpanel.add(scroll,BorderLayout.CENTER);
 							
 							JButton bb=new JButton("删除");
-							bb.setFont(new Font("宋体",Font.PLAIN,14));
+							bb.setFont(new Font("宋体",Font.PLAIN,18));
 							bb.setSize(4, 1);
 							bb.setOpaque(false);
 							cpanel.add(bb,BorderLayout.SOUTH);
@@ -346,59 +348,81 @@ public class Route_ContentMessagePanel {
 		DebugInfo.DebugInfo("开始绘制增加路线信息Panel");
 		self.removeAll();//将面板上面的组件全部清空
 		
-		JPanel p = new JPanel(new GridLayout(5,2,5,5));
+		JPanel p = new JPanel(new GridLayout(9,2,5,5));
 		p.setOpaque(false);
 		
 		//第一行 路线编号
 		JLabel lab1=new JLabel("路线编号");
-		lab1.setFont(new Font("宋体",Font.PLAIN,20));
+		lab1.setFont(new Font("宋体",Font.PLAIN,30));
 		lab1.setOpaque(false);
 		p.add(lab1);
 		
-		route_addtext1=new JTextField(20);
+		route_addtext1=new JTextField(30);
+		route_addtext1.setFont(new Font("宋体",Font.PLAIN,30));
 		route_addtext1.setEditable(true);//设置为可编辑
 		route_addtext1.setOpaque(false);
 		p.add(route_addtext1);
 		
+		//
+		p.add(new JLabel("     "));
+		p.add(new JLabel("     "));
+		
 		//第二行 起始站台
 		JLabel lab2=new JLabel("起始站台");
-		lab2.setFont(new Font("宋体",Font.PLAIN,20));
+		lab2.setFont(new Font("宋体",Font.PLAIN,30));
 		lab2.setOpaque(false);
 		p.add(lab2);
 		
-		route_addtext2=new JTextField(20);
+		route_addtext2=new JTextField();
+		route_addtext2.setFont(new Font("宋体",Font.PLAIN,30));
 		route_addtext2.setEditable(true);//设置为可编辑
 		route_addtext2.setOpaque(false);
 		p.add(route_addtext2);
 		
+		//
+		p.add(new JLabel("     "));
+		p.add(new JLabel("     "));
+		
 		//第三行 终点站
 		JLabel lab3=new JLabel("终点站");
-		lab3.setFont(new Font("宋体",Font.PLAIN,20));
+		lab3.setFont(new Font("宋体",Font.PLAIN,30));
 		lab3.setOpaque(false);
 		p.add(lab3);
 		
-		route_addtext3=new JTextField(20);
+		route_addtext3=new JTextField();
+		route_addtext3.setFont(new Font("宋体",Font.PLAIN,30));
 		route_addtext3.setEditable(true);//设置为可编辑
 		route_addtext3.setOpaque(false);
 		p.add(route_addtext3);
 		
+		//
+		p.add(new JLabel("     "));
+		p.add(new JLabel("     "));
+		
 		//第四行 中转站
 		JLabel lab4=new JLabel("中转站");
-		lab4.setFont(new Font("宋体",Font.PLAIN,20));
+		lab4.setFont(new Font("宋体",Font.PLAIN,30));
 		lab4.setOpaque(false);
 		p.add(lab4);
 		
-		route_addtext4=new JTextField(20);
+		route_addtext4=new JTextField();
+		route_addtext4.setFont(new Font("宋体",Font.PLAIN,30));
 		route_addtext4.setEditable(true);//设置为可编辑
 		route_addtext4.setOpaque(false);
 		p.add(route_addtext4);
 		
+		//
+		p.add(new JLabel("     "));
+		p.add(new JLabel("     "));
+		
 		//第五行 增加按钮
-		p.add(new JLabel("添加中转站信息格式：青岛-成都-济南"));
+		JLabel l=new JLabel("添加中转站信息格式：青岛-成都-济南");
+		l.setFont(new Font("宋体",Font.PLAIN,25));
+		p.add(l);
 		//中转站格式待修改完善
 		
 		JButton b=new JButton("确认");
-		b.setFont(new Font("宋体",Font.PLAIN,14));
+		b.setFont(new Font("宋体",Font.PLAIN,18));
 		b.setSize(4, 1);
 		b.setOpaque(false);
 		p.add(b);
@@ -451,16 +475,17 @@ public class Route_ContentMessagePanel {
 		route_mpanel.setOpaque(false);
 		
 		//第一列
-		JPanel panel=new JPanel(new GridLayout(5,2,5,5));
+		JPanel panel=new JPanel(new GridLayout(9,2,5,5));
 		panel.setOpaque(false);
 		
 		//第一行 路线编号
 		JLabel label1=new JLabel("路线编号");
-		label1.setFont(new Font("宋体",Font.PLAIN,20));
+		label1.setFont(new Font("宋体",Font.PLAIN,25));
 		label1.setOpaque(false);
 		panel.add(label1);
 		
 		route_modifytext1=new JTextField(20);
+		route_modifytext1.setFont(new Font("宋体",Font.PLAIN,25));
 		route_modifytext1.setEditable(true);//设置为可编辑
 		route_modifytext1.setOpaque(false);
 		panel.add(route_modifytext1);
@@ -469,45 +494,66 @@ public class Route_ContentMessagePanel {
 		Document document1 = route_modifytext1.getDocument();
 		document1.addDocumentListener(documentListener1);
 		
+		//
+		panel.add(new JLabel("    "));
+		panel.add(new JLabel("    "));
+		
 		//第二行 起始站台
 		JLabel label2=new JLabel("起始站台");
-		label2.setFont(new Font("宋体",Font.PLAIN,20));
+		label2.setFont(new Font("宋体",Font.PLAIN,25));
 		label2.setOpaque(false);
 		panel.add(label2);
 		
 		route_modifytext2=new JTextField(20);
+		route_modifytext2.setFont(new Font("宋体",Font.PLAIN,25));
 		route_modifytext2.setEditable(true);//设置为可编辑
 		route_modifytext2.setOpaque(false);
 		panel.add(route_modifytext2);
 		
+		//
+		panel.add(new JLabel("    "));
+		panel.add(new JLabel("    "));
+		
 		//第三行 终点站
 		JLabel label3=new JLabel("终点站");
-		label3.setFont(new Font("宋体",Font.PLAIN,20));
+		label3.setFont(new Font("宋体",Font.PLAIN,25));
 		label3.setOpaque(false);
 		panel.add(label3);
 		
 		route_modifytext3=new JTextField(20);
+		route_modifytext3.setFont(new Font("宋体",Font.PLAIN,25));
 		route_modifytext3.setEditable(true);//设置为可编辑
 		route_modifytext3.setOpaque(false);
 		panel.add(route_modifytext3);
 		
+		//
+		panel.add(new JLabel("    "));
+		panel.add(new JLabel("    "));
+		
 		//第四行 中转站
 		JLabel label4=new JLabel("中转站");
-		label4.setFont(new Font("宋体",Font.PLAIN,20));
+		label4.setFont(new Font("宋体",Font.PLAIN,25));
 		label4.setOpaque(false);
 		panel.add(label4);
 		
 		route_modifytext4=new JTextField(20);
+		route_modifytext4.setFont(new Font("宋体",Font.PLAIN,25));
 		route_modifytext4.setEditable(true);//设置为可编辑
 		route_modifytext4.setOpaque(false);
 		panel.add(route_modifytext4);
 		
+		//
+		panel.add(new JLabel("    "));
+		panel.add(new JLabel("    "));
+		
 		//第五行 增加按钮
-		panel.add(new JLabel("修改中转站信息格式：青岛-成都-济南"));
+		JLabel l=new JLabel("修改中转站信息格式：青岛-成都-济南");
+		l.setFont(new Font("宋体",Font.PLAIN,18));
+		panel.add(l);
 		//中转站格式待修改完善
 		
 		JButton b=new JButton("确认");
-		b.setFont(new Font("宋体",Font.PLAIN,14));
+		b.setFont(new Font("宋体",Font.PLAIN,18));
 		b.setSize(4, 1);
 		b.setOpaque(false);
 		panel.add(b);
@@ -548,16 +594,26 @@ public class Route_ContentMessagePanel {
 		//第二列
 		route_panel2=new JPanel();
 		route_panel2.setOpaque(false);
+		route_panel2.setLayout(new BorderLayout());
+		
+		JLabel ll=new JLabel("路线编号模糊查询结果",JLabel.CENTER);
+		ll.setFont(new Font("宋体",Font.PLAIN,18));
+		
+		route_panel2.add(ll,BorderLayout.NORTH);
 		
 		route_bobox=new JComboBox();
+		route_bobox.setFont(new Font("宋体",Font.PLAIN,25));
+		
 		route_bobox.setOpaque(false);
-		route_bobox.setBorder(BorderFactory.createTitledBorder("路线编号模糊查询结果"));
 		route_bobox.setSelectedIndex(-1);//设置不选中
 		
 		//添加监听函数
 		route_bobox.addItemListener(itemListener1);
 		
-		route_panel2.add(route_bobox);
+		JPanel o=new JPanel();
+		o.add(route_bobox);
+		
+		route_panel2.add(o,BorderLayout.CENTER);
 		
 		route_mpanel.add(route_panel2);
 	
