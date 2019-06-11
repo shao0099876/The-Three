@@ -11,7 +11,6 @@ public class Client {
 		BrowserDialog.init();
 		
 		//改为未登录的界面
-		//BrowserDialog.frame=new IndexUI();
-		BrowserDialog.frame=new BaseUI();
+		BrowserDialog.frame=new IndexUI();
 	}
 }
