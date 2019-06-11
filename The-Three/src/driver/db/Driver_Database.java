@@ -19,6 +19,7 @@ public class Driver_Database {
 			
 			IO.write(output, "2");//查询车辆信息具体信息中的驾驶员的信息
 			IO.write(output, Integer.toString(n));//写入驾驶员编号
+			
 			String raw_string=IO.read(input);
 			System.out.println(raw_string);
 			String[] data=raw_string.split("#");

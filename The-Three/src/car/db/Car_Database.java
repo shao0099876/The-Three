@@ -19,6 +19,7 @@ public class Car_Database {
 			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
 			
 			IO.write(output, "1");
+			
 			String raw_string=IO.read(input);
 			System.out.println(raw_string);
 			
@@ -50,7 +51,15 @@ public class Car_Database {
 			IO.write(output, s);//查询的车牌号部分信息
 			
 			String raw_string=IO.read(input);
-			String[] data=raw_string.split("#");//去掉#
+			String[] data1=raw_string.split("#");//去掉#
+			
+			String data[]=new String[data1.length/4];
+			int n=data1.length/4;
+			int j=0;
+			for(int i=0;i<n;i++){
+				data[i]=data1[j];
+				j=j+4;
+			}
 			output.close();
 			input.close();
 			socket.close();
@@ -219,4 +228,35 @@ public class Car_Database {
 		return null;
 	}
 
+	public static Car[] getMohuCarInfo(String s){//模糊查询车辆的所有信息
+		try {
+			Socket socket= new Socket(addr,8081);
+			DataInputStream input=new DataInputStream(socket.getInputStream());
+			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
+			IO.write(output, "4");//查询车辆的编号
+			IO.write(output, s);//查询的车牌号部分信息
+			
+			String raw_string=IO.read(input);
+			String[] data=raw_string.split("#");//去掉#
+			
+			Car[] res=new Car[data.length/4];
+			int n=data.length/4;
+			int j=0;
+			for(int i=0;i<n;i++){
+				res[i]=new Car(data[j],Integer.valueOf(data[j+1]),Integer.valueOf(data[j+2]),Integer.valueOf(data[j+3]));
+				j=j+4;
+			}
+			output.close();
+			input.close();
+			socket.close();
+			return res;
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

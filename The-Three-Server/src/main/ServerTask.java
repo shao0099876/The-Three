@@ -39,10 +39,10 @@ public class ServerTask implements Runnable {
 			System.out.print(op+"\n");
 			switch(op) {
 			case 1:
-				IO.write(output, Car_ServerTask.getCarInfo());
+				IO.write(output, Car_ServerTask.getCarInfo());//查询车辆概要信息
 				break;
 			case 2:
-				System.out.println("readDriverNum_before");
+				System.out.println("readDriverNum_before");//查询具体驾驶员信息
 				int peonum=IO.readInt(input);//读入驾驶员编号
 				System.out.println(peonum);
 				IO.write(output, Driver_ServerTask.getDriverInfo(peonum));
@@ -54,10 +54,10 @@ public class ServerTask implements Runnable {
 			case 4:
 				String s=IO.read(input);//读进来部分车牌号信息
 				System.out.println(s);
-				IO.write(output, Car_ServerTask.getCarNum(s));
+				IO.write(output, Car_ServerTask.getMohuCarInfo(s));
 				break;
 			case 5:
-				String carinfo=IO.read(input);//将要进行修改的车辆信息读进来
+				String carinfo=IO.read(input);//将要进行增加的车辆信息读进来
 				System.out.println(carinfo);//测试
 				IO.write(output, Car_ServerTask.AddCarInfo(carinfo));
 				break;
@@ -67,7 +67,7 @@ public class ServerTask implements Runnable {
 				IO.write(output, Car_ServerTask.DelCarInfo(delcarinfo));
 				break;
 			case 7:
-				String modcarinfo=IO.read(input);//将要进行删除的车辆信息读进来
+				String modcarinfo=IO.read(input);//将要进行修改的车辆信息读进来
 				System.out.println(modcarinfo);//测试
 				IO.write(output, Car_ServerTask.ModCarInfo(modcarinfo));
 				break;

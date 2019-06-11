@@ -35,11 +35,11 @@ import entity.Driver;
 import entity.Route;
 
 public class ContentMessagePanel extends JPanel{
-	//public static Car[] array;
 	private static ContentMessagePanel self;
 	public JTextField car_text1,car_text2,car_text3,car_text4;
 	public JComboBox car_bobox;
 	public JPanel car_mpanel,car_panel2;
+	public JTextField car_deltext;//用于车辆删除
 	
 	public JTextField route_deltext;//用于路线删除
 	public JTextField route_addtext1,route_addtext2,route_addtext3,route_addtext4;//用于增加路线时

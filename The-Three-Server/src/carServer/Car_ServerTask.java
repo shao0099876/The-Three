@@ -48,7 +48,8 @@ public class Car_ServerTask extends ServerTask{
 		}
 		return sb.toString();
 	}
-	public static String getCarNum(String s){//通讯协议4：查询车辆的车牌号（模糊查询）
+	
+	public static String getMohuCarInfo(String s){//通讯协议4：查询车辆的信息（模糊查询）
 		System.out.print("查数据库");
 		s=s+"%";//实现模糊查询
 		try {
@@ -61,7 +62,7 @@ public class Car_ServerTask extends ServerTask{
 		StringBuilder sb=new StringBuilder();
 		
 		try {
-			PreparedStatement pstmt=conn.prepareStatement("select carNumber from Car where carNumber like ?");
+			PreparedStatement pstmt=conn.prepareStatement("select * from Car where carNumber like ?");
 			pstmt.setString(1,s);
 			ResultSet res=pstmt.executeQuery();
 			
@@ -72,6 +73,12 @@ public class Car_ServerTask extends ServerTask{
 				}
 				flag=false;
 				sb.append(res.getString(1));
+				sb.append("#");
+				sb.append(res.getInt(2));
+				sb.append("#");
+				sb.append(res.getInt(3));
+				sb.append("#");
+				sb.append(res.getInt(4));
 			}
 			res.close();
 			pstmt.close();
@@ -83,6 +90,7 @@ public class Car_ServerTask extends ServerTask{
 		System.out.println(sb.toString());
 		return sb.toString();
 	}
+	
 	public static String AddCarInfo(String s){//通讯协议5：增加车辆信息
 		System.out.println("开始修改车辆信息");//测试
 		String message="";//操作结果
@@ -140,6 +148,7 @@ public class Car_ServerTask extends ServerTask{
 		}
 		return message;
 	}
+	
 	public static String DelCarInfo(String s){//通讯协议6：用于删除车辆信息
 		System.out.println("开始删除车辆信息");//测试
 		String[] data=s.split("#");//获取信息
@@ -185,6 +194,7 @@ public class Car_ServerTask extends ServerTask{
 		}
 		return message;
 	}
+	
 	public static String ModCarInfo(String s){//用于修改车辆信息
 		System.out.println("开始修改车辆信息");//测试
 		String message="";//操作结果
@@ -243,6 +253,7 @@ public class Car_ServerTask extends ServerTask{
 		}
 		return message;
 	}
+	
 	public static String getCarNumberonRoute(int routeNumber) {
 		// TODO Auto-generated method stub
 		try {
