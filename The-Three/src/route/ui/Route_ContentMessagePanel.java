@@ -199,6 +199,7 @@ public class Route_ContentMessagePanel {
 		//ÉèÖÃpanel
 		JPanel panel=new JPanel();
 		panel.setOpaque(false);
+		panel.setLayout(new BorderLayout());
 		
 		//ÉèÖÃËÑË÷panel
 		JPanel spanel=new JPanel(new GridLayout(1,2,0,0));

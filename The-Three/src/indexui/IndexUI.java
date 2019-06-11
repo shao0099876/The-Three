@@ -132,7 +132,7 @@ public class IndexUI extends JFrame{
 		addaction_Login();//给登陆增加相应函数
 		
 		setVisible(true);
-		setSize(500,200);
+		setSize(500,150);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setlocation();
 	}

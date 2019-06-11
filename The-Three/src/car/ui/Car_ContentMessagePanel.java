@@ -1,8 +1,11 @@
 package car.ui;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -34,7 +37,7 @@ import entity.Route;
 import route.db.Route_Database;
 import ui.ContentMessagePanel;
 
-public class Car_ContentMessagePanel {
+public class Car_ContentMessagePanel{
 	private static Car[] array=null;
 	private static ContentMessagePanel self;
 	
@@ -48,7 +51,7 @@ public class Car_ContentMessagePanel {
 	public static JComboBox car_bobox;
 	public static JPanel car_mpanel,car_panel2;
 	public static JTextField car_deltext;//用于车辆删除
-	
+
 	public static void comboboxChange(){
 		car_bobox.removeItemListener(itemListener);
 		String s=car_text1.getText();
@@ -314,7 +317,77 @@ public class Car_ContentMessagePanel {
 		self=p_self;
 		self.removeAll();
 		
+		//创建布局
+		CardLayout c1=new CardLayout();
+		JPanel panel=new JPanel();
+		panel.setLayout(c1);
+		
+		JPanel p1=new JPanel();//大概信息
+		p1.setOpaque(false);
+		p1.setLayout(new BorderLayout());
+		
+		
+		JPanel p2=new JPanel();//驾驶员信息
+		p2.setOpaque(false);
+		p2.setLayout(new BorderLayout());
+		
+		
+		JPanel p3=new JPanel();//路线信息
+		p3.setOpaque(false);
+		p3.setLayout(new BorderLayout());
+		
+		
+		//显示的标签信息
+		JLabel l1=new JLabel("显示大概信息");
+		JLabel l2=new JLabel("显示驾驶员信息");
+		JLabel l3=new JLabel("显示路线信息");
+		
+		//添加响应函数
+		MouseListener A=new MouseListener(){
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				// 判断用户点击了哪个JLable
+				if (e.getSource() == l1) {
+					c1.show(p1,"1");
+				} else if (e.getSource() == l2) {
+					c1.show(p2,"2");
+				} else if (e.getSource() == l3) {
+					c1.show(p3,"3");
+				}
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		};
+		l1.addMouseListener(A);
+		l2.addMouseListener(A);
+		l3.addMouseListener(A);
+		
 		//显示基本信息
+		p1.add(l1,BorderLayout.NORTH);
 		String[] name1= {"车牌号","驾驶员1","驾驶员2","路线"};
 		String[][] data1=new String[1][4];
 		data1[0]=carDetail.toStringArray();
@@ -323,8 +396,10 @@ public class Car_ContentMessagePanel {
 		table1.setOpaque(false);
 		JScrollPane scroll1=new JScrollPane(table1);
 		scroll1.setOpaque(false);
+		p1.add(scroll1,BorderLayout.CENTER);
 		
-		//显示驾驶员的详细信息
+		//显示驾驶员的详细信息	
+		p2.add(l2,BorderLayout.NORTH);
 		String[] name2={"驾驶员编号","驾驶证","驾驶员姓名","驾驶员年龄","驾驶年长","驾驶员联系方式","驾驶员目前状态"};
 		Driver driInfo1=new Driver();
 		driInfo1=Driver_Database.getDriverInfo(carDetail.people1Number);//查询驾驶员1的信息
@@ -337,12 +412,13 @@ public class Car_ContentMessagePanel {
 		data2[1]=driInfo2.toStringArray();
 		
 		JTable table2=new JTable(data2,name2);
-		//table2.setFont(new Font("宋体",Font.PLAIN,18));//设置字体
 		table2.setOpaque(false);
 		JScrollPane scroll2=new JScrollPane(table2);
 		scroll2.setOpaque(false);
+		p2.add(scroll2,BorderLayout.CENTER);
 		
-		//显示路线的详细信息
+		//显示路线的详细信息	
+		p3.add(l3,BorderLayout.NORTH);
 		String[] name3={"路线编号","起始站点","终点站","中转站点"};
 		Route routeInfo=new Route();
 		routeInfo=Route_Database.getRouteInfo(carDetail.routeNumber);//查询路线的详细信息
@@ -355,13 +431,15 @@ public class Car_ContentMessagePanel {
 		table3.setOpaque(false);
 		JScrollPane scroll3=new JScrollPane(table3);
 		scroll3.setOpaque(false);
+		p3.add(scroll3,BorderLayout.CENTER);
 		
-		JPanel panel=new JPanel(new GridLayout(1,3,0,0));//一行三列 显示列表
-		panel.setOpaque(false);
-		
-		panel.add(scroll1);
-		panel.add(scroll2);
-		panel.add(scroll3);
+		//添加到布局里面
+		panel.add("1",p1);
+		panel.add("2",p2);
+		panel.add("3",p3);
+	
+		// 设置默认显示的卡片
+		//panel.show(p1,"1");		
 		
 		self.add(panel);
 		self.revalidate();
@@ -369,7 +447,7 @@ public class Car_ContentMessagePanel {
 		DebugInfo.DebugInfo("完成绘制车辆详细信息Panel");
 		return;
 	}
-
+	
 	public static void modfiycarInfo(ContentMessagePanel p_self){//车辆信息的修改操作
 		DebugInfo.DebugInfo("开始绘制车辆修改Panel");
 		self=p_self;
@@ -511,13 +589,12 @@ public class Car_ContentMessagePanel {
 		
 		
 		flag=true;//初始化为删除路线编号来自于文本框
-		del_carnum=" ";//初始化
-		
+		del_carnum=" ";//初始化	
 		
 		//设置panel
 		JPanel panel=new JPanel();
 		panel.setOpaque(false);
-		
+		panel.setLayout(new BorderLayout());
 		
 		//设置搜索panel
 		JPanel spanel=new JPanel(new GridLayout(1,2,0,0));
