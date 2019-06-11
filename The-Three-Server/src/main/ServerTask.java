@@ -149,6 +149,16 @@ public class ServerTask implements Runnable {
 				DebugInfo.DebugInfo(stationName);
 				IO.write(output, Station_ServerTask.getGPS(stationName));
 				break;
+			case 27:
+				String stationInfo=IO.read(input);
+				IO.write(output, Station_ServerTask.addStation(stationInfo));
+				break;
+			case 28:
+				IO.write(output, Station_ServerTask.delStation(IO.read(input)));
+				break;
+			case 29:
+				IO.write(output, Station_ServerTask.modifyStation(IO.read(input)));
+				break;
 			}
 			input.close();
 			output.close();

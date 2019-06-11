@@ -114,14 +114,6 @@
     function FocusOn(x, y) {
         map.centerAndZoom(new BMap.Point(x, y), 10);
     }
-    var tmp;
-
-    function addr_to_GPS(x) {
-        var geocoder = new BMap.Geocoder();
-        geocoder.getPoint(x, function(point) {
-            alert('您的位置：' + point.lng + ',' + point.lat);
-        });
-    }
 </script>
 
 </html>
