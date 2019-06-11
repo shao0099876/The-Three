@@ -9,9 +9,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import carServer.Car_ServerTask;
+import cargoServer.Cargo_ServerTask;
 import deviceServer.Device_ServerTask;
 import driverServer.Driver_ServerTask;
 import routeServer.Route_ServerTask;
+import stationServer.Station_ServerTask;
 import iotools.IO;
 
 public class ServerTask implements Runnable {
@@ -112,6 +114,12 @@ public class ServerTask implements Runnable {
 			case 17:
 				IO.write(output, Device_ServerTask.getSpecifiedCarGPS(IO.read(input)));
 				break;
+			case 18:
+				IO.write(output, Cargo_ServerTask.getAllCargo());
+				break;
+			case 19:
+				IO.write(output, Cargo_ServerTask.getSpecifiedCargo(IO.readInt(input)));
+				break;
 			case 20:
 				System.out.println("开始查询所有驾驶员信息");
 				IO.write(output, Driver_ServerTask.getAllDriverInfo());//查询所有驾驶员信息
@@ -135,6 +143,11 @@ public class ServerTask implements Runnable {
 				String delnum=IO.read(input);//将删除的驾驶员编号读进来
 				System.out.println(delnum);//测试
 				IO.write(output, Driver_ServerTask.delDriverInfo(delnum));//删除驾驶员
+				break;
+			case 26:
+				String stationName=IO.read(input);
+				DebugInfo.DebugInfo(stationName);
+				IO.write(output, Station_ServerTask.getGPS(stationName));
 				break;
 			}
 			input.close();

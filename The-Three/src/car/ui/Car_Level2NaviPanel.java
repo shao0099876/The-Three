@@ -79,7 +79,9 @@ public class Car_Level2NaviPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				String[] res=Car_Database.getCarGPS().split("#");
+				String raw_string=Car_Database.getCarGPS();
+				DebugInfo.DebugInfo(raw_string);
+				String[] res=raw_string.split("#");
 				BrowserDialog map=new BrowserDialog();
 				map.clean();
 				map.Add_Cars_Point(res);

@@ -207,7 +207,7 @@ public class Route_Database {
 		return null;
 		
 	}
-	public static String[] getCarGPSonRoute(String s) {//查询该路线上所有车辆的GPS位置信息
+	public static String getCarGPSonRoute(String s) {//查询该路线上所有车辆的GPS位置信息
 		try {
 			Socket socket=new Socket(addr,8081);
 			DataInputStream input=new DataInputStream(socket.getInputStream());
@@ -219,7 +219,7 @@ public class Route_Database {
 			output.close();
 			input.close();
 			socket.close();
-			return raw_string.split("#");
+			return raw_string;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -71,7 +71,7 @@ public class Cargo_Database {
 			DataInputStream input=new DataInputStream(socket.getInputStream());
 			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
 			
-			IO.write(output, "20");
+			IO.write(output, "25");
 			IO.write(output, cargo.toTransString());
 			String raw_string=IO.read(input);
 			output.close();
@@ -87,4 +87,5 @@ public class Cargo_Database {
 		}
 		return null;
 	}
+	
 }

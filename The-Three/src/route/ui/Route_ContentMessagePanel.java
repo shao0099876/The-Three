@@ -27,6 +27,7 @@ import javax.swing.text.Document;
 import browser.BrowserDialog;
 import car.db.Car_Database;
 import route.db.Route_Database;
+import station.db.Station_Database;
 import client.DebugInfo;
 import ui.ContentMessagePanel;
 import entity.Route;
@@ -140,11 +141,20 @@ public class Route_ContentMessagePanel {
 				        int col = table.getSelectedColumn();
 				        if(col==0){
 				        	String routeNumber=data[row][col];
-				        	String[] res=Route_Database.getCarGPSonRoute(routeNumber);
+				        	String raw_string=Route_Database.getCarGPSonRoute(routeNumber);
+				        	String[] res=raw_string.split("#");
 				        	BrowserDialog map=new BrowserDialog();
 				        	map.clean();
-				        	map.addRoute(data[row]);
-				        	map.DrawRoutes();
+				        	map.Add_Cars_Point(res);
+				        	map.DrawPoints();
+				        	String start_GPS=Station_Database.getGPS(data[row][1]);
+				        	String end_GPS=Station_Database.getGPS(data[row][2]);
+				        	if(data[row][3].equals("null")) {
+				        		map.DrawRoute(start_GPS,end_GPS);
+				        	}
+				        	else {
+				        		map.DrawRoute(start_GPS, end_GPS,data[row][3].split("-"));
+				        	}
 				        	map.ShowGUI(Car_Database.getCarNumberonRoute(routeNumber).split("#"));
 				        }
 					}
