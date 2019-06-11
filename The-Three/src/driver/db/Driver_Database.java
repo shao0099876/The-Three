@@ -153,10 +153,10 @@ public class Driver_Database {
 			String raw_string=IO.read(input);
 			String[] data=raw_string.split("#");
 			
-			String[] res=new String[data.length];//用来保存编号
+			String[] res=new String[data.length/7];//用来保存编号
 			
 			for(int i=0;i<data.length;i+=7) {
-				res[i]=data[i];
+				res[i/7]=data[i];
 			}
 			output.close();
 			input.close();
@@ -189,7 +189,7 @@ public class Driver_Database {
 			Driver[] res=new Driver[data.length/7];
 			
 			for(int i=0;i<data.length;i+=7) {
-				res[i]=new Driver(Integer.valueOf(data[0]),data[1],data[2],Integer.valueOf(data[3]),Integer.valueOf(data[4]),data[5],Integer.valueOf(data[6]));
+				res[i/7]=new Driver(Integer.valueOf(data[i]),data[i+1],data[i+2],Integer.valueOf(data[i+3]),Integer.valueOf(data[i+4]),data[i+5],Integer.valueOf(data[i+6]));
 			}
 			
 			output.close();

@@ -54,11 +54,8 @@ public class Car_Database {
 			String[] data1=raw_string.split("#");//È¥µô#
 			
 			String data[]=new String[data1.length/4];
-			int n=data1.length/4;
-			int j=0;
-			for(int i=0;i<n;i++){
-				data[i]=data1[j];
-				j=j+4;
+			for(int i=0;i<data1.length;i+=4){
+				data[i/4]=data1[i];
 			}
 			output.close();
 			input.close();
@@ -240,11 +237,8 @@ public class Car_Database {
 			String[] data=raw_string.split("#");//È¥µô#
 			
 			Car[] res=new Car[data.length/4];
-			int n=data.length/4;
-			int j=0;
-			for(int i=0;i<n;i++){
-				res[i]=new Car(data[j],Integer.valueOf(data[j+1]),Integer.valueOf(data[j+2]),Integer.valueOf(data[j+3]));
-				j=j+4;
+			for(int i=0;i<data.length;i+=4){
+				res[i/4]=new Car(data[i],Integer.valueOf(data[i+1]),Integer.valueOf(data[i+2]),Integer.valueOf(data[i+3]));
 			}
 			output.close();
 			input.close();

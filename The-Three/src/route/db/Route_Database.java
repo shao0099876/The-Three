@@ -111,10 +111,10 @@ public class Route_Database {
 			String raw_string=IO.read(input);
 			String[] data=raw_string.split("#");
 			
-			String[] res=new String[data.length];//用来保存编号
+			String[] res=new String[data.length/4];//用来保存编号
 			
 			for(int i=0;i<data.length;i+=4) {
-				res[i]=data[i];
+				res[i/4]=data[i];
 			}
 			output.close();
 			input.close();

@@ -1,5 +1,8 @@
 package ui;
 
+import indexui.IndexUI;
+
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
@@ -15,6 +18,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
+import browser.BrowserDialog;
 import route.ui.Route_ContentMessagePanel;
 import car.ui.Car_ContentMessagePanel;
 import driver.ui.Driver_ContentMessagePanel;
@@ -51,12 +55,12 @@ public class BaseUI extends JFrame{
 		setaction_Logout();//退出
 		
 		contentPanel=new ContentMessagePanel();
-		contentPanel.setBounds(0, 0, width, height);
 		this.add(contentPanel);
 	
 		setVisible(true);
 		setSize(width,height);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setlocation();//设置位置
 	}
 	
 	public void setMenu(){//添加菜单与相应的菜单项
@@ -243,8 +247,13 @@ public class BaseUI extends JFrame{
 					public void run() {
 						// TODO Auto-generated method stub
 						System.out.println("绘制GPS");
-						//待添加
 						
+						//待添加
+						/*
+						 以车辆为主体，添加绘制路线函数
+						 * 
+						 * 
+						 * */
 						
 						
 					}});
@@ -388,6 +397,10 @@ public class BaseUI extends JFrame{
 					public void run() {
 						// TODO Auto-generated method stub
 						System.out.println("查看物流信息");
+						
+						/*
+						 *待添加*/
+						
 					}});
 				t.start();
 			}
@@ -402,6 +415,8 @@ public class BaseUI extends JFrame{
 					public void run() {
 						// TODO Auto-generated method stub
 						System.out.println("修改物流信息");
+						/*
+						 *待添加*/
 					}});
 				t.start();
 			}
@@ -416,6 +431,8 @@ public class BaseUI extends JFrame{
 					public void run() {
 						// TODO Auto-generated method stub
 						System.out.println("增加物流信息");
+						/*
+						 *待添加*/
 					}});
 				t.start();
 			}
@@ -430,13 +447,15 @@ public class BaseUI extends JFrame{
 					public void run() {
 						// TODO Auto-generated method stub
 						System.out.println("删除物流信息");
+						/*
+						 *待添加*/
 					}});
 				t.start();
 			}
 		});
 	}
 	
-	public static void setaction_Logout(){//给退出添加响应函数
+	public void setaction_Logout(){//给退出添加响应函数
 		m5_1.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -444,11 +463,18 @@ public class BaseUI extends JFrame{
 					@Override
 					public void run() {
 						System.out.println("退出");
+						
+						setVisible(false);
+						BrowserDialog.frame=new IndexUI();//回到未登录界面
+						
 					}});
 				t.start();
 			}
 		});
 	}
 	
-	
+	public void setlocation(){//设置窗口位置
+		Dimension dm = this.getToolkit().getScreenSize();
+		this.setLocation((int)(dm.getWidth()-1500)/2,(int)(dm.getHeight()-650)/2);//显示在屏幕中央
+	}
 }

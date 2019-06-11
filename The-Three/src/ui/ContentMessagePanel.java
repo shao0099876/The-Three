@@ -36,25 +36,6 @@ import entity.Route;
 
 public class ContentMessagePanel extends JPanel{
 	private static ContentMessagePanel self;
-	public JTextField car_text1,car_text2,car_text3,car_text4;
-	public JComboBox car_bobox;
-	public JPanel car_mpanel,car_panel2;
-	public JTextField car_deltext;//用于车辆删除
-	
-	public JTextField route_deltext;//用于路线删除
-	public JTextField route_addtext1,route_addtext2,route_addtext3,route_addtext4;//用于增加路线时
-	public JTextField route_modifytext1,route_modifytext2,route_modifytext3,route_modifytext4;//用于修改路线时
-	public JComboBox route_bobox;
-	public JPanel route_mpanel,route_panel2;
-	
-	public JTextField driver_deltext;//用于驾驶员删除
-	public JTextField driver_addtext1,driver_addtext2,driver_addtext3,driver_addtext4,
-						driver_addtext5,driver_addtext6,driver_addtext7;//用于增加驾驶员
-	public JTextField driver_modifytext1,driver_modifytext2,driver_modifytext3,driver_modifytext4,
-						driver_modifytext5,driver_modifytext6,driver_modifytext7;//用于修改驾驶员
-	
-	public JComboBox driver_bobox;
-	public JPanel driver_mpanel,driver_panel2;
 	
 	public ContentMessagePanel() {
 		super();

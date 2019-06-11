@@ -39,6 +39,15 @@ public class Driver_ContentMessagePanel {
 	
 	private static String del_drivernum;//标记被删除的驾驶员编号
 	
+	public static JTextField driver_deltext;//用于驾驶员删除
+	public static JTextField driver_addtext1,driver_addtext2,driver_addtext3,driver_addtext4,
+						driver_addtext5,driver_addtext6,driver_addtext7;//用于增加驾驶员
+	public static JTextField driver_modifytext1,driver_modifytext2,driver_modifytext3,driver_modifytext4,
+						driver_modifytext5,driver_modifytext6,driver_modifytext7;//用于修改驾驶员
+	
+	public static JComboBox driver_bobox;
+	public static JPanel driver_mpanel,driver_panel2;
+	
 	private static DocumentListener documentListener2=new DocumentListener() {
 
 		@Override
@@ -211,10 +220,10 @@ public class Driver_ContentMessagePanel {
 		lab1.setOpaque(false);
 		p.add(lab1);
 		
-		self.driver_addtext1=new JTextField(20);
-		self.driver_addtext1.setEditable(true);//设置为可编辑
-		self.driver_addtext1.setOpaque(false);
-		p.add(self.driver_addtext1);
+		driver_addtext1=new JTextField(20);
+		driver_addtext1.setEditable(true);//设置为可编辑
+		driver_addtext1.setOpaque(false);
+		p.add(driver_addtext1);
 		
 		//第二行 驾驶证编号
 		JLabel lab2=new JLabel("驾驶证编号");
@@ -222,10 +231,10 @@ public class Driver_ContentMessagePanel {
 		lab2.setOpaque(false);
 		p.add(lab2);
 		
-		self.driver_addtext2=new JTextField(20);
-		self.driver_addtext2.setEditable(true);//设置为可编辑
-		self.driver_addtext2.setOpaque(false);
-		p.add(self.driver_addtext2);
+		driver_addtext2=new JTextField(20);
+		driver_addtext2.setEditable(true);//设置为可编辑
+		driver_addtext2.setOpaque(false);
+		p.add(driver_addtext2);
 		
 		//第三行 驾驶员姓名
 		JLabel lab3=new JLabel("驾驶员姓名");
@@ -233,10 +242,10 @@ public class Driver_ContentMessagePanel {
 		lab3.setOpaque(false);
 		p.add(lab3);
 		
-		self.driver_addtext3=new JTextField(20);
-		self.driver_addtext3.setEditable(true);//设置为可编辑
-		self.driver_addtext3.setOpaque(false);
-		p.add(self.driver_addtext3);
+		driver_addtext3=new JTextField(20);
+		driver_addtext3.setEditable(true);//设置为可编辑
+		driver_addtext3.setOpaque(false);
+		p.add(driver_addtext3);
 		
 		//第四行 驾驶员年纪
 		JLabel lab4=new JLabel("驾驶员年纪");
@@ -244,10 +253,10 @@ public class Driver_ContentMessagePanel {
 		lab4.setOpaque(false);
 		p.add(lab4);
 		
-		self.driver_addtext4=new JTextField(20);
-		self.driver_addtext4.setEditable(true);//设置为可编辑
-		self.driver_addtext4.setOpaque(false);
-		p.add(self.driver_addtext4);
+		driver_addtext4=new JTextField(20);
+		driver_addtext4.setEditable(true);//设置为可编辑
+		driver_addtext4.setOpaque(false);
+		p.add(driver_addtext4);
 		
 		//第五行   驾龄
 		JLabel lab5=new JLabel("驾龄");
@@ -255,10 +264,10 @@ public class Driver_ContentMessagePanel {
 		lab5.setOpaque(false);
 		p.add(lab5);
 		
-		self.driver_addtext5=new JTextField(20);
-		self.driver_addtext5.setEditable(true);//设置为可编辑
-		self.driver_addtext5.setOpaque(false);
-		p.add(self.driver_addtext5);
+		driver_addtext5=new JTextField(20);
+		driver_addtext5.setEditable(true);//设置为可编辑
+		driver_addtext5.setOpaque(false);
+		p.add(driver_addtext5);
 		
 		//第六行  驾驶员联系方式
 		JLabel lab6=new JLabel("联系方式");
@@ -266,10 +275,10 @@ public class Driver_ContentMessagePanel {
 		lab6.setOpaque(false);
 		p.add(lab6);
 		
-		self.driver_addtext6=new JTextField(20);
-		self.driver_addtext6.setEditable(true);//设置为可编辑
-		self.driver_addtext6.setOpaque(false);
-		p.add(self.driver_addtext6);
+		driver_addtext6=new JTextField(20);
+		driver_addtext6.setEditable(true);//设置为可编辑
+		driver_addtext6.setOpaque(false);
+		p.add(driver_addtext6);
 		
 		//第七行  驾驶员当前状态
 		JLabel lab7=new JLabel("当前工作状态");
@@ -277,10 +286,10 @@ public class Driver_ContentMessagePanel {
 		lab7.setOpaque(false);
 		p.add(lab7);
 		
-		self.driver_addtext7=new JTextField(20);
-		self.driver_addtext7.setEditable(true);//设置为可编辑
-		self.driver_addtext7.setOpaque(false);
-		p.add(self.driver_addtext7);
+		driver_addtext7=new JTextField(20);
+		driver_addtext7.setEditable(true);//设置为可编辑
+		driver_addtext7.setOpaque(false);
+		p.add(driver_addtext7);
 		
 		//第八行 增加按钮
 		p.add(new JLabel(" 		"));
@@ -303,13 +312,13 @@ public class Driver_ContentMessagePanel {
 						DebugInfo.DebugInfo("添加驾驶员信息的按钮被按下");
 						String[] s=new String[7]; 
 						
-						s[0]=self.driver_addtext1.getText();
-						s[1]=self.driver_addtext2.getText();
-						s[2]=self.driver_addtext3.getText();
-						s[3]=self.driver_addtext4.getText();
-						s[4]=self.driver_addtext5.getText();
-						s[5]=self.driver_addtext6.getText();
-						s[6]=self.driver_addtext7.getText();
+						s[0]=driver_addtext1.getText();
+						s[1]=driver_addtext2.getText();
+						s[2]=driver_addtext3.getText();
+						s[3]=driver_addtext4.getText();
+						s[4]=driver_addtext5.getText();
+						s[5]=driver_addtext6.getText();
+						s[6]=driver_addtext7.getText();
 						
 						String S=s[0]+"#"+s[1]+"#"+s[2]+"#"+s[3]+"#"+s[4]+"#"+s[5]+"#"+s[6];//保存增加的驾驶员信息
 						System.out.println("增加驾驶员信息:"+S);
@@ -317,13 +326,13 @@ public class Driver_ContentMessagePanel {
 						String message=Driver_Database.addDriverInfo(S);//将该信息输出在界面上面
 						JOptionPane.showMessageDialog(self,message,"information",JOptionPane.INFORMATION_MESSAGE);
 					
-						self.driver_addtext1.setText("");
-						self.driver_addtext2.setText("");
-						self.driver_addtext3.setText("");
-						self.driver_addtext4.setText("");
-						self.driver_addtext5.setText("");
-						self.driver_addtext6.setText("");
-						self.driver_addtext7.setText("");
+						driver_addtext1.setText("");
+						driver_addtext2.setText("");
+						driver_addtext3.setText("");
+						driver_addtext4.setText("");
+						driver_addtext5.setText("");
+						driver_addtext6.setText("");
+						driver_addtext7.setText("");
 						
 					}
 				});
@@ -344,8 +353,8 @@ public class Driver_ContentMessagePanel {
 		DebugInfo.DebugInfo("开始绘制修改驾驶员信息Panel");
 		self.removeAll();//将面板上面的组件全部清空
 		
-		self.driver_mpanel=new JPanel(new GridLayout(1,2,0,0));
-		self.driver_mpanel.setOpaque(false);
+		driver_mpanel=new JPanel(new GridLayout(1,2,0,0));
+		driver_mpanel.setOpaque(false);
 		
 		//第一列
 		JPanel p = new JPanel(new GridLayout(8,2,5,5));
@@ -357,13 +366,13 @@ public class Driver_ContentMessagePanel {
 		lab1.setOpaque(false);
 		p.add(lab1);
 		
-		self.driver_modifytext1=new JTextField(20);
-		self.driver_modifytext1.setEditable(true);//设置为可编辑
-		self.driver_modifytext1.setOpaque(false);
-		p.add(self.driver_modifytext1);
+		driver_modifytext1=new JTextField(20);
+		driver_modifytext1.setEditable(true);//设置为可编辑
+		driver_modifytext1.setOpaque(false);
+		p.add(driver_modifytext1);
 		
 		//对文本框增加响应函数
-		Document document2 = self.driver_modifytext1.getDocument();
+		Document document2 = driver_modifytext1.getDocument();
 		document2.addDocumentListener(documentListener2);
 		
 		//第二行 驾驶证编号
@@ -372,10 +381,10 @@ public class Driver_ContentMessagePanel {
 		lab2.setOpaque(false);
 		p.add(lab2);
 		
-		self.driver_modifytext2=new JTextField(20);
-		self.driver_modifytext2.setEditable(true);//设置为可编辑
-		self.driver_modifytext2.setOpaque(false);
-		p.add(self.driver_modifytext2);
+		driver_modifytext2=new JTextField(20);
+		driver_modifytext2.setEditable(true);//设置为可编辑
+		driver_modifytext2.setOpaque(false);
+		p.add(driver_modifytext2);
 		
 		//第三行 驾驶员姓名
 		JLabel lab3=new JLabel("驾驶员姓名");
@@ -383,10 +392,10 @@ public class Driver_ContentMessagePanel {
 		lab3.setOpaque(false);
 		p.add(lab3);
 		
-		self.driver_modifytext3=new JTextField(20);
-		self.driver_modifytext3.setEditable(true);//设置为可编辑
-		self.driver_modifytext3.setOpaque(false);
-		p.add(self.driver_modifytext3);
+		driver_modifytext3=new JTextField(20);
+		driver_modifytext3.setEditable(true);//设置为可编辑
+		driver_modifytext3.setOpaque(false);
+		p.add(driver_modifytext3);
 		
 		//第四行 驾驶员年纪
 		JLabel lab4=new JLabel("驾驶员年纪");
@@ -394,10 +403,10 @@ public class Driver_ContentMessagePanel {
 		lab4.setOpaque(false);
 		p.add(lab4);
 		
-		self.driver_modifytext4=new JTextField(20);
-		self.driver_modifytext4.setEditable(true);//设置为可编辑
-		self.driver_modifytext4.setOpaque(false);
-		p.add(self.driver_modifytext4);
+		driver_modifytext4=new JTextField(20);
+		driver_modifytext4.setEditable(true);//设置为可编辑
+		driver_modifytext4.setOpaque(false);
+		p.add(driver_modifytext4);
 		
 		//第五行   驾龄
 		JLabel lab5=new JLabel("驾龄");
@@ -405,10 +414,10 @@ public class Driver_ContentMessagePanel {
 		lab5.setOpaque(false);
 		p.add(lab5);
 		
-		self.driver_modifytext5=new JTextField(20);
-		self.driver_modifytext5.setEditable(true);//设置为可编辑
-		self.driver_modifytext5.setOpaque(false);
-		p.add(self.driver_modifytext5);
+		driver_modifytext5=new JTextField(20);
+		driver_modifytext5.setEditable(true);//设置为可编辑
+		driver_modifytext5.setOpaque(false);
+		p.add(driver_modifytext5);
 		
 		//第六行  驾驶员联系方式
 		JLabel lab6=new JLabel("联系方式");
@@ -416,10 +425,10 @@ public class Driver_ContentMessagePanel {
 		lab6.setOpaque(false);
 		p.add(lab6);
 		
-		self.driver_modifytext6=new JTextField(20);
-		self.driver_modifytext6.setEditable(true);//设置为可编辑
-		self.driver_modifytext6.setOpaque(false);
-		p.add(self.driver_modifytext6);
+		driver_modifytext6=new JTextField(20);
+		driver_modifytext6.setEditable(true);//设置为可编辑
+		driver_modifytext6.setOpaque(false);
+		p.add(driver_modifytext6);
 		
 		//第七行  驾驶员当前状态
 		JLabel lab7=new JLabel("当前工作状态");
@@ -427,10 +436,10 @@ public class Driver_ContentMessagePanel {
 		lab7.setOpaque(false);
 		p.add(lab7);
 		
-		self.driver_modifytext7=new JTextField(20);
-		self.driver_modifytext7.setEditable(true);//设置为可编辑
-		self.driver_modifytext7.setOpaque(false);
-		p.add(self.driver_modifytext7);
+		driver_modifytext7=new JTextField(20);
+		driver_modifytext7.setEditable(true);//设置为可编辑
+		driver_modifytext7.setOpaque(false);
+		p.add(driver_modifytext7);
 		
 		//第八行 增加按钮
 		p.add(new JLabel(" 		"));
@@ -453,13 +462,13 @@ public class Driver_ContentMessagePanel {
 						DebugInfo.DebugInfo("修改驾驶员信息的按钮被按下");
 						String[] s=new String[7]; 
 						
-						s[0]=self.driver_modifytext1.getText();
-						s[1]=self.driver_modifytext2.getText();
-						s[2]=self.driver_modifytext3.getText();
-						s[3]=self.driver_modifytext4.getText();
-						s[4]=self.driver_modifytext5.getText();
-						s[5]=self.driver_modifytext6.getText();
-						s[6]=self.driver_modifytext7.getText();
+						s[0]=driver_modifytext1.getText();
+						s[1]=driver_modifytext2.getText();
+						s[2]=driver_modifytext3.getText();
+						s[3]=driver_modifytext4.getText();
+						s[4]=driver_modifytext5.getText();
+						s[5]=driver_modifytext6.getText();
+						s[6]=driver_modifytext7.getText();
 						
 						String S=s[0]+"#"+s[1]+"#"+s[2]+"#"+s[3]+"#"+s[4]+"#"+s[5]+"#"+s[6];//保存增加的驾驶员信息
 						System.out.println("修改驾驶员信息:"+S);
@@ -467,38 +476,38 @@ public class Driver_ContentMessagePanel {
 						String message=Driver_Database.modifyDriverInfo(S);//将该信息输出在界面上面
 						JOptionPane.showMessageDialog(self,message,"information",JOptionPane.INFORMATION_MESSAGE);
 					
-						self.driver_modifytext1.setText("");
-						self.driver_modifytext2.setText("");
-						self.driver_modifytext3.setText("");
-						self.driver_modifytext4.setText("");
-						self.driver_modifytext5.setText("");
-						self.driver_modifytext6.setText("");
-						self.driver_modifytext7.setText("");
+						driver_modifytext1.setText("");
+						driver_modifytext2.setText("");
+						driver_modifytext3.setText("");
+						driver_modifytext4.setText("");
+						driver_modifytext5.setText("");
+						driver_modifytext6.setText("");
+						driver_modifytext7.setText("");
 						
 					}
 				});
 				t.start();
 			}
 		});
-		self.driver_mpanel.add(p);
+		driver_mpanel.add(p);
 		
 		//第二列
-		self.driver_panel2=new JPanel();
-		self.driver_panel2.setOpaque(false);
+		driver_panel2=new JPanel();
+		driver_panel2.setOpaque(false);
 		
-		self.driver_bobox=new JComboBox();
-		self.driver_bobox.setOpaque(false);
-		self.driver_bobox.setBorder(BorderFactory.createTitledBorder("驾驶员编号模糊查询结果"));
-		self.driver_bobox.setSelectedIndex(-1);//设置不选中
+		driver_bobox=new JComboBox();
+		driver_bobox.setOpaque(false);
+		driver_bobox.setBorder(BorderFactory.createTitledBorder("驾驶员编号模糊查询结果"));
+		driver_bobox.setSelectedIndex(-1);//设置不选中
 		
 		//添加监听函数
-		self.driver_bobox.addItemListener(itemListener2);
+		driver_bobox.addItemListener(itemListener2);
 		
-		self.driver_panel2.add(self.driver_bobox);
+		driver_panel2.add(driver_bobox);
 		
-		self.driver_mpanel.add(self.driver_panel2);
+		driver_mpanel.add(driver_panel2);
 		
-		self.add(self.driver_mpanel);
+		self.add(driver_mpanel);
 		self.revalidate();
 		self.repaint();
 		DebugInfo.DebugInfo("完成绘制修改驾驶员信息Panel");
@@ -527,10 +536,10 @@ public class Driver_ContentMessagePanel {
 		cpanel.setOpaque(false);
 		panel.add(cpanel,BorderLayout.CENTER);
 		
-		self.driver_deltext=new JTextField(20);
-		self.driver_deltext.setEditable(true);
-		self.driver_deltext.setOpaque(false);
-		spanel.add(self.driver_deltext);
+		driver_deltext=new JTextField(20);
+		driver_deltext.setEditable(true);
+		driver_deltext.setOpaque(false);
+		spanel.add(driver_deltext);
 		
 		JButton b=new JButton("搜索");
 		b.setFont(new Font("宋体",Font.PLAIN,14));
@@ -546,7 +555,7 @@ public class Driver_ContentMessagePanel {
 					@Override
 					public void run() {
 						DebugInfo.DebugInfo("搜索按钮被按下");
-						String s=self.driver_deltext.getText();
+						String s=driver_deltext.getText();
 						Driver[] array=Driver_Database.getMohuDriverInfo(s);
 						
 						if(array==null||array.length==0){
@@ -633,12 +642,12 @@ public class Driver_ContentMessagePanel {
 										@Override
 										public void run() {
 											if(flag){//删除信息来自文本框
-												del_drivernum=self.driver_deltext.getText();//获取当前文本框中的路线编号
+												del_drivernum=driver_deltext.getText();//获取当前文本框中的路线编号
 											}
 											String message=Driver_Database.delDriverInfo(del_drivernum);
 											
 											JOptionPane.showMessageDialog(self,message,"information",JOptionPane.INFORMATION_MESSAGE);
-											self.driver_deltext.setText("");//清空文本框中内容
+											driver_deltext.setText("");//清空文本框中内容
 											cpanel.removeAll();
 											cpanel.revalidate();
 											cpanel.repaint();						
@@ -667,17 +676,17 @@ public class Driver_ContentMessagePanel {
 	}
 	
 	public static void moddriver_textChange() {
-		Document document2=self.driver_modifytext1.getDocument();
+		Document document2=driver_modifytext1.getDocument();
 		document2.removeDocumentListener(documentListener2);
-		String s=(String) self.driver_bobox.getSelectedItem();
-		self.driver_modifytext1.setText(s);
+		String s=(String) driver_bobox.getSelectedItem();
+		driver_modifytext1.setText(s);
 		document2.addDocumentListener(documentListener2);
 	}
 	
 	public static void moddriver_comboboxChange(){
-		self.driver_bobox.removeItemListener(itemListener2);
+		driver_bobox.removeItemListener(itemListener2);
 		
-		String s=self.driver_modifytext1.getText();
+		String s=driver_modifytext1.getText();
 		
 		String[] temp_driver=Driver_Database.getMohuDriverNumInfo(s);//用来保存模糊查询得到的驾驶员编号
 		
@@ -686,9 +695,9 @@ public class Driver_ContentMessagePanel {
 			driver_model.addElement(temp_driver[i]);
 		}
 		
-		self.driver_bobox.setModel(driver_model);
+		driver_bobox.setModel(driver_model);
 		
 		//self.car_bobox.setSelectedIndex(-1);//当模糊查询结果改变了，car面板上面的信息也就需要改变
-		self.driver_bobox.addItemListener(itemListener2);
+		driver_bobox.addItemListener(itemListener2);
 	}
 }
