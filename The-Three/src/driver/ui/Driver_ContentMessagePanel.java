@@ -559,11 +559,9 @@ public class Driver_ContentMessagePanel {
 						Driver[] array=Driver_Database.getMohuDriverInfo(s);
 						
 						if(array==null||array.length==0){
-							//JOptionPane.showMessageDialog(self,"系统中暂无驾驶员信息","information",JOptionPane.INFORMATION_MESSAGE);
-							cpanel.removeAll();
-							cpanel.add(new JLabel("该系统中暂无该驾驶员信息!"));
-							cpanel.revalidate();
-							cpanel.repaint();
+							JOptionPane.showMessageDialog(self,"该系统中暂无该驾驶员信息!","information",JOptionPane.INFORMATION_MESSAGE);
+							driver_deltext.setText("");
+							return;
 						}
 						else{
 							cpanel.removeAll();

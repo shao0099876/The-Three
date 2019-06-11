@@ -143,6 +143,7 @@ public class Car_ContentMessagePanel {
 			data[i]=array[i].toStringArray();
 		}
 		JTable table=new JTable(data,name);
+		//table.setFont(new Font("宋体",Font.PLAIN,18));//设置字体
 		table.setOpaque(false);
 		JScrollPane scroll=new JScrollPane(table);
 		scroll.setOpaque(false);
@@ -318,6 +319,7 @@ public class Car_ContentMessagePanel {
 		String[][] data1=new String[1][4];
 		data1[0]=carDetail.toStringArray();
 		JTable table1=new JTable(data1,name1);
+		//table1.setFont(new Font("宋体",Font.PLAIN,18));//设置字体
 		table1.setOpaque(false);
 		JScrollPane scroll1=new JScrollPane(table1);
 		scroll1.setOpaque(false);
@@ -335,6 +337,7 @@ public class Car_ContentMessagePanel {
 		data2[1]=driInfo2.toStringArray();
 		
 		JTable table2=new JTable(data2,name2);
+		//table2.setFont(new Font("宋体",Font.PLAIN,18));//设置字体
 		table2.setOpaque(false);
 		JScrollPane scroll2=new JScrollPane(table2);
 		scroll2.setOpaque(false);
@@ -348,6 +351,7 @@ public class Car_ContentMessagePanel {
 		data3[0]=routeInfo.toStringArray();
 		
 		JTable table3=new JTable(data3,name3);
+		//table3.setFont(new Font("宋体",Font.PLAIN,18));//设置字体
 		table3.setOpaque(false);
 		JScrollPane scroll3=new JScrollPane(table3);
 		scroll3.setOpaque(false);
@@ -550,10 +554,9 @@ public class Car_ContentMessagePanel {
 						Car[] array=Car_Database.getMohuCarInfo(s);
 						
 						if(array==null||array.length==0){
-							cpanel.removeAll();
-							cpanel.add(new JLabel("该系统中暂无该车辆信息!"));
-							cpanel.revalidate();
-							cpanel.repaint();
+							JOptionPane.showMessageDialog(self,"该系统中暂无该车辆信息!","information",JOptionPane.INFORMATION_MESSAGE);
+							car_deltext.setText("");
+							return;
 						}
 						else{
 							cpanel.removeAll();

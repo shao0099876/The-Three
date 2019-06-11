@@ -233,10 +233,9 @@ public class Route_ContentMessagePanel {
 						Route[] array=Route_Database.getMohuRouteInfo(s);
 						
 						if(array==null||array.length==0){
-							cpanel.removeAll();
-							cpanel.add(new JLabel("该系统中暂无该路线信息!"));
-							cpanel.revalidate();
-							cpanel.repaint();
+							JOptionPane.showMessageDialog(self,"该系统中暂无该路线信息!","information",JOptionPane.INFORMATION_MESSAGE);
+							route_deltext.setText("");
+							return;
 						}
 						else{
 							cpanel.removeAll();
