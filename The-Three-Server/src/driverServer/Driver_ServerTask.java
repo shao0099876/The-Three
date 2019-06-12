@@ -362,6 +362,7 @@ public class Driver_ServerTask extends ServerTask {
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+					message="该驾驶员正在某车辆的信息中，不能被删除";
 				}
 			}
 			res.close();

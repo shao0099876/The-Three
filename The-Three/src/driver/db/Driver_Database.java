@@ -21,6 +21,9 @@ public class Driver_Database {
 			IO.write(output, Integer.toString(n));//写入驾驶员编号
 			
 			String raw_string=IO.read(input);
+			if(raw_string==null||raw_string.equals("")){
+				return null;
+			}
 			System.out.println(raw_string);
 			String[] data=raw_string.split("#");
 			Driver[] res=new Driver[data.length/7];
@@ -55,6 +58,9 @@ public class Driver_Database {
 			IO.write(output, "20");//查询所有驾驶员信息		
 			
 			String raw_string=IO.read(input);
+			if(raw_string==null||raw_string.equals("")){
+				return null;
+			}
 			System.out.println(raw_string);
 			String[] data=raw_string.split("#");
 			Driver[] res=new Driver[data.length/7];
@@ -151,6 +157,9 @@ public class Driver_Database {
 			System.out.println("发送删除需要用的模糊查询驾驶员编号结束");
 			
 			String raw_string=IO.read(input);
+			if(raw_string==null||raw_string.equals("")){
+				return null;
+			}
 			String[] data=raw_string.split("#");
 			
 			String[] res=new String[data.length/7];//用来保存编号
@@ -184,6 +193,9 @@ public class Driver_Database {
 			System.out.println("发送删除需要用的模糊查询驾驶员编号结束");
 			
 			String raw_string=IO.read(input);
+			if(raw_string==null||raw_string.equals("")){
+				return null;
+			}
 			String[] data=raw_string.split("#");
 			
 			Driver[] res=new Driver[data.length/7];

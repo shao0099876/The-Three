@@ -40,14 +40,18 @@ public class BaseUI extends JFrame{
 	public static JMenuItem m4_1,m4_2;//货物菜单项
 	public static JMenuItem m5_1;//退出
 	
-	//定义获取屏幕长度变量
-	public static int width,height;
+	public static int width,height;//定义屏幕大小
+	public static void getscreenSize(){//获取屏幕大小
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		width=(int) (screenSize.getWidth()*0.7);//获取屏幕宽
+		height=(int) (screenSize.getHeight()*0.55);//获取屏幕高
+	}
 	
 	public BaseUI() {
 		super("物流综合信息平台");
 		
 		setMenu();//设置菜单
-		getscreenSize();//获取屏幕大小
+		getscreenSize();
 		
 		//添加响应函数
 		setaction_Car();//车辆
@@ -170,12 +174,6 @@ public class BaseUI extends JFrame{
 		 m5.add(m5_1);
 		 
 		 
-	}
-
-	public void getscreenSize(){//获取屏幕大小
-		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		width=(int) (screenSize.getWidth()*0.8);//获取屏幕宽
-		height=(int) (screenSize.getHeight()*0.6);//获取屏幕高
 	}
 
 	public static void setaction_Car(){//给车辆管理添加响应函数
@@ -486,6 +484,6 @@ public class BaseUI extends JFrame{
 	
 	public void setlocation(){//设置窗口位置
 		Dimension dm = this.getToolkit().getScreenSize();
-		this.setLocation((int)(dm.getWidth()-1500)/2,(int)(dm.getHeight()-650)/2);//显示在屏幕中央
+		this.setLocation((int)(dm.getWidth()-1400)/2,(int)(dm.getHeight()-650)/2);//显示在屏幕中央
 	}
 }

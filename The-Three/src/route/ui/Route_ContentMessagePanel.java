@@ -3,6 +3,7 @@ package route.ui;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -31,6 +32,7 @@ import station.db.Station_Database;
 import client.DebugInfo;
 import ui.ContentMessagePanel;
 import entity.Route;
+import entity.Station;
 
 public class Route_ContentMessagePanel {
 	private static Route[] array=null;
@@ -42,81 +44,50 @@ public class Route_ContentMessagePanel {
 	private static String del_routenum;//标记被删除的路线编号
 	
 	public static JTextField route_deltext;//用于路线删除
-	public static JTextField route_addtext1,route_addtext2,route_addtext3,route_addtext4;//用于增加路线时
-	public static JTextField route_modifytext1,route_modifytext2,route_modifytext3,route_modifytext4;//用于修改路线时
-	public static JComboBox route_bobox;
-	public static JPanel route_mpanel,route_panel2;
 	
-	private static DocumentListener documentListener1=new DocumentListener() {
-
-		@Override
-		public void changedUpdate(DocumentEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void insertUpdate(DocumentEvent e) {
-			// TODO Auto-generated method stub
-			DebugInfo.DebugInfo("文本框内容增加！");
-			Thread t=new Thread(new Runnable() {
-				
-				@Override
-				public void run() {
-					// TODO Auto-generated method stub
-					modroute_comboboxChange();
-				}
-			});
-			t.start();
-		}
-
-		@Override
-		public void removeUpdate(DocumentEvent e) {
-			// TODO Auto-generated method stub
-			DebugInfo.DebugInfo("文本框内容减少！");
-			Thread t=new Thread(new Runnable() {
-				
-				@Override
-				public void run() {
-					// TODO Auto-generated method stub
-					modroute_comboboxChange();
-				}
-			});
-			t.start();
-		}
-		
-	};
+	public static JTextField route_text1,route_text2,route_text3,route_text4;//增删
+	
+	public static JComboBox route_bobox;
+	
+	//下面参数用来显示站点查询结果
+	public static JComboBox station_bobox2,station_bobox3,station_bobox4;
+	
 	private static ItemListener itemListener1=new ItemListener() {
 
 		@Override
-		public void itemStateChanged(ItemEvent arg0) {
+		public void itemStateChanged(ItemEvent e) {
 			// TODO Auto-generated method stub
-			DebugInfo.DebugInfo("Combobox项被选中！");
-			Thread t=new Thread(new Runnable(){
-
-				@Override
-				public void run() {
-					// TODO Auto-generated method stub
-					modroute_textChange();
-				}
-				
-			});
-			t.start();
-		}};
+			if(e.getStateChange() == ItemEvent.SELECTED){
+				DebugInfo.DebugInfo("route1bobox项被选中！");
+				Thread t=new Thread(new Runnable(){
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						String s=(String) route_bobox.getSelectedItem();
+						route_text1.setText(s);
+					}
+					
+				});
+				t.start();
+			}
+			}
+	};
 	
 	public static void setRouteInfo(ContentMessagePanel p_self) {//查看路线信息 不包含GPS信息
 		self=p_self;
 		DebugInfo.DebugInfo("开始绘制路线概要信息Panel");
 		self.removeAll();//将面板上面的组件全部清空
 		
-		String[] name= {"路线编号","起始站点","终点站","中转站点"};
-		array=Route_Database.getAllRouteInfo();//查询所有路线信息
-		
 		if(array==null||array.length==0) {
+			self.removeAll();//将面板上面的组件全部清空
 			JOptionPane.showMessageDialog(self,"当前系统无可用路线信息！","information",JOptionPane.INFORMATION_MESSAGE);
+			self.revalidate();
+			self.repaint();
 			return;
 		}
 		
+		String[] name= {"路线编号","起始站点","终点站","中转站点"};
+		array=Route_Database.getAllRouteInfo();//查询所有路线信息
 		String[][] data=new String[array.length][4];
 		for(int i=0;i<array.length;i++) {
 			data[i]=array[i].toStringArray();
@@ -209,6 +180,7 @@ public class Route_ContentMessagePanel {
 		//设置panel
 		JPanel panel=new JPanel();
 		panel.setOpaque(false);
+		panel.setLayout(new BorderLayout());
 		
 		//设置搜索panel
 		JPanel spanel=new JPanel(new GridLayout(1,2,0,0));
@@ -221,12 +193,13 @@ public class Route_ContentMessagePanel {
 		panel.add(cpanel,BorderLayout.CENTER);
 		
 		route_deltext=new JTextField(20);
+		route_deltext.setFont(new Font("宋体",Font.PLAIN,30));
 		route_deltext.setEditable(true);
 		route_deltext.setOpaque(false);
 		spanel.add(route_deltext);
 		
 		JButton b=new JButton("搜索");
-		b.setFont(new Font("宋体",Font.PLAIN,14));
+		b.setFont(new Font("宋体",Font.PLAIN,20));
 		b.setSize(4, 1);
 		b.setOpaque(false);
 		spanel.add(b);
@@ -243,10 +216,9 @@ public class Route_ContentMessagePanel {
 						Route[] array=Route_Database.getMohuRouteInfo(s);
 						
 						if(array==null||array.length==0){
-							cpanel.removeAll();
-							cpanel.add(new JLabel("该系统中暂无该路线信息!"));
-							cpanel.revalidate();
-							cpanel.repaint();
+							JOptionPane.showMessageDialog(self,"该系统中暂无该路线信息!","information",JOptionPane.INFORMATION_MESSAGE);
+							route_deltext.setText("");
+							return;
 						}
 						else{
 							cpanel.removeAll();
@@ -310,7 +282,7 @@ public class Route_ContentMessagePanel {
 							cpanel.add(scroll,BorderLayout.CENTER);
 							
 							JButton bb=new JButton("删除");
-							bb.setFont(new Font("宋体",Font.PLAIN,14));
+							bb.setFont(new Font("宋体",Font.PLAIN,18));
 							bb.setSize(4, 1);
 							bb.setOpaque(false);
 							cpanel.add(bb,BorderLayout.SOUTH);
@@ -356,59 +328,103 @@ public class Route_ContentMessagePanel {
 		DebugInfo.DebugInfo("开始绘制增加路线信息Panel");
 		self.removeAll();//将面板上面的组件全部清空
 		
-		JPanel p = new JPanel(new GridLayout(5,2,5,5));
+		if(newstationbobox()==false){//调用stationbobox初始化函数
+			self.removeAll();//将面板上面的组件全部清空
+			JOptionPane.showMessageDialog(self,"系统现在无站点信息，不能进行路线添加，请先去添加站点信息","information",JOptionPane.INFORMATION_MESSAGE);
+			self.revalidate();
+			self.repaint();
+			return;
+		}
+
+		//有站点信息，进行添加
+		JPanel p = new JPanel(new GridLayout(9,3,5,0));
 		p.setOpaque(false);
 		
 		//第一行 路线编号
 		JLabel lab1=new JLabel("路线编号");
-		lab1.setFont(new Font("宋体",Font.PLAIN,20));
+		lab1.setFont(new Font("宋体",Font.PLAIN,25));
 		lab1.setOpaque(false);
 		p.add(lab1);
 		
-		route_addtext1=new JTextField(20);
-		route_addtext1.setEditable(true);//设置为可编辑
-		route_addtext1.setOpaque(false);
-		p.add(route_addtext1);
+		route_text1=new JTextField(20);
+		route_text1.setText("");
+		route_text1.setFont(new Font("宋体",Font.PLAIN,25));
+		route_text1.setEditable(true);//设置为可编辑
+		route_text1.setOpaque(false);
+		p.add(route_text1);
+		p.add(new JLabel("     "));
+		
+		//
+		p.add(new JLabel("     "));
+		p.add(new JLabel("     "));
+		p.add(new JLabel("     "));
 		
 		//第二行 起始站台
 		JLabel lab2=new JLabel("起始站台");
-		lab2.setFont(new Font("宋体",Font.PLAIN,20));
+		lab2.setFont(new Font("宋体",Font.PLAIN,25));
 		lab2.setOpaque(false);
 		p.add(lab2);
 		
-		route_addtext2=new JTextField(20);
-		route_addtext2.setEditable(true);//设置为可编辑
-		route_addtext2.setOpaque(false);
-		p.add(route_addtext2);
+		route_text2=new JTextField();
+		route_text2.setText("");
+		route_text2.setFont(new Font("宋体",Font.PLAIN,25));
+		route_text2.setEditable(false);//设置为可编辑
+		route_text2.setOpaque(false);
+		p.add(route_text2);
+		p.add(station_bobox2);
+		
+		//
+		p.add(new JLabel("     "));
+		p.add(new JLabel("     "));
+		p.add(new JLabel("     "));
 		
 		//第三行 终点站
 		JLabel lab3=new JLabel("终点站");
-		lab3.setFont(new Font("宋体",Font.PLAIN,20));
+		lab3.setFont(new Font("宋体",Font.PLAIN,25));
 		lab3.setOpaque(false);
 		p.add(lab3);
 		
-		route_addtext3=new JTextField(20);
-		route_addtext3.setEditable(true);//设置为可编辑
-		route_addtext3.setOpaque(false);
-		p.add(route_addtext3);
+		route_text3=new JTextField();
+		route_text3.setText("");
+		route_text3.setFont(new Font("宋体",Font.PLAIN,25));
+		route_text3.setEditable(false);//设置为可编辑
+		route_text3.setOpaque(false);
+		p.add(route_text3);
+		p.add(station_bobox3);
+		
+		//
+		p.add(new JLabel("     "));
+		p.add(new JLabel("     "));
+		p.add(new JLabel("     "));
 		
 		//第四行 中转站
 		JLabel lab4=new JLabel("中转站");
-		lab4.setFont(new Font("宋体",Font.PLAIN,20));
+		lab4.setFont(new Font("宋体",Font.PLAIN,25));
 		lab4.setOpaque(false);
 		p.add(lab4);
 		
-		route_addtext4=new JTextField(20);
-		route_addtext4.setEditable(true);//设置为可编辑
-		route_addtext4.setOpaque(false);
-		p.add(route_addtext4);
+		route_text4=new JTextField();
+		route_text4.setText("");
+		route_text4.setFont(new Font("宋体",Font.PLAIN,25));
+		route_text4.setEditable(false);//设置为可编辑
+		route_text4.setOpaque(false);
+		p.add(route_text4);
+		p.add(station_bobox4);
+		
+		//
+		p.add(new JLabel("     "));
+		p.add(new JLabel("     "));
+		p.add(new JLabel("     "));
 		
 		//第五行 增加按钮
-		p.add(new JLabel("添加中转站信息格式：青岛-成都-济南"));
-		//中转站格式待修改完善
+		JLabel l=new JLabel("站点信息都是从右边选择");
+		l.setFont(new Font("宋体",Font.PLAIN,25));
+		p.add(l);
+		
+		p.add(new JLabel("     "));
 		
 		JButton b=new JButton("确认");
-		b.setFont(new Font("宋体",Font.PLAIN,14));
+		b.setFont(new Font("宋体",Font.PLAIN,18));
 		b.setSize(4, 1);
 		b.setOpaque(false);
 		p.add(b);
@@ -423,10 +439,10 @@ public class Route_ContentMessagePanel {
 					public void run() {
 						DebugInfo.DebugInfo("添加路线信息的按钮被按下");
 						String[] s=new String[4]; 
-						s[0]=route_addtext1.getText();
-						s[1]=route_addtext2.getText();
-						s[2]=route_addtext3.getText();
-						s[3]=route_addtext4.getText();
+						s[0]=route_text1.getText();
+						s[1]=route_text2.getText();
+						s[2]=route_text3.getText();
+						s[3]=route_text4.getText();
 						
 						String S=s[0]+"#"+s[1]+"#"+s[2]+"#"+s[3];//保存增加的路径信息
 						System.out.println("增加路径信息:"+S);
@@ -434,10 +450,10 @@ public class Route_ContentMessagePanel {
 						String message=Route_Database.addRouteInfo(S);//将该信息输出在界面上面
 						JOptionPane.showMessageDialog(self,message,"information",JOptionPane.INFORMATION_MESSAGE);
 					
-						route_addtext1.setText("");
-						route_addtext2.setText("");
-						route_addtext3.setText("");
-						route_addtext4.setText("");
+						route_text1.setText("");
+						route_text2.setText("");
+						route_text3.setText("");
+						route_text4.setText("");
 						
 					}
 				});
@@ -457,67 +473,108 @@ public class Route_ContentMessagePanel {
 		DebugInfo.DebugInfo("开始绘制修改路线信息Panel");
 		self.removeAll();//将面板上面的组件全部清空
 		
-		route_mpanel=new JPanel(new GridLayout(1,2,0,0));
-		route_mpanel.setOpaque(false);
+		if(newstationbobox()==false){//调用stationbobox初始化函数
+			self.removeAll();//将面板上面的组件全部清空
+			JOptionPane.showMessageDialog(self,"系统现在无站点信息，不能进行路线修改，请先去添加站点信息","information",JOptionPane.INFORMATION_MESSAGE);
+			self.revalidate();
+			self.repaint();
+			return;
+		}
 		
-		//第一列
-		JPanel panel=new JPanel(new GridLayout(5,2,5,5));
+		//有站点信息,进行修改
+		JPanel panel=new JPanel(new GridLayout(9,3,5,5));
 		panel.setOpaque(false);
 		
 		//第一行 路线编号
 		JLabel label1=new JLabel("路线编号");
-		label1.setFont(new Font("宋体",Font.PLAIN,20));
+		label1.setFont(new Font("宋体",Font.PLAIN,25));
 		label1.setOpaque(false);
 		panel.add(label1);
 		
-		route_modifytext1=new JTextField(20);
-		route_modifytext1.setEditable(true);//设置为可编辑
-		route_modifytext1.setOpaque(false);
-		panel.add(route_modifytext1);
+		route_text1=new JTextField(20);
+		route_text1.setText("");
+		route_text1.setFont(new Font("宋体",Font.PLAIN,25));
+		route_text1.setEditable(false);//设置为可编辑
+		route_text1.setOpaque(false);
+		panel.add(route_text1);
 		
-		//对文本框增加响应函数
-		Document document1 = route_modifytext1.getDocument();
-		document1.addDocumentListener(documentListener1);
+		if(newroutebobox()==false){
+			JOptionPane.showMessageDialog(self,"系统没有路线信息，不能进行路线修改，请先去添加路线信息","information",JOptionPane.INFORMATION_MESSAGE);
+			return;
+		}
+		panel.add(route_bobox);
+		
+		//
+		panel.add(new JLabel("    "));
+		panel.add(new JLabel("    "));
+		panel.add(new JLabel("    "));
 		
 		//第二行 起始站台
 		JLabel label2=new JLabel("起始站台");
-		label2.setFont(new Font("宋体",Font.PLAIN,20));
+		label2.setFont(new Font("宋体",Font.PLAIN,25));
 		label2.setOpaque(false);
 		panel.add(label2);
 		
-		route_modifytext2=new JTextField(20);
-		route_modifytext2.setEditable(true);//设置为可编辑
-		route_modifytext2.setOpaque(false);
-		panel.add(route_modifytext2);
+		route_text2=new JTextField(20);
+		route_text2.setText("");
+		route_text2.setFont(new Font("宋体",Font.PLAIN,25));
+		route_text2.setEditable(false);//设置为可编辑
+		route_text2.setOpaque(false);
+		panel.add(route_text2);
+		panel.add(station_bobox2);
+		
+		//
+		panel.add(new JLabel("    "));
+		panel.add(new JLabel("    "));
+		panel.add(new JLabel("    "));
 		
 		//第三行 终点站
 		JLabel label3=new JLabel("终点站");
-		label3.setFont(new Font("宋体",Font.PLAIN,20));
+		label3.setFont(new Font("宋体",Font.PLAIN,25));
 		label3.setOpaque(false);
 		panel.add(label3);
 		
-		route_modifytext3=new JTextField(20);
-		route_modifytext3.setEditable(true);//设置为可编辑
-		route_modifytext3.setOpaque(false);
-		panel.add(route_modifytext3);
+		route_text3=new JTextField(20);
+		route_text3.setText("");
+		route_text3.setFont(new Font("宋体",Font.PLAIN,25));
+		route_text3.setEditable(false);//设置为可编辑
+		route_text3.setOpaque(false);
+		panel.add(route_text3);
+		panel.add(station_bobox3);
+		
+		//
+		panel.add(new JLabel("    "));
+		panel.add(new JLabel("    "));
+		panel.add(new JLabel("    "));
 		
 		//第四行 中转站
 		JLabel label4=new JLabel("中转站");
-		label4.setFont(new Font("宋体",Font.PLAIN,20));
+		label4.setFont(new Font("宋体",Font.PLAIN,25));
 		label4.setOpaque(false);
 		panel.add(label4);
 		
-		route_modifytext4=new JTextField(20);
-		route_modifytext4.setEditable(true);//设置为可编辑
-		route_modifytext4.setOpaque(false);
-		panel.add(route_modifytext4);
+		route_text4=new JTextField(20);
+		route_text4.setText("");
+		route_text4.setFont(new Font("宋体",Font.PLAIN,25));
+		route_text4.setEditable(false);//设置为可编辑
+		route_text4.setOpaque(false);
+		panel.add(route_text4);
+		panel.add(station_bobox4);
+		
+		//
+		panel.add(new JLabel("    "));
+		panel.add(new JLabel("    "));
+		panel.add(new JLabel("    "));
 		
 		//第五行 增加按钮
-		panel.add(new JLabel("修改中转站信息格式：青岛-成都-济南"));
-		//中转站格式待修改完善
+		JLabel l=new JLabel("文本框内容来自于右边搜索框s");
+		l.setFont(new Font("宋体",Font.PLAIN,18));
+		panel.add(l);
+		
+		panel.add(new JLabel("    "));
 		
 		JButton b=new JButton("确认");
-		b.setFont(new Font("宋体",Font.PLAIN,14));
+		b.setFont(new Font("宋体",Font.PLAIN,18));
 		b.setSize(4, 1);
 		b.setOpaque(false);
 		panel.add(b);
@@ -533,10 +590,10 @@ public class Route_ContentMessagePanel {
 					public void run() {
 						// TODO Auto-generated method stub
 						String[] s=new String[4]; 
-						s[0]=route_modifytext1.getText();
-						s[1]=route_modifytext2.getText();
-						s[2]=route_modifytext3.getText();
-						s[3]=route_modifytext4.getText();
+						s[0]=route_text1.getText();
+						s[1]=route_text2.getText();
+						s[2]=route_text3.getText();
+						s[3]=route_text4.getText();
 						
 						String S=s[0]+"#"+s[1]+"#"+s[2]+"#"+s[3];
 						System.out.println("修改信息为："+S);
@@ -544,60 +601,169 @@ public class Route_ContentMessagePanel {
 						String message=Route_Database.modRouteInfo(S);//将该信息输出在界面上面
 						JOptionPane.showMessageDialog(self,message,"information",JOptionPane.INFORMATION_MESSAGE);
 					
-						route_modifytext1.setText("");
-						route_modifytext2.setText("");
-						route_modifytext3.setText("");
-						route_modifytext4.setText("");
+						route_text1.setText("");
+						route_text2.setText("");
+						route_text3.setText("");
+						route_text4.setText("");
 					}
 				});
 				t.start();
 			}	
 		});
-		route_mpanel.add(panel);
 		
-		//第二列
-		route_panel2=new JPanel();
-		route_panel2.setOpaque(false);
-		
-		route_bobox=new JComboBox();
-		route_bobox.setOpaque(false);
-		route_bobox.setBorder(BorderFactory.createTitledBorder("路线编号模糊查询结果"));
-		route_bobox.setSelectedIndex(-1);//设置不选中
-		
-		//添加监听函数
-		route_bobox.addItemListener(itemListener1);
-		
-		route_panel2.add(route_bobox);
-		
-		route_mpanel.add(route_panel2);
-	
-		
-		self.add(route_mpanel);
+		self.add(panel);
 		self.revalidate();
 		self.repaint();
 		DebugInfo.DebugInfo("完成绘制修改路线信息Panel");
 		return;
 	}
+
 	
-	public static void modroute_textChange() {
-		Document document1=route_modifytext1.getDocument();
-		document1.removeDocumentListener(documentListener1);
-		String s=(String) route_bobox.getSelectedItem();
-		route_modifytext1.setText(s);
-		document1.addDocumentListener(documentListener1);
+	private static ItemListener station_itemListener2=new ItemListener() {//给stationbobox2增加响应函数
+
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				// TODO Auto-generated method stub
+				if(e.getStateChange() == ItemEvent.SELECTED){
+					DebugInfo.DebugInfo("Combobox2项被选中！");
+					Thread t=new Thread(new Runnable(){
+
+						@Override
+						public void run() {
+							// TODO Auto-generated method stub
+							String s=(String) station_bobox2.getSelectedItem();
+							route_text2.setText("");
+							route_text2.setText(s);
+						}
+						
+					});
+					t.start();
+				}
+				}
+		};
+	private static ItemListener station_itemListener3=new ItemListener() {//给stationbobox3增加响应函数
+	
+		@Override
+		public void itemStateChanged(ItemEvent e) {
+			// TODO Auto-generated method stub
+			if(e.getStateChange() == ItemEvent.SELECTED){
+				DebugInfo.DebugInfo("Combobox3项被选中！");
+				Thread t=new Thread(new Runnable(){
+		
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						String s=(String) station_bobox3.getSelectedItem();
+						route_text3.setText("");
+						route_text3.setText(s);
+					}
+					
+				});
+				t.start();
+			}
+		}};
+	private static ItemListener station_itemListener4=new ItemListener() {//给stationbobox4增加响应函数
+		@Override
+		public void itemStateChanged(ItemEvent e) {
+			// TODO Auto-generated method stub
+			
+			if(e.getStateChange() == ItemEvent.SELECTED){
+				DebugInfo.DebugInfo("Combobox4项被选中！");
+				
+				Thread t=new Thread(new Runnable(){
+					@Override
+					public void run() {
+						String s=(String) station_bobox4.getSelectedItem();
+						String ss=route_text4.getText();
+						
+						if(ss.length()==0||ss.equals("")){
+							route_text4.setText("");
+							route_text4.setText(s);
+						}
+						else{
+							ss=ss+"-"+s;
+							route_text4.setText("");
+							route_text4.setText(ss);
+						}
+					}
+					
+				});
+				t.start();
+			}
+		}};
+	
+	public static boolean newstationbobox(){//对station bobox初始化
+		//将站名添加进列表中
+		station_bobox2=new JComboBox();
+		station_bobox3=new JComboBox();
+		station_bobox4=new JComboBox();
+		
+		station_bobox2.setFont(new Font("宋体",Font.PLAIN,25));station_bobox2.setOpaque(false);
+		station_bobox3.setFont(new Font("宋体",Font.PLAIN,25));station_bobox3.setOpaque(false);
+		station_bobox4.setFont(new Font("宋体",Font.PLAIN,25));station_bobox4.setOpaque(false);
+		
+		station_bobox2.setSelectedIndex(-1);//设置不选中
+		station_bobox3.setSelectedIndex(-1);//设置不选中
+		station_bobox4.setSelectedIndex(-1);//设置不选中
+		
+		//获取所有站名
+		Station[] sta=Station_Database.getStationList();
+		if(sta==null||sta.length==0){
+			return false;//无站点信息
+		}
+		
+		String[] s=new String[sta.length];
+		for(int i=0;i<sta.length;i++){
+			s[i]=sta[i].stationName;//获取地名
+		}
+		
+		//将信息添加到列表中
+		DefaultComboBoxModel<String> route_model2=new DefaultComboBoxModel<String>();
+		DefaultComboBoxModel<String> route_model3=new DefaultComboBoxModel<String>();
+		DefaultComboBoxModel<String> route_model4=new DefaultComboBoxModel<String>();
+		for(int i=0;i<s.length;i++){
+			route_model2.addElement(s[i]);
+			route_model3.addElement(s[i]);
+			route_model4.addElement(s[i]);
+		}
+		station_bobox2.setModel(route_model2);
+		station_bobox3.setModel(route_model3);
+		station_bobox4.setModel(route_model4);
+		
+		//添加响应函数
+		station_bobox2.addItemListener(station_itemListener2);
+		station_bobox3.addItemListener(station_itemListener3);
+		station_bobox4.addItemListener(station_itemListener4);
+		return true;
 	}
 	
-	public static void modroute_comboboxChange(){
-		route_bobox.removeItemListener(itemListener1);
-		String s=route_modifytext1.getText();
-		String[] temp_route=Route_Database.getMohuRouteNumInfo(s);//用来保存模糊查询得到的路线编号
+	public static boolean newroutebobox(){
+		//添加路线编号搜索框
+		route_bobox=new JComboBox();
+		route_bobox.setFont(new Font("宋体",Font.PLAIN,25));
+		route_bobox.setOpaque(false);
+		route_bobox.setSelectedIndex(-1);//设置不选中
 		
-		DefaultComboBoxModel<String> route_model=new DefaultComboBoxModel<String>();
-		for(int i=0;i<temp_route.length;i++){
-			route_model.addElement(temp_route[i]);
+		//将信息添加到列表中
+		Route[] stat1=Route_Database.getAllRouteInfo();//查询所有路线信息
+
+		if(stat1==null||stat1.length==0) {
+			return false;//无可用路线
 		}
-		route_bobox.setModel(route_model);
-		//self.car_bobox.setSelectedIndex(-1);//当模糊查询结果改变了，car面板上面的信息也就需要改变
+		
+		String[] rr=new String[stat1.length];
+		for(int i=0;i<stat1.length;i++){
+			rr[i]=String.valueOf(stat1[i].routeNumber);
+		}
+		
+		DefaultComboBoxModel<String> route_model1=new DefaultComboBoxModel<String>();
+		for(int i=0;i<rr.length;i++){
+			route_model1.addElement(rr[i]);
+		}
+		route_bobox.setModel(route_model1);
+		
+		//添加监听函数
 		route_bobox.addItemListener(itemListener1);
+		return true;
 	}
 }

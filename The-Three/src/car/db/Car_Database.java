@@ -12,8 +12,8 @@ import entity.Car;
 import entity.GPS;
 
 public class Car_Database {
-	//private static String addr="cal.srcserver.xyz";
-	private static String addr="47.105.101.104";
+	private static String addr="cal.srcserver.xyz";
+	//private static String addr="47.105.101.104";
 	public static Car[] getCarInfo() {//查询车辆的概要信息
 		//测试完成
 		try {
@@ -24,6 +24,9 @@ public class Car_Database {
 			IO.write(output, "1");
 			
 			String raw_string=IO.read(input);
+			if(raw_string==null||raw_string.equals("")){
+				return null;
+			}
 			
 			String[] data=raw_string.split("#");
 			Car[] res=new Car[data.length/4];
@@ -51,6 +54,9 @@ public class Car_Database {
 			IO.write(output, s);//查询的车牌号部分信息
 			
 			String raw_string=IO.read(input);
+			if(raw_string==null||raw_string.equals("")){
+				return null;
+			}
 			
 			String[] data1=raw_string.split("#");//去掉#
 			String data[]=new String[data1.length/4];
@@ -241,6 +247,9 @@ public class Car_Database {
 			IO.write(output, s);//查询的车牌号部分信息
 			
 			String raw_string=IO.read(input);
+			if(raw_string==null||raw_string.equals("")){
+				return null;
+			}
 			String[] data=raw_string.split("#");//去掉#
 			
 			Car[] res=new Car[data.length/4];

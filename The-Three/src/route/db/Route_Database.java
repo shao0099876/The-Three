@@ -19,6 +19,11 @@ public class Route_Database {
 			IO.write(output, "3");//查询车辆信息具体信息中的路线的信息
 			IO.write(output, Integer.toString(n));//写入路线的编号
 			String raw_string=IO.read(input);
+			
+			if(raw_string==null||raw_string.equals("")){
+				return null;
+			}
+			
 			String[] data=raw_string.split("#");
 			Route[] res=new Route[data.length/4];
 			for(int i=0;i<data.length;i+=4) {
@@ -47,6 +52,10 @@ public class Route_Database {
 			IO.write(output, "8");//查询所有路线的信息
 			
 			String raw_string=IO.read(input);
+			if(raw_string==null||raw_string.equals("")){
+				return null;
+			}
+			
 			String[] data=raw_string.split("#");
 			Route[] res=new Route[data.length/4];
 			for(int i=0;i<data.length;i+=4) {
@@ -78,6 +87,9 @@ public class Route_Database {
 			System.out.println("发送删除需要用的模糊查询路线编号结束");
 			
 			String raw_string=IO.read(input);
+			if(raw_string==null||raw_string.equals("")){
+				return null;
+			}
 			String[] data=raw_string.split("#");
 			Route[] res=new Route[data.length/4];
 			for(int i=0;i<data.length;i+=4) {
@@ -109,6 +121,9 @@ public class Route_Database {
 			System.out.println("发送模糊查询文本框里面的路线编号结束");
 			
 			String raw_string=IO.read(input);
+			if(raw_string==null||raw_string.equals("")){
+				return null;
+			}
 			String[] data=raw_string.split("#");
 			
 			String[] res=new String[data.length/4];//用来保存编号
