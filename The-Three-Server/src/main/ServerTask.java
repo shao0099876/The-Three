@@ -162,6 +162,9 @@ public class ServerTask implements Runnable {
 			case 35:
 				Cargo_ServerTask.addCargoRecord(IO.read(input));
 				break;
+			case 36:
+				Station_ServerTask.addStationRecord(IO.read(input));
+				break;
 			}
 			input.close();
 			output.close();

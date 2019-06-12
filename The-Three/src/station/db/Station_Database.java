@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import client.Client;
 import code.IO;
 import entity.Car;
 import entity.Station;
@@ -149,6 +150,24 @@ public class Station_Database {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	public static void addStationRecord(String carNumber, String routeNumber, int i) {
+		try {
+			Socket socket= new Socket(addr,8081);
+			DataInputStream input=new DataInputStream(socket.getInputStream());
+			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
+			IO.write(output, "36");//查询车辆的编号
+			IO.write(output, carNumber+"#"+routeNumber+"#"+Client.user.stationName+"#"+Integer.toString(i));//查询的车牌号部分信息
+			output.close();
+			input.close();
+			socket.close();
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }

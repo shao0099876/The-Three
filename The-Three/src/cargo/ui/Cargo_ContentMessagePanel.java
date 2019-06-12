@@ -19,6 +19,7 @@ import javax.swing.JTextField;
 
 import car.db.Car_Database;
 import cargo.db.Cargo_Database;
+import client.Client;
 import entity.Cargo;
 import entity.Route;
 import entity.Station;
@@ -149,7 +150,7 @@ public class Cargo_ContentMessagePanel {
 						else {
 							int routeNumber=Integer.valueOf(route.split(":")[0]);
 							String cargoNumber=Cargo_Database.addCargo(start,end,routeNumber);
-							Cargo_Database.addCargoRecord(cargoNumber,start,1);//收件
+							Cargo_Database.addCargoRecord(cargoNumber,start,"", 1);//收件
 							JOptionPane.showMessageDialog(self,"物流单号："+cargoNumber,"information",JOptionPane.INFORMATION_MESSAGE);
 						}
 					}
@@ -209,7 +210,7 @@ public class Cargo_ContentMessagePanel {
 						// TODO Auto-generated method stub
 						String carName=(String) carNameComboBox.getSelectedItem();
 						String cargoNumber=cargoNumberText.getText();
-						String status=Cargo_Database.loadCargo(carName,cargoNumber);
+						Cargo_Database.addCargoRecord(cargoNumber,Client.user.stationName,carName,1);//收件
 					}
 					
 				});
@@ -218,7 +219,97 @@ public class Cargo_ContentMessagePanel {
 			
 		});
 		panel.add(loadButton);
+		self.add(panel);
+		self.revalidate();
+		self.repaint();
+	}
+
+	public static void unloadCargo(ContentMessagePanel contentPanel) {
+		// TODO Auto-generated method stub
+		ContentMessagePanel self=contentPanel;
+		self.removeAll();
+		JPanel panel=new JPanel(new GridLayout(3,2,5,5));
+		panel.setOpaque(false);
 		
+		JLabel label2=new JLabel("货物编号：");
+		label2.setFont(new Font("宋体",Font.PLAIN,20));
+		panel.add(label2);
+		
+		JTextField cargoNumberText=new JTextField(20);
+		cargoNumberText.setFont(new Font("宋体",Font.PLAIN,20));
+		panel.add(cargoNumberText);
+		
+		panel.add(new JLabel(" 		"));
+		
+		JButton loadButton=new JButton("卸车");
+		loadButton.setFont(new Font("宋体",Font.PLAIN,20));
+		loadButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				Thread t=new Thread(new Runnable() {
+
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						String cargoNumber=cargoNumberText.getText();
+						Cargo_Database.addCargoRecord(cargoNumber,Client.user.stationName,"",2);//卸车
+					}
+					
+				});
+				t.start();
+			}
+			
+		});
+		panel.add(loadButton);
+		self.add(panel);
+		self.revalidate();
+		self.repaint();
+	}
+
+	public static void delCargo(ContentMessagePanel contentPanel) {
+		// TODO Auto-generated method stub
+		ContentMessagePanel self=contentPanel;
+		self.removeAll();
+		JPanel panel=new JPanel(new GridLayout(3,2,5,5));
+		panel.setOpaque(false);
+		
+		JLabel label2=new JLabel("货物编号：");
+		label2.setFont(new Font("宋体",Font.PLAIN,20));
+		panel.add(label2);
+		
+		JTextField cargoNumberText=new JTextField(20);
+		cargoNumberText.setFont(new Font("宋体",Font.PLAIN,20));
+		panel.add(cargoNumberText);
+		
+		panel.add(new JLabel(" 		"));
+		
+		JButton loadButton=new JButton("派送");
+		loadButton.setFont(new Font("宋体",Font.PLAIN,20));
+		loadButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				Thread t=new Thread(new Runnable() {
+
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						String cargoNumber=cargoNumberText.getText();
+						Cargo_Database.addCargoRecord(cargoNumber,Client.user.stationName,"",3);//派送
+					}
+					
+				});
+				t.start();
+			}
+			
+		});
+		panel.add(loadButton);
+		self.add(panel);
+		self.revalidate();
+		self.repaint();
 	}
 
 }

@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import main.ServerTask;
 
@@ -260,6 +262,53 @@ public class Station_ServerTask extends ServerTask{
 			e.printStackTrace();
 		}
 		return sb.toString();
+	}
+
+	public static void addStationRecord(String s) {
+		// TODO Auto-generated method stub
+		String[] data=s.split("#");//获取信息
+		
+		try {
+			initDB();
+		} catch (ClassNotFoundException | SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		int recordNumber = 0;
+		try {
+			Statement stmt=conn.createStatement();
+			ResultSet res=stmt.executeQuery("select COUNT(*) from StationRecord");
+			recordNumber=res.getInt(1)+1;
+		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//数据类型转换
+		
+		String carNumber=data[0];
+		int routeNumber=Integer.valueOf(data[1]);
+		String stationName=data[2];
+		int type=Integer.valueOf(data[3]);
+		
+		SimpleDateFormat ft=new SimpleDateFormat("yyyyMMddhhmmss");
+		String time=ft.format(new Date());
+		
+		try {
+			PreparedStatement pstmt=conn.prepareStatement("insert into StationRecord values(?,?,?,?,?,?)");
+			pstmt.setInt(1, recordNumber);
+			pstmt.setString(2, carNumber);
+			pstmt.setString(3, stationName);
+			pstmt.setInt(4, type);
+			pstmt.setString(5, time);
+			pstmt.setInt(6, routeNumber);
+			pstmt.executeUpdate();
+			pstmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }

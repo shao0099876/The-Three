@@ -37,7 +37,7 @@ public class BaseUI extends JFrame{
 	public static JMenuItem m1_1,m1_2,m1_3,m1_4,m1_5;//车辆菜单项
 	public static JMenuItem m2_1,m2_2,m2_3,m2_4,m2_5,m2_6,m2_7;//路线菜单项
 	public static JMenuItem m3_1,m3_2,m3_3,m3_4;//驾驶员菜单项
-	public static JMenuItem m4_1,m4_2,m4_3;//货物菜单项
+	public static JMenuItem m4_1,m4_2,m4_3,m4_4,m4_5,m4_6,m4_7;//货物菜单项
 	public static JMenuItem m5_1;//退出
 	
 	public static int width,height;//定义屏幕大小
@@ -168,6 +168,22 @@ public class BaseUI extends JFrame{
 		 m4_3=new JMenuItem("装车");
 		 m4_3.setFont(new Font("宋体",Font.BOLD,20));
 		 m4.add(m4_3);
+		 
+		 m4_4=new JMenuItem("发车");
+		 m4_4.setFont(new Font("宋体",Font.BOLD,20));
+		 m4.add(m4_4);
+		 
+		 m4_5=new JMenuItem("入站");
+		 m4_5.setFont(new Font("宋体",Font.BOLD,20));
+		 m4.add(m4_5);
+		 
+		 m4_6=new JMenuItem("卸车");
+		 m4_6.setFont(new Font("宋体",Font.BOLD,20));
+		 m4.add(m4_6);
+		 
+		 m4_7=new JMenuItem("派件");
+		 m4_7.setFont(new Font("宋体",Font.BOLD,20));
+		 m4.add(m4_7);
 		 
 		 m5=new JMenu("退出");//菜单
 		 m5.setFont(new Font("宋体",Font.BOLD,24));//设置字体
@@ -500,7 +516,76 @@ public class BaseUI extends JFrame{
 			}
 			
 		});
-		
+		m4_4.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Thread t=new Thread(new Runnable() {
+
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						Station_ContentMessagePanel.departCar(BaseUI.contentPanel);
+					}
+					
+				});
+				t.start();
+			}
+			
+		});
+		m4_5.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				Thread t=new Thread(new Runnable() {
+
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						Station_ContentMessagePanel.receiveCar(BaseUI.contentPanel);
+					}
+					
+				});
+				t.start();
+			}
+			
+		});
+		m4_6.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				Thread t=new Thread(new Runnable() {
+
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						Cargo_ContentMessagePanel.unloadCargo(BaseUI.contentPanel);
+					}
+					
+				});
+				t.start();
+			}
+			
+		});
+		m4_7.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				Thread t=new Thread(new Runnable() {
+
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						Cargo_ContentMessagePanel.delCargo(BaseUI.contentPanel);
+					}
+					
+				});
+				t.start();
+			}
+			
+		});
 	}
 	
 	public void setaction_Logout(){//给退出添加响应函数
