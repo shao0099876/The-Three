@@ -78,14 +78,16 @@ public class Route_ContentMessagePanel {
 		DebugInfo.DebugInfo("开始绘制路线概要信息Panel");
 		self.removeAll();//将面板上面的组件全部清空
 		
-		String[] name= {"路线编号","起始站点","终点站","中转站点"};
-		array=Route_Database.getAllRouteInfo();//查询所有路线信息
-		
 		if(array==null||array.length==0) {
+			self.removeAll();//将面板上面的组件全部清空
 			JOptionPane.showMessageDialog(self,"当前系统无可用路线信息！","information",JOptionPane.INFORMATION_MESSAGE);
+			self.revalidate();
+			self.repaint();
 			return;
 		}
 		
+		String[] name= {"路线编号","起始站点","终点站","中转站点"};
+		array=Route_Database.getAllRouteInfo();//查询所有路线信息
 		String[][] data=new String[array.length][4];
 		for(int i=0;i<array.length;i++) {
 			data[i]=array[i].toStringArray();
@@ -327,7 +329,10 @@ public class Route_ContentMessagePanel {
 		self.removeAll();//将面板上面的组件全部清空
 		
 		if(newstationbobox()==false){//调用stationbobox初始化函数
+			self.removeAll();//将面板上面的组件全部清空
 			JOptionPane.showMessageDialog(self,"系统现在无站点信息，不能进行路线添加，请先去添加站点信息","information",JOptionPane.INFORMATION_MESSAGE);
+			self.revalidate();
+			self.repaint();
 			return;
 		}
 
@@ -469,7 +474,10 @@ public class Route_ContentMessagePanel {
 		self.removeAll();//将面板上面的组件全部清空
 		
 		if(newstationbobox()==false){//调用stationbobox初始化函数
+			self.removeAll();//将面板上面的组件全部清空
 			JOptionPane.showMessageDialog(self,"系统现在无站点信息，不能进行路线修改，请先去添加站点信息","information",JOptionPane.INFORMATION_MESSAGE);
+			self.revalidate();
+			self.repaint();
 			return;
 		}
 		
@@ -490,7 +498,10 @@ public class Route_ContentMessagePanel {
 		route_text1.setOpaque(false);
 		panel.add(route_text1);
 		
-		newroutebobox();
+		if(newroutebobox()==false){
+			JOptionPane.showMessageDialog(self,"系统没有路线信息，不能进行路线修改，请先去添加路线信息","information",JOptionPane.INFORMATION_MESSAGE);
+			return;
+		}
 		panel.add(route_bobox);
 		
 		//
@@ -726,7 +737,7 @@ public class Route_ContentMessagePanel {
 		return true;
 	}
 	
-	public static void newroutebobox(){
+	public static boolean newroutebobox(){
 		//添加路线编号搜索框
 		route_bobox=new JComboBox();
 		route_bobox.setFont(new Font("宋体",Font.PLAIN,25));
@@ -734,7 +745,12 @@ public class Route_ContentMessagePanel {
 		route_bobox.setSelectedIndex(-1);//设置不选中
 		
 		//将信息添加到列表中
-		Route[] stat1=Route_Database.getAllRouteInfo();
+		Route[] stat1=Route_Database.getAllRouteInfo();//查询所有路线信息
+
+		if(stat1==null||stat1.length==0) {
+			return false;//无可用路线
+		}
+		
 		String[] rr=new String[stat1.length];
 		for(int i=0;i<stat1.length;i++){
 			rr[i]=String.valueOf(stat1[i].routeNumber);
@@ -748,5 +764,6 @@ public class Route_ContentMessagePanel {
 		
 		//添加监听函数
 		route_bobox.addItemListener(itemListener1);
+		return true;
 	}
 }

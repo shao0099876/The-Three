@@ -175,6 +175,7 @@ public class Route_ServerTask extends ServerTask{
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+					message="该路线信息正在被使用，不能被删除";
 				}
 			}
 			res.close();

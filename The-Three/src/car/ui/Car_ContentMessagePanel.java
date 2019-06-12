@@ -142,13 +142,16 @@ public class Car_ContentMessagePanel{
 		DebugInfo.DebugInfo("开始绘制车队管理概要信息Panel");
 		self.removeAll();//将面板上面的组件全部清空
 		
-		String[] name= {"车牌号","驾驶员1","驾驶员2","路线"};
-		array=Car_Database.getCarInfo();
-		
 		if(array==null||array.length==0) {
+			self.removeAll();//将面板上面的组件全部清空
 			JOptionPane.showMessageDialog(self,"当前系统无可用车辆信息！","information",JOptionPane.INFORMATION_MESSAGE);
+			self.revalidate();
+			self.repaint();
 			return;
 		}
+		
+		String[] name= {"车牌号","驾驶员1","驾驶员2","路线"};
+		array=Car_Database.getCarInfo();
 		
 		String[][] data=new String[array.length][4];
 		for(int i=0;i<array.length;i++) {
@@ -220,12 +223,18 @@ public class Car_ContentMessagePanel{
 		self.removeAll();//清除面板上面的所有组件
 
 		if(setcarbobox()==1){
+			self.removeAll();//将面板上面的组件全部清空
 			JOptionPane.showMessageDialog(self,"系统现在无驾驶员信息，不能进行车辆信息添加，请先去添加驾驶员信息","information",JOptionPane.INFORMATION_MESSAGE);
+			self.revalidate();
+			self.repaint();
 			return;
 		}
 		
 		if(setcarbobox()==2){
+			self.removeAll();//将面板上面的组件全部清空
 			JOptionPane.showMessageDialog(self,"系统现在无路线信息，不能进行车辆信息添加，请先去添加路线信息","information",JOptionPane.INFORMATION_MESSAGE);
+			self.revalidate();
+			self.repaint();
 			return;
 		}
 		
@@ -500,17 +509,26 @@ public class Car_ContentMessagePanel{
 		self.removeAll();//清除面板上面的所有组件
 
 		if(setcarbobox()==0){
+			self.removeAll();//将面板上面的组件全部清空
 			JOptionPane.showMessageDialog(self,"系统现在无车辆信息，不能进行车辆修改，请先去添加车辆信息","information",JOptionPane.INFORMATION_MESSAGE);
+			self.revalidate();
+			self.repaint();
 			return;
 		}
 		
 		if(setcarbobox()==1){
+			self.removeAll();//将面板上面的组件全部清空
 			JOptionPane.showMessageDialog(self,"系统现在无驾驶员信息，不能进行车辆修改，请先去添加驾驶员信息","information",JOptionPane.INFORMATION_MESSAGE);
+			self.revalidate();
+			self.repaint();
 			return;
 		}
 		
 		if(setcarbobox()==2){
+			self.removeAll();//将面板上面的组件全部清空
 			JOptionPane.showMessageDialog(self,"系统现在无路线信息，不能进行车辆修改，请先去添加路线信息","information",JOptionPane.INFORMATION_MESSAGE);
+			self.revalidate();
+			self.repaint();
 			return;
 		}
 		
