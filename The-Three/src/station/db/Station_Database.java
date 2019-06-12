@@ -105,6 +105,12 @@ public class Station_Database {
 			IO.write(output, "30");//修改车辆信息
 			
 			String raw_string=IO.read(input);
+			if(raw_string==null||raw_string.equals("")) {
+				output.close();
+				input.close();
+				socket.close();
+				return null;
+			}
 			String[] tmp=raw_string.split("#");
 			Station[] res=new Station[tmp.length/3];
 			for(int i=0;i<tmp.length;i+=3) {

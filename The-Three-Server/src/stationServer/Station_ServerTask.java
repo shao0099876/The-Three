@@ -74,9 +74,10 @@ public class Station_ServerTask extends ServerTask{
 			
 			if(n==0){//为空，说明无结果，为添加
 				System.out.println("开始添加数据库");
-				PreparedStatement pstmt1=conn.prepareStatement("insert into Station values(?,?)");
+				PreparedStatement pstmt1=conn.prepareStatement("insert into Station values(?,?,?)");
 				pstmt1.setString(1,stationName);
-				pstmt1.setString(2,stationAddr);	
+				pstmt1.setString(2,stationAddr);
+				pstmt1.setNull(3, java.sql.Types.NVARCHAR);
 				pstmt1.executeUpdate();  
 				pstmt1.close();
 				message="添加信息成功";
