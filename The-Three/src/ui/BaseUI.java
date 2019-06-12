@@ -22,6 +22,7 @@ import browser.BrowserDialog;
 import route.ui.Route_ContentMessagePanel;
 import station.ui.Station_ContentMessagePanel;
 import car.ui.Car_ContentMessagePanel;
+import cargo.ui.Cargo_ContentMessagePanel;
 import driver.ui.Driver_ContentMessagePanel;
 
 public class BaseUI extends JFrame{
@@ -36,7 +37,7 @@ public class BaseUI extends JFrame{
 	public static JMenuItem m1_1,m1_2,m1_3,m1_4,m1_5;//车辆菜单项
 	public static JMenuItem m2_1,m2_2,m2_3,m2_4,m2_5,m2_6,m2_7;//路线菜单项
 	public static JMenuItem m3_1,m3_2,m3_3,m3_4;//驾驶员菜单项
-	public static JMenuItem m4_1,m4_2,m4_3,m4_4;//货物菜单项
+	public static JMenuItem m4_1,m4_2;//货物菜单项
 	public static JMenuItem m5_1;//退出
 	
 	//定义获取屏幕长度变量
@@ -148,25 +149,17 @@ public class BaseUI extends JFrame{
 		 m3_4.setFont(new Font("宋体",Font.BOLD,20));//设置字体
 		 m3.add(m3_4);
 		 
-		 m4=new JMenu("物流管理");//菜单
+		 m4=new JMenu("物流网络管理");//菜单
 		 m4.setFont(new Font("宋体",Font.BOLD,24));//设置字体
 		 menubar.add(m4);//添加菜单
 		 
-		 m4_1=new JMenuItem("查询货物信息");
+		 m4_1=new JMenuItem("查看货物列表");
 		 m4_1.setFont(new Font("宋体",Font.BOLD,20));//设置字体
 		 m4.add(m4_1);
 		 
-		 m4_2=new JMenuItem("修改货物信息");
-		 m4_2.setFont(new Font("宋体",Font.BOLD,20));//设置字体
+		 m4_2=new JMenuItem("收货");
+		 m4_2.setFont(new Font("宋体",Font.BOLD,20));
 		 m4.add(m4_2);
-		 
-		 m4_3=new JMenuItem("增加货物信息");
-		 m4_3.setFont(new Font("宋体",Font.BOLD,20));//设置字体
-		 m4.add(m4_3);
-		 
-		 m4_4=new JMenuItem("删除货物信息");
-		 m4_4.setFont(new Font("宋体",Font.BOLD,20));//设置字体
-		 m4.add(m4_4);
 		 
 		 m5=new JMenu("退出");//菜单
 		 m5.setFont(new Font("宋体",Font.BOLD,24));//设置字体
@@ -465,63 +458,12 @@ public class BaseUI extends JFrame{
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
-						System.out.println("查看物流信息");
-						
-						/*
-						 *待添加*/
-						
+						Cargo_ContentMessagePanel.showCargoList(BaseUI.contentPanel);
 					}});
 				t.start();
 			}
 		});
 		
-		//修改货物信息4-2
-		m4_2.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				Thread t=new Thread(new Runnable() {
-					@Override
-					public void run() {
-						// TODO Auto-generated method stub
-						System.out.println("修改物流信息");
-						/*
-						 *待添加*/
-					}});
-				t.start();
-			}
-		});
-		
-		//增加货物信息4-3
-		m4_3.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				Thread t=new Thread(new Runnable() {
-					@Override
-					public void run() {
-						// TODO Auto-generated method stub
-						System.out.println("增加物流信息");
-						/*
-						 *待添加*/
-					}});
-				t.start();
-			}
-		});
-		
-		//删除货物信息4-4
-		m4_4.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				Thread t=new Thread(new Runnable() {
-					@Override
-					public void run() {
-						// TODO Auto-generated method stub
-						System.out.println("删除物流信息");
-						/*
-						 *待添加*/
-					}});
-				t.start();
-			}
-		});
 	}
 	
 	public void setaction_Logout(){//给退出添加响应函数
