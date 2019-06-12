@@ -1,7 +1,7 @@
 package entity;
 
 public class Station {
-	private String stationName;
+	public String stationName;
 	private String stationAddr;
 	private String stationGPS;
 	public Station(String p1,String p2,String p3) {

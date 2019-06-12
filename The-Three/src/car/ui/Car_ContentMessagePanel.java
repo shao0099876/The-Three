@@ -49,86 +49,94 @@ public class Car_ContentMessagePanel{
 	private static String del_carnum;//标记被删除的路线编号
 	
 	public static JTextField car_text1,car_text2,car_text3,car_text4;
-	public static JComboBox car_bobox;
-	public static JPanel car_mpanel,car_panel2;
+	public static JComboBox car_bobox1,car_bobox2,car_bobox3,car_bobox4;
+	
 	public static JTextField car_deltext;//用于车辆删除
 
-	public static void comboboxChange(){
-		car_bobox.removeItemListener(itemListener);
-		String s=car_text1.getText();
-		String[] temp_car=Car_Database.getCarNumber(s);//用来保存模糊查询得到的车牌号信息
-		DefaultComboBoxModel<String> car_model=new DefaultComboBoxModel<String>();
-		for(int i=0;i<temp_car.length;i++){
-			car_model.addElement(temp_car[i]);
-		}
-		car_bobox.setModel(car_model);
-		car_bobox.addItemListener(itemListener);
-	}
-	public static void textChange() {
-		Document document=car_text1.getDocument();
-		document.removeDocumentListener(documentListener);
-		String s=(String) car_bobox.getSelectedItem();
-		car_text1.setText(s);
-		document.addDocumentListener(documentListener);
-	}
-
-	private static DocumentListener documentListener=new DocumentListener() {
+	private static ItemListener car_itemListener=new ItemListener() {
 
 		@Override
-		public void changedUpdate(DocumentEvent e) {
+		public void itemStateChanged(ItemEvent e) {
 			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void insertUpdate(DocumentEvent e) {
-			// TODO Auto-generated method stub
-			DebugInfo.DebugInfo("文本框内容增加！");
-			Thread t=new Thread(new Runnable() {
-				
-				@Override
-				public void run() {
-					// TODO Auto-generated method stub
-					comboboxChange();
-				}
-			});
-			t.start();
-		}
-
-		@Override
-		public void removeUpdate(DocumentEvent e) {
-			// TODO Auto-generated method stub
-			DebugInfo.DebugInfo("文本框内容减少！");
-			Thread t=new Thread(new Runnable() {
-				
-				@Override
-				public void run() {
-					// TODO Auto-generated method stub
-					comboboxChange();
-				}
-			});
-			t.start();
-		}
-		
+			if(e.getStateChange() == ItemEvent.SELECTED){
+				DebugInfo.DebugInfo("车牌号项被选中！");
+				Thread t=new Thread(new Runnable(){
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						String s=(String) car_bobox1.getSelectedItem();
+						car_text1.setText(s);
+					}
+					
+				});
+				t.start();
+			}
+			}
 	};
-	private static ItemListener itemListener=new ItemListener() {
+
+	private static ItemListener driver1_itemListener=new ItemListener() {
 
 		@Override
-		public void itemStateChanged(ItemEvent arg0) {
+		public void itemStateChanged(ItemEvent e) {
 			// TODO Auto-generated method stub
-			DebugInfo.DebugInfo("Combobox项被选中！");
-			Thread t=new Thread(new Runnable(){
+			if(e.getStateChange() == ItemEvent.SELECTED){
+				DebugInfo.DebugInfo("驾驶员1项被选中！");
+				Thread t=new Thread(new Runnable(){
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						String s=(String) car_bobox2.getSelectedItem();
+						car_text2.setText(s);
+					}
+					
+				});
+				t.start();
+			}
+			}
+	};
+	
+	private static ItemListener driver2_itemListener=new ItemListener() {
 
-				@Override
-				public void run() {
-					// TODO Auto-generated method stub
-					textChange();
-				}
-				
-			});
-			t.start();
-		}};
-		
+		@Override
+		public void itemStateChanged(ItemEvent e) {
+			// TODO Auto-generated method stub
+			if(e.getStateChange() == ItemEvent.SELECTED){
+				DebugInfo.DebugInfo("驾驶员2项被选中！");
+				Thread t=new Thread(new Runnable(){
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						String s=(String) car_bobox3.getSelectedItem();
+						car_text3.setText(s);
+					}
+					
+				});
+				t.start();
+			}
+			}
+	};
+
+	private static ItemListener route_itemListener=new ItemListener() {
+
+		@Override
+		public void itemStateChanged(ItemEvent e) {
+			// TODO Auto-generated method stub
+			if(e.getStateChange() == ItemEvent.SELECTED){
+				DebugInfo.DebugInfo("路线编号项被选中！");
+				Thread t=new Thread(new Runnable(){
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						String s=(String) car_bobox4.getSelectedItem();
+						car_text4.setText(s);
+					}
+					
+				});
+				t.start();
+			}
+			}
+	};
+	
 	public static void setCarInfo(ContentMessagePanel p_self) {//车队管理概要信息
 		self=p_self;
 		DebugInfo.DebugInfo("开始绘制车队管理概要信息Panel");
@@ -205,79 +213,99 @@ public class Car_ContentMessagePanel{
 		DebugInfo.DebugInfo("完成绘制车辆概要信息Panel");
 		return;
 	}
+
 	public static void addcarInfo(ContentMessagePanel p_self){//车辆信息的增加操作
 		DebugInfo.DebugInfo("开始绘制车辆增删改Panel");
 		self=p_self;
 		self.removeAll();//清除面板上面的所有组件
 
-		JPanel panel=new JPanel(new GridLayout(9,2,5,5));//六行三列
+		if(setcarbobox()==1){
+			JOptionPane.showMessageDialog(self,"系统现在无驾驶员信息，不能进行车辆信息添加，请先去添加驾驶员信息","information",JOptionPane.INFORMATION_MESSAGE);
+			return;
+		}
+		
+		if(setcarbobox()==2){
+			JOptionPane.showMessageDialog(self,"系统现在无路线信息，不能进行车辆信息添加，请先去添加路线信息","information",JOptionPane.INFORMATION_MESSAGE);
+			return;
+		}
+		
+		JPanel panel=new JPanel(new GridLayout(9,3,5,5));//六行三列
 		panel.setOpaque(false);
 		
 		//第一行 车辆编号
 		JLabel label1=new JLabel("车辆编号");
-		label1.setFont(new Font("宋体",Font.PLAIN,30));
+		label1.setFont(new Font("宋体",Font.PLAIN,25));
 		label1.setOpaque(false);
 		panel.add(label1);
 		
 		car_text1=new JTextField(30);
-		car_text1.setFont(new Font("宋体",Font.PLAIN,30));
+		car_text1.setFont(new Font("宋体",Font.PLAIN,25));
 		car_text1.setEditable(true);//设置为可编辑
 		car_text1.setOpaque(false);
 		panel.add(car_text1);
+		panel.add(new JLabel("    "));
 		
 		//新的空行
+		panel.add(new JLabel("    "));
 		panel.add(new JLabel("    "));
 		panel.add(new JLabel("    "));
 		
 		//第二行 驾驶员1号
 		JLabel label2=new JLabel("驾驶员一号编号");
-		label2.setFont(new Font("宋体",Font.PLAIN,30));
+		label2.setFont(new Font("宋体",Font.PLAIN,25));
 		label2.setOpaque(false);
 		panel.add(label2);
 		
 		car_text2=new JTextField();
-		car_text2.setFont(new Font("宋体",Font.PLAIN,30));
-		car_text2.setEditable(true);//设置为可编辑
+		car_text2.setFont(new Font("宋体",Font.PLAIN,25));
+		car_text2.setEditable(false);//设置为可编辑
 		car_text2.setOpaque(false);
 		panel.add(car_text2);
+		panel.add(car_bobox2);
 		
 		//新的空行
+		panel.add(new JLabel("    "));
 		panel.add(new JLabel("    "));
 		panel.add(new JLabel("    "));
 		
 		//第三行 驾驶员2号
 		JLabel label3=new JLabel("驾驶员二号编号");
-		label3.setFont(new Font("宋体",Font.PLAIN,30));
+		label3.setFont(new Font("宋体",Font.PLAIN,25));
 		label3.setOpaque(false);
 		panel.add(label3);
 		
 		car_text3=new JTextField();
-		car_text3.setFont(new Font("宋体",Font.PLAIN,30));
-		car_text3.setEditable(true);//设置为可编辑
+		car_text3.setFont(new Font("宋体",Font.PLAIN,25));
+		car_text3.setEditable(false);//设置为可编辑
 		car_text3.setOpaque(false);
 		panel.add(car_text3);
+		panel.add(car_bobox3);
 		
 		//新的空行
+		panel.add(new JLabel("    "));
 		panel.add(new JLabel("    "));
 		panel.add(new JLabel("    "));
 		
 		//第四行 路线编号
 		JLabel label4=new JLabel("路线编号");
-		label4.setFont(new Font("宋体",Font.PLAIN,30));
+		label4.setFont(new Font("宋体",Font.PLAIN,25));
 		label4.setOpaque(false);
 		panel.add(label4);
 		
 		car_text4=new JTextField();
-		car_text4.setFont(new Font("宋体",Font.PLAIN,30));
-		car_text4.setEditable(true);//设置为可编辑
+		car_text4.setFont(new Font("宋体",Font.PLAIN,25));
+		car_text4.setEditable(false);//设置为可编辑
 		car_text4.setOpaque(false);
 		panel.add(car_text4);
+		panel.add(car_bobox4);
 		
 		//第五行 增加空行
 		panel.add(new JLabel("    "));
 		panel.add(new JLabel("    "));
+		panel.add(new JLabel("    "));
 		
 		//第六行 添加按钮
+		panel.add(new JLabel("    "));
 		panel.add(new JLabel("    "));
 		JButton button=new JButton();
 		
@@ -471,79 +499,95 @@ public class Car_ContentMessagePanel{
 		self=p_self;
 		self.removeAll();//清除面板上面的所有组件
 
-		car_mpanel=new JPanel(new GridLayout(1,2,0,0));//一行两列
-		car_mpanel.setOpaque(false);
+		if(setcarbobox()==0){
+			JOptionPane.showMessageDialog(self,"系统现在无车辆信息，不能进行车辆修改，请先去添加车辆信息","information",JOptionPane.INFORMATION_MESSAGE);
+			return;
+		}
 		
-		//第一列
-		JPanel panel=new JPanel(new GridLayout(9,2,5,5));//六行三列
+		if(setcarbobox()==1){
+			JOptionPane.showMessageDialog(self,"系统现在无驾驶员信息，不能进行车辆修改，请先去添加驾驶员信息","information",JOptionPane.INFORMATION_MESSAGE);
+			return;
+		}
+		
+		if(setcarbobox()==2){
+			JOptionPane.showMessageDialog(self,"系统现在无路线信息，不能进行车辆修改，请先去添加路线信息","information",JOptionPane.INFORMATION_MESSAGE);
+			return;
+		}
+		
+		JPanel panel=new JPanel(new GridLayout(9,3,5,5));//六行三列
 		panel.setOpaque(false);
 		
 		//第一行 车辆编号
 		JLabel label1=new JLabel("车辆编号");
-		label1.setFont(new Font("宋体",Font.PLAIN,30));
+		label1.setFont(new Font("宋体",Font.PLAIN,25));
 		label1.setOpaque(false);
 		panel.add(label1);
 		
 		car_text1=new JTextField(20);
-		car_text1.setFont(new Font("宋体",Font.PLAIN,30));
-		car_text1.setEditable(true);//设置为可编辑
+		car_text1.setFont(new Font("宋体",Font.PLAIN,25));
+		car_text1.setEditable(false);//设置为可编辑
 		car_text1.setOpaque(false);
 		panel.add(car_text1);
+		panel.add(car_bobox1);
 		
-		//对文本框增加相应函数
-		Document document = car_text1.getDocument();
-		document.addDocumentListener(documentListener);
-		
+		panel.add(new JLabel("    "));
 		panel.add(new JLabel("    "));
 		panel.add(new JLabel("    "));
 		
 		//第二行 驾驶员1号
 		JLabel label2=new JLabel("驾驶员一号编号");
-		label2.setFont(new Font("宋体",Font.PLAIN,30));
+		label2.setFont(new Font("宋体",Font.PLAIN,25));
 		label2.setOpaque(false);
 		panel.add(label2);
 		
 		car_text2=new JTextField();
-		car_text2.setFont(new Font("宋体",Font.PLAIN,30));
-		car_text2.setEditable(true);//设置为可编辑
+		car_text2.setFont(new Font("宋体",Font.PLAIN,25));
+		car_text2.setEditable(false);//设置为可编辑
 		car_text2.setOpaque(false);
 		panel.add(car_text2);
+		panel.add(car_bobox2);
 		
+		panel.add(new JLabel("    "));
 		panel.add(new JLabel("    "));
 		panel.add(new JLabel("    "));
 		
 		//第三行 驾驶员2号
 		JLabel label3=new JLabel("驾驶员二号编号");
-		label3.setFont(new Font("宋体",Font.PLAIN,30));
+		label3.setFont(new Font("宋体",Font.PLAIN,25));
 		label3.setOpaque(false);
 		panel.add(label3);
 		
 		car_text3=new JTextField();
-		car_text3.setFont(new Font("宋体",Font.PLAIN,30));
-		car_text3.setEditable(true);//设置为可编辑
+		car_text3.setFont(new Font("宋体",Font.PLAIN,25));
+		car_text3.setEditable(false);//设置为可编辑
 		car_text3.setOpaque(false);
 		panel.add(car_text3);
+		panel.add(car_bobox3);
 		
+		panel.add(new JLabel("    "));
 		panel.add(new JLabel("    "));
 		panel.add(new JLabel("    "));
 		
 		//第四行 路线编号
 		JLabel label4=new JLabel("路线编号");
-		label4.setFont(new Font("宋体",Font.PLAIN,30));
+		label4.setFont(new Font("宋体",Font.PLAIN,25));
 		label4.setOpaque(false);
 		panel.add(label4);
 		
 		car_text4=new JTextField();
-		car_text4.setFont(new Font("宋体",Font.PLAIN,30));
-		car_text4.setEditable(true);//设置为可编辑
+		car_text4.setFont(new Font("宋体",Font.PLAIN,25));
+		car_text4.setEditable(false);//设置为可编辑
 		car_text4.setOpaque(false);
 		panel.add(car_text4);
+		panel.add(car_bobox4);
 		
 		//第五行 增加空行
 		panel.add(new JLabel("    "));
 		panel.add(new JLabel("    "));
+		panel.add(new JLabel("    "));
 		
 		//第六行 添加按钮
+		panel.add(new JLabel("    "));
 		panel.add(new JLabel("    "));
 		JButton button=new JButton();
 		
@@ -588,34 +632,7 @@ public class Car_ContentMessagePanel{
 			
 		});
 		
-		car_mpanel.add(panel);
-		
-		//第二列
-		car_panel2=new JPanel();
-		car_panel2.setOpaque(false);
-		car_panel2.setLayout(new BorderLayout());
-		
-		JLabel ll=new JLabel("车牌号模糊查询结果",JLabel.CENTER);
-		ll.setFont(new Font("宋体",Font.PLAIN,18));
-		
-		car_panel2.add(ll,BorderLayout.NORTH);
-		
-		car_bobox=new JComboBox();
-		car_bobox.setFont(new Font("宋体",Font.PLAIN,25));
-		
-		car_bobox.setOpaque(false);
-		car_bobox.setSelectedIndex(-1);//设置不选中
-		
-		//添加监听函数
-		car_bobox.addItemListener(itemListener);
-		
-		JPanel o=new JPanel();
-		o.add(car_bobox);
-		
-		car_panel2.add(o,BorderLayout.CENTER);
-		car_mpanel.add(car_panel2);
-		
-		self.add(car_mpanel);
+		self.add(panel);
 		self.revalidate();
 		self.repaint();
 		DebugInfo.DebugInfo("完成绘制车辆增删改Panel");
@@ -780,5 +797,84 @@ public class Car_ContentMessagePanel{
 		DebugInfo.DebugInfo("完成绘制删除车辆信息Panel");
 		return;
 	}
+
+	public static int setcarbobox(){
+		car_bobox1=new JComboBox();
+		car_bobox2=new JComboBox();
+		car_bobox3=new JComboBox();
+		car_bobox4=new JComboBox();
+		
+		car_bobox1.setFont(new Font("宋体",Font.PLAIN,25));car_bobox1.setOpaque(false);
+		car_bobox2.setFont(new Font("宋体",Font.PLAIN,25));car_bobox2.setOpaque(false);
+		car_bobox3.setFont(new Font("宋体",Font.PLAIN,25));car_bobox3.setOpaque(false);
+		car_bobox4.setFont(new Font("宋体",Font.PLAIN,25));car_bobox4.setOpaque(false);
 	
+		car_bobox1.setSelectedIndex(-1);
+		car_bobox2.setSelectedIndex(-1);
+		car_bobox3.setSelectedIndex(-1);
+		car_bobox4.setSelectedIndex(-1);
+		
+		//获取车辆信息
+		Car[] ca=Car_Database.getCarInfo();
+		if(ca==null||ca.length==0){
+			return 0;//无车辆信息
+		}
+		
+		Driver[] dri=Driver_Database.getAllDriverInfo();
+		if(dri==null||dri.length==0){
+			return 1;//无驾驶员信息
+		}
+		
+		Route[] ro=Route_Database.getAllRouteInfo();
+		if(ro==null||ro.length==0){
+			return 2;//无路线信息
+		}
+		
+		String[] s1=new String[ca.length];//车牌号
+		for(int i=0;i<ca.length;i++){
+			s1[i]=ca[i].carNumber;//获取车牌号
+		}
+		
+		String[] s2=new String[dri.length];//驾驶员编号
+		for(int i=0;i<dri.length;i++){
+			s2[i]=String.valueOf(dri[i].peopleNumber);//获取驾驶员编号
+		}
+		
+		String[] s3=new String[ro.length];//路线编号
+		for(int i=0;i<ro.length;i++){
+			s3[i]=String.valueOf(ro[i].routeNumber);//获取路线编号
+		}
+		
+		//将信息添加到列表中
+		DefaultComboBoxModel<String> car_model=new DefaultComboBoxModel<String>();	
+		DefaultComboBoxModel<String> driver_moel1=new DefaultComboBoxModel<String>();
+		DefaultComboBoxModel<String> driver_moel2=new DefaultComboBoxModel<String>();
+		DefaultComboBoxModel<String> route_model=new DefaultComboBoxModel<String>();
+		
+		for(int i=0;i<s1.length;i++){
+			car_model.addElement(s1[i]);
+		}
+		
+		for(int i=0;i<s2.length;i++){
+			driver_moel1.addElement(s2[i]);
+			driver_moel2.addElement(s2[i]);
+		}
+		
+		for(int i=0;i<s3.length;i++){
+			route_model.addElement(s3[i]);
+		}
+		
+		car_bobox1.setModel(car_model);
+		car_bobox2.setModel(driver_moel1);
+		car_bobox3.setModel(driver_moel2);
+		car_bobox4.setModel(route_model);
+		
+		//添加响应函数
+		car_bobox1.addItemListener(car_itemListener);
+		car_bobox2.addItemListener(driver1_itemListener);
+		car_bobox3.addItemListener(driver2_itemListener);
+		car_bobox4.addItemListener(route_itemListener);
+		return -1;//成功
+		
+	}
 }

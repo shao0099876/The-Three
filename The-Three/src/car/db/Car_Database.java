@@ -12,8 +12,8 @@ import entity.Car;
 import entity.GPS;
 
 public class Car_Database {
-	//private static String addr="cal.srcserver.xyz";
-	private static String addr="47.105.101.104";
+	private static String addr="cal.srcserver.xyz";
+	//private static String addr="47.105.101.104";
 	public static Car[] getCarInfo() {//查询车辆的概要信息
 		//测试完成
 		try {
