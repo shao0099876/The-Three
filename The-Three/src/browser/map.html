@@ -27,7 +27,7 @@
 <script>
     // 百度地图API功能
     var map = new BMap.Map("allmap"); // 创建Map实例
-    map.centerAndZoom(new BMap.Point(116.404, 39.915), 5); // 初始化地图,设置中心点坐标和地图级别
+    map.centerAndZoom(new BMap.Point(116.404, 39.915), 7); // 初始化地图,设置中心点坐标和地图级别
     //添加地图类型控件
     map.addControl(new BMap.MapTypeControl({
         mapTypes: [
@@ -43,16 +43,14 @@
         pointArray.push(new BMap.Point(x, y));
     }
 
-    function DrawPoint() {
+    function DrawPoints() {
         for (var i = 0; i < pointArray.length; i++) {
             var marker = new BMap.Marker(pointArray[i]);
             map.addOverlay(marker);
         }
     }
 
-    var routeArray = new Array();
-
-    function AddRoute(x, y, z) {
+    function DrawRoute(x, y, z) {
         var start;
         var geocoder = new BMap.Geocoder();
         geocoder.getPoint(x, function(point) {
@@ -68,25 +66,45 @@
             var tmp = z[i];
             midArray.push(new BMap.Point(tmp[0], tmp[1]));
         }
-        routeArray.push({
-            start: start,
-            end: end,
-            mid: midArray
+        var driving = new BMap.DrivingRoute(map, {
+            renderOptions: {
+                map: map,
+                autoViewport: true
+            }
+        });
+        driving.search(start, end, {
+            waypoints: midArray
         });
     }
 
-    function DrawRoutes() {
-        for (var i = 0; i < routeArray.length; i++) {
-            var driving = new BMap.DrivingRoute(map, {
-                renderOptions: {
-                    map: map,
-                    autoViewport: true
-                }
-            });
-            driving.search(routeArray[i].start, routeArray[i].end, {
-                waypoints: routeArray[i].mid
-            });
+    function DrawRoute(x, y) {
+        var start = new BMap.Point(x[0], x[1]);
+        var end = new BMap.Point(y[0], y[1]);
+        var driving = new BMap.DrivingRoute(map, {
+            renderOptions: {
+                map: map,
+                autoViewport: true
+            }
+        });
+        driving.search(start, end);
+    }
+
+    function DrawRoute_mid() {
+        var start = new BMap.Point(arguments[0][0], arguments[0][1]);
+        var end = new BMap.Point(arguments[1][0], arguments[1][1]);
+        var mid = new Array();
+        for (var i = 2; i < arguments.length; i++) {
+            mid.push(new BMap.Point(arguments[i][0], arguments[i][1]));
         }
+        var driving = new BMap.DrivingRoute(map, {
+            renderOptions: {
+                map: map,
+                autoViewport: true
+            }
+        });
+        driving.search(start, end, {
+            waypoints: mid
+        });
     }
     //Drawroute("威海","济南")
     function ErasePoints() {
@@ -95,15 +113,6 @@
 
     function FocusOn(x, y) {
         map.centerAndZoom(new BMap.Point(x, y), 10);
-    }
-    var tmp;
-
-    function addr_to_GPS(x) {
-        var geocoder = new BMap.Geocoder();
-        geocoder.getPoint(x, function(point) {
-            tmp = point;
-        });
-        return new String(tmp.Ing) + new String(tmp.Iat);
     }
 </script>
 

@@ -82,7 +82,7 @@ public class Device_ServerTask extends ServerTask{
 	}
 
 	public static String getCarGPS() {
-		// TODO Auto-generated method stub
+		//测试完成
 		try {
 			initDB();
 		} catch (ClassNotFoundException | SQLException e) {
@@ -123,7 +123,7 @@ public class Device_ServerTask extends ServerTask{
 	}
 
 	public static String getSpecifiedCarGPS(String carNumber) {
-		// TODO Auto-generated method stub
+		//测试完成
 		try {
 			initDB();
 		} catch (ClassNotFoundException | SQLException e) {

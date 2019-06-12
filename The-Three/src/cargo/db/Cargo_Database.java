@@ -25,7 +25,6 @@ public class Cargo_Database {
 			Cargo[] res=new Cargo[data.length/4];
 			
 			for(int i=0;i<data.length;i+=4) {
-				res[i/4]=new Cargo()
 				res[i/4]=new Cargo(Integer.valueOf(data[i+0]),data[i+1],data[i+2],Integer.valueOf(data[i+3]));
 			}
 			output.close();
@@ -72,21 +71,13 @@ public class Cargo_Database {
 			DataInputStream input=new DataInputStream(socket.getInputStream());
 			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
 			
-			IO.write(output, "20");
+			IO.write(output, "25");
 			IO.write(output, cargo.toTransString());
 			String raw_string=IO.read(input);
-			System.out.println(raw_string);
-			
-			String[] data=raw_string.split("#");
-			Car[] res=new Car[data.length/4];
-			
-			for(int i=0;i<data.length;i+=4) {
-				res[i/4]=new Car(data[i+0],Integer.valueOf(data[i+1]),Integer.valueOf(data[i+2]),Integer.valueOf(data[i+3]));
-			}
 			output.close();
 			input.close();
 			socket.close();
-			return res;
+			return raw_string;
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -96,4 +87,5 @@ public class Cargo_Database {
 		}
 		return null;
 	}
+	
 }

@@ -9,9 +9,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import carServer.Car_ServerTask;
+import cargoServer.Cargo_ServerTask;
 import deviceServer.Device_ServerTask;
 import driverServer.Driver_ServerTask;
 import routeServer.Route_ServerTask;
+import stationServer.Station_ServerTask;
 import iotools.IO;
 
 public class ServerTask implements Runnable {
@@ -48,28 +50,19 @@ public class ServerTask implements Runnable {
 				IO.write(output, Driver_ServerTask.getDriverInfo(peonum));
 				break;
 			case 3:
-				int routnum=IO.readInt(input);//读入路线的编号
-				IO.write(output, Route_ServerTask.getRouteInfo(routnum));
+				IO.write(output, Route_ServerTask.getRouteInfo(IO.readInt(input)));
 				break;
 			case 4:
-				String s=IO.read(input);//读进来部分车牌号信息
-				System.out.println(s);
-				IO.write(output, Car_ServerTask.getMohuCarInfo(s));
+				IO.write(output, Car_ServerTask.getMohuCarInfo(IO.read(input)));
 				break;
 			case 5:
-				String carinfo=IO.read(input);//将要进行增加的车辆信息读进来
-				System.out.println(carinfo);//测试
-				IO.write(output, Car_ServerTask.AddCarInfo(carinfo));
+				IO.write(output, Car_ServerTask.AddCarInfo(IO.read(input)));
 				break;
 			case 6:
-				String delcarinfo=IO.read(input);//将要进行删除的车辆信息读进来
-				System.out.println(delcarinfo);//测试
-				IO.write(output, Car_ServerTask.DelCarInfo(delcarinfo));
+				IO.write(output, Car_ServerTask.DelCarInfo(IO.read(input)));
 				break;
 			case 7:
-				String modcarinfo=IO.read(input);//将要进行修改的车辆信息读进来
-				System.out.println(modcarinfo);//测试
-				IO.write(output, Car_ServerTask.ModCarInfo(modcarinfo));
+				IO.write(output, Car_ServerTask.ModCarInfo(IO.read(input)));
 				break;
 			case 8:
 				String tmp=Route_ServerTask.getAllRouteInfo();
@@ -112,6 +105,12 @@ public class ServerTask implements Runnable {
 			case 17:
 				IO.write(output, Device_ServerTask.getSpecifiedCarGPS(IO.read(input)));
 				break;
+			case 18:
+				IO.write(output, Cargo_ServerTask.getAllCargo());
+				break;
+			case 19:
+				IO.write(output, Cargo_ServerTask.getSpecifiedCargo(IO.readInt(input)));
+				break;
 			case 20:
 				System.out.println("开始查询所有驾驶员信息");
 				IO.write(output, Driver_ServerTask.getAllDriverInfo());//查询所有驾驶员信息
@@ -135,6 +134,27 @@ public class ServerTask implements Runnable {
 				String delnum=IO.read(input);//将删除的驾驶员编号读进来
 				System.out.println(delnum);//测试
 				IO.write(output, Driver_ServerTask.delDriverInfo(delnum));//删除驾驶员
+				break;
+			case 26:
+				String stationName=IO.read(input);
+				DebugInfo.DebugInfo(stationName);
+				IO.write(output, Station_ServerTask.getGPS(stationName));
+				break;
+			case 27:
+				String stationInfo=IO.read(input);
+				IO.write(output, Station_ServerTask.addStation(stationInfo));
+				break;
+			case 28:
+				IO.write(output, Station_ServerTask.delStation(IO.read(input)));
+				break;
+			case 29:
+				IO.write(output, Station_ServerTask.modifyStation(IO.read(input)));
+				break;
+			case 30:
+				IO.write(output, Station_ServerTask.getStationList());
+				break;
+			case 31:
+				IO.write(output, Station_ServerTask.getMohuStationList(IO.read(input)));
 				break;
 			}
 			input.close();

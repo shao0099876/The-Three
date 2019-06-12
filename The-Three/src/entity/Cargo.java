@@ -26,4 +26,13 @@ public class Cargo {
 		sb.append(routeNumber);
 		return null;
 	}
+	public String[] toStringArray() {
+		// TODO Auto-generated method stub
+		String[] res=new String[4];
+		res[0]=Integer.toString(cargoNumber);
+		res[1]=start;
+		res[2]=end;
+		res[3]=Integer.toString(routeNumber);
+		return res;
+	}
 }

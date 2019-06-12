@@ -75,7 +75,7 @@ public class BrowserDialog extends JDialog {
 	public void Add_Cars_Point(String[] res) {
 		// TODO Auto-generated method stub
 		for(String i:res) {
-			String[] tmp=i.split("-");
+			String[] tmp=i.split(",");
 			StringBuilder sb=new StringBuilder();
 			sb.append("AddPoint(");
 			sb.append(tmp[0]);
@@ -89,20 +89,37 @@ public class BrowserDialog extends JDialog {
 		// TODO Auto-generated method stub
 		browser.execute("DrawPoints()");
 	}
-	public void addRoute(String[] strings) {
+	public void DrawRoute(String start_GPS,String end_GPS) {
+		StringBuilder sb=new StringBuilder();
+		sb.append("[");
+		sb.append(start_GPS);
+		sb.append("]");
+		sb.append(",[");
+		sb.append(end_GPS);
+		sb.append("]");
+		DebugInfo.DebugInfo(sb.toString());
+		browser.execute("DrawRoute("+sb.toString()+")");
+	}
+	public void DrawRoute(String start_GPS, String end_GPS, String[] mid) {
 		// TODO Auto-generated method stub
 		StringBuilder sb=new StringBuilder();
-		sb.append("AddRoute(");
-		sb.append(strings[1]);
-		sb.append(",");
-		sb.append(strings[2]);
-		sb.append(",");
-		sb.append(strings[3]);
-		sb.append(")");
-		browser.execute(sb.toString());
-	}
-	public void DrawRoutes() {
-		// TODO Auto-generated method stub
-		browser.execute("DrawRoutes()");
+		sb.append("[");
+		sb.append(start_GPS);
+		sb.append("]");
+		sb.append(",[");
+		sb.append(end_GPS);
+		sb.append("],[");
+		boolean flag=true;
+		for(int i=0;i<mid.length;i++) {
+			if(!flag) {
+				sb.append(",");
+			}
+			flag=false;
+			sb.append("[");
+			sb.append(mid[i]);
+			sb.append("]");
+		}
+		sb.append("]");
+		browser.execute("DrawRoute_mid("+sb.toString()+")");
 	}
 }

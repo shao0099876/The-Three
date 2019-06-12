@@ -751,7 +751,7 @@ public class Car_ContentMessagePanel{
 										@Override
 										public void run() {
 											if(flag){//删除信息来自文本框
-												del_carnum=car_deltext.getText();//获取当前文本框中的路线编号
+												del_carnum=car_deltext.getText();//获取当前文本框中的车辆编号
 											}
 											String message=Car_Database.DeleteCarInfo(del_carnum);
 											
