@@ -3,7 +3,7 @@ package entity;
 public class User {
 	private static String username;
 	private static String password;
-	public static String stationName;
+	private static String stationName;
 	private static int authority;
 	public User() {
 		

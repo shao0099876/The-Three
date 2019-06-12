@@ -191,7 +191,7 @@ public class Car_Database {
 		}
 		return null;
 	}
-	public static String getAllCarNumber() {
+	public static String[] getAllCarNumber() {
 		//≤‚ ‘ÕÍ≥…
 		try {
 			Socket socket= new Socket(addr,8081);
@@ -202,7 +202,7 @@ public class Car_Database {
 			output.close();
 			input.close();
 			socket.close();
-			return raw_string;
+			return raw_string.split("#");
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
