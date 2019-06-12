@@ -50,28 +50,19 @@ public class ServerTask implements Runnable {
 				IO.write(output, Driver_ServerTask.getDriverInfo(peonum));
 				break;
 			case 3:
-				int routnum=IO.readInt(input);//读入路线的编号
-				IO.write(output, Route_ServerTask.getRouteInfo(routnum));
+				IO.write(output, Route_ServerTask.getRouteInfo(IO.readInt(input)));
 				break;
 			case 4:
-				String s=IO.read(input);//读进来部分车牌号信息
-				System.out.println(s);
-				IO.write(output, Car_ServerTask.getMohuCarInfo(s));
+				IO.write(output, Car_ServerTask.getMohuCarInfo(IO.read(input)));
 				break;
 			case 5:
-				String carinfo=IO.read(input);//将要进行增加的车辆信息读进来
-				System.out.println(carinfo);//测试
-				IO.write(output, Car_ServerTask.AddCarInfo(carinfo));
+				IO.write(output, Car_ServerTask.AddCarInfo(IO.read(input)));
 				break;
 			case 6:
-				String delcarinfo=IO.read(input);//将要进行删除的车辆信息读进来
-				System.out.println(delcarinfo);//测试
-				IO.write(output, Car_ServerTask.DelCarInfo(delcarinfo));
+				IO.write(output, Car_ServerTask.DelCarInfo(IO.read(input)));
 				break;
 			case 7:
-				String modcarinfo=IO.read(input);//将要进行修改的车辆信息读进来
-				System.out.println(modcarinfo);//测试
-				IO.write(output, Car_ServerTask.ModCarInfo(modcarinfo));
+				IO.write(output, Car_ServerTask.ModCarInfo(IO.read(input)));
 				break;
 			case 8:
 				String tmp=Route_ServerTask.getAllRouteInfo();
@@ -158,6 +149,12 @@ public class ServerTask implements Runnable {
 				break;
 			case 29:
 				IO.write(output, Station_ServerTask.modifyStation(IO.read(input)));
+				break;
+			case 30:
+				IO.write(output, Station_ServerTask.getStationList());
+				break;
+			case 31:
+				IO.write(output, Station_ServerTask.getMohuStationList(IO.read(input)));
 				break;
 			}
 			input.close();

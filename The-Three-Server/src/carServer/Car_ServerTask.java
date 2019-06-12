@@ -6,13 +6,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import main.DebugInfo;
 import main.ServerTask;
 
 public class Car_ServerTask extends ServerTask{
 	public Car_ServerTask(Socket p) {
 		super(p);
 	}
-	public static String getCarInfo() {		//通信协议1：查车队概要列表
+	public static String getCarInfo() {//查车队概要列表
+		//测试完成
 		try {
 			initDB();
 		} catch (ClassNotFoundException | SQLException e1) {
@@ -49,8 +51,8 @@ public class Car_ServerTask extends ServerTask{
 		return sb.toString();
 	}
 	
-	public static String getMohuCarInfo(String s){//通讯协议4：查询车辆的信息（模糊查询）
-		System.out.print("查数据库");
+	public static String getMohuCarInfo(String s){//查询车辆的信息（模糊查询）
+		//测试完成
 		s=s+"%";//实现模糊查询
 		try {
 			initDB();
@@ -87,14 +89,12 @@ public class Car_ServerTask extends ServerTask{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(sb.toString());
 		return sb.toString();
 	}
 	
-	public static String AddCarInfo(String s){//通讯协议5：增加车辆信息
-		System.out.println("开始修改车辆信息");//测试
+	public static String AddCarInfo(String s){//增加车辆信息
+		//测试完成
 		String message="";//操作结果
-		
 		String[] data=s.split("#");//获取信息
 		
 		try {
@@ -109,12 +109,7 @@ public class Car_ServerTask extends ServerTask{
 		int newpeople1Number=Integer.valueOf(data[1]);
 		int newpeople2Number=Integer.valueOf(data[2]);
 		int newrouteNumber=Integer.valueOf(data[3]);
-		System.out.println(newcarNumber);
-		System.out.println(newpeople1Number);
-		System.out.println(newpeople2Number);
-		System.out.println(newrouteNumber);
 		
-			
 		try {
 			PreparedStatement pstmt=conn.prepareStatement("select carNumber from Car where carNumber = ?");
 			pstmt.setString(1,newcarNumber);
@@ -126,7 +121,6 @@ public class Car_ServerTask extends ServerTask{
 			}
 			
 			if(n==0){//为空，说明无结果，为添加
-				System.out.println("开始添加数据库");
 				PreparedStatement pstmt1=conn.prepareStatement("insert into Car values(?,?,?,?)");
 				pstmt1.setString(1,newcarNumber);
 				pstmt1.setInt(2,newpeople1Number);
@@ -149,8 +143,8 @@ public class Car_ServerTask extends ServerTask{
 		return message;
 	}
 	
-	public static String DelCarInfo(String s){//通讯协议6：用于删除车辆信息
-		System.out.println("开始删除车辆信息");//测试
+	public static String DelCarInfo(String s){//用于删除车辆信息
+		//测试完成
 		String[] data=s.split("#");//获取信息
 		String message="";
 		
@@ -196,7 +190,7 @@ public class Car_ServerTask extends ServerTask{
 	}
 	
 	public static String ModCarInfo(String s){//用于修改车辆信息
-		System.out.println("开始修改车辆信息");//测试
+		//测试完成
 		String message="";//操作结果
 		
 		String[] data=s.split("#");//获取信息
@@ -213,12 +207,7 @@ public class Car_ServerTask extends ServerTask{
 		int newpeople1Number=Integer.valueOf(data[1]);
 		int newpeople2Number=Integer.valueOf(data[2]);
 		int newrouteNumber=Integer.valueOf(data[3]);
-		System.out.println(newcarNumber);
-		System.out.println(newpeople1Number);
-		System.out.println(newpeople2Number);
-		System.out.println(newrouteNumber);
 		
-			
 		try {
 			PreparedStatement pstmt=conn.prepareStatement("select carNumber from Car where carNumber = ?");
 			pstmt.setString(1,newcarNumber);
@@ -233,7 +222,6 @@ public class Car_ServerTask extends ServerTask{
 				message="不存在该车辆信息，不能修改";
 			}
 			if(n>0){//非空，有结果，可以进行修改
-				System.out.println("开始更新数据库");
 				//待修改
 				PreparedStatement pstmt2=conn.prepareStatement("update Car set people1Number = ? , people2Number = ? , routeNumber = ? where carNumber = ?");			
 				pstmt2.setInt(1,newpeople1Number);
@@ -255,7 +243,7 @@ public class Car_ServerTask extends ServerTask{
 	}
 	
 	public static String getCarNumberonRoute(int routeNumber) {
-		// TODO Auto-generated method stub
+		//测试完成
 		try {
 			initDB();
 		} catch (ClassNotFoundException | SQLException e1) {
@@ -288,7 +276,7 @@ public class Car_ServerTask extends ServerTask{
 		return sb.toString();
 	}
 	public static String getAllCarNumber() {
-		// TODO Auto-generated method stub
+		//测试完成
 		try {
 			initDB();
 		} catch (ClassNotFoundException | SQLException e1) {

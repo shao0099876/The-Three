@@ -4,6 +4,7 @@ import java.net.Socket;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import main.ServerTask;
 
@@ -186,6 +187,79 @@ public class Station_ServerTask extends ServerTask{
 			e.printStackTrace();
 		}
 		return message;
+	}
+
+	public static String getStationList() {
+		// TODO Auto-generated method stub
+		try {
+			initDB();
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		StringBuilder sb=new StringBuilder();
+		try {
+			Statement stmt=conn.createStatement();
+			ResultSet res=stmt.executeQuery("select * from Station");
+			boolean flag=true;
+			while(res.next()) {
+				if(!flag) {
+					sb.append("#");
+				}
+				flag=false;
+				sb.append(res.getString(1));
+				sb.append("#");
+				sb.append(res.getString(2));
+				sb.append("#");
+				sb.append(res.getString(3));
+			}
+			res.close();
+			stmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return sb.toString();
+	}
+
+	public static String getMohuStationList(String s) {
+		// TODO Auto-generated method stub
+		s=s+"%";
+		try {
+			initDB();
+		} catch (ClassNotFoundException | SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		StringBuilder sb=new StringBuilder();
+		
+		try {
+			PreparedStatement pstmt=conn.prepareStatement("select * from Staion where stationName like ?");
+			pstmt.setString(1,s);
+			ResultSet res=pstmt.executeQuery();
+			
+			boolean flag=true;
+			while(res.next()){
+				if(!flag){
+					sb.append("#");
+				}
+				flag=false;
+				sb.append(res.getString(1));
+				sb.append("#");
+				sb.append(res.getString(2));
+				sb.append("#");
+				sb.append(res.getString(3));
+			}
+			res.close();
+			pstmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return sb.toString();
 	}
 	
 }

@@ -20,6 +20,7 @@ import javax.swing.JPanel;
 
 import browser.BrowserDialog;
 import route.ui.Route_ContentMessagePanel;
+import station.ui.Station_ContentMessagePanel;
 import car.ui.Car_ContentMessagePanel;
 import driver.ui.Driver_ContentMessagePanel;
 
@@ -33,7 +34,7 @@ public class BaseUI extends JFrame{
 	public static JMenu m1,m2,m3,m4,m5;
 	//菜单项定义
 	public static JMenuItem m1_1,m1_2,m1_3,m1_4,m1_5;//车辆菜单项
-	public static JMenuItem m2_1,m2_2,m2_3,m2_4;//路线菜单项
+	public static JMenuItem m2_1,m2_2,m2_3,m2_4,m2_5,m2_6,m2_7;//路线菜单项
 	public static JMenuItem m3_1,m3_2,m3_3,m3_4;//驾驶员菜单项
 	public static JMenuItem m4_1,m4_2,m4_3,m4_4;//货物菜单项
 	public static JMenuItem m5_1;//退出
@@ -62,7 +63,7 @@ public class BaseUI extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setlocation();//设置位置
 	}
-	
+
 	public void setMenu(){//添加菜单与相应的菜单项
 		//添加菜单条
 		menubar = new JMenuBar();//菜单条
@@ -114,6 +115,19 @@ public class BaseUI extends JFrame{
 		 m2_4.setFont(new Font("宋体",Font.BOLD,20));//设置字体
 		 m2.add(m2_4);
 		 
+		 m2_5=new JMenuItem("查看站点列表");
+		 m2_5.setFont(new Font("宋体",Font.BOLD,20));//设置字体
+		 m2.add(m2_5);
+		 
+		 m2_6=new JMenuItem("增加站点");
+		 m2_6.setFont(new Font("宋体",Font.BOLD,20));//设置字体
+		 m2.add(m2_6);
+		 
+		 m2_7=new JMenuItem("删除站点");
+		 m2_7.setFont(new Font("宋体",Font.BOLD,20));//设置字体
+		 m2.add(m2_7);
+		 
+		 
 		 m3=new JMenu("驾驶员管理");//菜单
 		 m3.setFont(new Font("宋体",Font.BOLD,24));//设置字体
 		 menubar.add(m3);//添加菜单
@@ -161,6 +175,8 @@ public class BaseUI extends JFrame{
 		 m5_1=new JMenuItem("退出登录");
 		 m5_1.setFont(new Font("宋体",Font.BOLD,20));//设置字体
 		 m5.add(m5_1);
+		 
+		 
 	}
 
 	public void getscreenSize(){//获取屏幕大小
@@ -322,6 +338,59 @@ public class BaseUI extends JFrame{
 					}});
 				t.start();
 			}
+		});
+		m2_5.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				Thread t=new Thread(new Runnable() {
+
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						Station_ContentMessagePanel.showStations(BaseUI.contentPanel);
+					}
+					
+				});
+				t.start();
+			}
+			
+		});
+		m2_6.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				Thread t=new Thread(new Runnable() {
+
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						Station_ContentMessagePanel.addStation(BaseUI.contentPanel);
+					}
+					
+				});
+				t.start();
+			}
+			
+		});
+		m2_7.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				Thread t=new Thread(new Runnable() {
+
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						Station_ContentMessagePanel.delStation(BaseUI.contentPanel);
+					}
+					
+				});
+				t.start();
+			}
+			
 		});
 	}
 	
