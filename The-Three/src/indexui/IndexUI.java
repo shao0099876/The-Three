@@ -167,7 +167,7 @@ public class IndexUI extends JFrame{
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
-						BrowserDialog.frame=new BaseUI();//开启员工登陆界面
+						//BrowserDialog.frame=new BaseUI();//开启员工登陆界面
 						JDialog dialog=new JDialog();
 						dialog.setTitle("登录");
 						dialog.setLayout(new GridLayout(3,2,5,5));
