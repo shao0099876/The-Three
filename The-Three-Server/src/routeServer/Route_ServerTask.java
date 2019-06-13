@@ -216,7 +216,13 @@ public class Route_ServerTask extends ServerTask{
 		String newdestAddr=data[2];
 		System.out.println(newdestAddr);
 		
-		String newmAddr=data[3];		
+		String newmAddr;
+		if(data.length==4) {
+			newmAddr=data[3];		
+		}
+		else {
+			newmAddr=null;
+		}
 		System.out.println(newmAddr);
 		
 			
@@ -238,7 +244,12 @@ public class Route_ServerTask extends ServerTask{
 				pstmt1.setInt(1,newrouteNumber);
 				pstmt1.setString(2,newstartAddr);
 				pstmt1.setString(3,newdestAddr);
-				pstmt1.setString(4,newmAddr);
+				if(newmAddr==null) {
+					pstmt1.setNull(4, java.sql.Types.NVARCHAR);
+				}
+				else {
+					pstmt1.setString(4,newmAddr);
+				}
 				pstmt1.executeUpdate();  
 				pstmt1.close();
 				message="添加信息成功";

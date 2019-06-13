@@ -210,7 +210,7 @@ public class Cargo_ContentMessagePanel {
 						// TODO Auto-generated method stub
 						String carName=(String) carNameComboBox.getSelectedItem();
 						String cargoNumber=cargoNumberText.getText();
-						Cargo_Database.addCargoRecord(cargoNumber,Client.user.stationName,carName,1);//收件
+						Cargo_Database.addCargoRecord(cargoNumber,Client.user.stationName,carName,2);//收件
 					}
 					
 				});
@@ -254,7 +254,7 @@ public class Cargo_ContentMessagePanel {
 					public void run() {
 						// TODO Auto-generated method stub
 						String cargoNumber=cargoNumberText.getText();
-						Cargo_Database.addCargoRecord(cargoNumber,Client.user.stationName,"",2);//卸车
+						Cargo_Database.addCargoRecord(cargoNumber,Client.user.stationName,"",3);//卸车
 					}
 					
 				});
@@ -298,7 +298,7 @@ public class Cargo_ContentMessagePanel {
 					public void run() {
 						// TODO Auto-generated method stub
 						String cargoNumber=cargoNumberText.getText();
-						Cargo_Database.addCargoRecord(cargoNumber,Client.user.stationName,"",3);//派送
+						Cargo_Database.addCargoRecord(cargoNumber,Client.user.stationName,"",4);//派送
 					}
 					
 				});

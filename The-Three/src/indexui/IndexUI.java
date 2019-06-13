@@ -25,6 +25,7 @@ import javax.swing.JTextField;
 import ui.BaseUI;
 import user.db.User_Database;
 import browser.BrowserDialog;
+import cargo.db.Cargo_Database;
 import client.Client;
 import client.DebugInfo;
 
@@ -77,11 +78,78 @@ public class IndexUI extends JFrame{
 					@Override
 					public void run() {
 						
-						//待添加
-						/*
-						 将窗口大小重绘制
-						 
-						 * */
+						JDialog dialog=new JDialog();
+						dialog.setTitle("查看物流单状态");
+						dialog.setLayout(new GridLayout(5,2,5,5));
+						
+						JLabel label1=new JLabel("物流单号");
+						label1.setFont(new Font("宋体",Font.BOLD,20));
+						dialog.add(label1);
+						
+						JTextField cargoNumberText=new JTextField(20);
+						cargoNumberText.setFont(new Font("宋体",Font.BOLD,20));
+						dialog.add(cargoNumberText);
+						
+						
+						JLabel label2=new JLabel("出发地");
+						label2.setFont(new Font("宋体",Font.BOLD,20));
+						dialog.add(label2);
+						
+						JTextField startText=new JTextField(20);
+						startText.setFont(new Font("宋体",Font.BOLD,20));
+						startText.setEditable(false);
+						dialog.add(startText);
+						
+						
+						JLabel label3=new JLabel("目的地");
+						label3.setFont(new Font("宋体",Font.BOLD,20));
+						dialog.add(label3);
+						
+						JTextField endText=new JTextField(20);
+						endText.setFont(new Font("宋体",Font.BOLD,20));
+						endText.setEditable(false);
+						dialog.add(endText);
+						
+						
+						JLabel label4=new JLabel("状态");
+						label4.setFont(new Font("宋体",Font.BOLD,20));
+						dialog.add(label4);
+						
+						JTextField statusText=new JTextField(20);
+						statusText.setFont(new Font("宋体",Font.BOLD,20));
+						statusText.setEditable(false);
+						dialog.add(statusText);
+						
+						
+						JButton button=new JButton("查询");
+						button.setFont(new Font("宋体",Font.BOLD,20));
+						button.addActionListener(new ActionListener() {
+
+							@Override
+							public void actionPerformed(ActionEvent arg0) {
+								// TODO Auto-generated method stub
+								Thread t=new Thread(new Runnable() {
+
+									@Override
+									public void run() {
+										// TODO Auto-generated method stub
+										String[] data=Cargo_Database.getCargoStatus(cargoNumberText.getText());
+										startText.setText(data[0]);
+										endText.setText(data[1]);
+										statusText.setText(data[2]);
+										dialog.revalidate();
+										dialog.repaint();
+									}
+									
+								});
+								t.start();
+								
+							}
+							
+						});
+						
+						dialog.setSize(2000,1000);
+						dialog.setVisible(true);
 						
 						System.out.println("客户查看物流信息查看物流信息");
 					}});
@@ -100,7 +168,7 @@ public class IndexUI extends JFrame{
 					public void run() {
 						// TODO Auto-generated method stub
 						BrowserDialog.frame=new BaseUI();//开启员工登陆界面
-						/*JDialog dialog=new JDialog();
+						JDialog dialog=new JDialog();
 						dialog.setTitle("登录");
 						dialog.setLayout(new GridLayout(3,2,5,5));
 						dialog.setSize(700,200);
@@ -121,7 +189,7 @@ public class IndexUI extends JFrame{
 						passwordTextField.setFont(new Font("宋体",Font.BOLD,20));
 						dialog.add(passwordTextField);
 						
-						p.add(new JLabel(" 		"));
+						dialog.add(new JLabel(" 		"));
 						
 						JButton loginButton=new JButton("登录");
 						loginButton.setFont(new Font("宋体",Font.BOLD,20));
@@ -146,7 +214,6 @@ public class IndexUI extends JFrame{
 						Dimension dm = self.getToolkit().getScreenSize();
 						dialog.setLocation((int)(dm.getWidth()-600)/2,(int)(dm.getHeight()-650)/2);
 						dialog.setVisible(true);
-						*/
 					}});
 				t.start();
 			}

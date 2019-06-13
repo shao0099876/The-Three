@@ -1,7 +1,9 @@
 package browser;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -10,8 +12,10 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -28,6 +32,8 @@ public class BrowserDialog extends JDialog {
 	private static Browser browser;
 	private static JFXPanel fxPanel;
 	public static JFrame frame;
+	public static BrowserDialog self;
+	public static JTextField carNumberText,driverText,subdriverText,carStatusText,fuelText;
 	public void ShowGUI(String[] array) {
 		this.add(fxPanel,BorderLayout.CENTER);
 		JPanel listPanel=new JPanel();
@@ -36,17 +42,65 @@ public class BrowserDialog extends JDialog {
 			model.addElement(i);
 		}
 		JList<String> list=new JList<String>(model);
+		list.setFont(new Font("宋体",Font.BOLD,20));
 		list.addListSelectionListener(new ListSelectionListener() {
 
 			@Override
 			public void valueChanged(ListSelectionEvent arg0) {
 				// TODO Auto-generated method stub
-				browser.execute("FocusOn("+Car_Database.getSpecifiedCarGPS(list.getSelectedValue())+")");
+				BrowserUI.FocusOn(list.getSelectedValue(),self);
 			}
 			
 		});
 		listPanel.add(list);
 		this.add(listPanel,BorderLayout.WEST);
+		JPanel infoPanel=new JPanel(new GridLayout(6,2,5,5));
+		
+		JLabel label1=new JLabel("车辆号");
+		label1.setFont(new Font("宋体",Font.BOLD,20));
+		infoPanel.add(label1);
+		
+		carNumberText=new JTextField(20);
+		carNumberText.setFont(new Font("宋体",Font.BOLD,20));
+		carNumberText.setEditable(false);
+		infoPanel.add(carNumberText);
+		
+		JLabel label2=new JLabel("驾驶员");
+		label2.setFont(new Font("宋体",Font.BOLD,20));
+		infoPanel.add(label2);
+		
+		driverText=new JTextField(20);
+		driverText.setFont(new Font("宋体",Font.BOLD,20));
+		driverText.setEditable(false);
+		infoPanel.add(driverText);
+		
+		JLabel label3=new JLabel("副驾驶");
+		label3.setFont(new Font("宋体",Font.BOLD,20));
+		infoPanel.add(label3);
+		
+		subdriverText=new JTextField(20);
+		subdriverText.setFont(new Font("宋体",Font.BOLD,20));
+		subdriverText.setEditable(false);
+		infoPanel.add(subdriverText);
+		
+		JLabel label5=new JLabel("车辆状态");
+		label5.setFont(new Font("宋体",Font.BOLD,20));
+		infoPanel.add(label5);
+		//carNumberText,driverText,subdriverText,driverTimeLength,carStatusText
+		carStatusText=new JTextField(20);
+		carStatusText.setFont(new Font("宋体",Font.BOLD,20));
+		carStatusText.setEditable(false);
+		infoPanel.add(carStatusText);
+		
+		JLabel label6=new JLabel("剩余油量");
+		label6.setFont(new Font("宋体",Font.BOLD,20));
+		infoPanel.add(label6);
+		
+		fuelText=new JTextField(20);
+		fuelText.setFont(new Font("宋体",Font.BOLD,20));
+		fuelText.setEditable(false);
+		infoPanel.add(fuelText);
+		
 		this.setSize(2000,1300);
 		this.setVisible(true);
 	}
@@ -66,24 +120,23 @@ public class BrowserDialog extends JDialog {
 	public BrowserDialog() {
 		super(frame,"浏览器",false);
 		this.setLayout(new BorderLayout());
+		self=this;
+	}
+	public void focuson(String gps) {
+		browser.execute("FocusOn("+gps+")");
 	}
 	//"路线编号","起始站点","终点站","中转站点"
 	public void clean() {
 		// TODO Auto-generated method stub
 		browser.execute("ErasePoints()");
 	}
-	public void Add_Cars_Point(String[] res) {
+	public void Add_Cars_Point(String s) {
 		// TODO Auto-generated method stub
-		for(String i:res) {
-			String[] tmp=i.split(",");
-			StringBuilder sb=new StringBuilder();
-			sb.append("AddPoint(");
-			sb.append(tmp[0]);
-			sb.append(",");
-			sb.append(tmp[1]);
-			sb.append(")");
-			browser.execute(sb.toString());
-		}
+		StringBuilder sb=new StringBuilder();
+		sb.append("AddPoint(");
+		sb.append(s);
+		sb.append(")");
+		browser.execute(sb.toString());
 	}
 	public void DrawPoints() {
 		// TODO Auto-generated method stub

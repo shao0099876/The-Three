@@ -305,6 +305,12 @@ public class Station_ServerTask extends ServerTask{
 			pstmt.setInt(6, routeNumber);
 			pstmt.executeUpdate();
 			pstmt.close();
+			
+			pstmt=conn.prepareStatement("update Car set routeNumber=? where carNumber=?");
+			pstmt.setInt(1, routeNumber);
+			pstmt.setString(2, carNumber);
+			pstmt.executeUpdate();
+			pstmt.close();
 			conn.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

@@ -19,6 +19,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 import browser.BrowserDialog;
+import browser.BrowserUI;
 import route.ui.Route_ContentMessagePanel;
 import station.ui.Station_ContentMessagePanel;
 import car.ui.Car_ContentMessagePanel;
@@ -274,15 +275,7 @@ public class BaseUI extends JFrame{
 					public void run() {
 						// TODO Auto-generated method stub
 						System.out.println("绘制GPS");
-						
-						//待添加
-						/*
-						 以车辆为主体，添加绘制路线函数
-						 * 
-						 * 
-						 * */
-						
-						
+						BrowserUI.drawAllCars();
 					}});
 				t.start();
 			}

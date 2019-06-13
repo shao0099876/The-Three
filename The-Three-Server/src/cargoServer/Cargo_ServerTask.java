@@ -180,4 +180,64 @@ public class Cargo_ServerTask extends ServerTask{
 			e.printStackTrace();
 		}
 	}
+
+	public static String getCargoStatus(String read) {
+		// TODO Auto-generated method stub
+		try {
+			initDB();
+		} catch (ClassNotFoundException | SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		try {
+			PreparedStatement stmt=conn.prepareStatement("select TOP 1 * from CargoRecord where cargoNumber=? order by time desc");
+			stmt.setString(1, read);
+			ResultSet res=stmt.executeQuery();
+			String stationName = null;int type = 0;
+			while(res.next()) {
+				stationName=res.getString(5);
+				type=res.getInt(6);
+			}
+			res.close();
+			stmt.close();
+			stmt=conn.prepareStatement("select * from Cargo where cargoNumber=?");
+			stmt.setString(1, read);
+			res=stmt.executeQuery();
+			String startAddr = null,endAddr = null;
+			while(res.next()) {
+				startAddr=res.getString(2);
+				endAddr=res.getString(3);
+			}
+			res.close();
+			stmt.close();
+			conn.close();
+			StringBuilder sb=new StringBuilder();
+			sb.append(startAddr);
+			sb.append("#");
+			sb.append(endAddr);
+			sb.append("#");
+			switch(type) {
+			case 1:
+				sb.append(stationName);
+				sb.append("已收件");
+				break;
+			case 2:
+				sb.append(stationName);
+				sb.append("已发车");
+				break;
+			case 3:
+				sb.append(stationName);
+				sb.append("已到达");
+				break;
+			case 4:
+				sb.append(stationName);
+				sb.append("已派件");
+			}
+			return sb.toString();
+		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

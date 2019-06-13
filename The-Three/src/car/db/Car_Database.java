@@ -147,7 +147,7 @@ public class Car_Database {
 		}
 		return null;
 	}
-	public static String getCarGPS() {
+	public static String[] getCarGPS() {
 		//测试完成
 		try {
 			Socket socket= new Socket(addr,8081);
@@ -159,7 +159,7 @@ public class Car_Database {
 			output.close();
 			input.close();
 			socket.close();
-			return raw_string;
+			return raw_string.split("#");
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -260,6 +260,33 @@ public class Car_Database {
 			input.close();
 			socket.close();
 			return res;
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	public static String[] getLatestDeviceRecord(String s) {
+		// TODO Auto-generated method stub
+		try {
+			Socket socket= new Socket(addr,8081);
+			DataInputStream input=new DataInputStream(socket.getInputStream());
+			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
+			IO.write(output, "37");//查询车辆的编号
+			IO.write(output, s);//查询的车牌号部分信息
+			
+			String raw_string=IO.read(input);
+			if(raw_string==null||raw_string.equals("")){
+				return null;
+			}
+			String[] data=raw_string.split("#");//去掉#
+			output.close();
+			input.close();
+			socket.close();
+			return data;
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

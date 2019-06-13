@@ -111,5 +111,29 @@ public class Cargo_Database {
 			e.printStackTrace();
 		}
 	}
+	public static String[] getCargoStatus(String text) {
+		// TODO Auto-generated method stub
+		try {
+			Socket socket= new Socket(addr,8081);
+			DataInputStream input=new DataInputStream(socket.getInputStream());
+			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
+			
+			IO.write(output, "38");
+			IO.write(output, text);
+			String data=IO.read(input);
+			String[] res=data.split("#");
+			output.close();
+			input.close();
+			socket.close();
+			return res;
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 	
 }
