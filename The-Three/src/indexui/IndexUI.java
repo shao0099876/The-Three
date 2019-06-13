@@ -147,7 +147,7 @@ public class IndexUI extends JFrame{
 							}
 							
 						});
-						
+						dialog.add(button);
 						dialog.setSize(2000,1000);
 						dialog.setVisible(true);
 						
