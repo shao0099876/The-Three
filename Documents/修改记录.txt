@@ -1,0 +1,49 @@
+一、多线程修改位置包含：
+1. Level1NaviPanel中，按下车队管理按钮后，调用changelevel2，显示对应二级导航的过程变为多线程操作
+2. Level1NaviPanel中，按下驾驶员按钮后，调用changelevel2，显示对应二级导航的过程变为多线程操作
+3. Level1NaviPanel中，按下货物按钮后，调用changelevel2，显示对应二级导航的过程变为多线程操作
+4. Car_Level2NaviPanel中，按下车辆信息按钮后，调用Car_ContentMessagePanel.setCarInfo，内容Panel显示对应内容的过程变为多线程操作
+5. Car_Level2NaviPanel中，按下车辆维护按钮后，调用Car_ContentMessagePanel.carInfo_Add_Del，内容Panel显示对应内容的过程变为多线程操作
+6. Car_ContentMessagePanel中setCarInfo函数，表格某项被按下后的处理过程变为多线程操作
+7. Car_ContentMessagePanel中DocumentListener监听器事件处理函数改为多线程
+8. Car_ContentMessagePanel中ItemListener监听器事件处理函数改为多线程
+9. Car_ContentMessagePanel中添加车辆信息按钮事件处理函数改为多线程
+
+
+二、为了消除warning进行的修改位置包含：
+1. BaseUI删除不需要的import
+2. Level2NaviPanel删除不需要的import
+3. Car_Level2NaviPanel删除不需要的import
+4. Car_ContentMessagePanel删除不需要的import
+5. Car_ContentMessagePanel的表格点击响应函数中有一个没有使用过的value变量，已删除
+6. Car_ContentMessagePanel中使用的car_model类型DefaultComboBoxModel需要添加内部数据类型，添加为<String>
+
+三、为了调整调试信息进行的修改位置包含：
+1. Client主函数设置调试标记
+2. 设置调试信息工具类DebugInfo，使用时直接调用DebugInfo("<调试信息>")即可，该函数可根据Client设置的调试标记自动确定是否输出调试信息，方便后面部署
+3. 监听器触发和各过程开始结束位置均添加了对应的调试信息
+
+四、为了调整界面大小预先进行的修改包含：
+1. BaseUI的setBackgroundImage函数调用后，获取图片宽高，赋值到width，height，后面数据设置改为使用width，height
+
+五、包间依赖性优化
+1. Car_ContentMessagePanel中大量调用的self.array修改为Car_ContentMessagePanel自己创建的array，类型与原来相同，为Car[]数组类型
+2. Car_ContentMessagePanel中setCarDetailInfo函数的第二个参数根据1.中提到的修改，改为直接传递对应的Car对象，无需再在函数中自己找数组对应项
+3. Car_ContentMessagePanel中comboboxChange(原test_change函数)使用的car_num先是修改为局部变量，后发现不需car_num，可直接从temp_car数组向car_model加入数据
+4. Car_ContentMessagePanel中使用的car_model现修改为局部变量，且设定为ComboBox初始化时不使用model
+5. ContentMessagePanel中涉及数据的成员变量均被注释，改由各自逻辑处理函数进行创建处理
+
+
+六、消息互锁解决
+1. 各函数关于ContentMessagePanel的参数self名改为p_self，增加类成员变量self，且在各函数开头赋值self=p_self
+2. 文本框监听函数现在开头定义为成员变量，在触发时调用comboboxChange(原test_change函数)，由comboboxChange函数进行以下操作：
+    Combobox监听器解绑定
+    自行从self的文本框中取内容
+    进行模糊查询
+    将新数据放入model，赋值给combobox，完成数据更新
+    Combobox监听器重新绑定
+3. ComboBox监听函数在开头定义为成员变量，在触发时调用textChange函数，由该函数进行以下操作：
+    Document监听器解绑定
+    获取ComboBox选中项
+    设置TextField值
+    Document监听器重新绑定
