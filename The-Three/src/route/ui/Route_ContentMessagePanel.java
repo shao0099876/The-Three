@@ -78,6 +78,8 @@ public class Route_ContentMessagePanel {
 		DebugInfo.DebugInfo("开始绘制路线概要信息Panel");
 		self.removeAll();//将面板上面的组件全部清空
 		
+		array=Route_Database.getAllRouteInfo();//查询所有路线信息
+
 		if(array==null||array.length==0) {
 			self.removeAll();//将面板上面的组件全部清空
 			JOptionPane.showMessageDialog(self,"当前系统无可用路线信息！","information",JOptionPane.INFORMATION_MESSAGE);
@@ -87,7 +89,7 @@ public class Route_ContentMessagePanel {
 		}
 		
 		String[] name= {"路线编号","起始站点","终点站","中转站点"};
-		array=Route_Database.getAllRouteInfo();//查询所有路线信息
+		
 		String[][] data=new String[array.length][4];
 		for(int i=0;i<array.length;i++) {
 			data[i]=array[i].toStringArray();

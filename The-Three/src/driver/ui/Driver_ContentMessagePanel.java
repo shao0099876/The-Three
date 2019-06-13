@@ -96,6 +96,7 @@ public class Driver_ContentMessagePanel {
 		DebugInfo.DebugInfo("开始绘制车队管理概要信息Panel");
 		self.removeAll();//将面板上面的组件全部清空
 		
+		array=Driver_Database.getAllDriverInfo();//获取所有驾驶员的所有信息
 		if(array==null||array.length==0){
 			self.removeAll();//将面板上面的组件全部清空
 			JOptionPane.showMessageDialog(self,"当前系统无驾驶员信息","information",JOptionPane.INFORMATION_MESSAGE);
@@ -105,7 +106,7 @@ public class Driver_ContentMessagePanel {
 		}
 		
 		String[] name= {"驾驶员编号","驾驶员姓名","工作状态"};
-		array=Driver_Database.getAllDriverInfo();//获取所有驾驶员的所有信息
+		
 		String[][] data=new String[array.length][3];//只保存部分信息
 		
 		for(int i=0;i<array.length;i++){
