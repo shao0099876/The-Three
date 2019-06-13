@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import main.ServerTask;
 
@@ -72,9 +74,10 @@ public class Station_ServerTask extends ServerTask{
 			
 			if(n==0){//为空，说明无结果，为添加
 				System.out.println("开始添加数据库");
-				PreparedStatement pstmt1=conn.prepareStatement("insert into Station values(?,?)");
+				PreparedStatement pstmt1=conn.prepareStatement("insert into Station values(?,?,?)");
 				pstmt1.setString(1,stationName);
-				pstmt1.setString(2,stationAddr);	
+				pstmt1.setString(2,stationAddr);
+				pstmt1.setNull(3, java.sql.Types.NVARCHAR);
 				pstmt1.executeUpdate();  
 				pstmt1.close();
 				message="添加信息成功";
@@ -260,6 +263,59 @@ public class Station_ServerTask extends ServerTask{
 			e.printStackTrace();
 		}
 		return sb.toString();
+	}
+
+	public static void addStationRecord(String s) {
+		// TODO Auto-generated method stub
+		String[] data=s.split("#");//获取信息
+		
+		try {
+			initDB();
+		} catch (ClassNotFoundException | SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		int recordNumber = 0;
+		try {
+			Statement stmt=conn.createStatement();
+			ResultSet res=stmt.executeQuery("select COUNT(*) from StationRecord");
+			recordNumber=res.getInt(1)+1;
+		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		//数据类型转换
+		
+		String carNumber=data[0];
+		int routeNumber=Integer.valueOf(data[1]);
+		String stationName=data[2];
+		int type=Integer.valueOf(data[3]);
+		
+		SimpleDateFormat ft=new SimpleDateFormat("yyyyMMddhhmmss");
+		String time=ft.format(new Date());
+		
+		try {
+			PreparedStatement pstmt=conn.prepareStatement("insert into StationRecord values(?,?,?,?,?,?)");
+			pstmt.setInt(1, recordNumber);
+			pstmt.setString(2, carNumber);
+			pstmt.setString(3, stationName);
+			pstmt.setInt(4, type);
+			pstmt.setString(5, time);
+			pstmt.setInt(6, routeNumber);
+			pstmt.executeUpdate();
+			pstmt.close();
+			
+			pstmt=conn.prepareStatement("update Car set routeNumber=? where carNumber=?");
+			pstmt.setInt(1, routeNumber);
+			pstmt.setString(2, carNumber);
+			pstmt.executeUpdate();
+			pstmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }

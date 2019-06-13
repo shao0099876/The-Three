@@ -306,4 +306,40 @@ public class Car_ServerTask extends ServerTask{
 		}
 		return sb.toString();
 	}
+	public static String getLatestDeviceRecord(String read) {
+		// TODO Auto-generated method stub
+		try {
+			initDB();
+		} catch (ClassNotFoundException | SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		StringBuilder sb=new StringBuilder();
+		
+		try {
+			PreparedStatement pstmt=conn.prepareStatement("select TOP 1 * from Devicerecord where CarNumber=? order by Time desc");
+			pstmt.setString(1,read);
+			ResultSet res=pstmt.executeQuery();
+			
+			while(res.next()){
+				sb.append(res.getString(1));
+				sb.append("#");
+				sb.append(res.getInt(4));
+				sb.append("#");
+				sb.append(res.getFloat(5));
+				sb.append("#");
+				sb.append(res.getInt(6));
+				sb.append("#");
+				sb.append(res.getInt(7));
+			}
+			res.close();
+			pstmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return sb.toString();
+	}
 }

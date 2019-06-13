@@ -120,7 +120,9 @@ public class Route_ContentMessagePanel {
 				        	String[] res=raw_string.split("#");
 				        	BrowserDialog map=new BrowserDialog();
 				        	map.clean();
-				        	map.Add_Cars_Point(res);
+				        	for(String i:res) {
+				        		map.Add_Cars_Point(i);
+				        	}
 				        	map.DrawPoints();
 				        	String start_GPS=Station_Database.getGPS(data[row][1]);
 				        	String end_GPS=Station_Database.getGPS(data[row][2]);

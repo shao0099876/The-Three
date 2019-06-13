@@ -14,6 +14,7 @@ public class DeviceTask implements Runnable{
 	private int driver;
 	private int status;
 	private int T;
+	private int subdriver;
 	private int test_cnt=0;
 	@Override
 	public void run() {
@@ -32,6 +33,8 @@ public class DeviceTask implements Runnable{
 			sb.append(driver);
 			sb.append("#");
 			sb.append(status);
+			sb.append("#");
+			sb.append(subdriver);
 			try {
 				Socket socket=new Socket("cal.srcserver.xyz",8082);
 				DataOutputStream output=new DataOutputStream(socket.getOutputStream());
@@ -59,6 +62,7 @@ public class DeviceTask implements Runnable{
 		fuel=100;
 		driver=1;
 		status=1;
+		subdriver=2;
 		T=1000;
 	}
 	private void change() {

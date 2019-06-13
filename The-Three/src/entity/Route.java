@@ -23,4 +23,13 @@ public class Route {
 		res[3]=mAddr;
 		return res;
 	}
+	public String toString() {
+		StringBuilder sb=new StringBuilder();
+		sb.append(routeNumber);
+		sb.append(":");
+		sb.append(startAddr+"-");
+		sb.append(mAddr+"-");
+		sb.append(destAddr);
+		return sb.toString();
+	}
 }

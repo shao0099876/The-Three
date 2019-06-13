@@ -39,10 +39,11 @@ public class DeviceServerTask extends ServerTask implements Runnable {
 		float fuel=Float.valueOf(array[2]);
 		int driver=Integer.valueOf(array[3]);
 		int status=Integer.valueOf(array[4]);
+		int subdriver=Integer.valueOf(array[5]);
 		
 		PreparedStatement pstmt;
 		try {
-			pstmt = conn.prepareStatement("insert into Devicerecord values(?,?,?,?,?,?)");
+			pstmt = conn.prepareStatement("insert into Devicerecord values(?,?,?,?,?,?,?)");
 			pstmt.setString(1,array[0]);
 			pstmt.setString(2,array[1]);
 			Date now=new Date();
@@ -51,7 +52,15 @@ public class DeviceServerTask extends ServerTask implements Runnable {
 			pstmt.setInt(4, driver);
 			pstmt.setFloat(5, fuel);
 			pstmt.setInt(6, status);
+			pstmt.setInt(7, subdriver);
 			pstmt.executeUpdate();  
+			pstmt.close();
+			
+			pstmt=conn.prepareStatement("update Car set people1Number=?,people2Number=? where carNumber =?");
+			pstmt.setInt(1, driver);
+			pstmt.setInt(2, subdriver);
+			pstmt.setString(3, array[0]);
+			pstmt.executeUpdate();
 			pstmt.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

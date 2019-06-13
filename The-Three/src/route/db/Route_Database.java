@@ -242,4 +242,31 @@ public class Route_Database {
 		
 		return null;
 	}
+
+	public static Route[] queryRouteInfo(String start, String end) {
+		try {
+			Socket socket=new Socket(addr,8081);
+			DataInputStream input=new DataInputStream(socket.getInputStream());
+			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
+			IO.write(output, "32");
+			IO.write(output,start);
+			IO.write(output, end);
+		
+			String raw_string=IO.read(input);
+			String[] data=raw_string.split("#");
+			Route[] res=new Route[data.length/4];
+			for(int i=0;i<data.length;i+=4) {
+				res[i/4]=new Route(Integer.valueOf(data[i+0]),data[i+1],data[i+2],data[i+3]);
+			}
+			output.close();
+			input.close();
+			socket.close();
+			return res;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
 }

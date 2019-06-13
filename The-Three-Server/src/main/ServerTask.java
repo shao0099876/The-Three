@@ -135,6 +135,9 @@ public class ServerTask implements Runnable {
 				System.out.println(delnum);//²âÊÔ
 				IO.write(output, Driver_ServerTask.delDriverInfo(delnum));//É¾³ý¼ÝÊ»Ô±
 				break;
+			case 25:
+				IO.write(output, Cargo_ServerTask.addCargo(IO.read(input)));
+				break;
 			case 26:
 				String stationName=IO.read(input);
 				DebugInfo.DebugInfo(stationName);
@@ -155,6 +158,18 @@ public class ServerTask implements Runnable {
 				break;
 			case 31:
 				IO.write(output, Station_ServerTask.getMohuStationList(IO.read(input)));
+				break;
+			case 35:
+				Cargo_ServerTask.addCargoRecord(IO.read(input));
+				break;
+			case 36:
+				Station_ServerTask.addStationRecord(IO.read(input));
+				break;
+			case 37:
+				IO.write(output, Car_ServerTask.getLatestDeviceRecord(IO.read(input)));
+				break;
+			case 38:
+				IO.write(output, Cargo_ServerTask.getCargoStatus(IO.read(input)));
 				break;
 			}
 			input.close();

@@ -28,6 +28,10 @@ public class Station_ContentMessagePanel {
 		self.removeAll();
 		String[] name= {"中转站名","中转站地址","中转站GPS坐标"};
 		Station[] stationArray=Station_Database.getStationList();
+		if(stationArray==null) {
+			JOptionPane.showMessageDialog(self,"当前系统无中转站信息","information",JOptionPane.INFORMATION_MESSAGE);
+			return;
+		}
 		String[][] data=new String[stationArray.length][3];
 		for(int i=0;i<stationArray.length;i++) {
 			data[i]=stationArray[i].toStringArray();
@@ -54,6 +58,7 @@ public class Station_ContentMessagePanel {
 		panel.add(label1);
 		
 		JTextField stationName_text=new JTextField(20);
+		stationName_text.setFont(new Font("宋体",Font.PLAIN,20));
 		stationName_text.setEditable(true);
 		stationName_text.setOpaque(false);
 		panel.add(stationName_text);
@@ -64,6 +69,7 @@ public class Station_ContentMessagePanel {
 		panel.add(label2);
 		
 		JTextField stationAddr_text=new JTextField(50);
+		stationAddr_text.setFont(new Font("宋体",Font.PLAIN,20));
 		stationAddr_text.setEditable(true);
 		stationAddr_text.setOpaque(false);
 		panel.add(stationAddr_text);
@@ -245,6 +251,105 @@ public class Station_ContentMessagePanel {
 							cpanel.revalidate();
 							cpanel.repaint();
 						}
+					}
+					
+				});
+				t.start();
+			}
+			
+		});
+		self.add(panel);
+		self.revalidate();
+		self.repaint();
+	}
+	public static void departCar(ContentMessagePanel contentPanel) {
+		// TODO Auto-generated method stub
+		self=contentPanel;
+		self.removeAll();
+		
+		JPanel panel=new JPanel(new GridLayout(3,2,5,5));
+		panel.setOpaque(false);
+		
+		JLabel label1=new JLabel("车辆编号：");
+		label1.setFont(new Font("宋体",Font.PLAIN,20));
+		panel.add(label1);
+		
+		JTextField carNumberText=new JTextField(20);
+		carNumberText.setFont(new Font("宋体",Font.PLAIN,20));
+		panel.add(carNumberText);
+		
+		JLabel label2=new JLabel("路线编号：");
+		label2.setFont(new Font("宋体",Font.PLAIN,20));
+		panel.add(label2);
+		
+		JTextField routeNumberText=new JTextField(20);
+		routeNumberText.setFont(new Font("宋体",Font.PLAIN,20));
+		panel.add(routeNumberText);
+		
+		panel.add(new JLabel("    "));
+		
+		JButton departButton=new JButton("发车");
+		departButton.setFont(new Font("宋体",Font.PLAIN,20));
+		departButton.setSize(4,1);
+		panel.add(departButton);
+		departButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				Thread t=new Thread(new Runnable() {
+
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						String carNumber=carNumberText.getText();
+						String routeNumber=routeNumberText.getText();
+						Station_Database.addStationRecord(carNumber,routeNumber,1);//发车
+					}
+					
+				});
+				t.start();
+			}
+			
+		});
+		self.add(panel);
+		self.revalidate();
+		self.repaint();
+	}
+	public static void receiveCar(ContentMessagePanel contentPanel) {
+		// TODO Auto-generated method stub
+		self=contentPanel;
+		self.removeAll();
+		
+		JPanel panel=new JPanel(new GridLayout(2,2,5,5));
+		panel.setOpaque(false);
+		
+		JLabel label1=new JLabel("车辆编号：");
+		label1.setFont(new Font("宋体",Font.PLAIN,20));
+		panel.add(label1);
+		
+		JTextField carNumberText=new JTextField(20);
+		carNumberText.setFont(new Font("宋体",Font.PLAIN,20));
+		panel.add(carNumberText);
+		
+		panel.add(new JLabel("    "));
+		
+		JButton departButton=new JButton("入站");
+		departButton.setFont(new Font("宋体",Font.PLAIN,20));
+		departButton.setSize(4,1);
+		panel.add(departButton);
+		departButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				Thread t=new Thread(new Runnable() {
+
+					@Override
+					public void run() {
+						// TODO Auto-generated method stub
+						String carNumber=carNumberText.getText();
+						Station_Database.addStationRecord(carNumber,"",2);//入站
 					}
 					
 				});
