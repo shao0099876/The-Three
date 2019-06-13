@@ -148,7 +148,7 @@ public class IndexUI extends JFrame{
 							
 						});
 						dialog.add(button);
-						dialog.setSize(2000,1000);
+						dialog.setSize(700,300);
 						dialog.setVisible(true);
 						
 						System.out.println("客户查看物流信息查看物流信息");
@@ -167,7 +167,7 @@ public class IndexUI extends JFrame{
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
-						BrowserDialog.frame=new BaseUI();//开启员工登陆界面
+						//BrowserDialog.frame=new BaseUI();//开启员工登陆界面
 						JDialog dialog=new JDialog();
 						dialog.setTitle("登录");
 						dialog.setLayout(new GridLayout(3,2,5,5));
