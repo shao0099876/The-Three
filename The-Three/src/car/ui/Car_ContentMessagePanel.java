@@ -219,10 +219,7 @@ public class Car_ContentMessagePanel{
 	}
 
 	public static void addcarInfo(ContentMessagePanel p_self){//车辆信息的增加操作
-		DebugInfo.DebugInfo("开始绘制车辆增删改Panel");
-		self=p_self;
-		self.removeAll();//清除面板上面的所有组件
-
+		System.out.println("开始判断驾驶员信息");
 		if(setcarbobox()==1){
 			self.removeAll();//将面板上面的组件全部清空
 			JOptionPane.showMessageDialog(self,"系统现在无驾驶员信息，不能进行车辆信息添加，请先去添加驾驶员信息","information",JOptionPane.INFORMATION_MESSAGE);
@@ -231,6 +228,7 @@ public class Car_ContentMessagePanel{
 			return;
 		}
 		
+		System.out.println("开始判断路线信息");
 		if(setcarbobox()==2){
 			self.removeAll();//将面板上面的组件全部清空
 			JOptionPane.showMessageDialog(self,"系统现在无路线信息，不能进行车辆信息添加，请先去添加路线信息","information",JOptionPane.INFORMATION_MESSAGE);
@@ -238,6 +236,12 @@ public class Car_ContentMessagePanel{
 			self.repaint();
 			return;
 		}
+		
+		DebugInfo.DebugInfo("开始绘制车辆增删改Panel");
+		self=p_self;
+		self.removeAll();//清除面板上面的所有组件
+
+		System.out.println("开始绘图");
 		
 		JPanel panel=new JPanel(new GridLayout(9,3,5,5));//六行三列
 		panel.setOpaque(false);
@@ -818,6 +822,7 @@ public class Car_ContentMessagePanel{
 	}
 
 	public static int setcarbobox(){
+		System.out.println("开始执行");
 		car_bobox1=new JComboBox();
 		car_bobox2=new JComboBox();
 		car_bobox3=new JComboBox();
@@ -832,67 +837,64 @@ public class Car_ContentMessagePanel{
 		car_bobox2.setSelectedIndex(-1);
 		car_bobox3.setSelectedIndex(-1);
 		car_bobox4.setSelectedIndex(-1);
+	
 		
-		//获取车辆信息
-		Car[] ca=Car_Database.getCarInfo();
-		if(ca==null||ca.length==0){
-			return 0;//无车辆信息
-		}
-		
+		System.out.println("获取驾驶员信息");
 		Driver[] dri=Driver_Database.getAllDriverInfo();
 		if(dri==null||dri.length==0){
 			return 1;//无驾驶员信息
 		}
-		
-		Route[] ro=Route_Database.getAllRouteInfo();
-		if(ro==null||ro.length==0){
-			return 2;//无路线信息
-		}
-		
-		String[] s1=new String[ca.length];//车牌号
-		for(int i=0;i<ca.length;i++){
-			s1[i]=ca[i].carNumber;//获取车牌号
-		}
-		
 		String[] s2=new String[dri.length];//驾驶员编号
 		for(int i=0;i<dri.length;i++){
+			System.out.println("驾驶员:"+s2[i]);
 			s2[i]=String.valueOf(dri[i].peopleNumber);//获取驾驶员编号
 		}
-		
-		String[] s3=new String[ro.length];//路线编号
-		for(int i=0;i<ro.length;i++){
-			s3[i]=String.valueOf(ro[i].routeNumber);//获取路线编号
-		}
-		
-		//将信息添加到列表中
-		DefaultComboBoxModel<String> car_model=new DefaultComboBoxModel<String>();	
 		DefaultComboBoxModel<String> driver_moel1=new DefaultComboBoxModel<String>();
 		DefaultComboBoxModel<String> driver_moel2=new DefaultComboBoxModel<String>();
-		DefaultComboBoxModel<String> route_model=new DefaultComboBoxModel<String>();
-		
-		for(int i=0;i<s1.length;i++){
-			car_model.addElement(s1[i]);
-		}
-		
 		for(int i=0;i<s2.length;i++){
 			driver_moel1.addElement(s2[i]);
 			driver_moel2.addElement(s2[i]);
 		}
+		car_bobox2.setModel(driver_moel1);
+		car_bobox3.setModel(driver_moel2);
+		car_bobox2.addItemListener(driver1_itemListener);
+		car_bobox3.addItemListener(driver2_itemListener);	
 		
+		System.out.println("获取路线信息");
+		Route[] ro=Route_Database.getAllRouteInfo();
+		if(ro==null||ro.length==0){
+			return 2;//无路线信息
+		}
+		String[] s3=new String[ro.length];//路线编号
+		for(int i=0;i<ro.length;i++){
+			System.out.println("路线:"+s3[i]);
+			s3[i]=String.valueOf(ro[i].routeNumber);//获取路线编号
+		}
+		DefaultComboBoxModel<String> route_model=new DefaultComboBoxModel<String>();
 		for(int i=0;i<s3.length;i++){
 			route_model.addElement(s3[i]);
 		}
-		
-		car_bobox1.setModel(car_model);
-		car_bobox2.setModel(driver_moel1);
-		car_bobox3.setModel(driver_moel2);
 		car_bobox4.setModel(route_model);
-		
-		//添加响应函数
-		car_bobox1.addItemListener(car_itemListener);
-		car_bobox2.addItemListener(driver1_itemListener);
-		car_bobox3.addItemListener(driver2_itemListener);
 		car_bobox4.addItemListener(route_itemListener);
+		
+		//获取车辆信息
+		System.out.println("获取车辆信息");
+		Car[] ca=Car_Database.getCarInfo();
+		if(ca==null||ca.length==0){
+			return 0;//无车辆信息
+		}
+		String[] s1=new String[ca.length];//车牌号
+		for(int i=0;i<ca.length;i++){
+			s1[i]=ca[i].carNumber;//获取车牌号
+			System.out.println("车牌号:"+s1[i]);
+		}
+		//将信息添加到列表中
+		DefaultComboBoxModel<String> car_model=new DefaultComboBoxModel<String>();		
+		for(int i=0;i<s1.length;i++){
+			car_model.addElement(s1[i]);
+		}
+		car_bobox1.setModel(car_model);
+		car_bobox1.addItemListener(car_itemListener);
 		return -1;//成功
 		
 	}
