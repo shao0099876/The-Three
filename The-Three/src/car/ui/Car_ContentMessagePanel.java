@@ -253,6 +253,7 @@ public class Car_ContentMessagePanel{
 		panel.add(label1);
 		
 		car_text1=new JTextField(30);
+		car_text1.setText("");
 		car_text1.setFont(new Font("宋体",Font.PLAIN,25));
 		car_text1.setEditable(true);//设置为可编辑
 		car_text1.setOpaque(false);
@@ -271,6 +272,8 @@ public class Car_ContentMessagePanel{
 		panel.add(label2);
 		
 		car_text2=new JTextField();
+		car_text2.setText("");
+
 		car_text2.setFont(new Font("宋体",Font.PLAIN,25));
 		car_text2.setEditable(false);//设置为可编辑
 		car_text2.setOpaque(false);
@@ -289,6 +292,8 @@ public class Car_ContentMessagePanel{
 		panel.add(label3);
 		
 		car_text3=new JTextField();
+		car_text3.setText("");
+
 		car_text3.setFont(new Font("宋体",Font.PLAIN,25));
 		car_text3.setEditable(false);//设置为可编辑
 		car_text3.setOpaque(false);
@@ -307,6 +312,7 @@ public class Car_ContentMessagePanel{
 		panel.add(label4);
 		
 		car_text4=new JTextField();
+		car_text4.setText("");
 		car_text4.setFont(new Font("宋体",Font.PLAIN,25));
 		car_text4.setEditable(false);//设置为可编辑
 		car_text4.setOpaque(false);
@@ -551,6 +557,7 @@ public class Car_ContentMessagePanel{
 		panel.add(label1);
 		
 		car_text1=new JTextField(20);
+		car_text1.setText("");
 		car_text1.setFont(new Font("宋体",Font.PLAIN,25));
 		car_text1.setEditable(false);//设置为可编辑
 		car_text1.setOpaque(false);
@@ -568,6 +575,8 @@ public class Car_ContentMessagePanel{
 		panel.add(label2);
 		
 		car_text2=new JTextField();
+		car_text2.setText("");
+
 		car_text2.setFont(new Font("宋体",Font.PLAIN,25));
 		car_text2.setEditable(false);//设置为可编辑
 		car_text2.setOpaque(false);
@@ -585,6 +594,7 @@ public class Car_ContentMessagePanel{
 		panel.add(label3);
 		
 		car_text3=new JTextField();
+		car_text3.setText("");
 		car_text3.setFont(new Font("宋体",Font.PLAIN,25));
 		car_text3.setEditable(false);//设置为可编辑
 		car_text3.setOpaque(false);
@@ -602,6 +612,7 @@ public class Car_ContentMessagePanel{
 		panel.add(label4);
 		
 		car_text4=new JTextField();
+		car_text4.setText("");
 		car_text4.setFont(new Font("宋体",Font.PLAIN,25));
 		car_text4.setEditable(false);//设置为可编辑
 		car_text4.setOpaque(false);
@@ -696,6 +707,7 @@ public class Car_ContentMessagePanel{
 		panel.add(cpanel,BorderLayout.CENTER);
 		
 		car_deltext=new JTextField(30);
+		car_deltext.setText("");
 		car_deltext.setFont(new Font("宋体",Font.PLAIN,30));
 		car_deltext.setEditable(true);
 		car_deltext.setOpaque(false);

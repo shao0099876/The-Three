@@ -197,6 +197,7 @@ public class Route_ContentMessagePanel {
 		panel.add(cpanel,BorderLayout.CENTER);
 		
 		route_deltext=new JTextField(20);
+		route_deltext.setText("");
 		route_deltext.setFont(new Font("ËÎÌו",Font.PLAIN,30));
 		route_deltext.setEditable(true);
 		route_deltext.setOpaque(false);
