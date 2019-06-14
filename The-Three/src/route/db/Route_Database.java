@@ -249,8 +249,7 @@ public class Route_Database {
 			DataInputStream input=new DataInputStream(socket.getInputStream());
 			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
 			IO.write(output, "32");
-			IO.write(output,start);
-			IO.write(output, end);
+			IO.write(output,start+"#"+end);
 		
 			String raw_string=IO.read(input);
 			String[] data=raw_string.split("#");

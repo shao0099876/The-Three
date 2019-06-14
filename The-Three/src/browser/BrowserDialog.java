@@ -101,6 +101,8 @@ public class BrowserDialog extends JDialog {
 		fuelText.setEditable(false);
 		infoPanel.add(fuelText);
 		
+		this.add(infoPanel,BorderLayout.SOUTH);
+		
 		this.setSize(2000,1300);
 		this.setVisible(true);
 	}

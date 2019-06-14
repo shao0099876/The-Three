@@ -278,8 +278,10 @@ public class Station_ServerTask extends ServerTask{
 		int recordNumber = 0;
 		try {
 			Statement stmt=conn.createStatement();
-			ResultSet res=stmt.executeQuery("select COUNT(*) from StationRecord");
-			recordNumber=res.getInt(1)+1;
+			ResultSet res=stmt.executeQuery("select recordNumber from StationRecord");
+			while(res.next()) {
+				recordNumber+=1;
+			}
 		}catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -288,7 +290,7 @@ public class Station_ServerTask extends ServerTask{
 		//数据类型转换
 		
 		String carNumber=data[0];
-		int routeNumber=Integer.valueOf(data[1]);
+		int routeNumber=data[1].equals("")? -1:Integer.valueOf(data[1]);
 		String stationName=data[2];
 		int type=Integer.valueOf(data[3]);
 		
