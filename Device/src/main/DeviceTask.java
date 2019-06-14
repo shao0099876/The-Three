@@ -20,7 +20,7 @@ public class DeviceTask implements Runnable{
 	public void run() {
 		// TODO Auto-generated method stub
 		init();
-		while(true) {
+		{
 			StringBuilder sb=new StringBuilder();
 			sb.append(carNumber);
 			sb.append("#");

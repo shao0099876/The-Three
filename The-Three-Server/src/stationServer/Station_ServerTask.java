@@ -265,7 +265,7 @@ public class Station_ServerTask extends ServerTask{
 		return sb.toString();
 	}
 
-	public static void addStationRecord(String s) {
+	public static String addStationRecord(String s) {
 		// TODO Auto-generated method stub
 		String[] data=s.split("#");//获取信息
 		
@@ -318,6 +318,7 @@ public class Station_ServerTask extends ServerTask{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return "hello";
 	}
 	
 }

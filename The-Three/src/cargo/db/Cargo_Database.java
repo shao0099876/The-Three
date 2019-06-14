@@ -101,6 +101,7 @@ public class Cargo_Database {
 			
 			IO.write(output, "35");
 			IO.write(output, cargoNumber+"#"+carNumber+"#"+stationName+"#"+Integer.toString(op));
+			IO.read(input);
 			output.close();
 			input.close();
 			socket.close();

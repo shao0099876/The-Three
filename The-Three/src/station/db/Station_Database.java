@@ -164,6 +164,7 @@ public class Station_Database {
 			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
 			IO.write(output, "36");//查询车辆的编号
 			IO.write(output, carNumber+"#"+routeNumber+"#"+Client.user.stationName+"#"+Integer.toString(i));//查询的车牌号部分信息
+			IO.read(input);
 			output.close();
 			input.close();
 			socket.close();

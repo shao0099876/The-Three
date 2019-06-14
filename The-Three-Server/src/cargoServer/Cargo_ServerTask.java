@@ -136,7 +136,7 @@ public class Cargo_ServerTask extends ServerTask{
 		return Integer.toString(cargoNumber);
 	}
 
-	public static void addCargoRecord(String s) {
+	public static String addCargoRecord(String s) {
 		// TODO Auto-generated method stub
 		System.out.println(s);
 		String[] data=s.split("#");//获取信息
@@ -184,6 +184,7 @@ public class Cargo_ServerTask extends ServerTask{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return "hello";
 	}
 
 	public static String getCargoStatus(String read) {
