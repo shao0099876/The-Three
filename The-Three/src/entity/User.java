@@ -8,10 +8,9 @@ public class User {
 	public User() {
 		
 	}
-	public User(String p1,String p2,String p3,int p4) {
+	public User(String p1,String p2,String p3) {
 		username=p1;
 		password=p2;
 		stationName=p3;
-		authority=p4;
 	}
 }

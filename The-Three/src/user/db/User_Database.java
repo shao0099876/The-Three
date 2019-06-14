@@ -19,8 +19,8 @@ public class User_Database {
 			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
 			
 			IO.write(output, "33");
-			IO.write(output, username);
-			IO.write(output, password);
+			System.out.println(username+"#"+password);
+			IO.write(output, username+"#"+password);
 			
 			String raw_string=IO.read(input);
 			
@@ -47,7 +47,7 @@ public class User_Database {
 			
 			String raw_string=IO.read(input);
 			String[] data=raw_string.split("#");
-			User res=new User(data[0],data[1],data[2],Integer.valueOf(data[3]));
+			User res=new User(data[0],data[1],data[2]);
 			output.close();
 			input.close();
 			socket.close();
