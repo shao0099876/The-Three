@@ -209,6 +209,7 @@ public class Driver_ContentMessagePanel {
 		p.add(lab1);
 		
 		driver_text1=new JTextField(20);
+		driver_text1.setText("");
 		driver_text1.setFont(new Font("宋体",Font.PLAIN,30));
 		driver_text1.setEditable(true);//设置为可编辑
 		driver_text1.setOpaque(false);
@@ -221,6 +222,8 @@ public class Driver_ContentMessagePanel {
 		p.add(lab2);
 		
 		driver_text2=new JTextField();
+		driver_text2.setText("");
+
 		driver_text2.setFont(new Font("宋体",Font.PLAIN,30));
 		driver_text2.setEditable(true);//设置为可编辑
 		driver_text2.setOpaque(false);
@@ -233,6 +236,7 @@ public class Driver_ContentMessagePanel {
 		p.add(lab3);
 		
 		driver_text3=new JTextField();
+		driver_text3.setText("");
 		driver_text3.setFont(new Font("宋体",Font.PLAIN,30));
 		driver_text3.setEditable(true);//设置为可编辑
 		driver_text3.setOpaque(false);
@@ -245,6 +249,7 @@ public class Driver_ContentMessagePanel {
 		p.add(lab4);
 		
 		driver_text4=new JTextField();
+		driver_text4.setText("");
 		driver_text4.setFont(new Font("宋体",Font.PLAIN,30));
 		driver_text4.setEditable(true);//设置为可编辑
 		driver_text4.setOpaque(false);
@@ -257,6 +262,7 @@ public class Driver_ContentMessagePanel {
 		p.add(lab5);
 		
 		driver_text5=new JTextField();
+		driver_text5.setText("");
 		driver_text5.setFont(new Font("宋体",Font.PLAIN,30));
 		driver_text5.setEditable(true);//设置为可编辑
 		driver_text5.setOpaque(false);
@@ -269,6 +275,8 @@ public class Driver_ContentMessagePanel {
 		p.add(lab6);
 		
 		driver_text6=new JTextField();
+		driver_text6.setText("");
+
 		driver_text6.setFont(new Font("宋体",Font.PLAIN,30));
 		driver_text6.setEditable(true);//设置为可编辑
 		driver_text6.setOpaque(false);
@@ -281,6 +289,7 @@ public class Driver_ContentMessagePanel {
 		p.add(lab7);
 		
 		driver_text7=new JTextField();
+		driver_text7.setText("");
 		driver_text7.setFont(new Font("宋体",Font.PLAIN,30));
 		driver_text7.setEditable(true);//设置为可编辑
 		driver_text7.setOpaque(false);
@@ -379,6 +388,8 @@ public class Driver_ContentMessagePanel {
 		p.add(lab1);
 		
 		driver_text1=new JTextField(20);
+		driver_text1.setText("");
+
 		driver_text1.setFont(new Font("宋体",Font.PLAIN,25));
 		driver_text1.setEditable(false);//设置为可编辑
 		driver_text1.setOpaque(false);
@@ -392,6 +403,8 @@ public class Driver_ContentMessagePanel {
 		p.add(lab2);
 		
 		driver_text2=new JTextField(20);
+		driver_text2.setText("");
+
 		driver_text2.setFont(new Font("宋体",Font.PLAIN,25));
 		driver_text2.setEditable(false);//设置为可编辑
 		driver_text2.setOpaque(false);
@@ -405,6 +418,8 @@ public class Driver_ContentMessagePanel {
 		p.add(lab3);
 		
 		driver_text3=new JTextField(20);
+		driver_text3.setText("");
+
 		driver_text3.setFont(new Font("宋体",Font.PLAIN,25));
 		driver_text3.setEditable(true);//设置为可编辑
 		driver_text3.setOpaque(false);
@@ -418,6 +433,8 @@ public class Driver_ContentMessagePanel {
 		p.add(lab4);
 		
 		driver_text4=new JTextField(20);
+		driver_text4.setText("");
+
 		driver_text4.setFont(new Font("宋体",Font.PLAIN,25));
 		driver_text4.setEditable(true);//设置为可编辑
 		driver_text4.setOpaque(false);
@@ -431,6 +448,8 @@ public class Driver_ContentMessagePanel {
 		p.add(lab5);
 		
 		driver_text5=new JTextField(20);
+		driver_text5.setText("");
+
 		driver_text5.setFont(new Font("宋体",Font.PLAIN,25));
 		driver_text5.setEditable(true);//设置为可编辑
 		driver_text5.setOpaque(false);
@@ -444,6 +463,8 @@ public class Driver_ContentMessagePanel {
 		p.add(lab6);
 		
 		driver_text6=new JTextField(20);
+		driver_text6.setText("");
+
 		driver_text6.setFont(new Font("宋体",Font.PLAIN,25));
 		driver_text6.setEditable(true);//设置为可编辑
 		driver_text6.setOpaque(false);
@@ -457,6 +478,8 @@ public class Driver_ContentMessagePanel {
 		p.add(lab7);
 		
 		driver_text7=new JTextField(20);
+		driver_text7.setText("");
+
 		driver_text7.setFont(new Font("宋体",Font.PLAIN,25));
 		driver_text7.setEditable(true);//设置为可编辑
 		driver_text7.setOpaque(false);
@@ -490,6 +513,19 @@ public class Driver_ContentMessagePanel {
 						s[4]=driver_text5.getText();
 						s[5]=driver_text6.getText();
 						s[6]=driver_text7.getText();
+						
+						boolean flag=false;
+						for(int i=0;i<7;i++){
+							if(s[i].equals("")||s[i].length()==0){
+								flag=true;
+								break;
+							}
+						}
+						
+						if(flag){
+							JOptionPane.showMessageDialog(self,"请将信息填写完整","information",JOptionPane.INFORMATION_MESSAGE);
+							return;
+						}
 						
 						String S=s[0]+"#"+s[1]+"#"+s[2]+"#"+s[3]+"#"+s[4]+"#"+s[5]+"#"+s[6];//保存增加的驾驶员信息
 						System.out.println("修改驾驶员信息:"+S);
@@ -542,6 +578,8 @@ public class Driver_ContentMessagePanel {
 		panel.add(cpanel,BorderLayout.CENTER);
 		
 		driver_deltext=new JTextField(20);
+		driver_deltext.setText("");
+
 		driver_deltext.setFont(new Font("宋体",Font.PLAIN,30));
 		driver_deltext.setEditable(true);
 		driver_deltext.setOpaque(false);
