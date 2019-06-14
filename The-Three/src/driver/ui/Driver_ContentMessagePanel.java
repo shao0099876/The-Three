@@ -691,10 +691,12 @@ public class Driver_ContentMessagePanel {
 		//将信息添加到列表中
 		DefaultComboBoxModel<String> drivernum_model=new DefaultComboBoxModel<String>();
 		DefaultComboBoxModel<String> driverbian_model=new DefaultComboBoxModel<String>();
-		for(int i=0;i<s1.length;i++){
+		drivernum_model.addElement("");
+		for(int i=1;i<s1.length;i++){
 			drivernum_model.addElement(s1[i]);
 		}
-		for(int i=0;i<s2.length;i++){
+		driverbian_model.addElement("");
+		for(int i=1;i<s2.length;i++){
 			driverbian_model.addElement(s2[i]);
 		}
 		drivernum_bobox.setModel(drivernum_model);

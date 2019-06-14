@@ -725,6 +725,9 @@ public class Route_ContentMessagePanel {
 		DefaultComboBoxModel<String> route_model2=new DefaultComboBoxModel<String>();
 		DefaultComboBoxModel<String> route_model3=new DefaultComboBoxModel<String>();
 		DefaultComboBoxModel<String> route_model4=new DefaultComboBoxModel<String>();
+		route_model2.addElement("");
+		route_model3.addElement("");
+		route_model4.addElement("");
 		for(int i=0;i<s.length;i++){
 			route_model2.addElement(s[i]);
 			route_model3.addElement(s[i]);
@@ -761,7 +764,8 @@ public class Route_ContentMessagePanel {
 		}
 		
 		DefaultComboBoxModel<String> route_model1=new DefaultComboBoxModel<String>();
-		for(int i=0;i<rr.length;i++){
+		route_model1.addElement("");
+		for(int i=1;i<rr.length;i++){
 			route_model1.addElement(rr[i]);
 		}
 		route_bobox.setModel(route_model1);

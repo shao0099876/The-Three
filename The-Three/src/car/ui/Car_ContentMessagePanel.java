@@ -851,6 +851,8 @@ public class Car_ContentMessagePanel{
 		}
 		DefaultComboBoxModel<String> driver_moel1=new DefaultComboBoxModel<String>();
 		DefaultComboBoxModel<String> driver_moel2=new DefaultComboBoxModel<String>();
+		driver_moel1.addElement("");
+		driver_moel2.addElement("");
 		for(int i=0;i<s2.length;i++){
 			driver_moel1.addElement(s2[i]);
 			driver_moel2.addElement(s2[i]);
@@ -871,6 +873,7 @@ public class Car_ContentMessagePanel{
 			s3[i]=String.valueOf(ro[i].routeNumber);//获取路线编号
 		}
 		DefaultComboBoxModel<String> route_model=new DefaultComboBoxModel<String>();
+		route_model.addElement("");
 		for(int i=0;i<s3.length;i++){
 			route_model.addElement(s3[i]);
 		}
@@ -889,7 +892,8 @@ public class Car_ContentMessagePanel{
 			System.out.println("车牌号:"+s1[i]);
 		}
 		//将信息添加到列表中
-		DefaultComboBoxModel<String> car_model=new DefaultComboBoxModel<String>();		
+		DefaultComboBoxModel<String> car_model=new DefaultComboBoxModel<String>();	
+		car_model.addElement("");
 		for(int i=0;i<s1.length;i++){
 			car_model.addElement(s1[i]);
 		}
