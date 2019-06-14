@@ -12,8 +12,7 @@ public class BrowserUI {
 			dialog.Add_Cars_Point(i);
 		}
 		dialog.DrawPoints();
-		dialog.setSize(2000,1000);
-		dialog.setVisible(true);
+		dialog.ShowGUI(Car_Database.getAllCarNumber());
 	}
 
 	public static void FocusOn(String selectedValue, BrowserDialog self) {

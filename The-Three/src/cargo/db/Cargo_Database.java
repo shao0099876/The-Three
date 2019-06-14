@@ -20,17 +20,18 @@ public class Cargo_Database {
 			
 			IO.write(output, "18");
 			String raw_string=IO.read(input);
-			
-			String[] data=raw_string.split("#");
-			Cargo[] res=new Cargo[data.length/4];
-			
-			for(int i=0;i<data.length;i+=4) {
-				res[i/4]=new Cargo(Integer.valueOf(data[i+0]),data[i+1],data[i+2],Integer.valueOf(data[i+3]));
+			if(raw_string!=null&&!raw_string.equals("")) {
+				String[] data=raw_string.split("#");
+				Cargo[] res=new Cargo[data.length/4];
+				
+				for(int i=0;i<data.length;i+=4) {
+					res[i/4]=new Cargo(Integer.valueOf(data[i+0]),data[i+1],data[i+2],Integer.valueOf(data[i+3]));
+				}
+				output.close();
+				input.close();
+				socket.close();
+				return res;
 			}
-			output.close();
-			input.close();
-			socket.close();
-			return res;
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

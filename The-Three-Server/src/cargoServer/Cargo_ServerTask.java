@@ -105,8 +105,10 @@ public class Cargo_ServerTask extends ServerTask{
 		int cargoNumber = 0;
 		try {
 			Statement stmt=conn.createStatement();
-			ResultSet res=stmt.executeQuery("select COUNT(*) from Cargo");
-			cargoNumber=res.getInt(1)+1;
+			ResultSet res=stmt.executeQuery("select cargoNumber from Cargo");
+			while(res.next()) {
+				cargoNumber+=1;
+			}
 		}catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -136,6 +138,7 @@ public class Cargo_ServerTask extends ServerTask{
 
 	public static void addCargoRecord(String s) {
 		// TODO Auto-generated method stub
+		System.out.println(s);
 		String[] data=s.split("#");//获取信息
 		
 		try {
@@ -147,8 +150,10 @@ public class Cargo_ServerTask extends ServerTask{
 		int recordNumber = 0;
 		try {
 			Statement stmt=conn.createStatement();
-			ResultSet res=stmt.executeQuery("select COUNT(*) from CargoRecord");
-			recordNumber=res.getInt(1)+1;
+			ResultSet res=stmt.executeQuery("select recordNumber from CargoRecord");
+			while(res.next()) {
+				recordNumber+=1;
+			}
 		}catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -156,12 +161,12 @@ public class Cargo_ServerTask extends ServerTask{
 		
 		//数据类型转换
 		int cargoNumber=Integer.valueOf(data[0]);
-		String carNumber=data[1];
+		String carNumber=data[2];
 		
 		SimpleDateFormat ft=new SimpleDateFormat("yyyyMMddhhmmss");
 		String time=ft.format(new Date());
 		
-		String stationName=data[2];
+		String stationName=data[1];
 		int type=Integer.valueOf(data[3]);
 		
 		try {

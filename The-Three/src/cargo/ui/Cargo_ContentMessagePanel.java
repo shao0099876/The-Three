@@ -67,21 +67,17 @@ public class Cargo_ContentMessagePanel {
 		JTextField startTextField=new JTextField(20);
 		startTextField.setFont(new Font("宋体",Font.PLAIN,20));
 		startTextField.setEditable(false);
+		startTextField.setText(Client.user.stationName);
 		panel.add(startTextField);
 
-		Station[] stationList=Station_Database.getStationList();
 		JLabel label2=new JLabel("终点站");
 		label2.setFont(new Font("宋体",Font.PLAIN,20));
 		label2.setOpaque(false);
 		panel.add(label2);
 		
-		DefaultComboBoxModel<String> endModel=new DefaultComboBoxModel<String>();
-		for(Station i:stationList) {
-			endModel.addElement(i.stationName);
-		}
-		JComboBox<String> endBox=new JComboBox<String>(endModel);
-		endBox.setFont(new Font("宋体",Font.PLAIN,20));
-		panel.add(endBox);
+		JTextField endTextField=new JTextField(20);
+		endTextField.setFont(new Font("宋体",Font.PLAIN,20));
+		panel.add(endTextField);
 		
 		JLabel label3=new JLabel("路线");
 		label3.setFont(new Font("宋体",Font.PLAIN,20));
@@ -106,7 +102,7 @@ public class Cargo_ContentMessagePanel {
 					public void run() {
 						// TODO Auto-generated method stub
 						String start=startTextField.getText();
-						String end=(String) endBox.getSelectedItem();
+						String end=endTextField.getText();
 						if(start==null||end==null) {
 							JOptionPane.showMessageDialog(self,"出发地与目的地不可为空","information",JOptionPane.INFORMATION_MESSAGE);
 						}
@@ -142,7 +138,7 @@ public class Cargo_ContentMessagePanel {
 					public void run() {
 						// TODO Auto-generated method stub
 						String start=startTextField.getText();
-						String end=(String) endBox.getSelectedItem();
+						String end=endTextField.getText();
 						String route=(String) routeBox.getSelectedItem();
 						if(start==null||end==null||route==null) {
 							JOptionPane.showMessageDialog(self,"信息框不可为空","information",JOptionPane.INFORMATION_MESSAGE);

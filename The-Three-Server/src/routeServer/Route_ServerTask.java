@@ -341,12 +341,13 @@ public class Route_ServerTask extends ServerTask{
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		System.out.println(read);
 		String[] data=read.split("#");
 		String startAddr=data[0];
 		String endAddr=data[1];
 			
 		try {
-			PreparedStatement pstmt=conn.prepareStatement("select routeNumber from Route where startAddr = ? , destAddr=?");
+			PreparedStatement pstmt=conn.prepareStatement("select * from Route where startAddr = ? and destAddr=?");
 			pstmt.setString(1, startAddr);
 			pstmt.setString(2, endAddr);
 			ResultSet res=pstmt.executeQuery();
@@ -357,7 +358,13 @@ public class Route_ServerTask extends ServerTask{
 					sb.append("#");
 				}
 				flag=false;
-				sb.append(res.getString(1));
+				sb.append(res.getInt(1));
+				sb.append("#");
+				sb.append(res.getString(2));
+				sb.append("#");
+				sb.append(res.getString(3));
+				sb.append("#");
+				sb.append(res.getString(4));
 			}
 			res.close();
 			pstmt.close();
