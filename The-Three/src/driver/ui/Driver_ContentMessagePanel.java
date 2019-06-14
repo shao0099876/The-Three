@@ -315,6 +315,19 @@ public class Driver_ContentMessagePanel {
 						s[5]=driver_text6.getText();
 						s[6]=driver_text7.getText();
 						
+						boolean flag=false;
+						for(int i=0;i<7;i++){
+							if(s[i].equals("")||s[i].length()==0){
+								flag=true;
+								break;
+							}
+						}
+						
+						if(flag){
+							JOptionPane.showMessageDialog(self,"请将信息填写完整","information",JOptionPane.INFORMATION_MESSAGE);
+							return;
+						}
+						
 						String S=s[0]+"#"+s[1]+"#"+s[2]+"#"+s[3]+"#"+s[4]+"#"+s[5]+"#"+s[6];//保存增加的驾驶员信息
 						System.out.println("增加驾驶员信息:"+S);
 						

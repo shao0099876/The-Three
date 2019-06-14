@@ -442,6 +442,10 @@ public class Route_ContentMessagePanel {
 					@Override
 					public void run() {
 						DebugInfo.DebugInfo("添加路线信息的按钮被按下");
+						if(route_text1.getText().length()==0||route_text1.equals("")){
+							JOptionPane.showMessageDialog(self,"请填写路线编号","information",JOptionPane.INFORMATION_MESSAGE);
+							return;
+						}
 						String[] s=new String[4]; 
 						s[0]=route_text1.getText();
 						s[1]=route_text2.getText();

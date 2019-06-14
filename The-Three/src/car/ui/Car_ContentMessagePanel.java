@@ -339,6 +339,10 @@ public class Car_ContentMessagePanel{
 					public void run() {
 						// TODO Auto-generated method stub
 						DebugInfo.DebugInfo("添加按钮被按下");
+						if(car_text1.getText().length()==0||car_text1.equals("")){
+							JOptionPane.showMessageDialog(self,"请填写车辆编号","information",JOptionPane.INFORMATION_MESSAGE);
+							return;
+						}
 						StringBuilder carinfo=new StringBuilder();//保存文本框中对应的信息
 						carinfo.append(car_text1.getText());
 						carinfo.append("#");
@@ -630,6 +634,10 @@ public class Car_ContentMessagePanel{
 					public void run() {
 						// TODO Auto-generated method stub
 						DebugInfo.DebugInfo("添加按钮被按下");
+						if(car_text1.getText().length()==0||car_text1.equals("")){
+							JOptionPane.showMessageDialog(self,"请选择车辆编号","information",JOptionPane.INFORMATION_MESSAGE);
+							return;
+						}
 						StringBuilder carinfo=new StringBuilder();//保存文本框中对应的信息
 						carinfo.append(car_text1.getText());
 						carinfo.append("#");
