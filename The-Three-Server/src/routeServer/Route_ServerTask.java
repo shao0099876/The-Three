@@ -331,4 +331,42 @@ public class Route_ServerTask extends ServerTask{
 		}
 		return message;
 	}
+
+	public static String getMRouteInfo(String read) {
+		// TODO Auto-generated method stub
+		
+		try {
+			initDB();
+		} catch (ClassNotFoundException | SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		String[] data=read.split("#");
+		String startAddr=data[0];
+		String endAddr=data[1];
+			
+		try {
+			PreparedStatement pstmt=conn.prepareStatement("select routeNumber from Route where startAddr = ? , destAddr=?");
+			pstmt.setString(1, startAddr);
+			pstmt.setString(2, endAddr);
+			ResultSet res=pstmt.executeQuery();
+			StringBuilder sb=new StringBuilder();
+			boolean flag=true;
+			while(res.next()){
+				if(!flag) {
+					sb.append("#");
+				}
+				flag=false;
+				sb.append(res.getString(1));
+			}
+			res.close();
+			pstmt.close();
+			conn.close();
+			return sb.toString();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

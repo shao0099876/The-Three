@@ -14,6 +14,7 @@ import deviceServer.Device_ServerTask;
 import driverServer.Driver_ServerTask;
 import routeServer.Route_ServerTask;
 import stationServer.Station_ServerTask;
+import userServer.User_ServerTask;
 import iotools.IO;
 
 public class ServerTask implements Runnable {
@@ -158,6 +159,15 @@ public class ServerTask implements Runnable {
 				break;
 			case 31:
 				IO.write(output, Station_ServerTask.getMohuStationList(IO.read(input)));
+				break;
+			case 32:
+				IO.write(output, Route_ServerTask.getMRouteInfo(IO.read(input)));
+				break;
+			case 33:
+				IO.write(output, User_ServerTask.login(IO.read(input)));
+				break;
+			case 34:
+				IO.write(output, User_ServerTask.getUser(IO.read(input)));
 				break;
 			case 35:
 				Cargo_ServerTask.addCargoRecord(IO.read(input));

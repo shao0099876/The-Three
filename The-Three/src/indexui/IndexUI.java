@@ -148,7 +148,7 @@ public class IndexUI extends JFrame{
 							
 						});
 						dialog.add(button);
-						dialog.setSize(2000,1000);
+						dialog.setSize(700,300);
 						dialog.setVisible(true);
 						
 						System.out.println("客户查看物流信息查看物流信息");
