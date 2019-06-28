@@ -10,25 +10,18 @@ import main.ServerTask;
 public class Route_ServerTask extends ServerTask{
 	public Route_ServerTask(Socket p) {
 		super(p);
-		// TODO Auto-generated constructor stub
 	}
-
 	public static String getRouteInfo(int routnum) {//获取某条路线信息
-		// TODO Auto-generated method stub
 		try {
 			initDB();
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		StringBuilder sb=new StringBuilder();
-		
 		try {
 			PreparedStatement pstmt=conn.prepareStatement("select * from Route where routeNumber=?");
 			pstmt.setInt(1,routnum);
 			ResultSet res=pstmt.executeQuery();
-			
 			boolean flag=true;
 			while(res.next()){
 				if(!flag){
@@ -43,15 +36,12 @@ public class Route_ServerTask extends ServerTask{
 				sb.append("#");
 				sb.append(res.getString(4));
 			}
-			
 			res.close();
 			pstmt.close();
 			conn.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		return sb.toString();
 	}
 

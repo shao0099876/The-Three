@@ -10,18 +10,13 @@ import java.util.ArrayList;
 import main.ServerTask;
 
 public class Device_ServerTask extends ServerTask{
-
 	public Device_ServerTask(Socket p) {
 		super(p);
-		// TODO Auto-generated constructor stub
 	}
-
 	public static String getCarLatestGPS(String carnum) {
-		// TODO Auto-generated method stub
 		try {
 			initDB();
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		StringBuilder sb=new StringBuilder();
@@ -34,7 +29,6 @@ public class Device_ServerTask extends ServerTask{
 			pstmt.close();
 			conn.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return sb.toString();

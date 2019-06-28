@@ -12,25 +12,19 @@ import entity.Car;
 import entity.GPS;
 
 public class Car_Database {
-	private static String addr="cal.srcserver.xyz";
-	//private static String addr="47.105.101.104";
+	private static String addr="118.190.147.40";
 	public static Car[] getCarInfo() {//查询车辆的概要信息
-		//测试完成
 		try {
 			Socket socket= new Socket(addr,8081);
 			DataInputStream input=new DataInputStream(socket.getInputStream());
 			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
-			
 			IO.write(output, "1");
-			
 			String raw_string=IO.read(input);
 			if(raw_string==null||raw_string.equals("")){
 				return null;
 			}
-			
 			String[] data=raw_string.split("#");
 			Car[] res=new Car[data.length/4];
-			
 			for(int i=0;i<data.length;i+=4) {
 				res[i/4]=new Car(data[i+0],Integer.valueOf(data[i+1]),Integer.valueOf(data[i+2]),Integer.valueOf(data[i+3]));
 			}
@@ -39,7 +33,6 @@ public class Car_Database {
 			socket.close();
 			return res;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;

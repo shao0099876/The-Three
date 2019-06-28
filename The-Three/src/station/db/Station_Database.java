@@ -12,10 +12,8 @@ import entity.Car;
 import entity.Station;
 
 public class Station_Database {
-	private static String addr="cal.srcserver.xyz";
-
+	private static String addr="118.190.147.40";
 	public static String getGPS(String stationName) {
-		// TODO Auto-generated method stub
 		try {
 			Socket socket=new Socket(addr,8081);
 			DataInputStream input=new DataInputStream(socket.getInputStream());
@@ -28,10 +26,8 @@ public class Station_Database {
 			socket.close();
 			return raw_string;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		return null;
 	}
 	public static String AddStation(String stationName,String stationAddr) {

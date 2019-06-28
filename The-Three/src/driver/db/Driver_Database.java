@@ -10,16 +10,14 @@ import code.IO;
 import entity.Driver;
 
 public class Driver_Database {
-	private static String addr="cal.srcserver.xyz";//"cal.srcserver.xyz";
+	private static String addr="118.190.147.40";//"cal.srcserver.xyz";
 	public static Driver getDriverInfo(int n){//查询某一具体驾驶员信息
 		try {
 			Socket socket= new Socket(addr,8081);
 			DataInputStream input=new DataInputStream(socket.getInputStream());
 			DataOutputStream output=new DataOutputStream(socket.getOutputStream());
-			
 			IO.write(output, "2");//查询车辆信息具体信息中的驾驶员的信息
 			IO.write(output, Integer.toString(n));//写入驾驶员编号
-			
 			String raw_string=IO.read(input);
 			if(raw_string==null||raw_string.equals("")){
 				return null;
@@ -32,21 +30,16 @@ public class Driver_Database {
 						Integer.valueOf(data[i+3]),Integer.valueOf(data[i+4]),data[i+5],
 						Integer.valueOf(data[i+6]));
 			}
-			
 			output.close();
 			input.close();
 			socket.close();
 			return res[0];
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		return null;
-		
 	}
 	
 	public static Driver[] getAllDriverInfo(){//查询所有驾驶员信息

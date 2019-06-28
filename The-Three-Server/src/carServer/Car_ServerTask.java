@@ -14,16 +14,12 @@ public class Car_ServerTask extends ServerTask{
 		super(p);
 	}
 	public static String getCarInfo() {//查车队概要列表
-		//测试完成
 		try {
 			initDB();
 		} catch (ClassNotFoundException | SQLException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
 		StringBuilder sb=new StringBuilder();
-		
 		try {
 			Statement stmt=conn.createStatement();
 			ResultSet res=stmt.executeQuery("select * from Car");
@@ -33,19 +29,15 @@ public class Car_ServerTask extends ServerTask{
 					sb.append("#");
 				}
 				flag=false;
-				sb.append(res.getString(1));
-				sb.append("#");
-				sb.append(res.getInt(2));
-				sb.append("#");
-				sb.append(res.getInt(3));
-				sb.append("#");
+				sb.append(res.getString(1));sb.append("#");
+				sb.append(res.getInt(2));sb.append("#");
+				sb.append(res.getInt(3));sb.append("#");
 				sb.append(res.getInt(4));
 			}
 			res.close();
 			stmt.close();
 			conn.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return sb.toString();

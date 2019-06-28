@@ -10,7 +10,7 @@ import code.IO;
 import entity.Route;
 
 public class Route_Database {
-	private static String addr="cal.srcserver.xyz";//"cal.srcserver.xyz";
+	private static String addr="118.190.147.40";//"cal.srcserver.xyz";
 	public static Route getRouteInfo(int n){//查询单条路线信息
 		try {
 			Socket socket= new Socket(addr,8081);
@@ -19,11 +19,9 @@ public class Route_Database {
 			IO.write(output, "3");//查询车辆信息具体信息中的路线的信息
 			IO.write(output, Integer.toString(n));//写入路线的编号
 			String raw_string=IO.read(input);
-			
 			if(raw_string==null||raw_string.equals("")){
 				return null;
 			}
-			
 			String[] data=raw_string.split("#");
 			Route[] res=new Route[data.length/4];
 			for(int i=0;i<data.length;i+=4) {
@@ -34,10 +32,8 @@ public class Route_Database {
 			socket.close();
 			return res[0];
 		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;

@@ -17,13 +17,11 @@ public class IO {
 		try {
 			reader = new BufferedReader(new InputStreamReader(input,"GBK"));
 		} catch (UnsupportedEncodingException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		try {
 			return reader.readLine();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -33,14 +31,12 @@ public class IO {
 		try {
 			writer = new BufferedWriter(new OutputStreamWriter(output,"GBK"));
 		} catch (UnsupportedEncodingException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		try {
 			writer.write(s+"\n");
 			writer.flush();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return;

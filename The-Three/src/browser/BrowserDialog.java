@@ -127,52 +127,33 @@ public class BrowserDialog extends JDialog {
 	public void focuson(String gps) {
 		browser.execute("FocusOn("+gps+")");
 	}
-	//"路线编号","起始站点","终点站","中转站点"
 	public void clean() {
-		// TODO Auto-generated method stub
 		browser.execute("ErasePoints()");
 	}
 	public void Add_Cars_Point(String s) {
-		// TODO Auto-generated method stub
 		StringBuilder sb=new StringBuilder();
-		sb.append("AddPoint(");
-		sb.append(s);
-		sb.append(")");
+		sb.append("AddPoint(");sb.append(s);sb.append(")");
 		browser.execute(sb.toString());
 	}
 	public void DrawPoints() {
-		// TODO Auto-generated method stub
 		browser.execute("DrawPoints()");
 	}
 	public void DrawRoute(String start_GPS,String end_GPS) {
 		StringBuilder sb=new StringBuilder();
-		sb.append("[");
-		sb.append(start_GPS);
-		sb.append("]");
-		sb.append(",[");
-		sb.append(end_GPS);
-		sb.append("]");
+		sb.append("[");sb.append(start_GPS);sb.append("]");sb.append(",[");sb.append(end_GPS);sb.append("]");
 		DebugInfo.DebugInfo(sb.toString());
 		browser.execute("DrawRoute("+sb.toString()+")");
 	}
 	public void DrawRoute(String start_GPS, String end_GPS, String[] mid) {
-		// TODO Auto-generated method stub
 		StringBuilder sb=new StringBuilder();
-		sb.append("[");
-		sb.append(start_GPS);
-		sb.append("]");
-		sb.append(",[");
-		sb.append(end_GPS);
-		sb.append("],[");
+		sb.append("[");sb.append(start_GPS);sb.append("]");sb.append(",[");sb.append(end_GPS);sb.append("],[");
 		boolean flag=true;
 		for(int i=0;i<mid.length;i++) {
 			if(!flag) {
 				sb.append(",");
 			}
 			flag=false;
-			sb.append("[");
-			sb.append(mid[i]);
-			sb.append("]");
+			sb.append("[");sb.append(mid[i]);sb.append("]");
 		}
 		sb.append("]");
 		browser.execute("DrawRoute_mid("+sb.toString()+")");

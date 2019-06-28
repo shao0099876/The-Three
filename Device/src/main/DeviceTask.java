@@ -18,31 +18,23 @@ public class DeviceTask implements Runnable{
 	private int test_cnt=0;
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
 		init();
 		{
 			StringBuilder sb=new StringBuilder();
-			sb.append(carNumber);
-			sb.append("#");
-			sb.append(x);
-			sb.append(",");
-			sb.append(y);
-			sb.append("#");
-			sb.append(fuel);
-			sb.append("#");
-			sb.append(driver);
-			sb.append("#");
-			sb.append(status);
-			sb.append("#");
+			sb.append(carNumber);sb.append("#");
+			sb.append(x);sb.append(",");
+			sb.append(y);sb.append("#");
+			sb.append(fuel);sb.append("#");
+			sb.append(driver);sb.append("#");
+			sb.append(status);sb.append("#");
 			sb.append(subdriver);
 			try {
-				Socket socket=new Socket("cal.srcserver.xyz",8082);
+				Socket socket=new Socket("118.190.147.40",8082);
 				DataOutputStream output=new DataOutputStream(socket.getOutputStream());
 				write(output,sb.toString());
 				output.close();
 				socket.close();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			test_cnt+=1;
@@ -50,7 +42,6 @@ public class DeviceTask implements Runnable{
 			try {
 				Thread.sleep(T);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -76,7 +67,6 @@ public class DeviceTask implements Runnable{
 			writer.write(s+"\n");
 			writer.flush();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return;

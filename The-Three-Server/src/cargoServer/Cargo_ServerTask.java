@@ -11,18 +11,13 @@ import java.util.Date;
 import main.ServerTask;
 
 public class Cargo_ServerTask extends ServerTask{
-
 	public Cargo_ServerTask(Socket p) {
 		super(p);
-		// TODO Auto-generated constructor stub
 	}
-
 	public static String getAllCargo() {
-		// TODO Auto-generated method stub
 		try {
 			initDB();
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		StringBuilder sb=new StringBuilder();
@@ -35,19 +30,15 @@ public class Cargo_ServerTask extends ServerTask{
 					sb.append("#");
 				}
 				flag=false;
-				sb.append(res.getInt(1));
-				sb.append("#");
-				sb.append(res.getString(2));
-				sb.append("#");
-				sb.append(res.getString(3));
-				sb.append("#");
+				sb.append(res.getInt(1));sb.append("#");
+				sb.append(res.getString(2));sb.append("#");
+				sb.append(res.getString(3));sb.append("#");
 				sb.append(res.getInt(4));
 			}
 			res.close();
 			stmt.close();
 			conn.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return sb.toString();
